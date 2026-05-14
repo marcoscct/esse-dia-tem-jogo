@@ -1,0 +1,87 @@
+# .github/workflows/update-calendar.yml
+#
+# Fase 2 — Automated calendar update
+# Runs daily during the World Cup, fetches OpenFootball data,
+# transforms it to our format, validates, and commits if changed.
+
+name: 🗓️ Update World Cup Calendar
+
+on:
+  schedule:
+    # Every day at 03:00 BRT (06:00 UTC) during the Cup
+    - cron: '0 6 * * *'
+  # Also run after results (15 min after typical final whistles in BRT)
+  # Manual trigger for emergency updates
+  workflow_dispatch:
+    inputs:
+      force_commit:
+        description: 'Force commit even if no changes'
+        required: false
+        default: 'false'
+
+jobs:
+  update:
+    name: Fetch & Transform Calendar
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch OpenFootball worldcup.json
+        run: |
+          echo "📥 Fetching raw data from OpenFootball..."
+          curl -sf \
+            https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json \
+            -o /tmp/worldcup_raw.json
+          echo "✅ Raw data fetched ($(wc -c < /tmp/worldcup_raw.json) bytes)"
+
+      - name: Transform to calendar.json
+        run: |
+          echo "⚙️ Running transform script..."
+          node scripts/transform-calendar.js \
+            --input /tmp/worldcup_raw.json \
+            --output public/data/calendar.json
+
+      - name: Validate calendar.json
+        run: |
+          echo "🔍 Validating output..."
+          node scripts/validate-calendar.js public/data/calendar.json
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet public/data/calendar.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ No changes detected in calendar.json"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "📝 Changes detected — will commit"
+          fi
+
+      - name: Commit and push if changed
+        if: steps.check_changes.outputs.changed == 'true' || github.event.inputs.force_commit == 'true'
+        run: |
+          git config user.name "Calendar Bot 🤖"
+          git config user.email "bot@essediatemjogo.com.br"
+          TODAY=$(date -u '+%Y-%m-%d')
+          git add public/data/calendar.json
+          git commit -m "🗓️ Auto-update: calendar.json [$TODAY]
+
+          Source: OpenFootball worldcup.json
+          Triggered by: ${{ github.event_name }}
+          Run: ${{ github.run_number }}"
+          git push
+
+      - name: Trigger deploy (Cloudflare Pages)
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          echo "🚀 Calendar updated — Cloudflare Pages will auto-deploy on push"
+          echo "Deploy URL: https://www.essediatemjogo.com.br"

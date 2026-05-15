@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { fetchCalendar, getTodayBRT, queryDate } from "@/lib/calendar";
-import { formatBRT } from "@/lib/date-utils";
+import { getCalendar, queryDate } from "@/lib/calendar";
+import { getTodayBRT, formatDateLong } from "@/lib/date-utils";
 
 export default async function Home() {
-  const calendar = await fetchCalendar();
+  const calendar = getCalendar();
   const today = getTodayBRT();
   const teams = Object.values(calendar.teams).sort((a, b) => a.name.localeCompare(b.name));
 
@@ -21,7 +21,7 @@ export default async function Home() {
 
         <section className="mb-12">
           <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-500 mb-6">
-            Hoje: {formatBRT(today)}
+            Hoje: {formatDateLong(today)}
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {teams.map((team) => {

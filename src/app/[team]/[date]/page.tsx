@@ -9,7 +9,7 @@
 import Link from "next/link";
 import { notFound } from 'next/navigation';
 import { getAllStaticRoutes, getTeamBySlug, queryDate } from '@/lib/calendar';
-import { formatBRT, formatTimeBRT, parseDateParam } from '@/lib/date-utils';
+import { formatDateLong, formatTimeBRT, parseDateParam } from '@/lib/date-utils';
 import { getDatePageMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
@@ -65,7 +65,7 @@ export default async function DatePage({ params }: Props) {
 
         <div className="flex flex-col items-center gap-4">
           <h2 className="text-xl font-bold uppercase tracking-[0.2em] opacity-80">
-            {formatBRT(isoDate)}
+            {formatDateLong(isoDate)}
           </h2>
           
           <h1 className="text-[12rem] sm:text-[16rem] font-black leading-none tracking-tighter uppercase select-none">

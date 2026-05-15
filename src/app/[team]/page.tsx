@@ -7,7 +7,7 @@
 import Link from "next/link";
 import { notFound } from 'next/navigation';
 import { getAllTeamSlugs, getTeamBySlug } from '@/lib/calendar';
-import { formatBRT, formatTimeBRT } from '@/lib/date-utils';
+import { formatDateLong, formatTimeBRT } from '@/lib/date-utils';
 import { getTeamMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
@@ -61,7 +61,7 @@ export default async function TeamPage({ params }: Props) {
             >
               <div>
                 <div className="font-bold text-lg">{match.opponent}</div>
-                <div className="text-sm text-zinc-500">{formatBRT(match.date)}</div>
+                <div className="text-sm text-zinc-500">{formatDateLong(match.date)}</div>
               </div>
               <div className="text-right">
                 <div className="font-mono text-xl font-bold">{formatTimeBRT(match.time)}</div>

@@ -33,10 +33,19 @@ let _calendar: Calendar | null = null;
 export function getCalendar(): Calendar {
   if (_calendar) return _calendar;
 
-  // Dynamic import at runtime — works in Node environment (server/build time)
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const raw = require('../../public/data/calendar.json') as Calendar;
-  _calendar = raw;
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const filePath = path.join(process.cwd(), 'public', 'data', 'calendar.json');
+    const raw = fs.readFileSync(filePath, 'utf-8');
+    _calendar = JSON.parse(raw) as Calendar;
+  } catch (err) {
+    // Fallback to require for environments where fs might be tricky (like some edge cases)
+    // but process.cwd() should work in Next.js build
+    console.warn('Fallback to require for calendar.json');
+    _calendar = require('../../public/data/calendar.json') as Calendar;
+  }
+  
   return _calendar;
 }
 

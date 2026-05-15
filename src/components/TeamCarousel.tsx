@@ -54,21 +54,21 @@ export default function TeamCarousel({ teams, selected, onSelect }: TeamCarousel
   }, [emblaApi, onSelectEmbla]);
 
   return (
-    <div className="flex flex-col items-center gap-3 w-full overflow-hidden">
+    <div className="flex flex-col items-center gap-3 w-full">
       <label className="uppercase text-zinc-500 font-bold tracking-widest text-xs">
         Escolha a Seleção
       </label>
       <p className="text-zinc-600 text-xs -mt-1">Arraste para selecionar</p>
 
       {/* Embla Viewport */}
-      <div className="w-full overflow-hidden" ref={emblaRef}>
-        <div className="flex touch-pan-y" style={{ backfaceVisibility: "hidden" }}>
+      <div className="w-full overflow-hidden px-2" ref={emblaRef}>
+        <div className="flex touch-pan-y py-6" style={{ backfaceVisibility: "hidden" }}>
           {teams.map((t, index) => {
             const isActive = index === selectedIndex;
             return (
               <div
                 key={t.code}
-                className="flex-[0_0_25%] min-w-[80px] md:flex-[0_0_20%] flex flex-col items-center justify-center pt-2 pb-4 cursor-grab active:cursor-grabbing"
+                className="flex-[0_0_25%] min-w-[80px] md:flex-[0_0_20%] flex flex-col items-center justify-center cursor-grab active:cursor-grabbing"
                 onClick={() => emblaApi?.scrollTo(index)}
               >
                 <div

@@ -122,7 +122,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
 
       {/* Footer Info */}
       <div className="w-full text-center py-4 bg-black text-zinc-600 text-xs">
-        Dados atualizados: {lastUpdated} | v1.2.3
+        Dados atualizados: {lastUpdated} | v1.3.0
       </div>
     </div>
   );

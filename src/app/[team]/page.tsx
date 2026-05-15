@@ -60,11 +60,11 @@ export default async function TeamPage({ params }: Props) {
               className="flex items-center justify-between p-6 rounded-2xl bg-white border border-zinc-200 hover:border-zinc-400 transition-all dark:bg-zinc-900 dark:border-zinc-800 dark:hover:border-zinc-700"
             >
               <div>
-                <div className="font-bold text-lg">{match.opponent}</div>
+                <div className="font-bold text-lg">{match.opponent_name}</div>
                 <div className="text-sm text-zinc-500">{formatDateLong(match.date)}</div>
               </div>
               <div className="text-right">
-                <div className="font-mono text-xl font-bold">{formatTimeBRT(match.time)}</div>
+                <div className="font-mono text-xl font-bold">{formatTimeBRT(match.time_brt)}</div>
                 <div className="text-xs uppercase tracking-widest text-zinc-400">{match.venue}</div>
               </div>
             </Link>

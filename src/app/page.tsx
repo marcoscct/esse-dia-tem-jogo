@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { getCalendar, queryDate } from "@/lib/calendar";
+import { getCalendar, getAllTeams, queryDate } from "@/lib/calendar";
 import { getTodayBRT, formatDateLong } from "@/lib/date-utils";
 
 export default async function Home() {
   const calendar = getCalendar();
   const today = getTodayBRT();
-  const teams = Object.values(calendar.teams).sort((a, b) => a.name.localeCompare(b.name));
+  const teams = getAllTeams().sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div className="min-h-screen bg-zinc-50 font-sans text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
@@ -47,7 +47,7 @@ export default async function Home() {
 
         <footer className="mt-20 border-t border-zinc-200 pt-8 dark:border-zinc-800 text-center sm:text-left">
           <p className="text-sm text-zinc-500">
-            Dados atualizados: {calendar.meta.lastUpdated} | v{calendar.meta.version}
+            Dados atualizados: {calendar.meta.last_updated} | v{calendar.meta.version}
           </p>
         </footer>
       </main>

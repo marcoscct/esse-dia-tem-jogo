@@ -76,8 +76,8 @@ export default async function DatePage({ params }: Props) {
             <div className="mt-8 space-y-6">
               {result.matches.map((match, i) => (
                 <div key={i} className="flex flex-col items-center">
-                  <div className="text-3xl font-bold">vs {match.opponent}</div>
-                  <div className="text-xl mt-2 font-mono">{formatTimeBRT(match.time)} BRT</div>
+                  <div className="text-3xl font-bold">vs {match.opponent_name}</div>
+                  <div className="text-xl mt-2 font-mono">{formatTimeBRT(match.time_brt)} BRT</div>
                   <div className="mt-4 px-4 py-1 bg-white/20 rounded-full text-sm font-bold uppercase tracking-widest">
                     {match.venue}
                   </div>

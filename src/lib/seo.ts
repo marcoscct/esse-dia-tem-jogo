@@ -36,10 +36,7 @@ export const baseMetadata: Metadata = {
 export function getHomeMetadata(): Metadata {
   return {
     ...baseMetadata,
-    title: {
-      default: `${SITE_NAME} — Antes de marcar, confere`,
-      template: `%s | ${SITE_NAME}`,
-    },
+    title: "Esse Dia Tem Jogo?",
     description: SITE_DESCRIPTION,
     keywords: [
       'tem jogo hoje',
@@ -52,7 +49,7 @@ export function getHomeMetadata(): Metadata {
     ],
     openGraph: {
       ...baseMetadata.openGraph,
-      title: `${SITE_NAME} — Antes de marcar, confere`,
+      title: "Esse Dia Tem Jogo?",
       description: SITE_DESCRIPTION,
       url: SITE_URL,
     },
@@ -62,13 +59,12 @@ export function getHomeMetadata(): Metadata {
 
 /** Metadata for a team overview page — /[team] */
 export function getTeamMetadata(team: Team & { code: string }): Metadata {
-  const title = `Jogos da ${team.name} — Copa do Mundo 2026`;
   const description = `Veja todos os jogos da ${team.name} ${team.flag} na Copa do Mundo 2026. Datas, horários e adversários confirmados.`;
   const url = `${SITE_URL}/${team.slug}`;
 
   return {
     ...baseMetadata,
-    title,
+    title: "Esse Dia Tem Jogo?",
     description,
     keywords: [
       `jogos da ${team.name.toLowerCase()}`,
@@ -78,7 +74,7 @@ export function getTeamMetadata(team: Team & { code: string }): Metadata {
     ],
     openGraph: {
       ...baseMetadata.openGraph,
-      title,
+      title: "Esse Dia Tem Jogo?",
       description,
       url,
     },
@@ -95,7 +91,6 @@ export function getDatePageMetadata(
   const formattedDate = formatDateLong(date);
   const url = `${SITE_URL}/${team.slug}/${date}`;
 
-  let title: string;
   let description: string;
 
   if (result.hasGame) {
@@ -105,22 +100,19 @@ export function getDatePageMetadata(
     const phase = match.phase;
 
     if (hasConfirmed) {
-      title = `${team.flag} ${team.name} JOGA dia ${formattedDate} | ${SITE_NAME}`;
       description = `TEM JOGO! ${team.name} x ${opponent} — ${phase} da Copa do Mundo 2026. ${
         match.time_brt ? `Às ${match.time_brt} (horário de Brasília).` : 'Horário a confirmar.'
       }`;
     } else {
-      title = `🟡 ${team.name} PODE jogar dia ${formattedDate} | ${SITE_NAME}`;
       description = `POSSÍVEL JOGO! ${team.name} pode jogar no dia ${formattedDate} (${phase} da Copa do Mundo 2026). Condição: ${match.condition || 'A confirmar'}.`;
     }
   } else {
-    title = `${team.name} NÃO joga dia ${formattedDate} | ${SITE_NAME}`;
     description = `Confirmado: ${team.name} ${team.flag} não tem jogo no dia ${formattedDate}. Pode marcar seu compromisso!`;
   }
 
   return {
     ...baseMetadata,
-    title,
+    title: "Esse Dia Tem Jogo?",
     description,
     keywords: [
       `${team.name.toLowerCase()} joga ${formattedDate}`,
@@ -130,7 +122,7 @@ export function getDatePageMetadata(
     ],
     openGraph: {
       ...baseMetadata.openGraph,
-      title,
+      title: "Esse Dia Tem Jogo?",
       description,
       url,
     },

@@ -36,6 +36,7 @@ interface TeamCarouselProps {
   teams: TeamSummary[];
   selected: string;
   onSelect: (slug: string) => void;
+  onScrollComplete?: () => void;
 }
 
 interface ProximityData {
@@ -72,7 +73,7 @@ function computeProximities(
   });
 }
 
-export default function TeamCarousel({ teams, selected, onSelect }: TeamCarouselProps) {
+export default function TeamCarousel({ teams, selected, onSelect, onScrollComplete }: TeamCarouselProps) {
   const brasilIndex = teams.findIndex((t) => t.code === "BRA");
   const startIndex = brasilIndex >= 0 ? brasilIndex : 0;
 
@@ -110,6 +111,9 @@ export default function TeamCarousel({ teams, selected, onSelect }: TeamCarousel
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
 
+  const onScrollCompleteRef = useRef(onScrollComplete);
+  onScrollCompleteRef.current = onScrollComplete;
+
   /* ── Tween: recompute proximities on every scroll frame ── */
   const updateTweens = useCallback(() => {
     if (!emblaApi) return;
@@ -139,9 +143,13 @@ export default function TeamCarousel({ teams, selected, onSelect }: TeamCarousel
     const nearest = emblaApi.selectedScrollSnap();
     setSelectedIndex(nearest);
 
+    const team = teamsRef.current[nearest];
+    if (team && team.slug === selectedRef.current) {
+      onScrollCompleteRef.current?.();
+    }
+
     if (userInteracted.current) {
       userInteracted.current = false;
-      const team = teamsRef.current[nearest];
       if (team && team.slug !== selectedRef.current) {
         onSelectRef.current(team.slug);
       }
@@ -192,10 +200,14 @@ export default function TeamCarousel({ teams, selected, onSelect }: TeamCarousel
   useEffect(() => {
     if (!emblaApi) return;
     const targetIdx = teams.findIndex((t) => t.slug === selected);
-    if (targetIdx !== -1 && targetIdx !== emblaApi.selectedScrollSnap()) {
-      emblaApi.scrollTo(targetIdx);
+    if (targetIdx !== -1) {
+      if (targetIdx !== emblaApi.selectedScrollSnap()) {
+        emblaApi.scrollTo(targetIdx);
+      } else {
+        onScrollComplete?.();
+      }
     }
-  }, [selected, teams, emblaApi]);
+  }, [selected, teams, emblaApi, onScrollComplete]);
 
   return (
     <div className="flex flex-col items-center gap-0 w-full">

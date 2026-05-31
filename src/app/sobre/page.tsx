@@ -19,7 +19,7 @@ export default function AboutPage() {
           </Link>
           <div className="w-24 h-24 mb-4">
             <img
-              src="/logo_transparente.png"
+              src="/logo.png"
               alt="Esse Dia Tem Jogo?"
               className="w-full h-full object-contain"
             />

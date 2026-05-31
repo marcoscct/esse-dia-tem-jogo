@@ -99,13 +99,20 @@ export function getDatePageMetadata(
   let description: string;
 
   if (result.hasGame) {
+    const hasConfirmed = result.matches.some(m => m.status === 'confirmed' || m.status === 'played');
     const match = result.matches[0];
     const opponent = match.opponent_name;
     const phase = match.phase;
-    title = `${team.flag} ${team.name} JOGA dia ${formattedDate} | ${SITE_NAME}`;
-    description = `TEM JOGO! ${team.name} x ${opponent} — ${phase} da Copa do Mundo 2026. ${
-      match.time_brt ? `Às ${match.time_brt} (horário de Brasília).` : 'Horário a confirmar.'
-    }`;
+
+    if (hasConfirmed) {
+      title = `${team.flag} ${team.name} JOGA dia ${formattedDate} | ${SITE_NAME}`;
+      description = `TEM JOGO! ${team.name} x ${opponent} — ${phase} da Copa do Mundo 2026. ${
+        match.time_brt ? `Às ${match.time_brt} (horário de Brasília).` : 'Horário a confirmar.'
+      }`;
+    } else {
+      title = `🟡 ${team.name} PODE jogar dia ${formattedDate} | ${SITE_NAME}`;
+      description = `POSSÍVEL JOGO! ${team.name} pode jogar no dia ${formattedDate} (${phase} da Copa do Mundo 2026). Condição: ${match.condition || 'A confirmar'}.`;
+    }
   } else {
     title = `${team.name} NÃO joga dia ${formattedDate} | ${SITE_NAME}`;
     description = `Confirmado: ${team.name} ${team.flag} não tem jogo no dia ${formattedDate}. Pode marcar seu compromisso!`;

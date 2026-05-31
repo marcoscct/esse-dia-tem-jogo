@@ -91,6 +91,34 @@ try {
             error(`${mp}.phase_slug invalid: "${match.phase_slug}"`);
           if (!VALID_STATUSES.has(match.status))
             error(`${mp}.status invalid: "${match.status}"`);
+
+          const VALID_CONDITION_TYPES = new Set(['group_1st', 'group_2nd', 'group_3rd', 'knockout_advance']);
+
+          // Condition checks
+          if (match.status === 'possible') {
+            if (match.condition === null || typeof match.condition !== 'string' || match.condition.trim() === '') {
+              error(`${mp}.condition is required and must be a non-empty string when status is "possible"`);
+            }
+            if (!VALID_CONDITION_TYPES.has(match.condition_type)) {
+              error(`${mp}.condition_type is invalid or missing for possible match: "${match.condition_type}"`);
+            }
+          } else if (match.status === 'confirmed' || match.status === 'played') {
+            if (match.condition !== null && match.condition !== undefined) {
+              error(`${mp}.condition must be null when status is "${match.status}", got: ${match.condition}`);
+            }
+            if (match.condition_type !== null && match.condition_type !== undefined) {
+              error(`${mp}.condition_type must be null when status is "${match.status}", got: ${match.condition_type}`);
+            }
+          }
+
+          // Match number checks
+          if (match.match_number !== null && match.match_number !== undefined) {
+            if (typeof match.match_number !== 'number') {
+              error(`${mp}.match_number must be a number or null, got: ${typeof match.match_number}`);
+            } else if (match.phase_slug !== 'group_stage' && (match.match_number < 73 || match.match_number > 104)) {
+              error(`${mp}.match_number must be between 73 and 104 for knockout matches, got: ${match.match_number}`);
+            }
+          }
         }
       }
     }

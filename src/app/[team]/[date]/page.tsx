@@ -52,7 +52,7 @@ export default async function DatePage({ params }: Props) {
 
   const result = queryDate(team.code, isoDate);
 
-  const teams = getAllTeams().sort((a, b) => a.name.localeCompare(b.name));
+  const teams = getAllTeams();
   const meta = getCalendarMeta();
 
   return (

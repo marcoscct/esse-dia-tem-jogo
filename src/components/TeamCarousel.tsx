@@ -12,6 +12,14 @@ const PT_CODE: Record<string, string> = {
   USA: "EUA",
   NED: "HOL",
   JPN: "JAP",
+  CGO: "RDC",
+  RSA: "AFS",
+  KOR: "COR",
+  SWE: "SUE",
+  CZE: "TCH",
+  IRN: "IRA",
+  KSA: "ARA",
+  QAT: "CAT"
 };
 function displayCode(code: string): string {
   return PT_CODE[code] ?? code;
@@ -30,16 +38,21 @@ interface TeamCarouselProps {
   onSelect: (slug: string) => void;
 }
 
+interface ProximityData {
+  flagP: number;
+  labelP: number;
+}
+
 /**
- * For each slide, compute a 0→1 "proximity" value based on its distance
- * to the current scroll centre.  Uses the shortest-path distance around
+ * For each slide, compute flag and label proximity values based on its distance
+ * to the current scroll centre. Uses the shortest-path distance around
  * the loop so there's no discontinuity at the wrap-around.
  */
 function computeProximities(
   scrollProgress: number,
   snapList: number[],
   numSlides: number
-): number[] {
+): ProximityData[] {
   return snapList.map((snap) => {
     // Raw difference in scroll-space (0…1)
     let diff = snap - scrollProgress;
@@ -51,8 +64,11 @@ function computeProximities(
     const normalised = Math.abs(diff) * numSlides;
     // Linear 0→1 proximity (clamped)
     const linear = Math.max(0, 1 - normalised);
-    // Steep power curve — only "pops" when very close to centre
-    return Math.pow(linear, STEEPNESS);
+    
+    return {
+      flagP: Math.pow(linear, STEEPNESS),
+      labelP: Math.pow(linear, 2),
+    };
   });
 }
 
@@ -69,8 +85,22 @@ export default function TeamCarousel({ teams, selected, onSelect }: TeamCarousel
   });
 
   const [selectedIndex, setSelectedIndex] = useState(startIndex);
-  const [proximities, setProximities] = useState<number[]>([]);
+  
+  // Safe default values so the carousel renders perfectly centered at Brasil on mount without jumps
+  const [proximities, setProximities] = useState<ProximityData[]>(() => {
+    return teams.map((_, index) => {
+      const isStart = index === startIndex;
+      return {
+        flagP: isStart ? 1 : 0,
+        labelP: isStart ? 1 : 0,
+      };
+    });
+  });
+
   const rafId = useRef(0);
+  const isInitialMount = useRef(true);
+  const hasDragged = useRef(false);
+  const isProgrammaticScroll = useRef(false);
 
   /* ── Tween: recompute proximities on every scroll frame ── */
   const updateTweens = useCallback(() => {
@@ -85,55 +115,101 @@ export default function TeamCarousel({ teams, selected, onSelect }: TeamCarousel
     if (!emblaApi) return;
     const idx = emblaApi.selectedScrollSnap();
     setSelectedIndex(idx);
-    const team = teams[idx];
-    if (team && team.slug !== selected) onSelect(team.slug);
-  }, [emblaApi, teams, selected, onSelect]);
+  }, [emblaApi]);
+
+  /* ── Settle-snap: when dragFree momentum stops, gently snap to nearest ── */
+  const handleSettle = useCallback(() => {
+    if (!emblaApi) return;
+    
+    // On initial mount, don't animate — just sync state
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      syncSelection();
+      isProgrammaticScroll.current = false;
+      return;
+    }
+
+    if (hasDragged.current) {
+      const nearest = emblaApi.selectedScrollSnap();
+      emblaApi.scrollTo(nearest);
+      hasDragged.current = false;
+      
+      const team = teams[nearest];
+      if (team && team.slug !== selected) {
+        onSelect(team.slug);
+      }
+    } else if (!isProgrammaticScroll.current) {
+      const nearest = emblaApi.selectedScrollSnap();
+      const team = teams[nearest];
+      if (team && team.slug !== selected) {
+        onSelect(team.slug);
+      }
+    }
+    
+    isProgrammaticScroll.current = false;
+    syncSelection();
+  }, [emblaApi, teams, selected, onSelect, syncSelection]);
 
   /* ── Lifecycle ── */
   useEffect(() => {
     if (!emblaApi) return;
 
+    // Mark initial mount to suppress any initial snap animations
+    isInitialMount.current = true;
     updateTweens();
     syncSelection();
+
+    const registerDragStart = () => {
+      hasDragged.current = true;
+    };
 
     emblaApi.on("scroll", updateTweens);
     emblaApi.on("reInit", updateTweens);
     emblaApi.on("select", syncSelection);
-    emblaApi.on("settle", syncSelection);
+    emblaApi.on("settle", handleSettle);
+    emblaApi.on("pointerDown", registerDragStart);
 
     return () => {
       emblaApi.off("scroll", updateTweens);
       emblaApi.off("reInit", updateTweens);
       emblaApi.off("select", syncSelection);
-      emblaApi.off("settle", syncSelection);
+      emblaApi.off("settle", handleSettle);
+      emblaApi.off("pointerDown", registerDragStart);
       cancelAnimationFrame(rafId.current);
     };
-  }, [emblaApi, updateTweens, syncSelection]);
+  }, [emblaApi, updateTweens, syncSelection, handleSettle]);
 
   /* ── Sync when parent changes `selected` ── */
   useEffect(() => {
     if (!emblaApi) return;
     const targetIdx = teams.findIndex((t) => t.slug === selected);
     if (targetIdx !== -1 && targetIdx !== emblaApi.selectedScrollSnap()) {
+      // Mark this as a programmatic scroll so syncSelection won't call onSelect
+      // (which would re-trigger this effect in an infinite loop)
+      isProgrammaticScroll.current = true;
       emblaApi.scrollTo(targetIdx);
     }
   }, [selected, teams, emblaApi]);
 
   return (
-    <div className="flex flex-col items-center gap-3 w-full">
-      <label className="uppercase text-zinc-500 font-bold tracking-widest text-xs">
-        Escolha a Seleção
-      </label>
-      <p className="text-zinc-600 text-xs -mt-1">Arraste para selecionar</p>
+    <div className="flex flex-col items-center gap-0 w-full">
+      {/* Category Title */}
+      <div className="flex flex-col items-center gap-1.5">
+        <span className="uppercase text-[#ffcc00] font-black tracking-widest text-xs md:text-sm">
+          Escolha a Seleção
+        </span>
+        <div className="w-8 h-1 bg-[#ffcc00] rounded-full"></div>
+      </div>
 
       {/* Embla Viewport */}
-      <div className="w-full overflow-hidden" ref={emblaRef}>
+      <div className="w-full overflow-hidden py-8" ref={emblaRef}>
         <div
           className="flex touch-pan-y"
           style={{ backfaceVisibility: "hidden" }}
         >
           {teams.map((t, index) => {
-            const p = proximities[index] ?? 0; // 0…1 steep proximity
+            const pData = proximities[index] ?? { flagP: index === startIndex ? 1 : 0, labelP: index === startIndex ? 1 : 0 };
+            const p = pData.flagP;
 
             // ── Visual values driven by proximity ──
             const scale = SCALE_MIN + p * (SCALE_MAX - SCALE_MIN);
@@ -142,23 +218,23 @@ export default function TeamCarousel({ teams, selected, onSelect }: TeamCarousel
             const glowRadius = Math.round(p * 35);
             const ringAlpha = p;
 
-            // Label uses a softer curve so it's visible a bit earlier
-            const labelP = Math.pow(Math.max(0, 1 - Math.abs(
-              (() => {
-                const snaps = emblaApi?.scrollSnapList() ?? [];
-                const prog = emblaApi?.scrollProgress() ?? 0;
-                let d = (snaps[index] ?? 0) - prog;
-                if (d > 0.5) d -= 1;
-                if (d < -0.5) d += 1;
-                return d * teams.length;
-              })()
-            )), 2); // power 2 = gentler than the scale curve
+            // ── Smooth label styling ──
+            const labelOpacity = 0.4 + p * 0.6;
+            const r = Math.round(161 + p * (255 - 161));
+            const g = Math.round(161 + p * (204 - 161));
+            const b = Math.round(170 + p * (0 - 170));
+            const textColor = `rgb(${r}, ${g}, ${b})`;
+            const fontSize = `${10.5 + p * 7.5}px`;
+            const fontWeight = p > 0.85 ? "900" : "500";
+            const textTransform = "uppercase" as const;
+            const translateY = (1 - p) * -2 + p * 16;
+            const scaleText = 0.95 + p * 0.15;
 
             return (
               <div
                 key={t.code}
                 className="flex-[0_0_22%] min-w-[72px] md:flex-[0_0_18%] flex flex-col items-center justify-end cursor-grab active:cursor-grabbing select-none"
-                style={{ paddingTop: 40, paddingBottom: 4 }}
+                style={{ paddingTop: 48, paddingBottom: 24 }}
                 onClick={() => emblaApi?.scrollTo(index)}
               >
                 {/* Flag circle */}
@@ -191,17 +267,22 @@ export default function TeamCarousel({ teams, selected, onSelect }: TeamCarousel
 
                 {/* Label — shows on ALL items proportional to proximity */}
                 <div
-                  className="flex flex-col items-center mt-2 h-8"
+                  className="flex flex-col items-center mt-2 h-6"
                   style={{
-                    opacity: labelP,
-                    transform: `translateY(${(1 - labelP) * -4}px) scale(${0.8 + labelP * 0.2})`,
+                    opacity: labelOpacity,
+                    transform: `translateY(${translateY}px) scale(${scaleText})`,
                     willChange: "opacity, transform",
                   }}
                 >
-                  <span className="font-bold text-[11px] uppercase tracking-wider text-[#ffcc00] leading-none">
-                    {displayCode(t.code)}
-                  </span>
-                  <span className="text-[10px] italic text-white whitespace-nowrap leading-tight mt-0.5">
+                  <span
+                    className="whitespace-nowrap leading-none transition-all duration-100"
+                    style={{
+                      color: textColor,
+                      fontSize,
+                      fontWeight,
+                      textTransform,
+                    }}
+                  >
                     {t.name}
                   </span>
                 </div>
@@ -209,23 +290,6 @@ export default function TeamCarousel({ teams, selected, onSelect }: TeamCarousel
             );
           })}
         </div>
-      </div>
-
-      {/* Dot indicators */}
-      <div className="flex gap-1.5 mt-1">
-        {teams.map((_, idx) => (
-          <button
-            key={idx}
-            type="button"
-            onClick={() => emblaApi?.scrollTo(idx)}
-            className={`rounded-full transition-all duration-300 ${
-              idx === selectedIndex
-                ? "w-6 h-2 bg-[#ffcc00]"
-                : "w-2 h-2 bg-zinc-700 hover:bg-zinc-500"
-            }`}
-            aria-label={`Ir para o slide ${idx + 1}`}
-          />
-        ))}
       </div>
     </div>
   );

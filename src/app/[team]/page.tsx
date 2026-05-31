@@ -43,7 +43,7 @@ export default async function TeamPage({ params }: Props) {
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
-  const teams = getAllTeams().sort((a, b) => a.name.localeCompare(b.name));
+  const teams = getAllTeams();
   const meta = getCalendarMeta();
 
   return (

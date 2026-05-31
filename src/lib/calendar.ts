@@ -64,10 +64,10 @@ export async function fetchCalendar(): Promise<Calendar> {
 
 // ─── Team Helpers ─────────────────────────────────────────────────────────────
 
-/** Returns all teams as an array of TeamSummary objects. */
+/** Returns all teams as an array of TeamSummary objects, sorted alphabetically with Brasil first. */
 export function getAllTeams(): TeamSummary[] {
   const calendar = getCalendar();
-  return Object.entries(calendar.teams).map(([code, team]) => ({
+  const list = Object.entries(calendar.teams).map(([code, team]) => ({
     code,
     name: team.name,
     slug: team.slug,
@@ -78,6 +78,8 @@ export function getAllTeams(): TeamSummary[] {
     total_matches: team.matches.length,
     confirmed_matches: team.matches.filter((m) => m.status === 'confirmed').length,
   }));
+
+  return list.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
 }
 
 /** Returns a team by its 3-letter ISO code (e.g. "BRA"). Returns null if not found. */
@@ -183,11 +185,16 @@ export function getTeamGameDates(code: string): string[] {
 export function getAllStaticRoutes(): StaticRoute[] {
   const calendar = getCalendar();
   const routes: StaticRoute[] = [];
+  const seen = new Set<string>();
 
   for (const team of Object.values(calendar.teams)) {
     for (const match of team.matches) {
       if (match.status !== 'eliminated') {
-        routes.push({ team: team.slug, date: match.date });
+        const key = `${team.slug}_${match.date}`;
+        if (!seen.has(key)) {
+          seen.add(key);
+          routes.push({ team: team.slug, date: match.date });
+        }
       }
     }
   }

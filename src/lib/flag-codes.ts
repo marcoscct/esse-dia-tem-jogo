@@ -41,7 +41,21 @@ const TEAM_TO_ISO: Record<string, string> = {
   AUS: "au",
   CHI: "cl",
   NGA: "ng",
-  KOR: "kr"
+  KOR: "kr",
+  BEL: "be",
+  BIH: "ba",
+  CAN: "ca",
+  CZE: "cz",
+  EGY: "eg",
+  IRN: "ir",
+  NZL: "nz",
+  PAR: "py",
+  QAT: "qa",
+  RSA: "za",
+  SWE: "se",
+  SUI: "ch",
+  TUN: "tn",
+  TUR: "tr"
 };
 
 /**

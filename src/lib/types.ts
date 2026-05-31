@@ -37,7 +37,16 @@ export interface Match {
   country: string;
   status: MatchStatus;
   result: MatchResult | null;
+  condition: string | null;
+  condition_type: ConditionType | null;
+  match_number: number | null;
 }
+
+export type ConditionType = 
+  | 'group_1st'
+  | 'group_2nd'
+  | 'group_3rd'
+  | 'knockout_advance';
 
 export interface Team {
   name: string;

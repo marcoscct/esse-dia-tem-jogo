@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Calendar as CalendarIcon } from "lucide-react";
+import Link from "next/link";
+
+import { Calendar as CalendarIcon, RefreshCw } from "lucide-react";
 import type { TeamSummary, MatchWithTeam } from "@/lib/types";
 import ResultModal from "./ResultModal";
 import TeamCarousel from "./TeamCarousel";
@@ -18,15 +20,12 @@ interface HomeClientProps {
 export default function HomeClient({ teams, lastUpdated, initialTeam, initialDate, result }: HomeClientProps) {
   const [selectedTeam, setSelectedTeam] = useState(initialTeam || (teams.find(t => t.code === "BRA")?.slug || teams[0]?.slug));
   const [selectedDate, setSelectedDate] = useState(initialDate || "");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(!!result);
   const router = useRouter();
 
+  // Sync modal state when result changes (e.g., on navigation)
   useEffect(() => {
-    if (result) {
-      setIsModalOpen(true);
-    } else {
-      setIsModalOpen(false);
-    }
+    setIsModalOpen(!!result);
   }, [result]);
 
   const handleVerify = (e: React.FormEvent) => {
@@ -78,19 +77,20 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
             />
 
             {/* Date Picker */}
-            <div className="flex flex-col gap-2 text-center">
-              <label htmlFor="date" className="uppercase text-zinc-500 font-bold tracking-widest text-xs">
+            <div className="flex flex-col items-center gap-1.5 text-center">
+              <label htmlFor="date" className="uppercase text-[#ffcc00] font-black tracking-widest text-xs md:text-sm cursor-pointer">
                 Escolha a Data
               </label>
-              <div className="relative">
-                <CalendarIcon className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-600 w-6 h-6 pointer-events-none" />
+              <div className="w-8 h-1 bg-[#ffcc00] rounded-full mb-1"></div>
+              <div className="relative max-w-[280px] mx-auto w-full">
+                <CalendarIcon className="absolute left-5 top-1/2 -translate-y-1/2 text-[#ffcc00] w-6 h-6 pointer-events-none" />
                 <input
                   type="date"
                   id="date"
                   required
                   value={selectedDate}
                   onChange={(e) => setSelectedDate(e.target.value)}
-                  className="w-full appearance-none bg-white text-black font-bold text-lg md:text-xl rounded-xl py-4 pl-14 pr-5 focus:outline-none focus:ring-4 focus:ring-[#ffcc00]/50 cursor-pointer"
+                  className="w-full appearance-none bg-zinc-950 text-white border border-zinc-800 font-bold text-lg md:text-xl rounded-xl py-4 pl-14 pr-12 focus:outline-none focus:border-[#ffcc00] focus:ring-2 focus:ring-[#ffcc00]/20 cursor-pointer"
                 />
               </div>
             </div>
@@ -121,9 +121,20 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
       </div>
 
       {/* Footer Info */}
-      <div className="w-full text-center py-4 bg-black text-zinc-600 text-xs">
-        Dados atualizados: {lastUpdated} | v1.4.0
-      </div>
+      <footer className="w-full flex flex-col items-center justify-center gap-2 py-6 bg-black text-zinc-550 text-xs border-t border-zinc-950">
+        <div className="flex items-center gap-1.5">
+          <RefreshCw className="w-3.5 h-3.5" />
+          <span>Dados atualizados: {lastUpdated} | v1.4.0</span>
+        </div>
+        <div className="flex items-center gap-4 text-zinc-500 mt-1">
+          <Link href="/sobre" className="hover:text-[#ffcc00] transition-colors">Sobre</Link>
+          <span>•</span>
+          <Link href="/politica-de-privacidade" className="hover:text-[#ffcc00] transition-colors">Privacidade</Link>
+          <span>•</span>
+          <Link href="/termos-de-uso" className="hover:text-[#ffcc00] transition-colors">Termos de Uso</Link>
+        </div>
+      </footer>
+
     </div>
   );
 }

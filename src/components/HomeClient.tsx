@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-import { Calendar as CalendarIcon, RefreshCw } from "lucide-react";
+import { Calendar as CalendarIcon, RefreshCw, Loader2 } from "lucide-react";
 import type { TeamSummary, MatchWithTeam } from "@/lib/types";
 import ResultModal from "./ResultModal";
 import TeamCarousel from "./TeamCarousel";
+import { queryDateClient } from "@/lib/client-calendar";
 
 interface HomeClientProps {
   teams: TeamSummary[];
@@ -22,10 +23,13 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
   const [selectedDate, setSelectedDate] = useState(initialDate || "");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shouldOpenModal, setShouldOpenModal] = useState(!!result);
+  const [localResult, setLocalResult] = useState<{ hasGame: boolean; matches: MatchWithTeam[] } | null>(result || null);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   // Sync modal state when result changes (e.g., on navigation)
   useEffect(() => {
+    setLocalResult(result || null);
     setShouldOpenModal(!!result);
     if (!result) {
       setIsModalOpen(false);
@@ -60,20 +64,29 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
     }
   }, [selectedTeam]);
 
-  const handleVerify = (e: React.FormEvent) => {
+  const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedTeam && selectedDate) {
-      router.push(`/${selectedTeam}/${selectedDate}`);
+      try {
+        setIsLoading(true);
+        const res = await queryDateClient(selectedTeam, selectedDate);
+        setLocalResult(res);
+        setShouldOpenModal(true);
+        setIsModalOpen(true);
+        window.history.pushState(null, "", `/${selectedTeam}/${selectedDate}`);
+      } catch (err) {
+        console.error("Failed to query date client-side:", err);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setShouldOpenModal(false);
-    // After closing the modal, navigate back to the team-specific page to preserve context
-    setTimeout(() => {
-      router.push(`/${selectedTeam}`);
-    }, 300);
+    setLocalResult(null);
+    window.history.pushState(null, "", `/${selectedTeam}`);
   };
 
   return (
@@ -141,18 +154,25 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
             {/* Submit */}
             <button
               type="submit"
-              disabled={!selectedDate || (selectedDate === initialDate && selectedTeam === initialTeam && isModalOpen)}
-              className="mt-1 w-full bg-[#ffcc00] hover:bg-[#e6b800] text-black font-black uppercase tracking-widest text-lg md:text-xl py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(255,204,0,0.2)] hover:shadow-[0_0_25px_rgba(255,204,0,0.4)]"
+              disabled={isLoading || !selectedDate || (selectedDate === initialDate && selectedTeam === initialTeam && isModalOpen)}
+              className="mt-1 w-full bg-[#ffcc00] hover:bg-[#e6b800] text-black font-black uppercase tracking-widest text-lg md:text-xl py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(255,204,0,0.2)] hover:shadow-[0_0_25px_rgba(255,204,0,0.4)] flex items-center justify-center gap-2"
             >
-              Verificar
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin text-black" />
+                  <span>Aguarde...</span>
+                </>
+              ) : (
+                "Verificar"
+              )}
             </button>
           </form>
         </div>
 
         {/* Result Modal */}
         <ResultModal 
-          hasGame={result?.hasGame || false} 
-          matches={result?.matches} 
+          hasGame={localResult?.hasGame || false} 
+          matches={localResult?.matches} 
           isOpen={isModalOpen} 
           onClose={handleCloseModal} 
         />

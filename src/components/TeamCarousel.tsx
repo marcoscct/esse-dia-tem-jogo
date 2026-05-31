@@ -102,6 +102,15 @@ export default function TeamCarousel({ teams, selected, onSelect }: TeamCarousel
   const hasDragged = useRef(false);
   const isProgrammaticScroll = useRef(false);
 
+  const teamsRef = useRef(teams);
+  teamsRef.current = teams;
+
+  const selectedRef = useRef(selected);
+  selectedRef.current = selected;
+
+  const onSelectRef = useRef(onSelect);
+  onSelectRef.current = onSelect;
+
   /* ── Tween: recompute proximities on every scroll frame ── */
   const updateTweens = useCallback(() => {
     if (!emblaApi) return;
@@ -134,21 +143,21 @@ export default function TeamCarousel({ teams, selected, onSelect }: TeamCarousel
       emblaApi.scrollTo(nearest);
       hasDragged.current = false;
       
-      const team = teams[nearest];
-      if (team && team.slug !== selected) {
-        onSelect(team.slug);
+      const team = teamsRef.current[nearest];
+      if (team && team.slug !== selectedRef.current) {
+        onSelectRef.current(team.slug);
       }
     } else if (!isProgrammaticScroll.current) {
       const nearest = emblaApi.selectedScrollSnap();
-      const team = teams[nearest];
-      if (team && team.slug !== selected) {
-        onSelect(team.slug);
+      const team = teamsRef.current[nearest];
+      if (team && team.slug !== selectedRef.current) {
+        onSelectRef.current(team.slug);
       }
     }
     
     isProgrammaticScroll.current = false;
     syncSelection();
-  }, [emblaApi, teams, selected, onSelect, syncSelection]);
+  }, [emblaApi, syncSelection]);
 
   /* ── Lifecycle ── */
   useEffect(() => {

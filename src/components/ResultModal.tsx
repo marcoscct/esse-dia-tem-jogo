@@ -51,7 +51,7 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose }: 
       heading: "Tem Jogo!",
       subheading: "Tome Cuidado!",
       description: "Evite marcar compromissos nesse dia.",
-      icon: <AlertTriangle className="w-12 h-12 text-[#ffcc00]" />
+      icon: <AlertTriangle className="w-6 h-6 text-[#ffcc00]" />
     },
     possible: {
       borderColor: "border-[#ff8c00] shadow-[#ff8c00]/20",
@@ -60,7 +60,7 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose }: 
       heading: "Possível Jogo!",
       subheading: "Fique Atento!",
       description: "Esta seleção possui cenários de classificação para este dia.",
-      icon: <HelpCircle className="w-12 h-12 text-[#ff8c00]" />
+      icon: <HelpCircle className="w-6 h-6 text-[#ff8c00]" />
     },
     none: {
       borderColor: "border-[#2ecc71] shadow-[#2ecc71]/20",
@@ -69,7 +69,7 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose }: 
       heading: "Não Tem Jogo!",
       subheading: "Tudo Certo!",
       description: "Dia livre para marcar seus eventos.",
-      icon: <CheckCircle2 className="w-12 h-12 text-[#2ecc71]" />
+      icon: <CheckCircle2 className="w-6 h-6 text-[#2ecc71]" />
     }
   }[gameState];
 
@@ -100,18 +100,19 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose }: 
               <X className="w-5 h-5" />
             </button>
 
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: "spring" }}
-              className={`w-20 h-20 rounded-full ${config.bgTheme} flex items-center justify-center mb-5`}
-            >
-              {config.icon}
-            </motion.div>
-
-            <h2 className={`${config.themeColor} font-black italic text-4xl uppercase tracking-tighter leading-none mb-1 text-center`}>
-              {config.heading}
-            </h2>
+            <div className="flex items-center gap-3 mb-2 justify-center mt-4">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2, type: "spring" }}
+                className={`w-10 h-10 rounded-full ${config.bgTheme} flex items-center justify-center shrink-0`}
+              >
+                {config.icon}
+              </motion.div>
+              <h2 className={`${config.themeColor} font-black italic text-3xl md:text-4xl uppercase tracking-tighter leading-none`}>
+                {config.heading}
+              </h2>
+            </div>
             <h3 className="text-white font-bold text-lg uppercase tracking-wider mb-1 text-center">
               {config.subheading}
             </h3>

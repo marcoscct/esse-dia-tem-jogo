@@ -98,9 +98,8 @@ export default function TeamCarousel({ teams, selected, onSelect }: TeamCarousel
   });
 
   const rafId = useRef(0);
-  const isInitialMount = useRef(true);
-  const hasDragged = useRef(false);
-  const isProgrammaticScroll = useRef(false);
+  const isPointerDown = useRef(false);
+  const userInteracted = useRef(false);
 
   const teamsRef = useRef(teams);
   teamsRef.current = teams;
@@ -126,64 +125,65 @@ export default function TeamCarousel({ teams, selected, onSelect }: TeamCarousel
     setSelectedIndex(idx);
   }, [emblaApi]);
 
+  /* ── Click handler ── */
+  const handleSlideClick = useCallback((index: number) => {
+    if (!emblaApi) return;
+    userInteracted.current = true;
+    emblaApi.scrollTo(index);
+  }, [emblaApi]);
+
   /* ── Settle-snap: when dragFree momentum stops, gently snap to nearest ── */
   const handleSettle = useCallback(() => {
     if (!emblaApi) return;
     
-    // On initial mount, don't animate — just sync state
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      syncSelection();
-      isProgrammaticScroll.current = false;
-      return;
-    }
+    const nearest = emblaApi.selectedScrollSnap();
+    setSelectedIndex(nearest);
 
-    if (hasDragged.current) {
-      const nearest = emblaApi.selectedScrollSnap();
-      emblaApi.scrollTo(nearest);
-      hasDragged.current = false;
-      
-      const team = teamsRef.current[nearest];
-      if (team && team.slug !== selectedRef.current) {
-        onSelectRef.current(team.slug);
-      }
-    } else if (!isProgrammaticScroll.current) {
-      const nearest = emblaApi.selectedScrollSnap();
+    if (userInteracted.current) {
+      userInteracted.current = false;
       const team = teamsRef.current[nearest];
       if (team && team.slug !== selectedRef.current) {
         onSelectRef.current(team.slug);
       }
     }
-    
-    isProgrammaticScroll.current = false;
-    syncSelection();
-  }, [emblaApi, syncSelection]);
+  }, [emblaApi]);
 
   /* ── Lifecycle ── */
   useEffect(() => {
     if (!emblaApi) return;
 
-    // Mark initial mount to suppress any initial snap animations
-    isInitialMount.current = true;
     updateTweens();
     syncSelection();
 
-    const registerDragStart = () => {
-      hasDragged.current = true;
+    const handlePointerDown = () => {
+      isPointerDown.current = true;
     };
 
-    emblaApi.on("scroll", updateTweens);
+    const handlePointerUp = () => {
+      isPointerDown.current = false;
+    };
+
+    const handleScroll = () => {
+      updateTweens();
+      if (isPointerDown.current) {
+        userInteracted.current = true;
+      }
+    };
+
+    emblaApi.on("scroll", handleScroll);
     emblaApi.on("reInit", updateTweens);
     emblaApi.on("select", syncSelection);
     emblaApi.on("settle", handleSettle);
-    emblaApi.on("pointerDown", registerDragStart);
+    emblaApi.on("pointerDown", handlePointerDown);
+    emblaApi.on("pointerUp", handlePointerUp);
 
     return () => {
-      emblaApi.off("scroll", updateTweens);
+      emblaApi.off("scroll", handleScroll);
       emblaApi.off("reInit", updateTweens);
       emblaApi.off("select", syncSelection);
       emblaApi.off("settle", handleSettle);
-      emblaApi.off("pointerDown", registerDragStart);
+      emblaApi.off("pointerDown", handlePointerDown);
+      emblaApi.off("pointerUp", handlePointerUp);
       cancelAnimationFrame(rafId.current);
     };
   }, [emblaApi, updateTweens, syncSelection, handleSettle]);
@@ -193,9 +193,6 @@ export default function TeamCarousel({ teams, selected, onSelect }: TeamCarousel
     if (!emblaApi) return;
     const targetIdx = teams.findIndex((t) => t.slug === selected);
     if (targetIdx !== -1 && targetIdx !== emblaApi.selectedScrollSnap()) {
-      // Mark this as a programmatic scroll so syncSelection won't call onSelect
-      // (which would re-trigger this effect in an infinite loop)
-      isProgrammaticScroll.current = true;
       emblaApi.scrollTo(targetIdx);
     }
   }, [selected, teams, emblaApi]);
@@ -244,7 +241,7 @@ export default function TeamCarousel({ teams, selected, onSelect }: TeamCarousel
                 key={t.code}
                 className="flex-[0_0_22%] min-w-[72px] md:flex-[0_0_18%] flex flex-col items-center justify-end cursor-grab active:cursor-grabbing select-none"
                 style={{ paddingTop: 48, paddingBottom: 24 }}
-                onClick={() => emblaApi?.scrollTo(index)}
+                onClick={() => handleSlideClick(index)}
               >
                 {/* Flag circle */}
                 <div

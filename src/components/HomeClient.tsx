@@ -28,6 +28,34 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
     setIsModalOpen(!!result);
   }, [result]);
 
+  // Restore last selected team from localStorage if on the home page (no initialTeam)
+  useEffect(() => {
+    if (!initialTeam) {
+      try {
+        const saved = localStorage.getItem("lastSelectedTeam");
+        if (saved) {
+          const exists = teams.some(t => t.slug === saved);
+          if (exists) {
+            setSelectedTeam(saved);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to read from localStorage:", err);
+      }
+    }
+  }, [initialTeam, teams]);
+
+  // Save selected team to localStorage when it changes
+  useEffect(() => {
+    if (selectedTeam) {
+      try {
+        localStorage.setItem("lastSelectedTeam", selectedTeam);
+      } catch (err) {
+        console.error("Failed to write to localStorage:", err);
+      }
+    }
+  }, [selectedTeam]);
+
   const handleVerify = (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedTeam && selectedDate) {
@@ -37,9 +65,9 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    // After closing the modal, navigate back to the home page to reset URL
+    // After closing the modal, navigate back to the team-specific page to preserve context
     setTimeout(() => {
-      router.push("/");
+      router.push(`/${selectedTeam}`);
     }, 300);
   };
 

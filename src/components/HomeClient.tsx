@@ -90,6 +90,11 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                   required
                   value={selectedDate}
                   onChange={(e) => setSelectedDate(e.target.value)}
+                  onClick={(e) => {
+                    try {
+                      e.currentTarget.showPicker();
+                    } catch (err) {}
+                  }}
                   className="w-full appearance-none bg-zinc-950 text-white border border-zinc-800 font-bold text-lg md:text-xl rounded-xl py-4 pl-14 pr-12 focus:outline-none focus:border-[#ffcc00] focus:ring-2 focus:ring-[#ffcc00]/20 cursor-pointer"
                 />
               </div>

@@ -155,7 +155,7 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose }: 
                       </div>
                     </div>
 
-                    <div className="font-black uppercase tracking-tight text-md text-white mb-2 text-center max-w-[240px] truncate">
+                    <div className="font-black uppercase tracking-tight text-md text-white mb-2 text-center">
                       {match.team_name} x {match.opponent_name}
                     </div>
 

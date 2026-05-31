@@ -16,3 +16,15 @@ body {
   background-color: var(--color-bg-dark);
   color: #ffffff;
 }
+
+/* Custom styles for native date picker calendar indicator icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(80%) sepia(82%) saturate(1210%) hue-rotate(352deg) brightness(101%) contrast(108%);
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}

@@ -71,3 +71,45 @@ export async function queryDateClient(teamSlug: string, date: string): Promise<D
     matches,
   };
 }
+
+/**
+ * Client-side query: returns all games from all active teams on a given date.
+ */
+export async function queryAllGamesOnDateClient(date: string): Promise<DateQueryResult> {
+  const calendar = await getClientCalendar();
+  const matches: MatchWithTeam[] = [];
+  const seenMatches = new Set<string>();
+
+  for (const [teamCode, team] of Object.entries(calendar.teams)) {
+    if (team.status === "eliminated") continue;
+
+    const dayMatches = team.matches.filter(
+      (m) => m.date === date && m.status !== "eliminated"
+    );
+
+    for (const match of dayMatches) {
+      const matchKey = match.match_number ? String(match.match_number) : `${match.date}-${teamCode}-${match.opponent_code}`;
+      if (!seenMatches.has(matchKey)) {
+        seenMatches.add(matchKey);
+        matches.push({
+          ...match,
+          team_code: teamCode,
+          team_name: team.name,
+          team_flag: team.flag,
+        });
+      }
+    }
+  }
+
+  matches.sort((a, b) => {
+    if (!a.time_brt) return 1;
+    if (!b.time_brt) return -1;
+    return a.time_brt.localeCompare(b.time_brt);
+  });
+
+  return {
+    hasGame: matches.length > 0,
+    date,
+    matches,
+  };
+}

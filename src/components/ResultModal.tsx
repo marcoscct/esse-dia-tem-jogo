@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AlertTriangle, CheckCircle2, Clock, Calendar as CalendarIcon, X, HelpCircle } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Clock, Calendar as CalendarIcon, X, HelpCircle, Share2, Check } from "lucide-react";
 import type { MatchWithTeam } from "@/lib/types";
 import { formatTimeBRT } from "@/lib/date-utils";
 import { getFlagUrl } from "@/lib/flag-codes";
@@ -12,10 +12,17 @@ interface ResultModalProps {
   matches?: MatchWithTeam[];
   isOpen: boolean;
   onClose: () => void;
+  date?: string;
 }
 
-export default function ResultModal({ hasGame, matches = [], isOpen, onClose }: ResultModalProps) {
+export default function ResultModal({ hasGame, matches = [], isOpen, onClose, date }: ResultModalProps) {
   const [mounted, setMounted] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  // Reset copy state when modal opens/closes or date changes
+  useEffect(() => {
+    setCopied(false);
+  }, [isOpen, date]);
 
   useEffect(() => {
     setMounted(true);
@@ -28,6 +35,40 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose }: 
       document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
+
+  const handleCopyText = () => {
+    if (!date) return;
+
+    let text = "";
+    const formattedDate = (() => {
+      const parts = date.split("-");
+      if (parts.length < 3) return date;
+      const [, month, day] = parts;
+      return `${day}/${month}`;
+    })();
+
+    if (gameState === "none" || matches.length === 0) {
+      text = `Pode marcar compromisso no dia ${formattedDate}! Eu já garanti que a agenda está livre em http://www.essediatemjogo.com.br`;
+    } else {
+      const gamesList = matches
+        .map((match) => {
+          const conditionStr = match.condition ? ` (${match.condition})` : "";
+          return `- ${match.team_name} x ${match.opponent_name}${conditionStr}`;
+        })
+        .join("\n");
+
+      text = `Não marque nada nesse dia! Os seguintes jogos podem ocorrer no dia ${formattedDate}:\n${gamesList}\n\nConfira você também em http://www.essediatemjogo.com.br`;
+    }
+
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch((err) => {
+        console.error("Failed to copy text:", err);
+      });
+  };
 
   if (!mounted) return null;
 
@@ -182,9 +223,33 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose }: 
               </div>
             )}
 
+            {/* Share Result Button */}
+            {date && (
+              <button
+                onClick={handleCopyText}
+                className={`mt-5 w-full flex items-center justify-center gap-2 font-bold uppercase tracking-wider py-3.5 px-4 rounded-xl transition-all border text-xs md:text-sm ${
+                  copied 
+                    ? "bg-[#2ecc71]/10 text-[#2ecc71] border-[#2ecc71]/30" 
+                    : "bg-zinc-950 hover:bg-zinc-900 text-zinc-300 border-zinc-900 hover:border-zinc-800 hover:text-white"
+                }`}
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-4 h-4 text-[#2ecc71]" />
+                    <span>Texto Copiado!</span>
+                  </>
+                ) : (
+                  <>
+                    <Share2 className="w-4 h-4 text-[#ffcc00]" />
+                    <span>Compartilhar Resultado</span>
+                  </>
+                )}
+              </button>
+            )}
+
             <button
               onClick={onClose}
-              className="mt-6 w-full bg-zinc-900 hover:bg-zinc-850 text-white font-bold uppercase tracking-widest py-4 rounded-xl transition-all border border-zinc-800 hover:border-zinc-700"
+              className="mt-4 w-full bg-zinc-900 hover:bg-zinc-850 text-white font-bold uppercase tracking-widest py-4 rounded-xl transition-all border border-zinc-800 hover:border-zinc-700"
             >
               Fazer nova busca
             </button>

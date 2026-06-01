@@ -8,19 +8,21 @@ import { Calendar as CalendarIcon, RefreshCw, Loader2 } from "lucide-react";
 import type { TeamSummary, MatchWithTeam } from "@/lib/types";
 import ResultModal from "./ResultModal";
 import TeamCarousel from "./TeamCarousel";
-import { queryDateClient } from "@/lib/client-calendar";
+import { queryDateClient, queryAllGamesOnDateClient } from "@/lib/client-calendar";
 
 interface HomeClientProps {
   teams: TeamSummary[];
   lastUpdated: string;
   initialTeam?: string;
   initialDate?: string;
+  initialMode?: "team" | "date-only";
   result?: { hasGame: boolean; matches: MatchWithTeam[] };
 }
 
-export default function HomeClient({ teams, lastUpdated, initialTeam, initialDate, result }: HomeClientProps) {
+export default function HomeClient({ teams, lastUpdated, initialTeam, initialDate, initialMode = "team", result }: HomeClientProps) {
   const [selectedTeam, setSelectedTeam] = useState(initialTeam || (teams.find(t => t.code === "BRA")?.slug || teams[0]?.slug));
   const [selectedDate, setSelectedDate] = useState(initialDate || "");
+  const [mode, setMode] = useState<"team" | "date-only">(initialMode);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shouldOpenModal, setShouldOpenModal] = useState(!!result);
   const [localResult, setLocalResult] = useState<{ hasGame: boolean; matches: MatchWithTeam[] } | null>(result || null);
@@ -64,16 +66,31 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
     }
   }, [selectedTeam]);
 
+  // Open modal on mount/prop change for date-only mode (since there is no TeamCarousel scroll to trigger it)
+  useEffect(() => {
+    if (mode === "date-only" && shouldOpenModal) {
+      setIsModalOpen(true);
+    }
+  }, [mode, shouldOpenModal]);
+
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (selectedTeam && selectedDate) {
+    if (selectedDate) {
       try {
         setIsLoading(true);
-        const res = await queryDateClient(selectedTeam, selectedDate);
-        setLocalResult(res);
-        setShouldOpenModal(true);
-        setIsModalOpen(true);
-        window.history.pushState(null, "", `/${selectedTeam}/${selectedDate}`);
+        if (mode === "team" && selectedTeam) {
+          const res = await queryDateClient(selectedTeam, selectedDate);
+          setLocalResult(res);
+          setShouldOpenModal(true);
+          setIsModalOpen(true);
+          window.history.pushState(null, "", `/${selectedTeam}/${selectedDate}`);
+        } else if (mode === "date-only") {
+          const res = await queryAllGamesOnDateClient(selectedDate);
+          setLocalResult(res);
+          setShouldOpenModal(true);
+          setIsModalOpen(true);
+          window.history.pushState(null, "", `/todos/${selectedDate}`);
+        }
       } catch (err) {
         console.error("Failed to query date client-side:", err);
       } finally {
@@ -86,7 +103,11 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
     setIsModalOpen(false);
     setShouldOpenModal(false);
     setLocalResult(null);
-    window.history.pushState(null, "", `/${selectedTeam}`);
+    if (mode === "team") {
+      window.history.pushState(null, "", `/${selectedTeam}`);
+    } else {
+      window.history.pushState(null, "", `/`);
+    }
   };
 
   return (
@@ -115,17 +136,50 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
         {/* Main Form Card */}
         <div className="w-full bg-[#111111] rounded-3xl p-5 md:p-8 shadow-2xl border border-zinc-800">
           <form onSubmit={handleVerify} className="flex flex-col gap-5">
+            {/* Mode Switcher */}
+            <div className="flex items-center justify-center gap-3 md:gap-5 mb-1 border-b border-zinc-900 pb-4">
+              <button
+                type="button"
+                onClick={() => setMode("team")}
+                className={`font-black uppercase tracking-wider text-xs md:text-sm transition-all pb-1.5 relative ${
+                  mode === "team" ? "text-[#ffcc00]" : "text-zinc-500 hover:text-zinc-300"
+                }`}
+              >
+                Escolha a Seleção
+                {mode === "team" && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#ffcc00] rounded-full" />
+                )}
+              </button>
+              
+              <span className="text-zinc-600 font-bold uppercase text-xs md:text-sm pb-1.5">OU</span>
+              
+              <button
+                type="button"
+                onClick={() => setMode("date-only")}
+                className={`font-black uppercase tracking-wider text-xs md:text-sm transition-all pb-1.5 relative ${
+                  mode === "date-only" ? "text-[#ffcc00]" : "text-zinc-500 hover:text-zinc-300"
+                }`}
+              >
+                Escolha somente o dia
+                {mode === "date-only" && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#ffcc00] rounded-full" />
+                )}
+              </button>
+            </div>
+
             {/* Team Carousel */}
-            <TeamCarousel
-              teams={teams}
-              selected={selectedTeam}
-              onSelect={setSelectedTeam}
-              onScrollComplete={() => {
-                if (shouldOpenModal) {
-                  setIsModalOpen(true);
-                }
-              }}
-            />
+            {mode === "team" && (
+              <TeamCarousel
+                teams={teams}
+                selected={selectedTeam}
+                onSelect={setSelectedTeam}
+                onScrollComplete={() => {
+                  if (shouldOpenModal) {
+                    setIsModalOpen(true);
+                  }
+                }}
+              />
+            )}
 
             {/* Date Picker */}
             <div className="flex flex-col items-center gap-1.5 text-center">
@@ -154,7 +208,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
             {/* Submit */}
             <button
               type="submit"
-              disabled={isLoading || !selectedDate || (selectedDate === initialDate && selectedTeam === initialTeam && isModalOpen)}
+              disabled={isLoading || !selectedDate || (selectedDate === initialDate && (mode === "team" ? selectedTeam === initialTeam : true) && isModalOpen)}
               className="mt-1 w-full bg-[#ffcc00] hover:bg-[#e6b800] text-black font-black uppercase tracking-widest text-lg md:text-xl py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(255,204,0,0.2)] hover:shadow-[0_0_25px_rgba(255,204,0,0.4)] flex items-center justify-center gap-2"
             >
               {isLoading ? (
@@ -175,6 +229,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
           matches={localResult?.matches} 
           isOpen={isModalOpen} 
           onClose={handleCloseModal} 
+          date={selectedDate}
         />
       </main>
 

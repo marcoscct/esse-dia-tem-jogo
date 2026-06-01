@@ -13,9 +13,10 @@ interface ResultModalProps {
   isOpen: boolean;
   onClose: () => void;
   date?: string;
+  endDate?: string;
 }
 
-export default function ResultModal({ hasGame, matches = [], isOpen, onClose, date }: ResultModalProps) {
+export default function ResultModal({ hasGame, matches = [], isOpen, onClose, date, endDate }: ResultModalProps) {
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -47,17 +48,39 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
       return `${day}/${month}`;
     })();
 
+    const formattedEndDate = (() => {
+      if (!endDate) return "";
+      const parts = endDate.split("-");
+      if (parts.length < 3) return endDate;
+      const [, month, day] = parts;
+      return `${day}/${month}`;
+    })();
+
     if (gameState === "none" || matches.length === 0) {
-      text = `Pode marcar compromisso no dia ${formattedDate}! Eu já garanti que a agenda está livre em http://www.essediatemjogo.com.br`;
+      if (formattedEndDate) {
+        text = `Pode marcar compromisso entre os dias ${formattedDate} e ${formattedEndDate}! Eu já garanti que a agenda está livre em http://www.essediatemjogo.com.br`;
+      } else {
+        text = `Pode marcar compromisso no dia ${formattedDate}! Eu já garanti que a agenda está livre em http://www.essediatemjogo.com.br`;
+      }
     } else {
       const gamesList = matches
         .map((match) => {
           const conditionStr = match.condition ? ` (${match.condition})` : "";
-          return `- ${match.team_name} x ${match.opponent_name}${conditionStr}`;
+          const datePrefix = formattedEndDate 
+            ? `${(() => {
+                const p = match.date.split("-");
+                return p.length < 3 ? match.date : `${p[2]}/${p[1]}`;
+              })()}: ` 
+            : "";
+          return `- ${datePrefix}${match.team_name} x ${match.opponent_name}${conditionStr}`;
         })
         .join("\n");
 
-      text = `Não marque nada nesse dia! Os seguintes jogos podem ocorrer no dia ${formattedDate}:\n${gamesList}\n\nConfira você também em http://www.essediatemjogo.com.br`;
+      if (formattedEndDate) {
+        text = `Não marque nada nesses dias! Os seguintes jogos podem ocorrer entre os dias ${formattedDate} e ${formattedEndDate}:\n${gamesList}\n\nConfira você também em http://www.essediatemjogo.com.br`;
+      } else {
+        text = `Não marque nada nesse dia! Os seguintes jogos podem ocorrer no dia ${formattedDate}:\n${gamesList}\n\nConfira você também em http://www.essediatemjogo.com.br`;
+      }
     }
 
     navigator.clipboard.writeText(text)
@@ -173,6 +196,10 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
                     
                     <div className="text-[10px] font-bold text-zinc-650 uppercase tracking-widest mb-3">
                       {match.phase === "Fase de Grupos" ? "Copa do Mundo 2026" : match.phase}
+                      {endDate && ` • ${(() => {
+                        const parts = match.date.split("-");
+                        return parts.length < 3 ? match.date : `${parts[2]}/${parts[1]}`;
+                      })()}`}
                     </div>
 
                     <div className="flex items-center justify-center gap-6 mb-3">

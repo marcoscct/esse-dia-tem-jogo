@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { Calendar as CalendarIcon, RefreshCw, Loader2 } from "lucide-react";
 import type { TeamSummary, MatchWithTeam } from "@/lib/types";
@@ -27,7 +28,44 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
   const [shouldOpenModal, setShouldOpenModal] = useState(!!result);
   const [localResult, setLocalResult] = useState<{ hasGame: boolean; matches: MatchWithTeam[] } | null>(result || null);
   const [isLoading, setIsLoading] = useState(false);
+  
+  // Range date selection states
+  const [isRangeEnabled, setIsRangeEnabled] = useState(false);
+  const [endDate, setEndDate] = useState("");
+  
   const router = useRouter();
+
+  // Load range parameter if present on initial mounting (direct URL access support)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const ate = params.get("ate");
+      if (ate) {
+        setIsRangeEnabled(true);
+        setEndDate(ate);
+        
+        // Trigger initial local query for the range immediately
+        (async () => {
+          try {
+            setIsLoading(true);
+            if (initialTeam && initialDate) {
+              const res = await queryDateClient(initialTeam, initialDate, ate);
+              setLocalResult(res);
+              setIsModalOpen(true);
+            } else if (initialDate) {
+              const res = await queryAllGamesOnDateClient(initialDate, ate);
+              setLocalResult(res);
+              setIsModalOpen(true);
+            }
+          } catch (err) {
+            console.error("Failed to query initial range client-side:", err);
+          } finally {
+            setIsLoading(false);
+          }
+        })();
+      }
+    }
+  }, [initialTeam, initialDate]);
 
   // Sync modal state when result changes (e.g., on navigation)
   useEffect(() => {
@@ -76,20 +114,23 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedDate) {
+      const activeEndDate = isRangeEnabled && endDate ? endDate : undefined;
+      const queryParam = activeEndDate ? `?ate=${activeEndDate}` : "";
+      
       try {
         setIsLoading(true);
         if (mode === "team" && selectedTeam) {
-          const res = await queryDateClient(selectedTeam, selectedDate);
+          const res = await queryDateClient(selectedTeam, selectedDate, activeEndDate);
           setLocalResult(res);
           setShouldOpenModal(true);
           setIsModalOpen(true);
-          window.history.pushState(null, "", `/${selectedTeam}/${selectedDate}`);
+          window.history.pushState(null, "", `/${selectedTeam}/${selectedDate}${queryParam}`);
         } else if (mode === "date-only") {
-          const res = await queryAllGamesOnDateClient(selectedDate);
+          const res = await queryAllGamesOnDateClient(selectedDate, activeEndDate);
           setLocalResult(res);
           setShouldOpenModal(true);
           setIsModalOpen(true);
-          window.history.pushState(null, "", `/todos/${selectedDate}`);
+          window.history.pushState(null, "", `/todos/${selectedDate}${queryParam}`);
         }
       } catch (err) {
         console.error("Failed to query date client-side:", err);
@@ -184,7 +225,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
             {/* Date Picker */}
             <div className="flex flex-col items-center gap-1.5 text-center">
               <label htmlFor="date" className="uppercase text-[#ffcc00] font-black tracking-widest text-xs md:text-sm cursor-pointer">
-                Escolha a Data
+                {isRangeEnabled ? "Data Inicial" : "Escolha a Data"}
               </label>
               <div className="w-8 h-1 bg-[#ffcc00] rounded-full mb-1"></div>
               <div className="relative max-w-[280px] mx-auto w-full">
@@ -194,7 +235,12 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                   id="date"
                   required
                   value={selectedDate}
-                  onChange={(e) => setSelectedDate(e.target.value)}
+                  onChange={(e) => {
+                    setSelectedDate(e.target.value);
+                    if (endDate && e.target.value > endDate) {
+                      setEndDate("");
+                    }
+                  }}
                   onClick={(e) => {
                     try {
                       e.currentTarget.showPicker();
@@ -205,10 +251,63 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
               </div>
             </div>
 
+            {/* Checkbox for date range */}
+            <div className="flex items-center justify-center -mt-1">
+              <label className="flex items-center gap-2 cursor-pointer text-xs md:text-sm text-zinc-550 hover:text-zinc-300 select-none">
+                <input
+                  type="checkbox"
+                  checked={isRangeEnabled}
+                  onChange={(e) => {
+                    setIsRangeEnabled(e.target.checked);
+                    if (!e.target.checked) setEndDate("");
+                  }}
+                  className="rounded border-zinc-850 bg-zinc-950 text-[#ffcc00] focus:ring-0 cursor-pointer w-4 h-4"
+                />
+                <span>Pesquisar intervalo de datas</span>
+              </label>
+            </div>
+
+            {/* Optional End Date Picker (Animated) */}
+            <AnimatePresence>
+              {isRangeEnabled && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                  animate={{ height: "auto", opacity: 1, marginTop: 4 }}
+                  exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="overflow-hidden w-full"
+                >
+                  <div className="flex flex-col items-center gap-1.5 text-center pt-2">
+                    <label htmlFor="endDate" className="uppercase text-[#ffcc00] font-black tracking-widest text-xs md:text-sm cursor-pointer">
+                      Data Final
+                    </label>
+                    <div className="w-8 h-1 bg-[#ffcc00] rounded-full mb-1"></div>
+                    <div className="relative max-w-[280px] mx-auto w-full">
+                      <CalendarIcon className="absolute left-5 top-1/2 -translate-y-1/2 text-[#ffcc00] w-6 h-6 pointer-events-none" />
+                      <input
+                        type="date"
+                        id="endDate"
+                        required={isRangeEnabled}
+                        value={endDate}
+                        min={selectedDate}
+                        onChange={(e) => setEndDate(e.target.value)}
+                        onClick={(e) => {
+                          try {
+                            e.currentTarget.showPicker();
+                          } catch (err) {}
+                        }}
+                        className="w-full appearance-none bg-zinc-950 text-white border border-zinc-800 font-bold text-lg md:text-xl rounded-xl py-4 pl-14 pr-12 focus:outline-none focus:border-[#ffcc00] focus:ring-2 focus:ring-[#ffcc00]/20 cursor-pointer"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
             {/* Submit */}
             <button
               type="submit"
-              disabled={isLoading || !selectedDate || (selectedDate === initialDate && (mode === "team" ? selectedTeam === initialTeam : true) && isModalOpen)}
+              disabled={isLoading || !selectedDate || (isRangeEnabled && !endDate)}
               className="mt-1 w-full bg-[#ffcc00] hover:bg-[#e6b800] text-black font-black uppercase tracking-widest text-lg md:text-xl py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(255,204,0,0.2)] hover:shadow-[0_0_25px_rgba(255,204,0,0.4)] flex items-center justify-center gap-2"
             >
               {isLoading ? (
@@ -230,6 +329,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
           isOpen={isModalOpen} 
           onClose={handleCloseModal} 
           date={selectedDate}
+          endDate={isRangeEnabled ? endDate : undefined}
         />
       </main>
 

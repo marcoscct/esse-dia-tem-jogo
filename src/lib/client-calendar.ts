@@ -29,9 +29,9 @@ export async function getClientCalendar(): Promise<Calendar> {
 }
 
 /**
- * Client-side query: checks if a team (by slug) has a game on a given date.
+ * Client-side query: checks if a team (by slug) has a game on a given date or range.
  */
-export async function queryDateClient(teamSlug: string, date: string): Promise<DateQueryResult> {
+export async function queryDateClient(teamSlug: string, startDate: string, endDate?: string): Promise<DateQueryResult> {
   const calendar = await getClientCalendar();
 
   // Find the team by slug
@@ -42,7 +42,7 @@ export async function queryDateClient(teamSlug: string, date: string): Promise<D
   if (!entry) {
     return {
       hasGame: false,
-      date,
+      date: startDate,
       matches: [],
     };
   }
@@ -51,9 +51,13 @@ export async function queryDateClient(teamSlug: string, date: string): Promise<D
   const matches: MatchWithTeam[] = [];
 
   if (team.status !== "eliminated") {
-    const dayMatches = team.matches.filter(
-      (m) => m.date === date && m.status !== "eliminated"
-    );
+    const dayMatches = team.matches.filter((m) => {
+      if (m.status === "eliminated") return false;
+      if (endDate) {
+        return m.date >= startDate && m.date <= endDate;
+      }
+      return m.date === startDate;
+    });
 
     for (const match of dayMatches) {
       matches.push({
@@ -67,15 +71,15 @@ export async function queryDateClient(teamSlug: string, date: string): Promise<D
 
   return {
     hasGame: matches.length > 0,
-    date,
+    date: startDate,
     matches,
   };
 }
 
 /**
- * Client-side query: returns all games from all active teams on a given date.
+ * Client-side query: returns all games from all active teams on a given date or range.
  */
-export async function queryAllGamesOnDateClient(date: string): Promise<DateQueryResult> {
+export async function queryAllGamesOnDateClient(startDate: string, endDate?: string): Promise<DateQueryResult> {
   const calendar = await getClientCalendar();
   const matches: MatchWithTeam[] = [];
   const seenMatches = new Set<string>();
@@ -83,9 +87,13 @@ export async function queryAllGamesOnDateClient(date: string): Promise<DateQuery
   for (const [teamCode, team] of Object.entries(calendar.teams)) {
     if (team.status === "eliminated") continue;
 
-    const dayMatches = team.matches.filter(
-      (m) => m.date === date && m.status !== "eliminated"
-    );
+    const dayMatches = team.matches.filter((m) => {
+      if (m.status === "eliminated") return false;
+      if (endDate) {
+        return m.date >= startDate && m.date <= endDate;
+      }
+      return m.date === startDate;
+    });
 
     for (const match of dayMatches) {
       const matchKey = match.match_number ? String(match.match_number) : `${match.date}-${teamCode}-${match.opponent_code}`;
@@ -102,6 +110,9 @@ export async function queryAllGamesOnDateClient(date: string): Promise<DateQuery
   }
 
   matches.sort((a, b) => {
+    if (a.date !== b.date) {
+      return a.date.localeCompare(b.date);
+    }
     if (!a.time_brt) return 1;
     if (!b.time_brt) return -1;
     return a.time_brt.localeCompare(b.time_brt);
@@ -109,7 +120,7 @@ export async function queryAllGamesOnDateClient(date: string): Promise<DateQuery
 
   return {
     hasGame: matches.length > 0,
-    date,
+    date: startDate,
     matches,
   };
 }

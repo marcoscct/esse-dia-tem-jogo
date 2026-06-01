@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Kanit, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import Script from "next/script";
 import "./globals.css";
 
 const kanit = Kanit({
@@ -29,8 +31,17 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${kanit.variable} ${inter.variable} h-full antialiased`}
     >
+      <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5186167131908065"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans bg-[#050505] text-white">
         {children}
+        <Analytics />
       </body>
     </html>
   );

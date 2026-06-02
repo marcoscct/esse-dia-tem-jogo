@@ -139,14 +139,14 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
 
     if (!isDragging && !isProgrammaticScrollRef.current && isFlingingRef.current && !hasSnappedRef.current) {
       const speed = Math.abs(velocity);
-      // When it starts to crawl, pull it abruptly to the closest slide
-      if (speed > 0.05 && speed < 1.8) {
+      // Lower snap threshold to 0.8 so it is almost at rest before snapping, preventing jerks
+      if (speed > 0.05 && speed < 0.8) {
         hasSnappedRef.current = true;
         const closestIdx = pData.findIndex(d => d.flagP === Math.max(...pData.map(p => p.flagP)));
         
-        // High friction + fast duration = snappy magnetic alignment
-        engine.scrollBody.useFriction(0.72);
-        engine.scrollBody.useDuration(18);
+        // Higher friction (0.85) provides critical damping to eliminate pendular oscillation (waggle)
+        engine.scrollBody.useFriction(0.85);
+        engine.scrollBody.useDuration(20);
         
         emblaApi.scrollTo(closestIdx);
       }

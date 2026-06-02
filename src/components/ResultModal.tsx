@@ -283,8 +283,12 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
 
                     <div className="flex items-center justify-center gap-1 text-zinc-600 font-bold text-[9px] uppercase tracking-wide text-center">
                       <span>{match.venue}</span>
-                      <span>•</span>
-                      <span>{match.city}</span>
+                      {match.city && match.city !== match.venue && (
+                        <>
+                          <span>•</span>
+                          <span>{match.city}</span>
+                        </>
+                      )}
                     </div>
 
                     <div className="flex items-center justify-center gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">

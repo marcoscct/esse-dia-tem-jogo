@@ -607,11 +607,19 @@ function transform(rawJson) {
           else if (condType === 'group_3rd') cond = `Caso passe como melhor 3º do Grupo ${team.group}`;
         } else {
           condType = 'knockout_advance';
-          if (bMatch.phase_slug === 'round_of_16') cond = 'Caso avance para as Oitavas de Final';
-          else if (bMatch.phase_slug === 'quarter_finals') cond = 'Caso avance para as Quartas de Final';
-          else if (bMatch.phase_slug === 'semi_finals') cond = 'Caso avance para a Semifinal';
-          else if (bMatch.phase_slug === 'third_place') cond = 'Caso dispute o 3º lugar';
-          else if (bMatch.phase_slug === 'final') cond = 'Caso avance para a Final';
+          let prefix = '';
+          if (spec.conditionType === 'group_1st') prefix = `Caso passe em 1º do Grupo ${team.group}`;
+          else if (spec.conditionType === 'group_2nd') prefix = `Caso passe em 2º do Grupo ${team.group}`;
+          else if (spec.conditionType === 'group_3rd') prefix = `Caso passe como melhor 3º do Grupo ${team.group}`;
+
+          let suffix = '';
+          if (bMatch.phase_slug === 'round_of_16') suffix = 'e avance para as Oitavas de Final';
+          else if (bMatch.phase_slug === 'quarter_finals') suffix = 'e avance para as Quartas de Final';
+          else if (bMatch.phase_slug === 'semi_finals') suffix = 'e avance para a Semifinal';
+          else if (bMatch.phase_slug === 'third_place') suffix = 'e dispute o 3º lugar';
+          else if (bMatch.phase_slug === 'final') suffix = 'e avance para a Final';
+
+          cond = `${prefix} ${suffix}`;
         }
 
         const opponentName = getOpponentDescription(bMatch, spec.pathMatches, team.group, spec.conditionType);

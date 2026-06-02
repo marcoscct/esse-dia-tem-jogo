@@ -91,33 +91,52 @@ export function translateOpponentName(code: string | null, name: string, lang: L
   return name;
 }
 
-// Translates condition descriptions like "Caso passe em 2º do Grupo A"
+// Translates condition descriptions like "Caso passe em 2º do Grupo A" or combined "Caso passe em 2º do Grupo A e avance para as Oitavas de Final"
 export function translateCondition(condition: string | null, lang: Language): string | null {
   if (!condition) return null;
   if (lang === 'pt') return condition;
+
+  const parts = condition.split(/\s+e\s+/i);
+  const prefix = parts[0];
+  const suffix = parts[1];
+
+  let prefixTrans = prefix;
   
-  // Case: "Caso passe em 1º do Grupo A" / "Caso passe em 2º do Grupo A"
-  const groupMatch = condition.match(/^Caso\s+passe\s+em\s+(\d+)º\s+do\s+Grupo\s+([A-L])$/i);
+  const groupMatch = prefix.match(/^Caso\s+passe\s+em\s+(\d+)º\s+do\s+Grupo\s+([A-L])$/i);
   if (groupMatch) {
     const num = groupMatch[1];
     const group = groupMatch[2];
     if (lang === 'en') {
-      const suffix = num === '1' ? 'st' : num === '2' ? 'nd' : 'rd';
-      return `If qualifying ${num}${suffix} in Group ${group}`;
+      const sfx = num === '1' ? 'st' : num === '2' ? 'nd' : 'rd';
+      prefixTrans = `If qualifying ${num}${sfx} in Group ${group}`;
     } else if (lang === 'es') {
-      return `Si clasifica ${num}º del Grupo ${group}`;
+      prefixTrans = `Si clasifica ${num}º del Grupo ${group}`;
+    }
+  } else {
+    const best3rdMatch = prefix.match(/^Caso\s+passe\s+como\s+melhor\s+3º\s+do\s+Grupo\s+([A-L])$/i);
+    if (best3rdMatch) {
+      const group = best3rdMatch[1];
+      if (lang === 'en') prefixTrans = `If qualifying as best 3rd in Group ${group}`;
+      if (lang === 'es') prefixTrans = `Si clasifica como mejor 3º del Grupo ${group}`;
     }
   }
-  
-  // Case: "Caso passe como melhor 3º do Grupo A"
-  const best3rdMatch = condition.match(/^Caso\s+passe\s+como\s+melhor\s+3º\s+do\s+Grupo\s+([A-L])$/i);
-  if (best3rdMatch) {
-    const group = best3rdMatch[1];
-    if (lang === 'en') return `If qualifying as best 3rd in Group ${group}`;
-    if (lang === 'es') return `Si clasifica como mejor 3º del Grupo ${group}`;
+
+  if (suffix) {
+    let suffixTrans = suffix;
+    if (suffix.includes('avance para as Oitavas de Final') || suffix.includes('avance para as oitavas')) {
+      suffixTrans = lang === 'en' ? 'and advancing to the Round of 16' : 'y avanza a los Octavos de Final';
+    } else if (suffix.includes('avance para as Quartas de Final') || suffix.includes('avance para as quartas')) {
+      suffixTrans = lang === 'en' ? 'and advancing to the Quarter-finals' : 'y avanza a los Cuartos de Final';
+    } else if (suffix.includes('avance para a Semifinal') || suffix.includes('avance para a semifinal')) {
+      suffixTrans = lang === 'en' ? 'and advancing to the Semi-finals' : 'y avanza a la Semifinal';
+    } else if (suffix.includes('dispute o 3º lugar') || suffix.includes('dispute o terceiro')) {
+      suffixTrans = lang === 'en' ? 'and playing the 3rd place match' : 'y disputa el 3º puesto';
+    } else if (suffix.includes('avance para a Final') || suffix.includes('avance para a final')) {
+      suffixTrans = lang === 'en' ? 'and advancing to the Final' : 'y avanza a la Final';
+    }
+    return `${prefixTrans} ${suffixTrans}`;
   }
-  
-  // Simple advance cases
+
   if (condition.includes('Caso avance para as Oitavas de Final')) {
     return lang === 'en' ? 'If advancing to the Round of 16' : 'Si avanza a los Octavos de Final';
   }
@@ -133,8 +152,8 @@ export function translateCondition(condition: string | null, lang: Language): st
   if (condition.includes('Caso avance para a Final')) {
     return lang === 'en' ? 'If advancing to the Final' : 'Si avanza a la Final';
   }
-  
-  return condition;
+
+  return prefixTrans;
 }
 
 // Translates tournament phase names like "Fase de Grupos", "Oitavas de Final"

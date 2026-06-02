@@ -10,7 +10,6 @@ import ResultModal from "./ResultModal";
 import TeamCarousel from "./TeamCarousel";
 import { queryDateClient, queryAllGamesOnDateClient } from "@/lib/client-calendar";
 import { useLanguage } from "./TranslationProvider";
-import LanguageSwitcher from "./LanguageSwitcher";
 
 // Wait, Next.js Link import:
 import NextLink from "next/link";
@@ -187,7 +186,6 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
           <p className="text-zinc-400 text-sm md:text-base max-w-xs md:max-w-md mx-auto leading-tight">
             {t("description")}
           </p>
-          <LanguageSwitcher />
         </header>
 
         {/* Main Form Card */}
@@ -238,33 +236,73 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
               />
             )}
 
-            {/* Date Picker */}
-            <div className="flex flex-col items-center gap-1.5 text-center">
-              <label htmlFor="date" className="uppercase text-[#ffcc00] font-black tracking-widest text-xs md:text-sm cursor-pointer">
-                {isRangeEnabled ? t("start_date") : t("select_date")}
-              </label>
-              <div className="w-8 h-1 bg-[#ffcc00] rounded-full mb-1"></div>
-              <div className="relative max-w-[280px] mx-auto w-full">
-                <CalendarIcon className="absolute left-5 top-1/2 -translate-y-1/2 text-[#ffcc00] w-6 h-6 pointer-events-none" />
-                <input
-                  type="date"
-                  id="date"
-                  required
-                  value={selectedDate}
-                  onChange={(e) => {
-                    setSelectedDate(e.target.value);
-                    if (endDate && e.target.value > endDate) {
-                      setEndDate("");
-                    }
-                  }}
-                  onClick={(e) => {
-                    try {
-                      e.currentTarget.showPicker();
-                    } catch (err) {}
-                  }}
-                  className="w-full appearance-none bg-zinc-950 text-white border border-zinc-800 font-bold text-lg md:text-xl rounded-xl py-4 pl-14 pr-12 focus:outline-none focus:border-[#ffcc00] focus:ring-2 focus:ring-[#ffcc00]/20 cursor-pointer"
-                />
+            {/* Date Pickers Container */}
+            <div className="flex flex-col md:flex-row items-start justify-center gap-4 w-full">
+              {/* Start Date */}
+              <div className="flex flex-col items-center gap-1.5 text-center w-full flex-1">
+                <label htmlFor="date" className="uppercase text-[#ffcc00] font-black tracking-widest text-xs md:text-sm cursor-pointer">
+                  {isRangeEnabled ? t("start_date") : t("select_date")}
+                </label>
+                <div className="w-8 h-1 bg-[#ffcc00] rounded-full mb-1"></div>
+                <div className="relative w-full max-w-[280px] md:max-w-full mx-auto">
+                  <CalendarIcon className="absolute left-5 top-1/2 -translate-y-1/2 text-[#ffcc00] w-6 h-6 pointer-events-none" />
+                  <input
+                    type="date"
+                    id="date"
+                    required
+                    value={selectedDate}
+                    onChange={(e) => {
+                      setSelectedDate(e.target.value);
+                      if (endDate && e.target.value > endDate) {
+                        setEndDate("");
+                      }
+                    }}
+                    onClick={(e) => {
+                      try {
+                        e.currentTarget.showPicker();
+                      } catch (err) {}
+                    }}
+                    className="w-full appearance-none bg-zinc-950 text-white border border-zinc-800 font-bold text-lg md:text-xl rounded-xl py-4 pl-14 pr-12 focus:outline-none focus:border-[#ffcc00] focus:ring-2 focus:ring-[#ffcc00]/20 cursor-pointer"
+                  />
+                </div>
               </div>
+
+              {/* Optional End Date Picker */}
+              <AnimatePresence>
+                {isRangeEnabled && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden w-full flex-1"
+                  >
+                    <div className="flex flex-col items-center gap-1.5 text-center md:pt-0">
+                      <label htmlFor="endDate" className="uppercase text-[#ffcc00] font-black tracking-widest text-xs md:text-sm cursor-pointer">
+                        {t("end_date")}
+                      </label>
+                      <div className="w-8 h-1 bg-[#ffcc00] rounded-full mb-1"></div>
+                      <div className="relative w-full max-w-[280px] md:max-w-full mx-auto">
+                        <CalendarIcon className="absolute left-5 top-1/2 -translate-y-1/2 text-[#ffcc00] w-6 h-6 pointer-events-none" />
+                        <input
+                          type="date"
+                          id="endDate"
+                          required={isRangeEnabled}
+                          value={endDate}
+                          min={selectedDate}
+                          onChange={(e) => setEndDate(e.target.value)}
+                          onClick={(e) => {
+                            try {
+                              e.currentTarget.showPicker();
+                            } catch (err) {}
+                          }}
+                          className="w-full appearance-none bg-zinc-950 text-white border border-zinc-800 font-bold text-lg md:text-xl rounded-xl py-4 pl-14 pr-12 focus:outline-none focus:border-[#ffcc00] focus:ring-2 focus:ring-[#ffcc00]/20 cursor-pointer"
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Checkbox for date range */}
@@ -282,43 +320,6 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                 <span>{t("search_range")}</span>
               </label>
             </div>
-
-            {/* Optional End Date Picker (Animated) */}
-            <AnimatePresence>
-              {isRangeEnabled && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                  animate={{ height: "auto", opacity: 1, marginTop: 4 }}
-                  exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="overflow-hidden w-full"
-                >
-                  <div className="flex flex-col items-center gap-1.5 text-center pt-2">
-                    <label htmlFor="endDate" className="uppercase text-[#ffcc00] font-black tracking-widest text-xs md:text-sm cursor-pointer">
-                      {t("end_date")}
-                    </label>
-                    <div className="w-8 h-1 bg-[#ffcc00] rounded-full mb-1"></div>
-                    <div className="relative max-w-[280px] mx-auto w-full">
-                      <CalendarIcon className="absolute left-5 top-1/2 -translate-y-1/2 text-[#ffcc00] w-6 h-6 pointer-events-none" />
-                      <input
-                        type="date"
-                        id="endDate"
-                        required={isRangeEnabled}
-                        value={endDate}
-                        min={selectedDate}
-                        onChange={(e) => setEndDate(e.target.value)}
-                        onClick={(e) => {
-                          try {
-                            e.currentTarget.showPicker();
-                          } catch (err) {}
-                        }}
-                        className="w-full appearance-none bg-zinc-950 text-white border border-zinc-800 font-bold text-lg md:text-xl rounded-xl py-4 pl-14 pr-12 focus:outline-none focus:border-[#ffcc00] focus:ring-2 focus:ring-[#ffcc00]/20 cursor-pointer"
-                      />
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
 
             {/* Submit */}
             <button

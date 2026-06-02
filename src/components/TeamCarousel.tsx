@@ -103,6 +103,10 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
 
   const isPointerDown = useRef(false);
   const userInteracted = useRef(false);
+  const draggedRef = useRef(false);
+  const hasSnappedRef = useRef(false);
+  const isFlingingRef = useRef(false);
+  const isProgrammaticScrollRef = useRef(false);
 
   const teamsRef = useRef(teams);
   const selectedRef = useRef(selected);
@@ -121,7 +125,32 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
     if (!emblaApi) return;
     const snaps = emblaApi.scrollSnapList();
     const progress = emblaApi.scrollProgress();
-    setProximities(computeProximities(progress, snaps, teams.length));
+    const pData = computeProximities(progress, snaps, teams.length);
+    setProximities(pData);
+
+    // Physics attraction (magnet snapping when velocity slows down)
+    const engine = emblaApi.internalEngine();
+    const velocity = engine.scrollBody.velocity();
+    const isDragging = engine.dragHandler.pointerDown();
+
+    if (isDragging) {
+      draggedRef.current = true;
+    }
+
+    if (!isDragging && !isProgrammaticScrollRef.current && isFlingingRef.current && !hasSnappedRef.current) {
+      const speed = Math.abs(velocity);
+      // When it starts to crawl, pull it abruptly to the closest slide
+      if (speed > 0.05 && speed < 1.8) {
+        hasSnappedRef.current = true;
+        const closestIdx = pData.findIndex(d => d.flagP === Math.max(...pData.map(p => p.flagP)));
+        
+        // High friction + fast duration = snappy magnetic alignment
+        engine.scrollBody.useFriction(0.72);
+        engine.scrollBody.useDuration(18);
+        
+        emblaApi.scrollTo(closestIdx);
+      }
+    }
   }, [emblaApi, teams.length]);
 
   /* ── Selection sync ── */
@@ -135,12 +164,23 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
   const handleSlideClick = useCallback((index: number) => {
     if (!emblaApi) return;
     userInteracted.current = true;
+    isProgrammaticScrollRef.current = true;
     emblaApi.scrollTo(index);
   }, [emblaApi]);
 
   /* ── Settle-snap: when dragFree momentum stops, gently snap to nearest ── */
   const handleSettle = useCallback(() => {
     if (!emblaApi) return;
+
+    // Restore base physics
+    const engine = emblaApi.internalEngine();
+    engine.scrollBody.useBaseFriction();
+    engine.scrollBody.useBaseDuration();
+    
+    hasSnappedRef.current = false;
+    draggedRef.current = false;
+    isFlingingRef.current = false;
+    isProgrammaticScrollRef.current = false;
     
     const nearest = emblaApi.selectedScrollSnap();
     setSelectedIndex(nearest);
@@ -169,10 +209,24 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
 
     const handlePointerDown = () => {
       isPointerDown.current = true;
+      draggedRef.current = false;
+      hasSnappedRef.current = false;
+      isFlingingRef.current = false;
+      isProgrammaticScrollRef.current = false;
+      const engine = emblaApi.internalEngine();
+      engine.scrollBody.useBaseFriction();
+      engine.scrollBody.useBaseDuration();
     };
 
     const handlePointerUp = () => {
       isPointerDown.current = false;
+      if (draggedRef.current) {
+        isFlingingRef.current = true;
+        const engine = emblaApi.internalEngine();
+        // Spin like a true roulette (very low friction)
+        engine.scrollBody.useFriction(0.965);
+        engine.scrollBody.useDuration(40);
+      }
     };
 
     const handleScroll = () => {
@@ -224,7 +278,7 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
       </div>
 
       {/* Embla Viewport */}
-      <div className="w-full overflow-hidden py-8" ref={emblaRef}>
+      <div className="w-full overflow-x-clip overflow-y-visible py-8" ref={emblaRef}>
         <div
           className="flex touch-pan-y"
           style={{ backfaceVisibility: "hidden" }}

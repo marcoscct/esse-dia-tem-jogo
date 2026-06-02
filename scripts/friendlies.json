@@ -1,26 +1,64 @@
 [
   {
-    "id": "friendly-20260602-bra-esp",
+    "id": "friendly-20260602-cro-bel",
     "date": "2026-06-02",
-    "time_brt": "16:00",
+    "time_brt": "15:45",
+    "home_team": {
+      "code": "CRO",
+      "name": "Croácia",
+      "flag": "🇭🇷"
+    },
+    "away_team": {
+      "code": "BEL",
+      "name": "Bélgica",
+      "flag": "🇧🇪"
+    },
+    "venue": "Maksimir Stadium",
+    "city": "Zagreb",
+    "country": "Croácia",
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260606-bra-egy",
+    "date": "2026-06-06",
+    "time_brt": "19:00",
     "home_team": {
       "code": "BRA",
       "name": "Brasil",
       "flag": "🇧🇷"
     },
     "away_team": {
-      "code": "ESP",
-      "name": "Espanha",
-      "flag": "🇪🇸"
+      "code": "EGY",
+      "name": "Egito",
+      "flag": "🇪🇬"
     },
-    "venue": "Wembley Stadium",
-    "city": "Londres",
-    "country": "Inglaterra",
+    "venue": "Huntington Bank Field",
+    "city": "Cleveland",
+    "country": "EUA",
     "status": "confirmed"
   },
   {
-    "id": "friendly-20260603-por-fra",
-    "date": "2026-06-03",
+    "id": "friendly-20260606-usa-ger",
+    "date": "2026-06-06",
+    "time_brt": "16:00",
+    "home_team": {
+      "code": "USA",
+      "name": "Estados Unidos",
+      "flag": "🇺🇸"
+    },
+    "away_team": {
+      "code": "GER",
+      "name": "Alemanha",
+      "flag": "🇩🇪"
+    },
+    "venue": "Soldier Field",
+    "city": "Chicago",
+    "country": "EUA",
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260606-por-chi",
+    "date": "2026-06-06",
     "time_brt": "15:45",
     "home_team": {
       "code": "POR",
@@ -28,31 +66,183 @@
       "flag": "🇵🇹"
     },
     "away_team": {
-      "code": "FRA",
-      "name": "França",
-      "flag": "🇫🇷"
+      "code": "CHI",
+      "name": "Chile",
+      "flag": "🇨🇱"
     },
-    "venue": "Stade de France",
-    "city": "Paris",
-    "country": "França",
+    "venue": "Jamor National Stadium",
+    "city": "Lisboa",
+    "country": "Portugal",
     "status": "confirmed"
   },
   {
-    "id": "friendly-20260604-usa-arg",
-    "date": "2026-06-04",
-    "time_brt": "20:00",
+    "id": "friendly-20260606-eng-nzl",
+    "date": "2026-06-06",
+    "time_brt": "18:00",
     "home_team": {
-      "code": "USA",
-      "name": "Estados Unidos",
-      "flag": "🇺🇸"
+      "code": "ENG",
+      "name": "Inglaterra",
+      "flag": "🏴\u200d󠁧󠁢󠁥󠁮󠁧󠁿"
     },
     "away_team": {
+      "code": "NZL",
+      "name": "Nova Zelândia",
+      "flag": "🇳🇿"
+    },
+    "venue": "Raymond James Stadium",
+    "city": "Tampa",
+    "country": "EUA",
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260606-arg-hon",
+    "date": "2026-06-06",
+    "time_brt": "21:00",
+    "home_team": {
       "code": "ARG",
       "name": "Argentina",
       "flag": "🇦🇷"
     },
-    "venue": "MetLife Stadium",
-    "city": "Nova York/NJ",
+    "away_team": {
+      "code": "HON",
+      "name": "Honduras",
+      "flag": "🇭🇳"
+    },
+    "venue": "Hard Rock Stadium",
+    "city": "Miami",
+    "country": "EUA",
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260606-sui-aus",
+    "date": "2026-06-06",
+    "time_brt": "13:00",
+    "home_team": {
+      "code": "SUI",
+      "name": "Suíça",
+      "flag": "🇨🇭"
+    },
+    "away_team": {
+      "code": "AUS",
+      "name": "Austrália",
+      "flag": "🇦🇺"
+    },
+    "venue": "Snapdragon Stadium",
+    "city": "San Diego",
+    "country": "EUA",
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260606-bol-sco",
+    "date": "2026-06-06",
+    "time_brt": "15:00",
+    "home_team": {
+      "code": "BOL",
+      "name": "Bolívia",
+      "flag": "🇧🇴"
+    },
+    "away_team": {
+      "code": "SCO",
+      "name": "Escócia",
+      "flag": "🏴\u200d󠁧󠁢󠁳󠁣󠁴󠁿"
+    },
+    "venue": "Red Bull Arena",
+    "city": "Harrison",
+    "country": "EUA",
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260607-col-jor",
+    "date": "2026-06-07",
+    "time_brt": "18:00",
+    "home_team": {
+      "code": "COL",
+      "name": "Colômbia",
+      "flag": "🇨🇴"
+    },
+    "away_team": {
+      "code": "JOR",
+      "name": "Jordânia",
+      "flag": "🇯🇴"
+    },
+    "venue": "Toyota Stadium",
+    "city": "Frisco",
+    "country": "EUA",
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260607-mar-nor",
+    "date": "2026-06-07",
+    "time_brt": "15:00",
+    "home_team": {
+      "code": "MAR",
+      "name": "Marrocos",
+      "flag": "🇲🇦"
+    },
+    "away_team": {
+      "code": "NOR",
+      "name": "Noruega",
+      "flag": "🇳🇴"
+    },
+    "venue": "Stade de Marrakech",
+    "city": "Marrakech",
+    "country": "Marrocos",
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260609-arg-isl",
+    "date": "2026-06-09",
+    "time_brt": "20:00",
+    "home_team": {
+      "code": "ARG",
+      "name": "Argentina",
+      "flag": "🇦🇷"
+    },
+    "away_team": {
+      "code": "ISL",
+      "name": "Islândia",
+      "flag": "🇮🇸"
+    },
+    "venue": "Soldier Field",
+    "city": "Chicago",
+    "country": "EUA",
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260610-por-nga",
+    "date": "2026-06-10",
+    "time_brt": "15:45",
+    "home_team": {
+      "code": "POR",
+      "name": "Portugal",
+      "flag": "🇵🇹"
+    },
+    "away_team": {
+      "code": "NGA",
+      "name": "Nigéria",
+      "flag": "🇳🇬"
+    },
+    "venue": "Estádio do Algarve",
+    "city": "Faro",
+    "country": "Portugal",
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260610-eng-crc",
+    "date": "2026-06-10",
+    "time_brt": "19:00",
+    "home_team": {
+      "code": "ENG",
+      "name": "Inglaterra",
+      "flag": "🏴\u200d󠁧󠁢󠁥󠁮󠁧󠁿"
+    },
+    "away_team": {
+      "code": "CRC",
+      "name": "Costa Rica",
+      "flag": "🇨🇷"
+    },
+    "venue": "Inter&Co Stadium",
+    "city": "Orlando",
     "country": "EUA",
     "status": "confirmed"
   }

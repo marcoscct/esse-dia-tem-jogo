@@ -313,7 +313,7 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
                             href={getGoogleCalendarUrl(getEventData(match))}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2.5 hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
+                            className="flex items-center justify-center gap-2.5 hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
                           >
                             <span className="w-2 h-2 rounded-full bg-[#db4437] shrink-0" />
                             <span>{t("google_calendar")}</span>
@@ -322,14 +322,14 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
                             href={getOutlookCalendarUrl(getEventData(match))}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2.5 hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
+                            className="flex items-center justify-center gap-2.5 hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
                           >
                             <span className="w-2 h-2 rounded-full bg-[#0078d4] shrink-0" />
                             <span>{t("outlook_calendar")}</span>
                           </a>
                           <button
                             onClick={() => downloadIcsFile(getEventData(match))}
-                            className="flex items-center gap-2.5 w-full text-left hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
+                            className="flex items-center justify-center gap-2.5 w-full hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
                           >
                             <span className="w-2 h-2 rounded-full bg-zinc-550 shrink-0" />
                             <span>{t("download_ics")}</span>

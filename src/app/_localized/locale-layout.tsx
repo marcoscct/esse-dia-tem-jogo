@@ -1,6 +1,5 @@
 import { Kanit, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-import Script from "next/script";
 import "../globals.css";
 import { TranslationProvider } from "@/components/TranslationProvider";
 import LanguageSwitcher from "@/components/LanguageSwitcher";

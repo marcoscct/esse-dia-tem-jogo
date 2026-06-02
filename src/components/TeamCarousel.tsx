@@ -7,25 +7,7 @@ import { getFlagUrl } from "@/lib/flag-codes";
 import { useLanguage } from "./TranslationProvider";
 import { translateTeamName } from "@/locales/i18n-utils";
 
-/* ── Portuguese display codes ── */
-const PT_CODE: Record<string, string> = {
-  GER: "ALE",
-  ENG: "ING",
-  USA: "EUA",
-  NED: "HOL",
-  JPN: "JAP",
-  CGO: "RDC",
-  RSA: "AFS",
-  KOR: "COR",
-  SWE: "SUE",
-  CZE: "TCH",
-  IRN: "IRA",
-  KSA: "ARA",
-  QAT: "CAT"
-};
-function displayCode(code: string): string {
-  return PT_CODE[code] ?? code;
-}
+
 
 /* ── Visual tuning ── */
 const SCALE_MIN = 0.55;
@@ -76,7 +58,7 @@ function computeProximities(
 }
 
 export default function TeamCarousel({ teams, selected, onSelect, onScrollComplete }: TeamCarouselProps) {
-  const { lang, t } = useLanguage();
+  const { lang } = useLanguage();
   const brasilIndex = teams.findIndex((t) => t.code === "BRA");
   const startIndex = brasilIndex >= 0 ? brasilIndex : 0;
 
@@ -88,7 +70,7 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
     containScroll: false,
   });
 
-  const [selectedIndex, setSelectedIndex] = useState(startIndex);
+
   
   // Safe default values so the carousel renders perfectly centered at Brasil on mount without jumps
   const [proximities, setProximities] = useState<ProximityData[]>(() => {
@@ -125,12 +107,7 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
     setProximities(pData);
   }, [emblaApi, teams.length]);
 
-  /* ── Selection sync ── */
-  const syncSelection = useCallback(() => {
-    if (!emblaApi) return;
-    const idx = emblaApi.selectedScrollSnap();
-    setSelectedIndex(idx);
-  }, [emblaApi]);
+
 
   /* ── Click handler ── */
   const handleSlideClick = useCallback((index: number) => {
@@ -144,7 +121,6 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
     if (!emblaApi) return;
 
     const nearest = emblaApi.selectedScrollSnap();
-    setSelectedIndex(nearest);
 
     const team = teamsRef.current[nearest];
     if (team && team.slug === selectedRef.current) {
@@ -167,7 +143,6 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
 
     const initialSyncId = requestAnimationFrame(() => {
       updateTweens();
-      syncSelection();
     });
 
     const handlePointerDown = () => {
@@ -187,7 +162,7 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
 
     emblaApi.on("scroll", handleScroll);
     emblaApi.on("reInit", updateTweens);
-    emblaApi.on("select", syncSelection);
+
     emblaApi.on("settle", handleSettle);
     emblaApi.on("pointerDown", handlePointerDown);
     emblaApi.on("pointerUp", handlePointerUp);
@@ -195,13 +170,13 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
     return () => {
       emblaApi.off("scroll", handleScroll);
       emblaApi.off("reInit", updateTweens);
-      emblaApi.off("select", syncSelection);
+
       emblaApi.off("settle", handleSettle);
       emblaApi.off("pointerDown", handlePointerDown);
       emblaApi.off("pointerUp", handlePointerUp);
       cancelAnimationFrame(initialSyncId);
     };
-  }, [emblaApi, updateTweens, syncSelection, handleSettle]);
+  }, [emblaApi, updateTweens, handleSettle]);
 
   /* ── Sync when parent changes `selected` ── */
   useEffect(() => {

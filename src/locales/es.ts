@@ -41,6 +41,12 @@ export const es = {
   "google_calendar": "Google Calendar",
   "outlook_calendar": "Outlook / Microsoft",
   "download_ics": "Descargar archivo (.ics)",
+  "settings_title": "Ajustes",
+  "timezone_section_title": "Mostrar Horarios",
+  "timezone_mode_device": "Tu Dispositivo",
+  "timezone_mode_brt": "Brasilia (BRT)",
+  "timezone_mode_stadium": "Estadio (Local)",
+  "timezone_mode_stadium_desc": "Husos del lugar del partido",
 
   // Share templates
   "share_free_range": "¡Puedes programar compromisos entre el {start} y el {end}! Ya me aseguré de que la agenda esté libre en http://www.essediatemjogo.com.br",

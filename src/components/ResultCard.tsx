@@ -1,6 +1,6 @@
 import { AlertTriangle, CheckCircle2, Clock, Calendar as CalendarIcon, HelpCircle } from "lucide-react";
 import type { MatchWithTeam } from "@/lib/types";
-import { formatTimeBRT } from "@/lib/date-utils";
+import { getVenueIanaTimezone, formatMatchTimeInTimezone } from "@/lib/date-utils";
 import { getFlagUrl } from "@/lib/flag-codes";
 import { useLanguage } from "./TranslationProvider";
 import { translateTeamName, translateOpponentName, translatePhase, translateCondition } from "@/locales/i18n-utils";
@@ -10,8 +10,8 @@ interface ResultCardProps {
   matches?: MatchWithTeam[];
 }
 
-export default function ResultCard({ hasGame, matches = [] }: ResultCardProps) {
-  const { lang, t } = useLanguage();
+export default function ResultCard({ matches = [] }: ResultCardProps) {
+  const { lang, t, timezoneMode, deviceTimezone } = useLanguage();
   
   const gameState: 'confirmed' | 'possible' | 'none' = 
     matches.length === 0 
@@ -106,10 +106,31 @@ export default function ResultCard({ hasGame, matches = [] }: ResultCardProps) {
                     <span className="font-bold text-sm text-white">{translateOpponentName(match.opponent_code, match.opponent_name, lang)}</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-1.5 text-zinc-455 font-bold text-xs bg-zinc-950 py-1.5 px-4 rounded-full mt-1 border border-zinc-900">
-                  <Clock className="w-3.5 h-3.5 text-zinc-550" />
-                  <span>{match.time_brt ? formatTimeBRT(match.time_brt, lang) : t("time_tbd")}</span>
-                </div>
+                {(() => {
+                  if (!match.time_brt) {
+                    return (
+                      <div className="flex items-center gap-1.5 text-zinc-455 font-bold text-xs bg-zinc-950 py-1.5 px-4 rounded-full mt-1 border border-zinc-900">
+                        <Clock className="w-3.5 h-3.5 text-zinc-550" />
+                        <span>{t("time_tbd")}</span>
+                      </div>
+                    );
+                  }
+                  
+                  let targetTz = 'America/Sao_Paulo';
+                  if (timezoneMode === 'device') {
+                    targetTz = deviceTimezone;
+                  } else if (timezoneMode === 'stadium') {
+                    targetTz = getVenueIanaTimezone(match.city, match.venue);
+                  }
+                  
+                  const formattedTime = formatMatchTimeInTimezone(match.time_brt, match.date, targetTz, lang);
+                  return (
+                    <div className="flex items-center gap-1.5 text-zinc-455 font-bold text-xs bg-zinc-950 py-1.5 px-4 rounded-full mt-1 border border-zinc-900">
+                      <Clock className="w-3.5 h-3.5 text-zinc-550" />
+                      <span>{formattedTime}</span>
+                    </div>
+                  );
+                })()}
               </div>
             ))}
           </div>

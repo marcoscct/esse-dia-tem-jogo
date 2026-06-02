@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Calendar as CalendarIcon, RefreshCw, Loader2 } from "lucide-react";
@@ -37,18 +36,16 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
   const [isRangeEnabled, setIsRangeEnabled] = useState(false);
   const [endDate, setEndDate] = useState("");
   
-  const router = useRouter();
-
   // Load range parameter if present on initial mounting (direct URL access support)
   useEffect(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const ate = params.get("ate");
       if (ate) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setIsRangeEnabled(true);
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setEndDate(ate);
+        setTimeout(() => {
+          setIsRangeEnabled(true);
+          setEndDate(ate);
+        }, 0);
         
         // Trigger initial local query for the range immediately
         (async () => {
@@ -260,7 +257,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                     onClick={(e) => {
                       try {
                         e.currentTarget.showPicker();
-                      } catch (err) {}
+                      } catch {}
                     }}
                     className="w-full appearance-none bg-zinc-950 text-white border border-zinc-800 font-bold text-lg md:text-xl rounded-xl py-4 pl-14 pr-12 focus:outline-none focus:border-[#ffcc00] focus:ring-2 focus:ring-[#ffcc00]/20 cursor-pointer"
                   />
@@ -294,7 +291,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                           onClick={(e) => {
                             try {
                               e.currentTarget.showPicker();
-                            } catch (err) {}
+                            } catch {}
                           }}
                           className="w-full appearance-none bg-zinc-950 text-white border border-zinc-800 font-bold text-lg md:text-xl rounded-xl py-4 pl-14 pr-12 focus:outline-none focus:border-[#ffcc00] focus:ring-2 focus:ring-[#ffcc00]/20 cursor-pointer"
                         />

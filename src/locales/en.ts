@@ -41,6 +41,12 @@ export const en = {
   "google_calendar": "Google Calendar",
   "outlook_calendar": "Outlook / Microsoft",
   "download_ics": "Download file (.ics)",
+  "settings_title": "Settings",
+  "timezone_section_title": "Match Timezone",
+  "timezone_mode_device": "Your Device",
+  "timezone_mode_brt": "Brasília (BRT)",
+  "timezone_mode_stadium": "Stadium (Local)",
+  "timezone_mode_stadium_desc": "Stadium timezone",
 
   // Share templates
   "share_free_range": "You can schedule plans between {start} and {end}! I've already checked that the schedule is free at http://www.essediatemjogo.com.br",

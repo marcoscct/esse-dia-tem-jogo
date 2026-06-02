@@ -159,3 +159,100 @@ export function parseDateParam(param: string): string | null {
 export function toRouteDate(isoDate: string): string {
   return isoDate; // YYYY-MM-DD — already URL safe
 }
+
+export function getVenueIanaTimezone(city: string, venue: string): string {
+  const c = (city || '').toLowerCase();
+  const v = (venue || '').toLowerCase();
+
+  // Pacific Time (America/Vancouver, America/Los_Angeles)
+  if (c.includes('vancouver') || v.includes('bc place')) {
+    return 'America/Vancouver';
+  }
+  if (
+    c.includes('los angeles') || v.includes('sofi') ||
+    c.includes('seattle') || v.includes('lumen') ||
+    c.includes('san francisco') || c.includes('santa clara') || v.includes('levi')
+  ) {
+    return 'America/Los_Angeles';
+  }
+
+  // CST (Mexico CST/MDT - America/Mexico_City, America/Monterrey)
+  if (c.includes('monterrey') || c.includes('guadalupe')) {
+    return 'America/Monterrey';
+  }
+  if (
+    c.includes('mexico') || c.includes('méxico') || v.includes('azteca') ||
+    c.includes('guadalajara') || c.includes('zapopan')
+  ) {
+    return 'America/Mexico_City';
+  }
+
+  // Central Time (America/Chicago)
+  if (
+    c.includes('dallas') || c.includes('arlington') || v.includes('att') ||
+    c.includes('houston') || v.includes('nrg') ||
+    c.includes('kansas') || v.includes('arrowhead')
+  ) {
+    return 'America/Chicago';
+  }
+
+  // Eastern Time (America/New_York, America/Toronto)
+  if (c.includes('toronto') || v.includes('bmo field')) {
+    return 'America/Toronto';
+  }
+  if (
+    c.includes('atlanta') || v.includes('mercedes') ||
+    c.includes('boston') || c.includes('foxborough') || v.includes('gillette') ||
+    c.includes('miami') || v.includes('hard rock') ||
+    c.includes('nova york') || c.includes('new york') || c.includes('nj') || v.includes('metlife') ||
+    c.includes('filadélfia') || c.includes('philadelphia') || v.includes('lincoln')
+  ) {
+    return 'America/New_York';
+  }
+
+  // Default to Brasília
+  return 'America/Sao_Paulo';
+}
+
+export function getTimezoneAbbreviation(timezone: string, date: Date = new Date()): string {
+  try {
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: timezone,
+      timeZoneName: 'short'
+    });
+    const parts = formatter.formatToParts(date);
+    const part = parts.find(p => p.type === 'timeZoneName');
+    return part ? part.value : '';
+  } catch {
+    return '';
+  }
+}
+
+export function formatMatchTimeInTimezone(timeBrt: string, dateStr: string, targetTz: string, lang: Language = 'pt'): string {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const [hh, mm] = timeBrt.split(':').map(Number);
+  
+  // Original is BRT (UTC-3), we add 3 hours to get UTC date object
+  const matchDate = new Date(Date.UTC(y, m - 1, d, hh + 3, mm, 0));
+  
+  const localesMap = { pt: 'pt-BR', en: 'en-US', es: 'es-ES' };
+  
+  let timeString = matchDate.toLocaleTimeString(localesMap[lang], {
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: targetTz,
+    hour12: false
+  });
+  
+  if (lang === 'en') {
+    timeString = matchDate.toLocaleTimeString(localesMap[lang], {
+      hour: 'numeric',
+      minute: '2-digit',
+      timeZone: targetTz,
+      hour12: true
+    });
+  }
+  
+  const abbr = getTimezoneAbbreviation(targetTz, matchDate);
+  return `${timeString} (${abbr})`;
+}

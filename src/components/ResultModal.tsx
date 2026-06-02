@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AlertTriangle, CheckCircle2, Clock, Calendar as CalendarIcon, X, HelpCircle, Share2, Check, ChevronDown } from "lucide-react";
 import type { MatchWithTeam } from "@/lib/types";
-import { formatTimeBRT } from "@/lib/date-utils";
+import { formatTimeBRT, getVenueIanaTimezone, formatMatchTimeInTimezone } from "@/lib/date-utils";
 import { getFlagUrl } from "@/lib/flag-codes";
 import { useLanguage } from "./TranslationProvider";
 import { translateTeamName, translateOpponentName, translatePhase, translateCondition } from "@/locales/i18n-utils";
@@ -19,10 +19,10 @@ interface ResultModalProps {
   endDate?: string;
 }
 
-export default function ResultModal({ hasGame, matches = [], isOpen, onClose, date, endDate }: ResultModalProps) {
+export default function ResultModal({ matches = [], isOpen, onClose, date, endDate }: ResultModalProps) {
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
-  const { lang, t } = useLanguage();
+  const { lang, t, timezoneMode, deviceTimezone } = useLanguage();
 
   const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
   const [prevDate, setPrevDate] = useState(date);
@@ -120,15 +120,21 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
     
     const location = `${match.venue}, ${match.city}`;
     
-    const timeStr = match.time_brt ? formatTimeBRT(match.time_brt, lang) : t("time_tbd");
+    const venueTz = getVenueIanaTimezone(match.city, match.venue);
+    const localTimeFormatted = match.time_brt ? formatMatchTimeInTimezone(match.time_brt, match.date, venueTz, lang) : "";
+    
+    const timeStrBrt = match.time_brt ? formatTimeBRT(match.time_brt, lang) : t("time_tbd");
     
     let description = "";
     if (lang === 'pt') {
-      description = `Esse Dia Tem Jogo! ⚽\n\nPartida: ${title}\nFase: ${phaseTrans}\nEstádio: ${match.venue}\nCidade: ${match.city}\nHorário: ${timeStr}\n\nEvite marcar compromissos nesse horário!\nConsulte mais datas em: http://www.essediatemjogo.com.br`;
+      const localTimeText = localTimeFormatted ? ` / ${localTimeFormatted} (horário local)` : "";
+      description = `Esse Dia Tem Jogo! ⚽\n\nPartida: ${title}\nFase: ${phaseTrans}\nEstádio: ${match.venue}\nCidade: ${match.city}\nHorário: ${timeStrBrt}${localTimeText}\n\nEvite marcar compromissos nesse horário!\nConsulte mais datas em: http://www.essediatemjogo.com.br`;
     } else if (lang === 'es') {
-      description = `¡Hay Partido! ⚽\n\nPartido: ${title}\nFase: ${phaseTrans}\nEstadio: ${match.venue}\nCiudad: ${match.city}\nHorario: ${timeStr}\n\n¡Evita programar compromisos a esta hora!\nConsulta más fechas en: http://www.essediatemjogo.com.br`;
+      const localTimeText = localTimeFormatted ? ` / ${localTimeFormatted} (hora local)` : "";
+      description = `¡Hay Partido! ⚽\n\nPartido: ${title}\nFase: ${phaseTrans}\nEstadio: ${match.venue}\nCiudad: ${match.city}\nHorario: ${timeStrBrt}${localTimeText}\n\n¡Evita programar compromisos a esta hora!\nConsulta más fechas en: http://www.essediatemjogo.com.br`;
     } else {
-      description = `Game Day! ⚽\n\nMatch: ${title}\nPhase: ${phaseTrans}\nVenue: ${match.venue}\nCity: ${match.city}\nTime: ${timeStr}\n\nAvoid scheduling commitments during this time!\nCheck more dates at: http://www.essediatemjogo.com.br`;
+      const localTimeText = localTimeFormatted ? ` / ${localTimeFormatted} (local time)` : "";
+      description = `Game Day! ⚽\n\nMatch: ${title}\nPhase: ${phaseTrans}\nVenue: ${match.venue}\nCity: ${match.city}\nTime: ${timeStrBrt}${localTimeText}\n\nAvoid scheduling commitments during this time!\nCheck more dates at: http://www.essediatemjogo.com.br`;
     }
 
     return {
@@ -202,7 +208,7 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
             animate={{ scale: 1, y: 0, opacity: 1 }}
             exit={{ scale: 0.9, y: 30, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className={`relative w-full max-w-lg bg-[#0d0d0d] rounded-[2rem] p-6 md:p-8 shadow-2xl border-4 ${config.borderColor} flex flex-col items-center z-10 overflow-hidden`}
+            className={`relative w-full max-w-[560px] bg-[#0d0d0d] rounded-[2rem] p-6 md:p-8 shadow-2xl border-4 ${config.borderColor} flex flex-col items-center z-10 overflow-hidden`}
           >
             {/* Close button */}
             <button
@@ -233,7 +239,7 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
             </p>
 
             {gameState !== 'none' && matches.length > 0 ? (
-              <div className="w-full max-h-[320px] overflow-y-auto pr-1 flex flex-col gap-4 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+              <div className="w-full max-h-[400px] overflow-y-auto pr-1 flex flex-col gap-4 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
                 {matches.map(match => (
                   <div key={match.id} className="w-full bg-[#141414] rounded-2xl p-5 border border-zinc-900 flex flex-col items-center">
                     {match.condition && (
@@ -291,10 +297,31 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
                       )}
                     </div>
 
-                    <div className="flex items-center justify-center gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">
-                      <Clock className="w-3.5 h-3.5 text-zinc-550" />
-                      <span>{match.time_brt ? formatTimeBRT(match.time_brt, lang) : t("time_tbd")}</span>
-                    </div>
+                    {(() => {
+                      if (!match.time_brt) {
+                        return (
+                          <div className="flex items-center justify-center gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">
+                            <Clock className="w-3.5 h-3.5 text-zinc-550" />
+                            <span>{t("time_tbd")}</span>
+                          </div>
+                        );
+                      }
+                      
+                      let targetTz = 'America/Sao_Paulo';
+                      if (timezoneMode === 'device') {
+                        targetTz = deviceTimezone;
+                      } else if (timezoneMode === 'stadium') {
+                        targetTz = getVenueIanaTimezone(match.city, match.venue);
+                      }
+                      
+                      const formattedTime = formatMatchTimeInTimezone(match.time_brt, match.date, targetTz, lang);
+                      return (
+                        <div className="flex items-center justify-center gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">
+                          <Clock className="w-3.5 h-3.5 text-zinc-550" />
+                          <span>{formattedTime}</span>
+                        </div>
+                      );
+                    })()}
 
                     {/* Add to Calendar Button & Accordion */}
                     <div className="w-full mt-4 flex flex-col gap-2">

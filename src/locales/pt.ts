@@ -41,6 +41,12 @@ export const pt = {
   "google_calendar": "Google Agenda",
   "outlook_calendar": "Outlook / Microsoft",
   "download_ics": "Baixar arquivo (.ics)",
+  "settings_title": "Configurações",
+  "timezone_section_title": "Exibição de Horários",
+  "timezone_mode_device": "Seu Aparelho",
+  "timezone_mode_brt": "Brasília (BRT)",
+  "timezone_mode_stadium": "Estádio (Local)",
+  "timezone_mode_stadium_desc": "Fuso do local do jogo",
 
   // Share templates
   "share_free_range": "Pode marcar compromisso entre os dias {start} e {end}! Eu já garanti que a agenda está livre em http://www.essediatemjogo.com.br",

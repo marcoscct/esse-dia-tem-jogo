@@ -3,6 +3,7 @@ import { Kanit, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
 import "./globals.css";
+import { TranslationProvider } from "@/components/TranslationProvider";
 
 const kanit = Kanit({
   weight: ["400", "700", "800", "900"],
@@ -40,7 +41,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans bg-[#050505] text-white">
-        {children}
+        <TranslationProvider lang="pt">
+          {children}
+        </TranslationProvider>
         <Analytics />
       </body>
     </html>

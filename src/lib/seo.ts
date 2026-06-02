@@ -1,80 +1,144 @@
 /**
  * seo.ts
- * SEO metadata generators for all route types.
+ * SEO metadata generators for all route types, localized by language.
  * Returns Metadata objects compatible with Next.js App Router.
  */
 
 import type { Metadata } from 'next';
 import { formatDateLong } from './date-utils';
 import type { MatchWithTeam, Team } from './types';
+import type { Language } from '@/locales/i18n-utils';
+import { translateTeamName, translatePhase, translateCondition } from '@/locales/i18n-utils';
 
-const SITE_NAME = 'Esse Dia Tem Jogo';
 const SITE_URL = 'https://www.essediatemjogo.com.br';
-const SITE_DESCRIPTION =
-  'Esse dia tem jogo? Descubra em segundos se tem partida do seu time antes de marcar qualquer compromisso.';
 
-/** Base metadata shared across all pages */
-export const baseMetadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  applicationName: SITE_NAME,
-  authors: [{ name: 'Castro Brothers', url: 'https://divertical.com.br' }],
-  creator: 'Castro Brothers',
-  publisher: 'Castro Brothers',
-  robots: { index: true, follow: true },
-  openGraph: {
-    siteName: SITE_NAME,
+const LOCALIZED_CONFIG = {
+  pt: {
+    siteName: 'Esse Dia Tem Jogo',
+    title: 'Esse Dia Tem Jogo?',
+    description: 'Esse dia tem jogo? Descubra em segundos se tem partida do seu time antes de marcar qualquer compromisso.',
     locale: 'pt_BR',
-    type: 'website',
   },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@essediatemjogo',
+  en: {
+    siteName: 'Is There a Game Today',
+    title: 'Is There a Game Today?',
+    description: 'Is there a game today? Find out in seconds if your team is playing before scheduling any commitments.',
+    locale: 'en_US',
   },
+  es: {
+    siteName: '¿Este Día Hay Partido?',
+    title: '¿Este Día Hay Partido?',
+    description: '¿Este día hay partido? Descubre en segundos si hay partido de tu equipo antes de programar cualquier compromiso.',
+    locale: 'es_ES',
+  }
 };
 
-/** Metadata for the home page */
-export function getHomeMetadata(): Metadata {
+/** Base metadata shared across all pages */
+export function getBaseMetadata(lang: Language = 'pt'): Metadata {
+  const config = LOCALIZED_CONFIG[lang];
+  const canonicalUrl = lang === 'pt' ? SITE_URL : `${SITE_URL}/${lang}`;
+  
   return {
-    ...baseMetadata,
-    title: "Esse Dia Tem Jogo?",
-    description: SITE_DESCRIPTION,
-    keywords: [
-      'tem jogo hoje',
-      'vai ter jogo',
-      'brasil joga hoje',
-      'copa do mundo 2026',
-      'esse dia tem jogo',
-      'jogo do brasil',
-      'agenda copa 2026',
-    ],
+    metadataBase: new URL(SITE_URL),
+    applicationName: config.siteName,
+    authors: [{ name: 'Castro Brothers', url: 'https://divertical.com.br' }],
+    creator: 'Castro Brothers',
+    publisher: 'Castro Brothers',
+    robots: { index: true, follow: true },
     openGraph: {
-      ...baseMetadata.openGraph,
-      title: "Esse Dia Tem Jogo?",
-      description: SITE_DESCRIPTION,
-      url: SITE_URL,
+      siteName: config.siteName,
+      locale: config.locale,
+      type: 'website',
     },
-    alternates: { canonical: SITE_URL },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@essediatemjogo',
+    },
+    alternates: {
+      canonical: canonicalUrl,
+    }
+  };
+}
+
+/** Metadata for the home page */
+export function getHomeMetadata(lang: Language = 'pt'): Metadata {
+  const config = LOCALIZED_CONFIG[lang];
+  const base = getBaseMetadata(lang);
+  
+  const ptKeywords = [
+    'tem jogo hoje',
+    'vai ter jogo',
+    'brasil joga hoje',
+    'copa do mundo 2026',
+    'esse dia tem jogo',
+    'jogo do brasil',
+    'agenda copa 2026',
+  ];
+
+  const enKeywords = [
+    'is there a game today',
+    'game day schedule',
+    'does brazil play today',
+    'world cup 2026 schedule',
+    'is there a match today',
+    'brazil matches',
+    'world cup agenda',
+  ];
+
+  const esKeywords = [
+    'hay partido hoy',
+    'juega hoy',
+    'brasil juega hoy',
+    'copa del mundo 2026',
+    'calendario copa 2026',
+    'partido de brasil',
+    'agenda copa del mundo',
+  ];
+
+  const keywords = lang === 'en' ? enKeywords : lang === 'es' ? esKeywords : ptKeywords;
+
+  const canonicalUrl = lang === 'pt' ? SITE_URL : `${SITE_URL}/${lang}`;
+
+  return {
+    ...base,
+    title: config.title,
+    description: config.description,
+    keywords,
+    openGraph: {
+      ...base.openGraph,
+      title: config.title,
+      description: config.description,
+      url: canonicalUrl,
+    },
   };
 }
 
 /** Metadata for a team overview page — /[team] */
-export function getTeamMetadata(team: Team & { code: string }): Metadata {
-  const description = `Veja todos os jogos da ${team.name} ${team.flag} na Copa do Mundo 2026. Datas, horários e adversários confirmados.`;
-  const url = `${SITE_URL}/${team.slug}`;
+export function getTeamMetadata(team: Team & { code: string }, lang: Language = 'pt'): Metadata {
+  const base = getBaseMetadata(lang);
+  const teamName = translateTeamName(team.code, team.name, lang);
+  
+  let description = `Veja todos os jogos da ${teamName} ${team.flag} na Copa do Mundo 2026. Datas, horários e adversários confirmados.`;
+  if (lang === 'en') {
+    description = `Check all World Cup 2026 matches for ${teamName} ${team.flag}. Confirmed dates, times, and opponents.`;
+  } else if (lang === 'es') {
+    description = `Mira todos los partidos de ${teamName} ${team.flag} en la Copa del Mundo 2026. Fechas, horarios y rivales confirmados.`;
+  }
+
+  const pathSuffix = lang === 'pt' ? `/${team.slug}` : `/${lang}/${team.slug}`;
+  const url = `${SITE_URL}${pathSuffix}`;
 
   return {
-    ...baseMetadata,
-    title: "Esse Dia Tem Jogo?",
+    ...base,
+    title: LOCALIZED_CONFIG[lang].title,
     description,
     keywords: [
-      `jogos da ${team.name.toLowerCase()}`,
-      `${team.name.toLowerCase()} copa 2026`,
-      `${team.name.toLowerCase()} joga quando`,
-      `calendário ${team.name.toLowerCase()} copa do mundo`,
+      `${teamName.toLowerCase()} matches`,
+      `${teamName.toLowerCase()} world cup 2026`,
     ],
     openGraph: {
-      ...baseMetadata.openGraph,
-      title: "Esse Dia Tem Jogo?",
+      ...base.openGraph,
+      title: LOCALIZED_CONFIG[lang].title,
       description,
       url,
     },
@@ -86,43 +150,69 @@ export function getTeamMetadata(team: Team & { code: string }): Metadata {
 export function getDatePageMetadata(
   team: Team & { code: string },
   date: string,
-  result: { hasGame: boolean; matches: MatchWithTeam[] }
+  result: { hasGame: boolean; matches: MatchWithTeam[] },
+  lang: Language = 'pt'
 ): Metadata {
-  const formattedDate = formatDateLong(date);
-  const url = `${SITE_URL}/${team.slug}/${date}`;
+  const base = getBaseMetadata(lang);
+  const formattedDate = formatDateLong(date, lang);
+  const teamName = translateTeamName(team.code, team.name, lang);
+  
+  const pathSuffix = lang === 'pt' ? `/${team.slug}/${date}` : `/${lang}/${team.slug}/${date}`;
+  const url = `${SITE_URL}${pathSuffix}`;
 
   let description: string;
 
   if (result.hasGame) {
     const hasConfirmed = result.matches.some(m => m.status === 'confirmed' || m.status === 'played');
     const match = result.matches[0];
-    const opponent = match.opponent_name;
-    const phase = match.phase;
+    const opponent = translateTeamName(match.opponent_code || '', match.opponent_name, lang);
+    const phase = translatePhase(match.phase, lang);
 
     if (hasConfirmed) {
-      description = `TEM JOGO! ${team.name} x ${opponent} — ${phase} da Copa do Mundo 2026. ${
-        match.time_brt ? `Às ${match.time_brt} (horário de Brasília).` : 'Horário a confirmar.'
-      }`;
+      if (lang === 'en') {
+        description = `GAME DAY! ${teamName} vs ${opponent} — World Cup 2026 ${phase}. ${
+          match.time_brt ? `At ${match.time_brt} BRT.` : 'Kickoff time to be confirmed.'
+        }`;
+      } else if (lang === 'es') {
+        description = `¡HAY PARTIDO! ${teamName} x ${opponent} — ${phase} de la Copa del Mundo 2026. ${
+          match.time_brt ? `A las ${match.time_brt} (hora de Brasilia).` : 'Horario a confirmar.'
+        }`;
+      } else {
+        description = `TEM JOGO! ${teamName} x ${opponent} — ${phase} da Copa do Mundo 2026. ${
+          match.time_brt ? `Às ${match.time_brt} (horário de Brasília).` : 'Horário a confirmar.'
+        }`;
+      }
     } else {
-      description = `POSSÍVEL JOGO! ${team.name} pode jogar no dia ${formattedDate} (${phase} da Copa do Mundo 2026). Condição: ${match.condition || 'A confirmar'}.`;
+      const condition = translateCondition(match.condition, lang) || 'TBD';
+      if (lang === 'en') {
+        description = `POSSIBLE GAME! ${teamName} may play on ${formattedDate} (World Cup 2026 ${phase}). Scenario: ${condition}.`;
+      } else if (lang === 'es') {
+        description = `¡POSIBLE PARTIDO! ${teamName} podría jugar el día ${formattedDate} (${phase} de la Copa del Mundo 2026). Condición: ${condition}.`;
+      } else {
+        description = `POSSÍVEL JOGO! ${teamName} pode jogar no dia ${formattedDate} (${phase} da Copa do Mundo 2026). Condição: ${condition}.`;
+      }
     }
   } else {
-    description = `Confirmado: ${team.name} ${team.flag} não tem jogo no dia ${formattedDate}. Pode marcar seu compromisso!`;
+    if (lang === 'en') {
+      description = `Confirmed: ${teamName} ${team.flag} has no game on ${formattedDate}. Feel free to make plans!`;
+    } else if (lang === 'es') {
+      description = `Confirmado: ${teamName} ${team.flag} no tiene partido el día ${formattedDate}. ¡Puedes programar tu compromiso!`;
+    } else {
+      description = `Confirmado: ${teamName} ${team.flag} não tem jogo no dia ${formattedDate}. Pode marcar seu compromisso!`;
+    }
   }
 
   return {
-    ...baseMetadata,
-    title: "Esse Dia Tem Jogo?",
+    ...base,
+    title: LOCALIZED_CONFIG[lang].title,
     description,
     keywords: [
-      `${team.name.toLowerCase()} joga ${formattedDate}`,
-      `jogo da ${team.name.toLowerCase()} hoje`,
-      `${team.name.toLowerCase()} copa 2026`,
-      `esse dia tem jogo ${team.name.toLowerCase()}`,
+      `${teamName.toLowerCase()} ${date}`,
+      `${teamName.toLowerCase()} match today`,
     ],
     openGraph: {
-      ...baseMetadata.openGraph,
-      title: "Esse Dia Tem Jogo?",
+      ...base.openGraph,
+      title: LOCALIZED_CONFIG[lang].title,
       description,
       url,
     },

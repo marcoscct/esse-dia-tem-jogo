@@ -2,10 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AlertTriangle, CheckCircle2, Clock, Calendar as CalendarIcon, X, HelpCircle, Share2, Check } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Clock, Calendar as CalendarIcon, X, HelpCircle, Share2, Check, ChevronDown } from "lucide-react";
 import type { MatchWithTeam } from "@/lib/types";
 import { formatTimeBRT } from "@/lib/date-utils";
 import { getFlagUrl } from "@/lib/flag-codes";
+import { useLanguage } from "./TranslationProvider";
+import { translateTeamName, translateOpponentName, translatePhase, translateCondition } from "@/locales/i18n-utils";
+import { getGoogleCalendarUrl, getOutlookCalendarUrl, downloadIcsFile } from "@/lib/calendar-utils";
 
 interface ResultModalProps {
   hasGame: boolean;
@@ -19,14 +22,25 @@ interface ResultModalProps {
 export default function ResultModal({ hasGame, matches = [], isOpen, onClose, date, endDate }: ResultModalProps) {
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
+  const { lang, t } = useLanguage();
 
-  // Reset copy state when modal opens/closes or date changes
-  useEffect(() => {
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
+  const [prevDate, setPrevDate] = useState(date);
+  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
+  
+  if (isOpen !== prevIsOpen || date !== prevDate) {
+    setPrevIsOpen(isOpen);
+    setPrevDate(date);
     setCopied(false);
-  }, [isOpen, date]);
+    setOpenDropdownId(null);
+  }
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -45,7 +59,7 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
       const parts = date.split("-");
       if (parts.length < 3) return date;
       const [, month, day] = parts;
-      return `${day}/${month}`;
+      return lang === 'en' ? `${month}/${day}` : `${day}/${month}`;
     })();
 
     const formattedEndDate = (() => {
@@ -53,33 +67,36 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
       const parts = endDate.split("-");
       if (parts.length < 3) return endDate;
       const [, month, day] = parts;
-      return `${day}/${month}`;
+      return lang === 'en' ? `${month}/${day}` : `${day}/${month}`;
     })();
 
     if (gameState === "none" || matches.length === 0) {
       if (formattedEndDate) {
-        text = `Pode marcar compromisso entre os dias ${formattedDate} e ${formattedEndDate}! Eu já garanti que a agenda está livre em http://www.essediatemjogo.com.br`;
+        text = t("share_free_range", { start: formattedDate, end: formattedEndDate });
       } else {
-        text = `Pode marcar compromisso no dia ${formattedDate}! Eu já garanti que a agenda está livre em http://www.essediatemjogo.com.br`;
+        text = t("share_free_single", { date: formattedDate });
       }
     } else {
       const gamesList = matches
         .map((match) => {
-          const conditionStr = match.condition ? ` (${match.condition})` : "";
+          const transTeam = translateTeamName(match.team_code, match.team_name, lang);
+          const transOpp = translateOpponentName(match.opponent_code, match.opponent_name, lang);
+          const conditionStr = match.condition ? ` (${translateCondition(match.condition, lang)})` : "";
           const datePrefix = formattedEndDate 
             ? `${(() => {
                 const p = match.date.split("-");
-                return p.length < 3 ? match.date : `${p[2]}/${p[1]}`;
+                if (p.length < 3) return match.date;
+                return lang === 'en' ? `${p[1]}/${p[2]}` : `${p[2]}/${p[1]}`;
               })()}: ` 
             : "";
-          return `- ${datePrefix}${match.team_name} x ${match.opponent_name}${conditionStr}`;
+          return `- ${datePrefix}${transTeam} x ${transOpp}${conditionStr}`;
         })
         .join("\n");
 
       if (formattedEndDate) {
-        text = `Não marque nada nesses dias! Os seguintes jogos podem ocorrer entre os dias ${formattedDate} e ${formattedEndDate}:\n${gamesList}\n\nConfira você também em http://www.essediatemjogo.com.br`;
+        text = t("share_busy_range", { start: formattedDate, end: formattedEndDate, games: gamesList });
       } else {
-        text = `Não marque nada nesse dia! Os seguintes jogos podem ocorrer no dia ${formattedDate}:\n${gamesList}\n\nConfira você também em http://www.essediatemjogo.com.br`;
+        text = t("share_busy_single", { date: formattedDate, games: gamesList });
       }
     }
 
@@ -91,6 +108,37 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
       .catch((err) => {
         console.error("Failed to copy text:", err);
       });
+  };
+
+  const getEventData = (match: MatchWithTeam) => {
+    const teamNameTrans = translateTeamName(match.team_code, match.team_name, lang);
+    const opponentNameTrans = translateOpponentName(match.opponent_code, match.opponent_name, lang);
+    const phaseTrans = translatePhase(match.phase, lang);
+    
+    const separator = lang === 'pt' ? ' x ' : ' vs ';
+    const title = `${teamNameTrans}${separator}${opponentNameTrans}`;
+    
+    const location = `${match.venue}, ${match.city}`;
+    
+    const timeStr = match.time_brt ? formatTimeBRT(match.time_brt, lang) : t("time_tbd");
+    
+    let description = "";
+    if (lang === 'pt') {
+      description = `Esse Dia Tem Jogo! ⚽\n\nPartida: ${title}\nFase: ${phaseTrans}\nEstádio: ${match.venue}\nCidade: ${match.city}\nHorário: ${timeStr}\n\nEvite marcar compromissos nesse horário!\nConsulte mais datas em: http://www.essediatemjogo.com.br`;
+    } else if (lang === 'es') {
+      description = `¡Hay Partido! ⚽\n\nPartido: ${title}\nFase: ${phaseTrans}\nEstadio: ${match.venue}\nCiudad: ${match.city}\nHorario: ${timeStr}\n\n¡Evita programar compromisos a esta hora!\nConsulta más fechas en: http://www.essediatemjogo.com.br`;
+    } else {
+      description = `Game Day! ⚽\n\nMatch: ${title}\nPhase: ${phaseTrans}\nVenue: ${match.venue}\nCity: ${match.city}\nTime: ${timeStr}\n\nAvoid scheduling commitments during this time!\nCheck more dates at: http://www.essediatemjogo.com.br`;
+    }
+
+    return {
+      id: match.id,
+      title,
+      description,
+      location,
+      date: match.date,
+      timeBrt: match.time_brt
+    };
   };
 
   if (!mounted) return null;
@@ -112,27 +160,27 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
       borderColor: "border-[#ffcc00] shadow-[#ffcc00]/20",
       themeColor: "text-[#ffcc00]",
       bgTheme: "bg-[#ffcc00]/10",
-      heading: "Tem Jogo!",
-      subheading: "Tome Cuidado!",
-      description: "Evite marcar compromissos nesse dia.",
+      heading: t("has_game_heading"),
+      subheading: t("has_game_subheading"),
+      description: t("has_game_desc"),
       icon: <AlertTriangle className="w-6 h-6 text-[#ffcc00]" />
     },
     possible: {
       borderColor: "border-[#ff8c00] shadow-[#ff8c00]/20",
       themeColor: "text-[#ff8c00]",
       bgTheme: "bg-[#ff8c00]/10",
-      heading: "Possível Jogo!",
-      subheading: "Fique Atento!",
-      description: "Esta seleção possui cenários de classificação para este dia.",
+      heading: t("possible_game_heading"),
+      subheading: t("possible_game_subheading"),
+      description: t("possible_game_desc_modal"),
       icon: <HelpCircle className="w-6 h-6 text-[#ff8c00]" />
     },
     none: {
       borderColor: "border-[#2ecc71] shadow-[#2ecc71]/20",
       themeColor: "text-[#2ecc71]",
       bgTheme: "bg-[#2ecc71]/10",
-      heading: "Não Tem Jogo!",
-      subheading: "Tudo Certo!",
-      description: "Dia livre para marcar seus eventos.",
+      heading: t("no_game_heading"),
+      subheading: t("no_game_subheading"),
+      description: t("no_game_desc"),
       icon: <CheckCircle2 className="w-6 h-6 text-[#2ecc71]" />
     }
   }[gameState];
@@ -190,42 +238,47 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
                   <div key={match.id} className="w-full bg-[#141414] rounded-2xl p-5 border border-zinc-900 flex flex-col items-center">
                     {match.condition && (
                       <div className={`text-[10px] font-black uppercase tracking-wider py-1.5 px-4 rounded-full mb-3 text-center border ${config.bgTheme} ${config.themeColor} border-${config.themeColor}/20`}>
-                        {match.condition}
+                        {translateCondition(match.condition, lang)}
                       </div>
                     )}
                     
                     <div className="text-[10px] font-bold text-zinc-650 uppercase tracking-widest mb-3">
-                      {match.phase === "Fase de Grupos" ? "Copa do Mundo 2026" : match.phase}
+                      {translatePhase(match.phase, lang)}
                       {endDate && ` • ${(() => {
                         const parts = match.date.split("-");
-                        return parts.length < 3 ? match.date : `${parts[2]}/${parts[1]}`;
+                        if (parts.length < 3) return match.date;
+                        return lang === 'en' ? `${parts[1]}/${parts[2]}` : `${parts[2]}/${parts[1]}`;
                       })()}`}
                     </div>
 
                     <div className="flex items-center justify-center gap-6 mb-3">
                       <div className="flex flex-col items-center gap-1.5 w-20">
                         <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-850">
-                          <img src={getFlagUrl(match.team_code)} alt={match.team_name} className="w-full h-full object-cover" />
+                          <img 
+                            src={getFlagUrl(match.team_code)} 
+                            alt={translateTeamName(match.team_code, match.team_name, lang)} 
+                            className="w-full h-full object-cover" 
+                          />
                         </div>
-                        <span className="text-[10px] font-black text-zinc-450 uppercase">{match.team_code}</span>
+                        <span className="text-[10px] font-black text-zinc-455 uppercase">{match.team_code}</span>
                       </div>
 
                       <span className="text-zinc-700 font-black text-lg italic">X</span>
 
                       <div className="flex flex-col items-center gap-1.5 w-20">
-                        <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-850 bg-zinc-950 flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-855 bg-zinc-950 flex items-center justify-center">
                           <img 
                             src={match.opponent_code ? getFlagUrl(match.opponent_code) : "https://hatscripts.github.io/circle-flags/flags/xx.svg"} 
-                            alt={match.opponent_name} 
+                            alt={translateOpponentName(match.opponent_code, match.opponent_name, lang)} 
                             className="w-full h-full object-cover" 
                           />
                         </div>
-                        <span className="text-[10px] font-black text-zinc-450 uppercase">{match.opponent_code || "TBD"}</span>
+                        <span className="text-[10px] font-black text-zinc-455 uppercase">{match.opponent_code || "TBD"}</span>
                       </div>
                     </div>
 
                     <div className="font-black uppercase tracking-tight text-md text-white mb-2 text-center">
-                      {match.team_name} x {match.opponent_name}
+                      {translateTeamName(match.team_code, match.team_name, lang)} x {translateOpponentName(match.opponent_code, match.opponent_name, lang)}
                     </div>
 
                     <div className="flex items-center justify-center gap-1 text-zinc-600 font-bold text-[9px] uppercase tracking-wide text-center">
@@ -236,7 +289,53 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
 
                     <div className="flex items-center justify-center gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">
                       <Clock className="w-3.5 h-3.5 text-zinc-550" />
-                      <span>{match.time_brt ? formatTimeBRT(match.time_brt) : "Horário a confirmar"}</span>
+                      <span>{match.time_brt ? formatTimeBRT(match.time_brt, lang) : t("time_tbd")}</span>
+                    </div>
+
+                    {/* Add to Calendar Button & Accordion */}
+                    <div className="w-full mt-4 flex flex-col gap-2">
+                      <button
+                        onClick={() => setOpenDropdownId(openDropdownId === match.id ? null : match.id)}
+                        className="w-full flex items-center justify-center gap-1.5 bg-zinc-950 hover:bg-zinc-900 text-zinc-400 hover:text-white font-bold py-2.5 px-4 rounded-xl text-xs border border-zinc-900 hover:border-zinc-800 transition-all cursor-pointer"
+                      >
+                        <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
+                        <span>{t("add_to_calendar")}</span>
+                        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${openDropdownId === match.id ? "rotate-180" : ""}`} />
+                      </button>
+
+                      {openDropdownId === match.id && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          className="w-full bg-[#0a0a0a] border border-zinc-900 rounded-xl p-2 flex flex-col gap-1 overflow-hidden"
+                        >
+                          <a
+                            href={getGoogleCalendarUrl(getEventData(match))}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2.5 hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
+                          >
+                            <span className="w-2 h-2 rounded-full bg-[#db4437] shrink-0" />
+                            <span>{t("google_calendar")}</span>
+                          </a>
+                          <a
+                            href={getOutlookCalendarUrl(getEventData(match))}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2.5 hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
+                          >
+                            <span className="w-2 h-2 rounded-full bg-[#0078d4] shrink-0" />
+                            <span>{t("outlook_calendar")}</span>
+                          </a>
+                          <button
+                            onClick={() => downloadIcsFile(getEventData(match))}
+                            className="flex items-center gap-2.5 w-full text-left hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
+                          >
+                            <span className="w-2 h-2 rounded-full bg-zinc-550 shrink-0" />
+                            <span>{t("download_ics")}</span>
+                          </button>
+                        </motion.div>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -245,7 +344,7 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
               <div className="w-full bg-[#141414] rounded-2xl py-8 px-6 border border-zinc-900 flex flex-col items-center">
                 <CalendarIcon className="w-12 h-12 text-[#2ecc71] mb-3 opacity-80" />
                 <div className="text-[#2ecc71] font-black italic text-xl uppercase tracking-wider">
-                  Dia Livre!
+                  {t("free_day")}
                 </div>
               </div>
             )}
@@ -263,12 +362,12 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
                 {copied ? (
                   <>
                     <Check className="w-4 h-4 text-[#2ecc71]" />
-                    <span>Texto Copiado!</span>
+                    <span>{t("copied")}</span>
                   </>
                 ) : (
                   <>
                     <Share2 className="w-4 h-4 text-[#ffcc00]" />
-                    <span>Compartilhar Resultado</span>
+                    <span>{t("share_result")}</span>
                   </>
                 )}
               </button>
@@ -278,7 +377,7 @@ export default function ResultModal({ hasGame, matches = [], isOpen, onClose, da
               onClick={onClose}
               className="mt-4 w-full bg-zinc-900 hover:bg-zinc-850 text-white font-bold uppercase tracking-widest py-4 rounded-xl transition-all border border-zinc-800 hover:border-zinc-700"
             >
-              Fazer nova busca
+              {t("new_search")}
             </button>
           </motion.div>
         </motion.div>

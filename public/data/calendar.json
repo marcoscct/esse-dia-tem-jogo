@@ -2690,6 +2690,24 @@
       "status": "active",
       "matches": [
         {
+          "id": "friendly-20260602-bra-esp",
+          "date": "2026-06-02",
+          "time_brt": "16:00",
+          "opponent_code": "ESP",
+          "opponent_name": "Espanha",
+          "opponent_flag": "🇪🇸",
+          "phase": "Amistoso Internacional",
+          "phase_slug": "friendly",
+          "venue": "Wembley Stadium",
+          "city": "Londres",
+          "country": "Inglaterra",
+          "status": "confirmed",
+          "result": null,
+          "condition": null,
+          "condition_type": null,
+          "match_number": null
+        },
+        {
           "id": "wc2026-013-bra",
           "date": "2026-06-13",
           "time_brt": "19:00",
@@ -4025,6 +4043,24 @@
       "type": "national_team",
       "status": "active",
       "matches": [
+        {
+          "id": "friendly-20260604-usa-arg",
+          "date": "2026-06-04",
+          "time_brt": "20:00",
+          "opponent_code": "ARG",
+          "opponent_name": "Argentina",
+          "opponent_flag": "🇦🇷",
+          "phase": "Amistoso Internacional",
+          "phase_slug": "friendly",
+          "venue": "MetLife Stadium",
+          "city": "Nova York/NJ",
+          "country": "EUA",
+          "status": "confirmed",
+          "result": null,
+          "condition": null,
+          "condition_type": null,
+          "match_number": null
+        },
         {
           "id": "wc2026-019-usa",
           "date": "2026-06-12",
@@ -10306,6 +10342,24 @@
       "status": "active",
       "matches": [
         {
+          "id": "friendly-20260602-bra-esp",
+          "date": "2026-06-02",
+          "time_brt": "16:00",
+          "opponent_code": "BRA",
+          "opponent_name": "Brasil",
+          "opponent_flag": "🇧🇷",
+          "phase": "Amistoso Internacional",
+          "phase_slug": "friendly",
+          "venue": "Wembley Stadium",
+          "city": "Londres",
+          "country": "Inglaterra",
+          "status": "confirmed",
+          "result": null,
+          "condition": null,
+          "condition_type": null,
+          "match_number": null
+        },
+        {
           "id": "wc2026-043-esp",
           "date": "2026-06-15",
           "time_brt": "13:00",
@@ -11929,6 +11983,24 @@
       "type": "national_team",
       "status": "active",
       "matches": [
+        {
+          "id": "friendly-20260603-por-fra",
+          "date": "2026-06-03",
+          "time_brt": "15:45",
+          "opponent_code": "POR",
+          "opponent_name": "Portugal",
+          "opponent_flag": "🇵🇹",
+          "phase": "Amistoso Internacional",
+          "phase_slug": "friendly",
+          "venue": "Stade de France",
+          "city": "Paris",
+          "country": "França",
+          "status": "confirmed",
+          "result": null,
+          "condition": null,
+          "condition_type": null,
+          "match_number": null
+        },
         {
           "id": "wc2026-049-fra",
           "date": "2026-06-16",
@@ -13698,6 +13770,24 @@
       "status": "active",
       "matches": [
         {
+          "id": "friendly-20260604-usa-arg",
+          "date": "2026-06-04",
+          "time_brt": "20:00",
+          "opponent_code": "USA",
+          "opponent_name": "Estados Unidos",
+          "opponent_flag": "🇺🇸",
+          "phase": "Amistoso Internacional",
+          "phase_slug": "friendly",
+          "venue": "MetLife Stadium",
+          "city": "Nova York/NJ",
+          "country": "EUA",
+          "status": "confirmed",
+          "result": null,
+          "condition": null,
+          "condition_type": null,
+          "match_number": null
+        },
+        {
           "id": "wc2026-055-arg",
           "date": "2026-06-16",
           "time_brt": "22:00",
@@ -15321,6 +15411,24 @@
       "type": "national_team",
       "status": "active",
       "matches": [
+        {
+          "id": "friendly-20260603-por-fra",
+          "date": "2026-06-03",
+          "time_brt": "15:45",
+          "opponent_code": "FRA",
+          "opponent_name": "França",
+          "opponent_flag": "🇫🇷",
+          "phase": "Amistoso Internacional",
+          "phase_slug": "friendly",
+          "venue": "Stade de France",
+          "city": "Paris",
+          "country": "França",
+          "status": "confirmed",
+          "result": null,
+          "condition": null,
+          "condition_type": null,
+          "match_number": null
+        },
         {
           "id": "wc2026-061-por",
           "date": "2026-06-17",

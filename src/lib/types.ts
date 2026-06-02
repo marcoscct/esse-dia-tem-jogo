@@ -10,7 +10,8 @@ export type PhaseSlug =
   | 'quarter_finals'
   | 'semi_finals'
   | 'third_place'
-  | 'final';
+  | 'final'
+  | 'friendly';
 
 export type TeamType = 'national_team' | 'club';
 export type TeamStatus = 'active' | 'eliminated';

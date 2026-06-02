@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Calendar as CalendarIcon, RefreshCw, Loader2 } from "lucide-react";
@@ -10,6 +9,11 @@ import type { TeamSummary, MatchWithTeam } from "@/lib/types";
 import ResultModal from "./ResultModal";
 import TeamCarousel from "./TeamCarousel";
 import { queryDateClient, queryAllGamesOnDateClient } from "@/lib/client-calendar";
+import { useLanguage } from "./TranslationProvider";
+import LanguageSwitcher from "./LanguageSwitcher";
+
+// Wait, Next.js Link import:
+import NextLink from "next/link";
 
 interface HomeClientProps {
   teams: TeamSummary[];
@@ -21,6 +25,7 @@ interface HomeClientProps {
 }
 
 export default function HomeClient({ teams, lastUpdated, initialTeam, initialDate, initialMode = "team", result }: HomeClientProps) {
+  const { lang, t } = useLanguage();
   const [selectedTeam, setSelectedTeam] = useState(initialTeam || (teams.find(t => t.code === "BRA")?.slug || teams[0]?.slug));
   const [selectedDate, setSelectedDate] = useState(initialDate || "");
   const [mode, setMode] = useState<"team" | "date-only">(initialMode);
@@ -41,7 +46,9 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
       const params = new URLSearchParams(window.location.search);
       const ate = params.get("ate");
       if (ate) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setIsRangeEnabled(true);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setEndDate(ate);
         
         // Trigger initial local query for the range immediately
@@ -68,13 +75,15 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
   }, [initialTeam, initialDate]);
 
   // Sync modal state when result changes (e.g., on navigation)
-  useEffect(() => {
+  const [prevResult, setPrevResult] = useState(result);
+  if (result !== prevResult) {
+    setPrevResult(result);
     setLocalResult(result || null);
     setShouldOpenModal(!!result);
     if (!result) {
       setIsModalOpen(false);
     }
-  }, [result]);
+  }
 
   // Restore last selected team from localStorage if on the home page (no initialTeam)
   useEffect(() => {
@@ -84,6 +93,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
         if (saved) {
           const exists = teams.some(t => t.slug === saved);
           if (exists) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setSelectedTeam(saved);
           }
         }
@@ -107,6 +117,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
   // Open modal on mount/prop change for date-only mode (since there is no TeamCarousel scroll to trigger it)
   useEffect(() => {
     if (mode === "date-only" && shouldOpenModal) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsModalOpen(true);
     }
   }, [mode, shouldOpenModal]);
@@ -116,6 +127,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
     if (selectedDate) {
       const activeEndDate = isRangeEnabled && endDate ? endDate : undefined;
       const queryParam = activeEndDate ? `?ate=${activeEndDate}` : "";
+      const langPath = lang === 'pt' ? '' : `/${lang}`;
       
       try {
         setIsLoading(true);
@@ -124,13 +136,13 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
           setLocalResult(res);
           setShouldOpenModal(true);
           setIsModalOpen(true);
-          window.history.pushState(null, "", `/${selectedTeam}/${selectedDate}${queryParam}`);
+          window.history.pushState(null, "", `${langPath}/${selectedTeam}/${selectedDate}${queryParam}`);
         } else if (mode === "date-only") {
           const res = await queryAllGamesOnDateClient(selectedDate, activeEndDate);
           setLocalResult(res);
           setShouldOpenModal(true);
           setIsModalOpen(true);
-          window.history.pushState(null, "", `/todos/${selectedDate}${queryParam}`);
+          window.history.pushState(null, "", `${langPath}/todos/${selectedDate}${queryParam}`);
         }
       } catch (err) {
         console.error("Failed to query date client-side:", err);
@@ -144,12 +156,15 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
     setIsModalOpen(false);
     setShouldOpenModal(false);
     setLocalResult(null);
+    const langPath = lang === 'pt' ? '' : `/${lang}`;
     if (mode === "team") {
-      window.history.pushState(null, "", `/${selectedTeam}`);
+      window.history.pushState(null, "", `${langPath}/${selectedTeam}`);
     } else {
-      window.history.pushState(null, "", `/`);
+      window.history.pushState(null, "", `${langPath || '/'}`);
     }
   };
+
+  const langPrefix = lang === 'pt' ? '' : `/${lang}`;
 
   return (
     <div className="flex flex-col min-h-screen bg-[#050505] font-sans text-white selection:bg-[#ffcc00] selection:text-black">
@@ -160,18 +175,19 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
 
       <main className="flex-1 flex flex-col items-center px-4 w-full max-w-2xl mx-auto pt-6 pb-12">
         {/* Header / Hero */}
-        <header className="w-full flex flex-col items-center text-center mb-6">
+        <header className="w-full flex flex-col items-center text-center mb-6 gap-4">
           {/* Logo */}
-          <div className="w-40 h-40 md:w-52 md:h-52 mb-4">
+          <div className="w-40 h-40 md:w-52 md:h-52">
             <img
               src="/logo.png"
-              alt="Esse Dia Tem Jogo?"
+              alt={t("title")}
               className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,204,0,0.3)]"
             />
           </div>
           <p className="text-zinc-400 text-sm md:text-base max-w-xs md:max-w-md mx-auto leading-tight">
-            Descubra se sua seleção joga na data que você escolher.
+            {t("description")}
           </p>
+          <LanguageSwitcher />
         </header>
 
         {/* Main Form Card */}
@@ -186,13 +202,13 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                   mode === "team" ? "text-[#ffcc00]" : "text-zinc-500 hover:text-zinc-300"
                 }`}
               >
-                Escolha a Seleção
+                {t("select_team")}
                 {mode === "team" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#ffcc00] rounded-full" />
                 )}
               </button>
               
-              <span className="text-zinc-600 font-bold uppercase text-xs md:text-sm pb-1.5">OU</span>
+              <span className="text-zinc-600 font-bold uppercase text-xs md:text-sm pb-1.5">{t("or")}</span>
               
               <button
                 type="button"
@@ -201,7 +217,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                   mode === "date-only" ? "text-[#ffcc00]" : "text-zinc-500 hover:text-zinc-300"
                 }`}
               >
-                Escolha somente o dia
+                {t("select_day_only")}
                 {mode === "date-only" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#ffcc00] rounded-full" />
                 )}
@@ -225,7 +241,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
             {/* Date Picker */}
             <div className="flex flex-col items-center gap-1.5 text-center">
               <label htmlFor="date" className="uppercase text-[#ffcc00] font-black tracking-widest text-xs md:text-sm cursor-pointer">
-                {isRangeEnabled ? "Data Inicial" : "Escolha a Data"}
+                {isRangeEnabled ? t("start_date") : t("select_date")}
               </label>
               <div className="w-8 h-1 bg-[#ffcc00] rounded-full mb-1"></div>
               <div className="relative max-w-[280px] mx-auto w-full">
@@ -253,7 +269,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
 
             {/* Checkbox for date range */}
             <div className="flex items-center justify-center -mt-1">
-              <label className="flex items-center gap-2 cursor-pointer text-xs md:text-sm text-zinc-550 hover:text-zinc-300 select-none">
+              <label className="flex items-center gap-2 cursor-pointer text-xs md:text-sm text-zinc-500 hover:text-zinc-300 select-none">
                 <input
                   type="checkbox"
                   checked={isRangeEnabled}
@@ -263,7 +279,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                   }}
                   className="rounded border-zinc-850 bg-zinc-950 text-[#ffcc00] focus:ring-0 cursor-pointer w-4 h-4"
                 />
-                <span>Pesquisar intervalo de datas</span>
+                <span>{t("search_range")}</span>
               </label>
             </div>
 
@@ -279,7 +295,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                 >
                   <div className="flex flex-col items-center gap-1.5 text-center pt-2">
                     <label htmlFor="endDate" className="uppercase text-[#ffcc00] font-black tracking-widest text-xs md:text-sm cursor-pointer">
-                      Data Final
+                      {t("end_date")}
                     </label>
                     <div className="w-8 h-1 bg-[#ffcc00] rounded-full mb-1"></div>
                     <div className="relative max-w-[280px] mx-auto w-full">
@@ -308,15 +324,15 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
             <button
               type="submit"
               disabled={isLoading || !selectedDate || (isRangeEnabled && !endDate)}
-              className="mt-1 w-full bg-[#ffcc00] hover:bg-[#e6b800] text-black font-black uppercase tracking-widest text-lg md:text-xl py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(255,204,0,0.2)] hover:shadow-[0_0_25px_rgba(255,204,0,0.4)] flex items-center justify-center gap-2"
+              className="mt-1 w-full bg-[#ffcc00] hover:bg-[#e6b800] text-black font-black uppercase tracking-widest text-lg md:text-xl py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(255,204,0,0.2)] hover:shadow-[0_0_25px_rgba(255,204,0,0.4)] flex items-center justify-center gap-2 cursor-pointer"
             >
               {isLoading ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin text-black" />
-                  <span>Aguarde...</span>
+                  <span>{t("please_wait")}</span>
                 </>
               ) : (
-                "Verificar"
+                t("verify")
               )}
             </button>
           </form>
@@ -339,17 +355,17 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
       </div>
 
       {/* Footer Info */}
-      <footer className="w-full flex flex-col items-center justify-center gap-2 py-6 bg-black text-zinc-550 text-xs border-t border-zinc-950">
+      <footer className="w-full flex flex-col items-center justify-center gap-2 py-6 bg-black text-zinc-500 text-xs border-t border-zinc-950">
         <div className="flex items-center gap-1.5">
           <RefreshCw className="w-3.5 h-3.5" />
-          <span>Dados atualizados: {lastUpdated} | v1.4.0</span>
+          <span>{t("last_updated", { date: lastUpdated })}</span>
         </div>
         <div className="flex items-center gap-4 text-zinc-500 mt-1">
-          <Link href="/sobre" className="hover:text-[#ffcc00] transition-colors">Sobre</Link>
+          <NextLink href={`${langPrefix}/sobre`} className="hover:text-[#ffcc00] transition-colors">{t("about")}</NextLink>
           <span>•</span>
-          <Link href="/politica-de-privacidade" className="hover:text-[#ffcc00] transition-colors">Privacidade</Link>
+          <NextLink href={`${langPrefix}/politica-de-privacidade`} className="hover:text-[#ffcc00] transition-colors">{t("privacy")}</NextLink>
           <span>•</span>
-          <Link href="/termos-de-uso" className="hover:text-[#ffcc00] transition-colors">Termos de Uso</Link>
+          <NextLink href={`${langPrefix}/termos-de-uso`} className="hover:text-[#ffcc00] transition-colors">{t("terms_of_use")}</NextLink>
         </div>
       </footer>
 

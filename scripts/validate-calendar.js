@@ -15,7 +15,9 @@
 
 'use strict';
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const fs = require('fs');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const path = require('path');
 
 const CALENDAR_PATH =
@@ -26,6 +28,7 @@ const VALID_STATUSES = new Set(['confirmed', 'possible', 'eliminated', 'played']
 const VALID_PHASE_SLUGS = new Set([
   'group_stage', 'round_of_32', 'round_of_16',
   'quarter_finals', 'semi_finals', 'third_place', 'final',
+  'friendly',
 ]);
 const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 const TIME_REGEX = /^\d{2}:\d{2}$/;

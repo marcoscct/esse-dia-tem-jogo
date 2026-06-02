@@ -10,7 +10,9 @@
 
 'use strict';
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const fs = require('fs');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const path = require('path');
 
 // ─── CLI args ─────────────────────────────────────────────────────────────────
@@ -631,6 +633,80 @@ function transform(rawJson) {
           condition: cond,
           condition_type: condType,
           match_number: matchNumber
+        });
+      }
+    }
+  }
+
+  // 5. Inject International Friendlies from scripts/friendlies.json
+  const friendliesPath = path.join(__dirname, 'friendlies.json');
+  if (fs.existsSync(friendliesPath)) {
+    console.log(`📥 Loading friendlies from: ${friendliesPath}`);
+    const friendliesRaw = fs.readFileSync(friendliesPath, 'utf-8');
+    const friendlies = JSON.parse(friendliesRaw);
+
+    const resolveFriendlyTeam = (teamRef) => {
+      if (typeof teamRef === 'string') {
+        const code = teamRef.toUpperCase();
+        // Try to find by code in TEAM_MAP
+        const entry = Object.entries(TEAM_MAP).find(([, meta]) => meta.code === code);
+        if (entry) {
+          return { code: entry[1].code, name: entry[1].name, flag: entry[1].flag };
+        }
+        return { code, name: teamRef, flag: null };
+      }
+      return {
+        code: teamRef.code ? teamRef.code.toUpperCase() : null,
+        name: teamRef.name || 'A definir',
+        flag: teamRef.flag || null
+      };
+    };
+
+    for (const f of friendlies) {
+      const home = resolveFriendlyTeam(f.home_team);
+      const away = resolveFriendlyTeam(f.away_team);
+
+      if (!home.code || !away.code) continue;
+
+      if (teams[home.code]) {
+        teams[home.code].matches.push({
+          id: f.id || `friendly-${f.date}-${home.code.toLowerCase()}-${away.code.toLowerCase()}`,
+          date: f.date,
+          time_brt: f.time_brt || null,
+          opponent_code: away.code,
+          opponent_name: away.name,
+          opponent_flag: away.flag,
+          phase: 'Amistoso Internacional',
+          phase_slug: 'friendly',
+          venue: f.venue || 'A definir',
+          city: f.city || 'A definir',
+          country: f.country || 'A definir',
+          status: f.status || 'confirmed',
+          result: f.result || null,
+          condition: null,
+          condition_type: null,
+          match_number: null
+        });
+      }
+
+      if (teams[away.code]) {
+        teams[away.code].matches.push({
+          id: f.id || `friendly-${f.date}-${away.code.toLowerCase()}-${home.code.toLowerCase()}`,
+          date: f.date,
+          time_brt: f.time_brt || null,
+          opponent_code: home.code,
+          opponent_name: home.name,
+          opponent_flag: home.flag,
+          phase: 'Amistoso Internacional',
+          phase_slug: 'friendly',
+          venue: f.venue || 'A definir',
+          city: f.city || 'A definir',
+          country: f.country || 'A definir',
+          status: f.status || 'confirmed',
+          result: f.result || null,
+          condition: null,
+          condition_type: null,
+          match_number: null
         });
       }
     }

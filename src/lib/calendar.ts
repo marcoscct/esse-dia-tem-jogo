@@ -34,15 +34,18 @@ export function getCalendar(): Calendar {
   if (_calendar) return _calendar;
 
   try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const fs = require('fs');
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const path = require('path');
     const filePath = path.join(process.cwd(), 'public', 'data', 'calendar.json');
     const raw = fs.readFileSync(filePath, 'utf-8');
     _calendar = JSON.parse(raw) as Calendar;
-  } catch (err) {
+  } catch {
     // Fallback to require for environments where fs might be tricky (like some edge cases)
     // but process.cwd() should work in Next.js build
     console.warn('Fallback to require for calendar.json');
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     _calendar = require('../../public/data/calendar.json') as Calendar;
   }
   
@@ -222,6 +225,29 @@ export function getAllDates(): string[] {
 }
 
 /**
+ * Helper to retrieve generic bracket slot names for a given possible knockout match.
+ * Scans all teams to find the two distinct opponent names mapped to this match number.
+ */
+function getKnockoutGenericTeams(calendar: Calendar, matchNumber: number): [string, string] {
+  const opponents = new Set<string>();
+  for (const team of Object.values(calendar.teams)) {
+    for (const m of team.matches) {
+      if (m.match_number === matchNumber && m.opponent_name) {
+        opponents.add(m.opponent_name);
+      }
+    }
+  }
+  const arr = Array.from(opponents).sort();
+  if (arr.length === 2) {
+    return [arr[0], arr[1]];
+  }
+  if (arr.length === 1) {
+    return [arr[0], "A definir"];
+  }
+  return ["A definir", "A definir"];
+}
+
+/**
  * Server-side query: returns all games from all active teams on a given date.
  */
 export function queryAllGamesOnDate(date: string): DateQueryResult {
@@ -240,12 +266,27 @@ export function queryAllGamesOnDate(date: string): DateQueryResult {
       const matchKey = match.match_number ? String(match.match_number) : `${match.date}-${teamCode}-${match.opponent_code}`;
       if (!seenMatches.has(matchKey)) {
         seenMatches.add(matchKey);
-        matches.push({
-          ...match,
-          team_code: teamCode,
-          team_name: team.name,
-          team_flag: team.flag,
-        });
+        
+        if (match.phase_slug !== 'group_stage' && match.status === 'possible' && match.match_number) {
+          const [sideA, sideB] = getKnockoutGenericTeams(calendar, match.match_number);
+          matches.push({
+            ...match,
+            team_code: 'TBD',
+            team_name: sideA,
+            team_flag: '🏳️',
+            opponent_code: 'TBD',
+            opponent_name: sideB,
+            opponent_flag: null,
+            condition: null,
+          });
+        } else {
+          matches.push({
+            ...match,
+            team_code: teamCode,
+            team_name: team.name,
+            team_flag: team.flag,
+          });
+        }
       }
     }
   }

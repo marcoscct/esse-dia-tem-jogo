@@ -1,0 +1,59 @@
+[
+  {
+    "id": "friendly-20260602-bra-esp",
+    "date": "2026-06-02",
+    "time_brt": "16:00",
+    "home_team": {
+      "code": "BRA",
+      "name": "Brasil",
+      "flag": "🇧🇷"
+    },
+    "away_team": {
+      "code": "ESP",
+      "name": "Espanha",
+      "flag": "🇪🇸"
+    },
+    "venue": "Wembley Stadium",
+    "city": "Londres",
+    "country": "Inglaterra",
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260603-por-fra",
+    "date": "2026-06-03",
+    "time_brt": "15:45",
+    "home_team": {
+      "code": "POR",
+      "name": "Portugal",
+      "flag": "🇵🇹"
+    },
+    "away_team": {
+      "code": "FRA",
+      "name": "França",
+      "flag": "🇫🇷"
+    },
+    "venue": "Stade de France",
+    "city": "Paris",
+    "country": "França",
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260604-usa-arg",
+    "date": "2026-06-04",
+    "time_brt": "20:00",
+    "home_team": {
+      "code": "USA",
+      "name": "Estados Unidos",
+      "flag": "🇺🇸"
+    },
+    "away_team": {
+      "code": "ARG",
+      "name": "Argentina",
+      "flag": "🇦🇷"
+    },
+    "venue": "MetLife Stadium",
+    "city": "Nova York/NJ",
+    "country": "EUA",
+    "status": "confirmed"
+  }
+]

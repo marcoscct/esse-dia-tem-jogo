@@ -1,7 +1,7 @@
 import { getAllDates } from '@/lib/calendar';
 import { parseDateParam } from '@/lib/date-utils';
 import type { Metadata } from 'next';
-import LocalizedTodosPage from '../../_localized/todos-page';
+import LocalizedTodosPage from '../../../_localized/todos-page';
 
 interface Props {
   params: Promise<{ date: string }>;
@@ -19,8 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!isoDate) return {};
   
   return {
-    title: "Esse Dia Tem Jogo?",
-    description: `Veja todos os jogos da Copa do Mundo de ${isoDate}.`,
+    title: "¿Este Día Hay Partido?",
+    description: `Consulta todos los partidos del ${isoDate}.`,
   };
 }
 

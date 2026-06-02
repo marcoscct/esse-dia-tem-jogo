@@ -1,23 +1,28 @@
 /**
  * date-utils.ts
  * Pure date/time utilities — no external dependencies.
- * All formatting targets Brazilian users (pt-BR locale, BRT timezone).
+ * All formatting targets Brazilian users (pt-BR locale, BRT timezone), localized by language.
  */
+
+import type { Language } from "@/locales/i18n-utils";
 
 /** BRT timezone identifier */
 export const BRT_TIMEZONE = 'America/Sao_Paulo';
 
-/** Locale for all user-facing formatting */
-export const PT_BR = 'pt-BR';
+const localesMap: Record<Language, string> = {
+  pt: 'pt-BR',
+  en: 'en-US',
+  es: 'es-ES'
+};
 
 /**
- * Formats an ISO date string (YYYY-MM-DD) into a localized Brazilian string.
- * @example "2026-06-13" → "sábado, 13 de junho de 2026"
+ * Formats an ISO date string (YYYY-MM-DD) into a localized string.
+ * @example "2026-06-13" → "sábado, 13 de junho de 2026" (pt)
  */
-export function formatDateLong(isoDate: string): string {
+export function formatDateLong(isoDate: string, lang: Language = 'pt'): string {
   const [year, month, day] = isoDate.split('-').map(Number);
   const date = new Date(year, month - 1, day); // local date — no TZ shift
-  return date.toLocaleDateString(PT_BR, {
+  return date.toLocaleDateString(localesMap[lang], {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
@@ -26,13 +31,13 @@ export function formatDateLong(isoDate: string): string {
 }
 
 /**
- * Formats an ISO date string into a short Brazilian string.
- * @example "2026-06-13" → "13/06/2026"
+ * Formats an ISO date string into a short localized string.
+ * @example "2026-06-13" → "13/06/2026" (pt/es) / "06/13/2026" (en)
  */
-export function formatDateShort(isoDate: string): string {
+export function formatDateShort(isoDate: string, lang: Language = 'pt'): string {
   const [year, month, day] = isoDate.split('-').map(Number);
   const date = new Date(year, month - 1, day);
-  return date.toLocaleDateString(PT_BR, {
+  return date.toLocaleDateString(localesMap[lang], {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
@@ -40,13 +45,13 @@ export function formatDateShort(isoDate: string): string {
 }
 
 /**
- * Returns the weekday name in Portuguese.
- * @example "2026-06-13" → "sábado"
+ * Returns the weekday name in the active language.
+ * @example "2026-06-13" → "sábado" (pt) / "Saturday" (en)
  */
-export function getWeekday(isoDate: string): string {
+export function getWeekday(isoDate: string, lang: Language = 'pt'): string {
   const [year, month, day] = isoDate.split('-').map(Number);
   const date = new Date(year, month - 1, day);
-  return date.toLocaleDateString(PT_BR, { weekday: 'long' });
+  return date.toLocaleDateString(localesMap[lang], { weekday: 'long' });
 }
 
 /**
@@ -100,10 +105,27 @@ export function isFuture(isoDate: string): boolean {
 
 /**
  * Given a time_brt string (e.g. "19:00"), returns a human-friendly label.
- * @example "19:00" → "19h00 (horário de Brasília)"
+ * @example "19:00" → "19h00 (horário de Brasília)" (pt)
  */
-export function formatTimeBRT(timeBrt: string | null): string {
-  if (!timeBrt) return 'Horário a confirmar';
+export function formatTimeBRT(timeBrt: string | null, lang: Language = 'pt'): string {
+  if (!timeBrt) {
+    return lang === 'en' ? 'Time to be confirmed' : 'Horário a confirmar';
+  }
+  
+  if (lang === 'en') {
+    const [h, m] = timeBrt.split(':').map(Number);
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const h12 = h % 12 || 12;
+    const mStr = String(m).padStart(2, '0');
+    return `${h12}:${mStr} ${ampm} (Brasília time)`;
+  }
+  
+  if (lang === 'es') {
+    const [h, m] = timeBrt.split(':');
+    return `${h}:${m} (hora de Brasilia)`;
+  }
+
+  // Default pt
   const [h, m] = timeBrt.split(':');
   return `${h}h${m} (horário de Brasília)`;
 }

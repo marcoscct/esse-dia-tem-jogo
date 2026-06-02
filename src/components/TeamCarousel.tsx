@@ -4,6 +4,8 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import type { TeamSummary } from "@/lib/types";
 import { getFlagUrl } from "@/lib/flag-codes";
+import { useLanguage } from "./TranslationProvider";
+import { translateTeamName } from "@/locales/i18n-utils";
 
 /* ── Portuguese display codes ── */
 const PT_CODE: Record<string, string> = {
@@ -74,6 +76,7 @@ function computeProximities(
 }
 
 export default function TeamCarousel({ teams, selected, onSelect, onScrollComplete }: TeamCarouselProps) {
+  const { lang, t } = useLanguage();
   const brasilIndex = teams.findIndex((t) => t.code === "BRA");
   const startIndex = brasilIndex >= 0 ? brasilIndex : 0;
 
@@ -98,21 +101,20 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
     });
   });
 
-  const rafId = useRef(0);
   const isPointerDown = useRef(false);
   const userInteracted = useRef(false);
 
   const teamsRef = useRef(teams);
-  teamsRef.current = teams;
-
   const selectedRef = useRef(selected);
-  selectedRef.current = selected;
-
   const onSelectRef = useRef(onSelect);
-  onSelectRef.current = onSelect;
-
   const onScrollCompleteRef = useRef(onScrollComplete);
-  onScrollCompleteRef.current = onScrollComplete;
+
+  useEffect(() => {
+    teamsRef.current = teams;
+    selectedRef.current = selected;
+    onSelectRef.current = onSelect;
+    onScrollCompleteRef.current = onScrollComplete;
+  });
 
   /* ── Tween: recompute proximities on every scroll frame ── */
   const updateTweens = useCallback(() => {
@@ -160,8 +162,10 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
   useEffect(() => {
     if (!emblaApi) return;
 
-    updateTweens();
-    syncSelection();
+    const initialSyncId = requestAnimationFrame(() => {
+      updateTweens();
+      syncSelection();
+    });
 
     const handlePointerDown = () => {
       isPointerDown.current = true;
@@ -192,7 +196,7 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
       emblaApi.off("settle", handleSettle);
       emblaApi.off("pointerDown", handlePointerDown);
       emblaApi.off("pointerUp", handlePointerUp);
-      cancelAnimationFrame(rafId.current);
+      cancelAnimationFrame(initialSyncId);
     };
   }, [emblaApi, updateTweens, syncSelection, handleSettle]);
 
@@ -214,7 +218,7 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
       {/* Category Title */}
       <div className="flex flex-col items-center gap-1.5">
         <span className="uppercase text-[#ffcc00] font-black tracking-widest text-xs md:text-sm">
-          Escolha a Seleção
+          {t("select_team")}
         </span>
         <div className="w-8 h-1 bg-[#ffcc00] rounded-full"></div>
       </div>
@@ -276,7 +280,7 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
                 >
                   <img
                     src={getFlagUrl(t.code)}
-                    alt={`Bandeira ${t.name}`}
+                    alt={`Bandeira ${translateTeamName(t.code, t.name, lang)}`}
                     className="w-full h-full object-cover rounded-full pointer-events-none"
                     draggable={false}
                     loading="lazy"
@@ -301,7 +305,7 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
                       textTransform,
                     }}
                   >
-                    {t.name}
+                    {translateTeamName(t.code, t.name, lang)}
                   </span>
                 </div>
               </div>

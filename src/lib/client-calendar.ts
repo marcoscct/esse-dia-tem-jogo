@@ -119,7 +119,9 @@ export async function queryAllGamesOnDateClient(startDate: string, endDate?: str
     });
 
     for (const match of dayMatches) {
-      const matchKey = match.match_number ? String(match.match_number) : `${match.date}-${teamCode}-${match.opponent_code}`;
+      const matchKey = match.match_number
+        ? String(match.match_number)
+        : `${match.date}-${[teamCode, match.opponent_code || ''].sort().join('-')}`;
       if (!seenMatches.has(matchKey)) {
         seenMatches.add(matchKey);
         

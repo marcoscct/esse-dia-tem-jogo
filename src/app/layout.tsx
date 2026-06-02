@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Kanit, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import "./globals.css";
 import { TranslationProvider } from "@/components/TranslationProvider";
@@ -114,6 +115,7 @@ export default function RootLayout({
           {children}
         </TranslationProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

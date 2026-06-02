@@ -103,10 +103,6 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
 
   const isPointerDown = useRef(false);
   const userInteracted = useRef(false);
-  const draggedRef = useRef(false);
-  const hasSnappedRef = useRef(false);
-  const isFlingingRef = useRef(false);
-  const isProgrammaticScrollRef = useRef(false);
 
   const teamsRef = useRef(teams);
   const selectedRef = useRef(selected);
@@ -127,30 +123,6 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
     const progress = emblaApi.scrollProgress();
     const pData = computeProximities(progress, snaps, teams.length);
     setProximities(pData);
-
-    // Physics attraction (magnet snapping when velocity slows down)
-    const engine = emblaApi.internalEngine();
-    const velocity = engine.scrollBody.velocity();
-    const isDragging = engine.dragHandler.pointerDown();
-
-    if (isDragging) {
-      draggedRef.current = true;
-    }
-
-    if (!isDragging && !isProgrammaticScrollRef.current && isFlingingRef.current && !hasSnappedRef.current) {
-      const speed = Math.abs(velocity);
-      // Lower snap threshold to 0.8 so it is almost at rest before snapping, preventing jerks
-      if (speed > 0.05 && speed < 0.8) {
-        hasSnappedRef.current = true;
-        const closestIdx = pData.findIndex(d => d.flagP === Math.max(...pData.map(p => p.flagP)));
-        
-        // Lower friction coefficient (0.45) provides higher damping to prevent any pendular oscillation (overshoot/waggle)
-        engine.scrollBody.useFriction(0.45);
-        engine.scrollBody.useDuration(14);
-        
-        emblaApi.scrollTo(closestIdx);
-      }
-    }
   }, [emblaApi, teams.length]);
 
   /* ── Selection sync ── */
@@ -164,24 +136,13 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
   const handleSlideClick = useCallback((index: number) => {
     if (!emblaApi) return;
     userInteracted.current = true;
-    isProgrammaticScrollRef.current = true;
     emblaApi.scrollTo(index);
   }, [emblaApi]);
 
-  /* ── Settle-snap: when dragFree momentum stops, gently snap to nearest ── */
+  /* ── Settle-snap: when dragFree momentum stops, snap to nearest ── */
   const handleSettle = useCallback(() => {
     if (!emblaApi) return;
 
-    // Restore base physics
-    const engine = emblaApi.internalEngine();
-    engine.scrollBody.useBaseFriction();
-    engine.scrollBody.useBaseDuration();
-    
-    hasSnappedRef.current = false;
-    draggedRef.current = false;
-    isFlingingRef.current = false;
-    isProgrammaticScrollRef.current = false;
-    
     const nearest = emblaApi.selectedScrollSnap();
     setSelectedIndex(nearest);
 
@@ -195,6 +156,8 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
       if (team && team.slug !== selectedRef.current) {
         onSelectRef.current(team.slug);
       }
+      // Snap to the center of the closest slide only at the very end of the movement
+      emblaApi.scrollTo(nearest);
     }
   }, [emblaApi]);
 
@@ -209,24 +172,10 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
 
     const handlePointerDown = () => {
       isPointerDown.current = true;
-      draggedRef.current = false;
-      hasSnappedRef.current = false;
-      isFlingingRef.current = false;
-      isProgrammaticScrollRef.current = false;
-      const engine = emblaApi.internalEngine();
-      engine.scrollBody.useBaseFriction();
-      engine.scrollBody.useBaseDuration();
     };
 
     const handlePointerUp = () => {
       isPointerDown.current = false;
-      if (draggedRef.current) {
-        isFlingingRef.current = true;
-        const engine = emblaApi.internalEngine();
-        // Spin like a true roulette (very low friction)
-        engine.scrollBody.useFriction(0.965);
-        engine.scrollBody.useDuration(40);
-      }
     };
 
     const handleScroll = () => {
@@ -269,16 +218,10 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
 
   return (
     <div className="flex flex-col items-center gap-0 w-full">
-      {/* Category Title */}
-      <div className="flex flex-col items-center gap-1.5">
-        <span className="uppercase text-[#ffcc00] font-black tracking-widest text-xs md:text-sm">
-          {t("select_team")}
-        </span>
-        <div className="w-8 h-1 bg-[#ffcc00] rounded-full"></div>
-      </div>
+
 
       {/* Embla Viewport */}
-      <div className="w-full overflow-x-clip overflow-y-visible py-8" ref={emblaRef}>
+      <div className="w-full overflow-x-clip overflow-y-visible py-2" ref={emblaRef}>
         <div
           className="flex touch-pan-y"
           style={{ backfaceVisibility: "hidden" }}
@@ -310,7 +253,7 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
               <div
                 key={t.code}
                 className="flex-[0_0_22%] min-w-[72px] md:flex-[0_0_18%] flex flex-col items-center justify-end cursor-grab active:cursor-grabbing select-none"
-                style={{ paddingTop: 48, paddingBottom: 24 }}
+                style={{ paddingTop: 20, paddingBottom: 8 }}
                 onClick={() => handleSlideClick(index)}
               >
                 {/* Flag circle */}
@@ -343,15 +286,16 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
 
                 {/* Label — shows on ALL items proportional to proximity */}
                 <div
-                  className="flex flex-col items-center mt-2 h-6"
+                  className="flex flex-col items-center mt-2 h-7"
                   style={{
                     opacity: labelOpacity,
                     transform: `translateY(${translateY}px) scale(${scaleText})`,
+                    transformOrigin: "top center",
                     willChange: "opacity, transform",
                   }}
                 >
                   <span
-                    className="whitespace-nowrap leading-none transition-all duration-100"
+                    className={`${p > 0.85 ? "whitespace-nowrap leading-none" : "whitespace-normal text-center leading-[1.1]"} transition-all duration-100`}
                     style={{
                       color: textColor,
                       fontSize,

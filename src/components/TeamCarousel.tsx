@@ -144,9 +144,9 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
         hasSnappedRef.current = true;
         const closestIdx = pData.findIndex(d => d.flagP === Math.max(...pData.map(p => p.flagP)));
         
-        // Higher friction (0.85) provides critical damping to eliminate pendular oscillation (waggle)
-        engine.scrollBody.useFriction(0.85);
-        engine.scrollBody.useDuration(20);
+        // Lower friction coefficient (0.45) provides higher damping to prevent any pendular oscillation (overshoot/waggle)
+        engine.scrollBody.useFriction(0.45);
+        engine.scrollBody.useDuration(14);
         
         emblaApi.scrollTo(closestIdx);
       }

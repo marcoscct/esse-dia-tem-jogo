@@ -25,7 +25,14 @@ interface HomeClientProps {
 export default function HomeClient({ teams, lastUpdated, initialTeam, initialDate, initialMode = "team", result }: HomeClientProps) {
   const { lang, t } = useLanguage();
   const [selectedTeam, setSelectedTeam] = useState(initialTeam || (teams.find(t => t.code === "BRA")?.slug || teams[0]?.slug));
-  const [selectedDate, setSelectedDate] = useState(initialDate || "");
+  const [selectedDate, setSelectedDate] = useState(() => {
+    if (initialDate) return initialDate;
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  });
   const [mode, setMode] = useState<"team" | "date-only">(initialMode);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shouldOpenModal, setShouldOpenModal] = useState(!!result);
@@ -310,7 +317,11 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                   checked={isRangeEnabled}
                   onChange={(e) => {
                     setIsRangeEnabled(e.target.checked);
-                    if (!e.target.checked) setEndDate("");
+                    if (e.target.checked) {
+                      setEndDate("2026-07-19");
+                    } else {
+                      setEndDate("");
+                    }
                   }}
                   className="rounded border-zinc-850 bg-zinc-950 text-[#ffcc00] focus:ring-0 cursor-pointer w-4 h-4"
                 />

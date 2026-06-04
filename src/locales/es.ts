@@ -11,12 +11,13 @@ export const es = {
   "search_range": "Buscar rango de fechas",
   "please_wait": "Espera...",
   "verify": "Verificar",
-  "last_updated": "Datos actualizados: {date} | v1.4.0",
+  "last_updated": "Datos actualizados: {date} | v1.5.0",
   "about": "Sobre nosotros",
   "privacy": "Privacidad",
   "terms_of_use": "Términos de Uso",
   "back_home": "Voltar al Inicio",
   "about_title": "Sobre el Proyecto",
+  "where_to_watch": "Dónde ver:",
   
   // Results config
   "has_game_heading": "¡Hay Partido!",

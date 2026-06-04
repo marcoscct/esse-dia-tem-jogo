@@ -11,12 +11,13 @@ export const pt = {
   "search_range": "Pesquisar intervalo de datas",
   "please_wait": "Aguarde...",
   "verify": "Verificar",
-  "last_updated": "Dados atualizados: {date} | v1.4.0",
+  "last_updated": "Dados atualizados: {date} | v1.5.0",
   "about": "Sobre",
   "privacy": "Privacidade",
   "terms_of_use": "Termos de Uso",
   "back_home": "Voltar para o Início",
   "about_title": "Sobre o Projeto",
+  "where_to_watch": "Onde assistir:",
   
   // Results config
   "has_game_heading": "Tem Jogo!",

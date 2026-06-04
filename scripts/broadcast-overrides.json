@@ -1,0 +1,75 @@
+{
+  "by_teams_date": [
+    {
+      "date": "2026-06-11",
+      "teams": ["MEX", "RSA"],
+      "broadcasts": ["Globo", "SBT", "SporTV", "CazéTV"]
+    },
+    {
+      "date": "2026-06-12",
+      "teams": ["USA", "PAR"],
+      "broadcasts": ["SBT", "CazéTV"]
+    },
+    {
+      "date": "2026-06-13",
+      "teams": ["BRA", "MAR"],
+      "broadcasts": ["Globo", "SBT", "SporTV", "CazéTV"]
+    },
+    {
+      "date": "2026-06-14",
+      "teams": ["NED", "JPN"],
+      "broadcasts": ["SBT", "CazéTV"]
+    },
+    {
+      "date": "2026-06-15",
+      "teams": ["KSA", "URU"],
+      "broadcasts": ["SBT", "CazéTV"]
+    },
+    {
+      "date": "2026-06-16",
+      "teams": ["FRA", "SEN"],
+      "broadcasts": ["SBT", "CazéTV"]
+    },
+    {
+      "date": "2026-06-17",
+      "teams": ["ENG", "CRO"],
+      "broadcasts": ["SBT", "CazéTV"]
+    },
+    {
+      "date": "2026-06-18",
+      "teams": ["SUI", "BIH"],
+      "broadcasts": ["SBT", "CazéTV"]
+    },
+    {
+      "date": "2026-06-19",
+      "teams": ["BRA", "HAI"],
+      "broadcasts": ["Globo", "SBT", "SporTV", "CazéTV"]
+    },
+    {
+      "date": "2026-06-20",
+      "teams": ["GER", "CIV"],
+      "broadcasts": ["SBT", "CazéTV"]
+    },
+    {
+      "date": "2026-06-21",
+      "teams": ["URU", "CPV"],
+      "broadcasts": ["SBT", "CazéTV"]
+    },
+    {
+      "date": "2026-06-22",
+      "teams": ["ARG", "AUT"],
+      "broadcasts": ["SBT", "CazéTV"]
+    },
+    {
+      "date": "2026-06-23",
+      "teams": ["ENG", "GHA"],
+      "broadcasts": ["SBT", "CazéTV"]
+    },
+    {
+      "date": "2026-06-24",
+      "teams": ["BRA", "SCO"],
+      "broadcasts": ["Globo", "SBT", "SporTV", "CazéTV"]
+    }
+  ],
+  "overrides": {}
+}

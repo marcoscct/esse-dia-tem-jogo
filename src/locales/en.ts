@@ -11,12 +11,13 @@ export const en = {
   "search_range": "Search date range",
   "please_wait": "Wait...",
   "verify": "Verify",
-  "last_updated": "Data updated: {date} | v1.4.0",
+  "last_updated": "Data updated: {date} | v1.5.0",
   "about": "About",
   "privacy": "Privacy Policy",
   "terms_of_use": "Terms of Use",
   "back_home": "Back to Home",
   "about_title": "About the Project",
+  "where_to_watch": "Where to watch:",
   
   // Results config
   "has_game_heading": "Game Day!",

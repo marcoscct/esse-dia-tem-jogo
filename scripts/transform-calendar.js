@@ -15,6 +15,49 @@ const fs = require('fs');
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const path = require('path');
 
+// Load broadcast overrides
+const overridesPath = path.join(__dirname, 'broadcast-overrides.json');
+let broadcastOverrides = { by_teams_date: [], overrides: {} };
+if (fs.existsSync(overridesPath)) {
+  try {
+    broadcastOverrides = JSON.parse(fs.readFileSync(overridesPath, 'utf-8'));
+    console.log(`📥 Loaded broadcast overrides from: ${overridesPath}`);
+  } catch (e) {
+    console.error(`⚠️ Failed to parse broadcast overrides: ${e.message}`);
+  }
+}
+
+function resolveBroadcasts(date, teamCode, opponentCode, matchNumber, matchId) {
+  // 1. Check overrides by matchNumber or matchId
+  if (matchNumber && broadcastOverrides.overrides && broadcastOverrides.overrides[String(matchNumber)]) {
+    return broadcastOverrides.overrides[String(matchNumber)];
+  }
+  if (matchId && broadcastOverrides.overrides && broadcastOverrides.overrides[matchId]) {
+    return broadcastOverrides.overrides[matchId];
+  }
+
+  // 2. Check overrides by teams and date
+  if (date && teamCode && opponentCode && broadcastOverrides.by_teams_date) {
+    const matchOverride = broadcastOverrides.by_teams_date.find(entry => {
+      return entry.date === date &&
+        entry.teams.includes(teamCode) &&
+        entry.teams.includes(opponentCode);
+    });
+    if (matchOverride) {
+      return matchOverride.broadcasts;
+    }
+  }
+
+  // 3. Apply default rules
+  if (teamCode === 'BRA' || opponentCode === 'BRA') {
+    return ["Globo", "SBT", "SporTV", "CazéTV"];
+  }
+  if (['ARG', 'FRA', 'GER', 'POR', 'ENG', 'ESP'].includes(teamCode) || ['ARG', 'FRA', 'GER', 'POR', 'ENG', 'ESP'].includes(opponentCode)) {
+    return ["Globo", "SporTV", "CazéTV"];
+  }
+  return ["CazéTV"];
+}
+
 // ─── CLI args ─────────────────────────────────────────────────────────────────
 const args = process.argv.slice(2);
 const getArg = (flag) => {
@@ -720,9 +763,18 @@ function transform(rawJson) {
     }
   }
 
-  // Sort matches by date for each team
-  for (const team of Object.values(teams)) {
+  // Sort matches by date for each team and resolve broadcasts
+  for (const [teamCode, team] of Object.entries(teams)) {
     team.matches.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    for (const match of team.matches) {
+      match.broadcasts = resolveBroadcasts(
+        match.date,
+        teamCode,
+        match.opponent_code,
+        match.match_number,
+        match.id
+      );
+    }
   }
 
   const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'America/Sao_Paulo' }).format(new Date());

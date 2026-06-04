@@ -41,6 +41,7 @@ export interface Match {
   condition: string | null;
   condition_type: ConditionType | null;
   match_number: number | null;
+  broadcasts?: string[];
 }
 
 export type ConditionType = 

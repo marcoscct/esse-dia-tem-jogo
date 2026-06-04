@@ -10,6 +10,81 @@ import { useLanguage } from "./TranslationProvider";
 import { translateTeamName, translateOpponentName, translatePhase, translateCondition } from "@/locales/i18n-utils";
 import { getGoogleCalendarUrl, getOutlookCalendarUrl, downloadIcsFile } from "@/lib/calendar-utils";
 
+function BroadcastIcon({ channel }: { channel: string }) {
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [timeoutId]);
+
+  const channelInfo: Record<string, { logo: string; name: string }> = {
+    Globo: { logo: "/images/globo.png", name: "Globo" },
+    SBT: { logo: "/images/sbt.png", name: "SBT" },
+    SporTV: { logo: "/images/sportv.png", name: "SporTV" },
+    CazéTV: { logo: "/images/cazetv.png", name: "CazéTV" },
+  };
+
+  const info = channelInfo[channel] || { logo: "", name: channel };
+
+  if (!info.logo) return null;
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    setShowTooltip(true);
+    const id = setTimeout(() => {
+      setShowTooltip(false);
+    }, 2000);
+    setTimeoutId(id);
+  };
+
+  const handleMouseEnter = () => {
+    setShowTooltip(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowTooltip(false);
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+  };
+
+  return (
+    <div className="relative flex items-center justify-center">
+      <button
+        onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center bg-zinc-950 border border-zinc-850 hover:border-zinc-700 transition-all p-1.5 focus:outline-none cursor-pointer"
+      >
+        <img src={info.logo} alt={info.name} className="w-full h-full object-contain" />
+      </button>
+      
+      <AnimatePresence>
+        {showTooltip && (
+          <motion.div
+            initial={{ opacity: 0, y: 5, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 5, scale: 0.95 }}
+            transition={{ duration: 0.15 }}
+            className="absolute bottom-full mb-2.5 z-20 px-2.5 py-1 text-[10px] font-black text-white bg-zinc-900 border border-zinc-800 rounded-md shadow-lg whitespace-nowrap pointer-events-none"
+          >
+            {info.name}
+            {/* Arrow */}
+            <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] border-4 border-transparent border-t-zinc-900" />
+            <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-zinc-800 -z-10" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 interface ResultModalProps {
   hasGame: boolean;
   matches?: MatchWithTeam[];
@@ -322,6 +397,17 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                         </div>
                       );
                     })()}
+
+                    {lang === 'pt' && match.broadcasts && match.broadcasts.length > 0 && (
+                      <div className="flex flex-col items-center gap-1 mt-3">
+                        <span className="text-[9px] font-bold text-zinc-550 uppercase tracking-wider">{t("where_to_watch")}</span>
+                        <div className="flex items-center gap-2 mt-1">
+                          {match.broadcasts.map((channel) => (
+                            <BroadcastIcon key={channel} channel={channel} />
+                          ))}
+                        </div>
+                      </div>
+                    )}
 
                     {/* Add to Calendar Button & Accordion */}
                     <div className="w-full mt-4 flex flex-col gap-2">

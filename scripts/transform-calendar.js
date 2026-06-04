@@ -48,7 +48,31 @@ function resolveBroadcasts(date, teamCode, opponentCode, matchNumber, matchId) {
     }
   }
 
-  // 3. Apply default rules
+  // 3. Stage-specific rules (Knockout final phases)
+  // Match 101 & 102 (Semifinals), Match 104 (Final)
+  if (matchNumber === 101 || matchNumber === 102 || matchNumber === 104) {
+    return ["Globo", "SBT", "SporTV", "CazéTV"];
+  }
+
+  // Match 103 (Third Place Play-off)
+  if (matchNumber === 103) {
+    if (teamCode === 'BRA' || opponentCode === 'BRA') {
+      return ["Globo", "SBT", "SporTV", "CazéTV"];
+    }
+    return ["Globo", "SporTV", "CazéTV"];
+  }
+
+  // Other final stages (Quarter-finals and Round of 16)
+  // - Round of 16: Matches 89 to 96
+  // - Quarter-finals: Matches 97 to 100
+  if (matchNumber >= 89 && matchNumber <= 100) {
+    if (teamCode === 'BRA' || opponentCode === 'BRA') {
+      return ["Globo", "SBT", "SporTV", "CazéTV"];
+    }
+    return ["Globo", "SporTV", "CazéTV"];
+  }
+
+  // 4. Default rules based on teams
   if (teamCode === 'BRA' || opponentCode === 'BRA') {
     return ["Globo", "SBT", "SporTV", "CazéTV"];
   }
@@ -183,22 +207,22 @@ function slugifyPhase(round) {
 // ─── Knockout Bracket Data ────────────────────────────────────────────────────
 const KNOCKOUT_BRACKET = [
   // --- Round of 32 ---
-  { matchNumber: 73, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-06-28', time_brt: '16:00', venue: 'Los Angeles Stadium', city: 'Los Angeles', slotA: { type: '2nd', group: 'A' }, slotB: { type: '2nd', group: 'B' }, nextMatch: 90 },
-  { matchNumber: 74, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-06-29', time_brt: '17:30', venue: 'Boston Stadium', city: 'Boston', slotA: { type: '1st', group: 'E' }, slotB: { type: '3rd', pool: ['A', 'B', 'C', 'D', 'F'] }, nextMatch: 89 },
-  { matchNumber: 75, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-06-29', time_brt: '22:00', venue: 'Estadio Monterrey', city: 'Monterrey', slotA: { type: '1st', group: 'F' }, slotB: { type: '2nd', group: 'C' }, nextMatch: 90 },
-  { matchNumber: 76, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-06-29', time_brt: '14:00', venue: 'Houston Stadium', city: 'Houston', slotA: { type: '1st', group: 'C' }, slotB: { type: '2nd', group: 'F' }, nextMatch: 91 },
-  { matchNumber: 77, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-06-30', time_brt: '18:00', venue: 'New York New Jersey Stadium', city: 'Nova York/NJ', slotA: { type: '1st', group: 'I' }, slotB: { type: '3rd', pool: ['C', 'D', 'F', 'G', 'H'] }, nextMatch: 89 },
-  { matchNumber: 78, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-06-30', time_brt: '14:00', venue: 'Dallas Stadium', city: 'Dallas', slotA: { type: '2nd', group: 'E' }, slotB: { type: '2nd', group: 'I' }, nextMatch: 91 },
-  { matchNumber: 79, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-06-30', time_brt: '22:00', venue: 'Estadio Azteca', city: 'Cidade do México', slotA: { type: '1st', group: 'A' }, slotB: { type: '3rd', pool: ['C', 'E', 'F', 'H', 'I'] }, nextMatch: 92 },
-  { matchNumber: 80, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-07-01', time_brt: '13:00', venue: 'Atlanta Stadium', city: 'Atlanta', slotA: { type: '1st', group: 'L' }, slotB: { type: '3rd', pool: ['E', 'H', 'I', 'J', 'K'] }, nextMatch: 92 },
-  { matchNumber: 81, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-07-01', time_brt: '21:00', venue: "Levi's Stadium", city: 'San Francisco', slotA: { type: '1st', group: 'D' }, slotB: { type: '3rd', pool: ['B', 'E', 'F', 'I', 'J'] }, nextMatch: 94 },
-  { matchNumber: 82, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-07-01', time_brt: '17:00', venue: 'Lumen Field', city: 'Seattle', slotA: { type: '1st', group: 'G' }, slotB: { type: '3rd', pool: ['A', 'E', 'H', 'I', 'J'] }, nextMatch: 94 },
-  { matchNumber: 83, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-07-02', time_brt: '20:00', venue: 'BMO Field', city: 'Toronto', slotA: { type: '2nd', group: 'K' }, slotB: { type: '2nd', group: 'L' }, nextMatch: 93 },
-  { matchNumber: 84, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-07-02', time_brt: '16:00', venue: 'SoFi Stadium', city: 'Los Angeles', slotA: { type: '1st', group: 'H' }, slotB: { type: '2nd', group: 'J' }, nextMatch: 93 },
-  { matchNumber: 85, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-07-02', time_brt: '00:00', venue: 'BC Place', city: 'Vancouver', slotA: { type: '1st', group: 'B' }, slotB: { type: '3rd', pool: ['E', 'F', 'G', 'I', 'J'] }, nextMatch: 96 },
-  { matchNumber: 86, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-07-03', time_brt: '19:00', venue: 'Hard Rock Stadium', city: 'Miami', slotA: { type: '1st', group: 'J' }, slotB: { type: '2nd', group: 'H' }, nextMatch: 95 },
-  { matchNumber: 87, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-07-03', time_brt: '22:30', venue: 'Kansas City Stadium', city: 'Kansas City', slotA: { type: '1st', group: 'K' }, slotB: { type: '3rd', pool: ['D', 'E', 'I', 'J', 'L'] }, nextMatch: 96 },
-  { matchNumber: 88, phase_slug: 'round_of_32', phase: '32 avos de Final', date: '2026-07-03', time_brt: '15:00', venue: 'Dallas Stadium', city: 'Dallas', slotA: { type: '2nd', group: 'D' }, slotB: { type: '2nd', group: 'G' }, nextMatch: 95 },
+  { matchNumber: 73, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-06-28', time_brt: '16:00', venue: 'Los Angeles Stadium', city: 'Los Angeles', slotA: { type: '2nd', group: 'A' }, slotB: { type: '2nd', group: 'B' }, nextMatch: 90 },
+  { matchNumber: 74, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-06-29', time_brt: '17:30', venue: 'Boston Stadium', city: 'Boston', slotA: { type: '1st', group: 'E' }, slotB: { type: '3rd', pool: ['A', 'B', 'C', 'D', 'F'] }, nextMatch: 89 },
+  { matchNumber: 75, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-06-29', time_brt: '22:00', venue: 'Estadio Monterrey', city: 'Monterrey', slotA: { type: '1st', group: 'F' }, slotB: { type: '2nd', group: 'C' }, nextMatch: 90 },
+  { matchNumber: 76, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-06-29', time_brt: '14:00', venue: 'Houston Stadium', city: 'Houston', slotA: { type: '1st', group: 'C' }, slotB: { type: '2nd', group: 'F' }, nextMatch: 91 },
+  { matchNumber: 77, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-06-30', time_brt: '18:00', venue: 'New York New Jersey Stadium', city: 'Nova York/NJ', slotA: { type: '1st', group: 'I' }, slotB: { type: '3rd', pool: ['C', 'D', 'F', 'G', 'H'] }, nextMatch: 89 },
+  { matchNumber: 78, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-06-30', time_brt: '14:00', venue: 'Dallas Stadium', city: 'Dallas', slotA: { type: '2nd', group: 'E' }, slotB: { type: '2nd', group: 'I' }, nextMatch: 91 },
+  { matchNumber: 79, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-06-30', time_brt: '22:00', venue: 'Estadio Azteca', city: 'Cidade do México', slotA: { type: '1st', group: 'A' }, slotB: { type: '3rd', pool: ['C', 'E', 'F', 'H', 'I'] }, nextMatch: 92 },
+  { matchNumber: 80, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-07-01', time_brt: '13:00', venue: 'Atlanta Stadium', city: 'Atlanta', slotA: { type: '1st', group: 'L' }, slotB: { type: '3rd', pool: ['E', 'H', 'I', 'J', 'K'] }, nextMatch: 92 },
+  { matchNumber: 81, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-07-01', time_brt: '21:00', venue: "Levi's Stadium", city: 'San Francisco', slotA: { type: '1st', group: 'D' }, slotB: { type: '3rd', pool: ['B', 'E', 'F', 'I', 'J'] }, nextMatch: 94 },
+  { matchNumber: 82, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-07-01', time_brt: '17:00', venue: 'Lumen Field', city: 'Seattle', slotA: { type: '1st', group: 'G' }, slotB: { type: '3rd', pool: ['A', 'E', 'H', 'I', 'J'] }, nextMatch: 94 },
+  { matchNumber: 83, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-07-02', time_brt: '20:00', venue: 'BMO Field', city: 'Toronto', slotA: { type: '2nd', group: 'K' }, slotB: { type: '2nd', group: 'L' }, nextMatch: 93 },
+  { matchNumber: 84, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-07-02', time_brt: '16:00', venue: 'SoFi Stadium', city: 'Los Angeles', slotA: { type: '1st', group: 'H' }, slotB: { type: '2nd', group: 'J' }, nextMatch: 93 },
+  { matchNumber: 85, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-07-02', time_brt: '00:00', venue: 'BC Place', city: 'Vancouver', slotA: { type: '1st', group: 'B' }, slotB: { type: '3rd', pool: ['E', 'F', 'G', 'I', 'J'] }, nextMatch: 96 },
+  { matchNumber: 86, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-07-03', time_brt: '19:00', venue: 'Hard Rock Stadium', city: 'Miami', slotA: { type: '1st', group: 'J' }, slotB: { type: '2nd', group: 'H' }, nextMatch: 95 },
+  { matchNumber: 87, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-07-03', time_brt: '22:30', venue: 'Kansas City Stadium', city: 'Kansas City', slotA: { type: '1st', group: 'K' }, slotB: { type: '3rd', pool: ['D', 'E', 'I', 'J', 'L'] }, nextMatch: 96 },
+  { matchNumber: 88, phase_slug: 'round_of_32', phase: '16 avos de Final', date: '2026-07-03', time_brt: '15:00', venue: 'Dallas Stadium', city: 'Dallas', slotA: { type: '2nd', group: 'D' }, slotB: { type: '2nd', group: 'G' }, nextMatch: 95 },
 
   // --- Round of 16 ---
   { matchNumber: 89, phase_slug: 'round_of_16', phase: 'Oitavas de Final', date: '2026-07-04', time_brt: '18:00', venue: 'Lincoln Financial Field', city: 'Filadélfia', slotA: { type: 'winner', matchNumber: 74 }, slotB: { type: 'winner', matchNumber: 77 }, nextMatch: 97 },
@@ -650,19 +674,27 @@ function transform(rawJson) {
           else if (condType === 'group_3rd') cond = `Caso passe como melhor 3º do Grupo ${team.group}`;
         } else {
           condType = 'knockout_advance';
-          let prefix = '';
-          if (spec.conditionType === 'group_1st') prefix = `Caso passe em 1º do Grupo ${team.group}`;
-          else if (spec.conditionType === 'group_2nd') prefix = `Caso passe em 2º do Grupo ${team.group}`;
-          else if (spec.conditionType === 'group_3rd') prefix = `Caso passe como melhor 3º do Grupo ${team.group}`;
-
-          let suffix = '';
-          if (bMatch.phase_slug === 'round_of_16') suffix = 'e avance para as Oitavas de Final';
-          else if (bMatch.phase_slug === 'quarter_finals') suffix = 'e avance para as Quartas de Final';
-          else if (bMatch.phase_slug === 'semi_finals') suffix = 'e avance para a Semifinal';
-          else if (bMatch.phase_slug === 'third_place') suffix = 'e dispute o 3º lugar';
-          else if (bMatch.phase_slug === 'final') suffix = 'e avance para a Final';
-
-          cond = `${prefix} ${suffix}`;
+          if (bMatch.phase_slug === 'round_of_16') {
+            if (spec.conditionType === 'group_1st') cond = `Caso passe em 1º do Grupo ${team.group}`;
+            else if (spec.conditionType === 'group_2nd') cond = `Caso passe em 2º do Grupo ${team.group}`;
+            else if (spec.conditionType === 'group_3rd') cond = `Caso passe como melhor 3º do Grupo ${team.group}`;
+          } else if (bMatch.phase_slug === 'quarter_finals') {
+            let prefix = '';
+            if (spec.conditionType === 'group_1st') prefix = `Caso passe em 1º do Grupo ${team.group}`;
+            else if (spec.conditionType === 'group_2nd') prefix = `Caso passe em 2º do Grupo ${team.group}`;
+            else if (spec.conditionType === 'group_3rd') prefix = `Caso passe como melhor 3º do Grupo ${team.group}`;
+            cond = `${prefix} e avance para as 4ªˢ`;
+          } else if (bMatch.phase_slug === 'semi_finals') {
+            let prefix = '';
+            if (spec.conditionType === 'group_1st') prefix = `Caso passe em 1º do Grupo ${team.group}`;
+            else if (spec.conditionType === 'group_2nd') prefix = `Caso passe em 2º do Grupo ${team.group}`;
+            else if (spec.conditionType === 'group_3rd') prefix = `Caso passe como melhor 3º do Grupo ${team.group}`;
+            cond = `${prefix} e avance para a Semifinal`;
+          } else if (bMatch.phase_slug === 'third_place') {
+            cond = `Caso dispute o 3º lugar`;
+          } else if (bMatch.phase_slug === 'final') {
+            cond = `Caso chegue à Final`;
+          }
         }
 
         const opponentName = getOpponentDescription(bMatch, spec.pathMatches, team.group, spec.conditionType);

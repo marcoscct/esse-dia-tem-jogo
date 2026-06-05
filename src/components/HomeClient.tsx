@@ -365,12 +365,18 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
 
       {/* Footer Info */}
       <footer className="w-full flex flex-col items-center justify-center gap-2 py-6 bg-black text-zinc-500 text-xs border-t border-zinc-950">
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5 flex-wrap justify-center text-zinc-500">
           <RefreshCw className="w-3.5 h-3.5" />
           <span>{t("last_updated", { date: lastUpdated })}</span>
+          <span>|</span>
+          <NextLink href={`${langPrefix}/devlog`} className="hover:text-[#ffcc00] font-bold transition-colors">
+            v1.5.0
+          </NextLink>
         </div>
-        <div className="flex items-center gap-4 text-zinc-500 mt-1">
+        <div className="flex items-center gap-4 text-zinc-500 mt-1 flex-wrap justify-center">
           <NextLink href={`${langPrefix}/sobre`} className="hover:text-[#ffcc00] transition-colors">{t("about")}</NextLink>
+          <span>•</span>
+          <NextLink href={`${langPrefix}/devlog`} className="hover:text-[#ffcc00] transition-colors">{t("devlog")}</NextLink>
           <span>•</span>
           <NextLink href={`${langPrefix}/politica-de-privacidade`} className="hover:text-[#ffcc00] transition-colors">{t("privacy")}</NextLink>
           <span>•</span>

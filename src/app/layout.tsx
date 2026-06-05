@@ -22,7 +22,21 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Esse Dia Tem Jogo?",
-  description: "Descubra se sua seleção joga na data que você escolher.",
+  description: "Descubra se seu time ou seleção joga na data que você escolher.",
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  appleWebApp: {
+    capable: true,
+    title: "Esse Dia Tem Jogo",
+    statusBarStyle: "default",
+  },
 };
 
 export default function RootLayout({
@@ -46,6 +60,23 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
+        <Script id="register-sw" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              var register = function() {
+                navigator.serviceWorker.register('/sw.js').then(
+                  function(reg) { console.log('SW registered:', reg.scope); },
+                  function(err) { console.log('SW failed:', err); }
+                );
+              };
+              if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                register();
+              } else {
+                window.addEventListener('load', register);
+              }
+            }
+          `}
+        </Script>
         {/* Google Tag (gtag.js) */}
         {googleTagId && (
           <>

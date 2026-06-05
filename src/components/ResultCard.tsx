@@ -6,6 +6,7 @@ import { getVenueIanaTimezone, formatMatchTimeInTimezone } from "@/lib/date-util
 import { getFlagUrl } from "@/lib/flag-codes";
 import { useLanguage } from "./TranslationProvider";
 import { translateTeamName, translateOpponentName, translatePhase, translateCondition } from "@/locales/i18n-utils";
+import CalendarFeedModal from "./CalendarFeedModal";
 
 function BroadcastIcon({ channel }: { channel: string }) {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -89,6 +90,13 @@ interface ResultCardProps {
 
 export default function ResultCard({ matches = [] }: ResultCardProps) {
   const { lang, t, timezoneMode, deviceTimezone } = useLanguage();
+  const [isFeedModalOpen, setIsFeedModalOpen] = useState(false);
+
+  const firstMatch = matches[0];
+  const isSingleTeamMatches = matches.length > 0 && matches.every(m => m.team_code === firstMatch.team_code);
+  const showSubscribe = isSingleTeamMatches && firstMatch && firstMatch.team_code !== 'TBD' && firstMatch.team_code !== 'FREE';
+  const teamCode = firstMatch?.team_code || '';
+  const teamName = firstMatch?.team_name || '';
   
   const gameState: 'confirmed' | 'possible' | 'none' = 
     matches.length === 0 
@@ -144,6 +152,15 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
           <p className="text-zinc-400 text-sm leading-tight max-w-[220px]">
             {config.description}
           </p>
+          {showSubscribe && (
+            <button
+              onClick={() => setIsFeedModalOpen(true)}
+              className="mt-3 flex items-center justify-center gap-2 font-bold uppercase tracking-wider py-2.5 px-4 rounded-xl bg-zinc-950 hover:bg-zinc-900 text-[#ffcc00] border border-zinc-900 hover:border-zinc-800 text-xs transition-all cursor-pointer w-full max-w-[220px]"
+            >
+              <CalendarIcon className="w-4 h-4 text-[#ffcc00]" />
+              <span>{t("subscribe_full_calendar")}</span>
+            </button>
+          )}
         </div>
       </div>
 
@@ -233,6 +250,13 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
           </div>
         )}
       </div>
+
+      <CalendarFeedModal
+        isOpen={isFeedModalOpen}
+        onClose={() => setIsFeedModalOpen(false)}
+        teamCode={teamCode}
+        teamName={translateTeamName(teamCode, teamName, lang)}
+      />
     </div>
   );
 }

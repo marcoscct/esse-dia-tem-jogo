@@ -9,6 +9,7 @@ import { getFlagUrl } from "@/lib/flag-codes";
 import { useLanguage } from "./TranslationProvider";
 import { translateTeamName, translateOpponentName, translatePhase, translateCondition } from "@/locales/i18n-utils";
 import { getGoogleCalendarUrl, getOutlookCalendarUrl, downloadIcsFile } from "@/lib/calendar-utils";
+import CalendarFeedModal from "./CalendarFeedModal";
 
 function BroadcastIcon({ channel }: { channel: string }) {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -98,10 +99,17 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
   const { lang, t, timezoneMode, deviceTimezone } = useLanguage();
+  const [isFeedModalOpen, setIsFeedModalOpen] = useState(false);
 
   const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
   const [prevDate, setPrevDate] = useState(date);
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
+
+  const firstMatch = matches[0];
+  const isSingleTeamMatches = matches.length > 0 && matches.every(m => m.team_code === firstMatch.team_code);
+  const showSubscribe = isSingleTeamMatches && firstMatch && firstMatch.team_code !== 'TBD' && firstMatch.team_code !== 'FREE';
+  const teamCode = firstMatch?.team_code || '';
+  const teamName = firstMatch?.team_name || '';
   
   if (isOpen !== prevIsOpen || date !== prevDate) {
     setPrevIsOpen(isOpen);
@@ -283,219 +291,283 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
             animate={{ scale: 1, y: 0, opacity: 1 }}
             exit={{ scale: 0.9, y: 30, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className={`relative w-full max-w-[560px] bg-[#0d0d0d] rounded-[2rem] p-6 md:p-8 shadow-2xl border-4 ${config.borderColor} flex flex-col items-center z-10 overflow-hidden`}
+            className={`relative w-full max-w-[560px] md:max-w-[850px] bg-[#0d0d0d] rounded-[2rem] p-6 md:p-8 shadow-2xl border-4 ${config.borderColor} flex flex-col md:flex-row md:items-stretch gap-6 md:gap-8 z-10 overflow-hidden`}
           >
             {/* Close button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 text-zinc-550 hover:text-white transition-colors bg-zinc-950 rounded-full p-2 border border-zinc-900"
+              className="absolute top-4 right-4 text-zinc-550 hover:text-white transition-colors bg-zinc-950 rounded-full p-2 border border-zinc-900 z-20"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="flex items-center gap-3 mb-2 justify-center mt-4">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: "spring" }}
-                className={`w-10 h-10 rounded-full ${config.bgTheme} flex items-center justify-center shrink-0`}
-              >
-                {config.icon}
-              </motion.div>
-              <h2 className={`${config.themeColor} font-black italic text-3xl md:text-4xl uppercase tracking-tighter leading-none`}>
-                {config.heading}
-              </h2>
-            </div>
-            <h3 className="text-white font-bold text-lg uppercase tracking-wider mb-1 text-center">
-              {config.subheading}
-            </h3>
-            <p className="text-zinc-500 text-sm text-center mb-6 max-w-xs leading-tight">
-              {config.description}
-            </p>
+            {/* Left Column */}
+            <div className="flex flex-col items-center md:items-start md:justify-center flex-1 w-full md:w-[45%]">
+              <div className="flex items-center gap-3 mb-2 justify-center md:justify-start mt-4 md:mt-0">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.2, type: "spring" }}
+                  className={`w-10 h-10 rounded-full ${config.bgTheme} flex items-center justify-center shrink-0`}
+                >
+                  {config.icon}
+                </motion.div>
+                <h2 className={`${config.themeColor} font-black italic text-3xl md:text-4xl uppercase tracking-tighter leading-none`}>
+                  {config.heading}
+                </h2>
+              </div>
+              <h3 className="text-white font-bold text-lg uppercase tracking-wider mb-1 text-center md:text-left">
+                {config.subheading}
+              </h3>
+              <p className="text-zinc-500 text-sm text-center md:text-left mb-6 max-w-xs leading-tight">
+                {config.description}
+              </p>
 
-            {gameState !== 'none' && matches.length > 0 ? (
-              <div className="w-full max-h-[400px] overflow-y-auto pr-1 flex flex-col gap-4 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
-                {matches.map(match => (
-                  <div key={match.id} className="w-full bg-[#141414] rounded-2xl p-5 border border-zinc-900 flex flex-col items-center">
-                    {match.condition && (
-                      <div className={`text-[10px] font-black uppercase tracking-wider py-1.5 px-4 rounded-full mb-3 text-center border ${config.bgTheme} ${config.themeColor} border-${config.themeColor}/20`}>
-                        {translateCondition(match.condition, lang)}
-                      </div>
+              {/* Desktop Buttons */}
+              <div className="w-full mt-auto hidden md:flex flex-col gap-3 pt-4">
+                {showSubscribe && (
+                  <button
+                    onClick={() => setIsFeedModalOpen(true)}
+                    className="w-full flex items-center justify-center gap-2 font-bold uppercase tracking-wider py-3.5 px-4 rounded-xl bg-zinc-950 hover:bg-zinc-900 text-[#ffcc00] border border-zinc-900 hover:border-zinc-800 text-xs md:text-sm transition-all cursor-pointer"
+                  >
+                    <CalendarIcon className="w-4 h-4 text-[#ffcc00]" />
+                    <span>{t("subscribe_full_calendar")}</span>
+                  </button>
+                )}
+                {date && (
+                  <button
+                    onClick={handleCopyText}
+                    className={`w-full flex items-center justify-center gap-2 font-bold uppercase tracking-wider py-3.5 px-4 rounded-xl transition-all border text-xs md:text-sm ${
+                      copied 
+                        ? "bg-[#2ecc71]/10 text-[#2ecc71] border-[#2ecc71]/30" 
+                        : "bg-zinc-950 hover:bg-zinc-900 text-zinc-300 border-zinc-900 hover:border-zinc-800 hover:text-white"
+                    }`}
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="w-4 h-4 text-[#2ecc71]" />
+                        <span>{t("copied")}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Share2 className="w-4 h-4 text-[#ffcc00]" />
+                        <span>{t("share_result")}</span>
+                      </>
                     )}
-                    
-                    <div className="text-[10px] font-bold text-zinc-650 uppercase tracking-widest mb-3">
-                      {translatePhase(match.phase, lang)}
-                      {endDate && ` • ${(() => {
-                        const parts = match.date.split("-");
-                        if (parts.length < 3) return match.date;
-                        return lang === 'en' ? `${parts[1]}/${parts[2]}` : `${parts[2]}/${parts[1]}`;
-                      })()}`}
-                    </div>
+                  </button>
+                )}
+                <button
+                  onClick={onClose}
+                  className="w-full bg-zinc-900 hover:bg-zinc-850 text-white font-bold uppercase tracking-widest py-4 rounded-xl transition-all border border-zinc-800 hover:border-zinc-700"
+                >
+                  {t("new_search")}
+                </button>
+              </div>
+            </div>
 
-                    <div className="flex items-center justify-center gap-6 mb-3">
-                      <div className="flex flex-col items-center gap-1.5 w-20">
-                        <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-850">
-                          <img 
-                            src={getFlagUrl(match.team_code)} 
-                            alt={translateTeamName(match.team_code, match.team_name, lang)} 
-                            className="w-full h-full object-cover" 
-                          />
+            {/* Right Column (Matches) */}
+            <div className="flex-1 w-full md:w-[55%] flex flex-col justify-center">
+              {gameState !== 'none' && matches.length > 0 ? (
+                <div className="w-full max-h-[400px] md:max-h-[480px] overflow-y-auto pr-2 flex flex-col gap-4 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+                  {matches.map(match => (
+                    <div key={match.id} className="w-full bg-[#141414] rounded-2xl p-5 border border-zinc-900 flex flex-col items-center">
+                      {match.condition && (
+                        <div className={`text-[10px] font-black uppercase tracking-wider py-1.5 px-4 rounded-full mb-3 text-center border ${config.bgTheme} ${config.themeColor} border-${config.themeColor}/20`}>
+                          {translateCondition(match.condition, lang)}
                         </div>
-                        <span className="text-[10px] font-black text-zinc-455 uppercase">{match.team_code}</span>
-                      </div>
-
-                      <span className="text-zinc-700 font-black text-lg italic">X</span>
-
-                      <div className="flex flex-col items-center gap-1.5 w-20">
-                        <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-855 bg-zinc-950 flex items-center justify-center">
-                          <img 
-                            src={match.opponent_code ? getFlagUrl(match.opponent_code) : "https://hatscripts.github.io/circle-flags/flags/xx.svg"} 
-                            alt={translateOpponentName(match.opponent_code, match.opponent_name, lang)} 
-                            className="w-full h-full object-cover" 
-                          />
-                        </div>
-                        <span className="text-[10px] font-black text-zinc-455 uppercase">{match.opponent_code || "TBD"}</span>
-                      </div>
-                    </div>
-
-                    <div className="font-black uppercase tracking-tight text-md text-white mb-2 text-center">
-                      {translateTeamName(match.team_code, match.team_name, lang)} x {translateOpponentName(match.opponent_code, match.opponent_name, lang)}
-                    </div>
-
-                    <div className="flex items-center justify-center gap-1 text-zinc-600 font-bold text-[9px] uppercase tracking-wide text-center">
-                      <span>{match.venue}</span>
-                      {match.city && match.city !== match.venue && (
-                        <>
-                          <span>•</span>
-                          <span>{match.city}</span>
-                        </>
                       )}
-                    </div>
+                      
+                      <div className="text-[10px] font-bold text-zinc-650 uppercase tracking-widest mb-3">
+                        {translatePhase(match.phase, lang)}
+                        {endDate && ` • ${(() => {
+                          const parts = match.date.split("-");
+                          if (parts.length < 3) return match.date;
+                          return lang === 'en' ? `${parts[1]}/${parts[2]}` : `${parts[2]}/${parts[1]}`;
+                        })()}`}
+                      </div>
 
-                    {(() => {
-                      if (!match.time_brt) {
+                      <div className="flex items-center justify-center gap-6 mb-3">
+                        <div className="flex flex-col items-center gap-1.5 w-20">
+                          <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-850">
+                            <img 
+                              src={getFlagUrl(match.team_code)} 
+                              alt={translateTeamName(match.team_code, match.team_name, lang)} 
+                              className="w-full h-full object-cover" 
+                            />
+                          </div>
+                          <span className="text-[10px] font-black text-zinc-455 uppercase">{match.team_code}</span>
+                        </div>
+
+                        <span className="text-zinc-700 font-black text-lg italic">X</span>
+
+                        <div className="flex flex-col items-center gap-1.5 w-20">
+                          <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-855 bg-zinc-950 flex items-center justify-center">
+                            <img 
+                              src={match.opponent_code ? getFlagUrl(match.opponent_code) : "https://hatscripts.github.io/circle-flags/flags/xx.svg"} 
+                              alt={translateOpponentName(match.opponent_code, match.opponent_name, lang)} 
+                              className="w-full h-full object-cover" 
+                            />
+                          </div>
+                          <span className="text-[10px] font-black text-zinc-455 uppercase">{match.opponent_code || "TBD"}</span>
+                        </div>
+                      </div>
+
+                      <div className="font-black uppercase tracking-tight text-md text-white mb-2 text-center">
+                        {translateTeamName(match.team_code, match.team_name, lang)} x {translateOpponentName(match.opponent_code, match.opponent_name, lang)}
+                      </div>
+
+                      <div className="flex items-center justify-center gap-1 text-zinc-600 font-bold text-[9px] uppercase tracking-wide text-center">
+                        <span>{match.venue}</span>
+                        {match.city && match.city !== match.venue && (
+                          <>
+                            <span>•</span>
+                            <span>{match.city}</span>
+                          </>
+                        )}
+                      </div>
+
+                      {(() => {
+                        if (!match.time_brt) {
+                          return (
+                            <div className="flex items-center justify-center gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">
+                              <Clock className="w-3.5 h-3.5 text-zinc-550" />
+                              <span>{t("time_tbd")}</span>
+                            </div>
+                          );
+                        }
+                        
+                        let targetTz = 'America/Sao_Paulo';
+                        if (timezoneMode === 'device') {
+                          targetTz = deviceTimezone;
+                        } else if (timezoneMode === 'stadium') {
+                          targetTz = getVenueIanaTimezone(match.city, match.venue);
+                        }
+                        
+                        const formattedTime = formatMatchTimeInTimezone(match.time_brt, match.date, targetTz, lang);
                         return (
                           <div className="flex items-center justify-center gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">
                             <Clock className="w-3.5 h-3.5 text-zinc-550" />
-                            <span>{t("time_tbd")}</span>
+                            <span>{formattedTime}</span>
                           </div>
                         );
-                      }
-                      
-                      let targetTz = 'America/Sao_Paulo';
-                      if (timezoneMode === 'device') {
-                        targetTz = deviceTimezone;
-                      } else if (timezoneMode === 'stadium') {
-                        targetTz = getVenueIanaTimezone(match.city, match.venue);
-                      }
-                      
-                      const formattedTime = formatMatchTimeInTimezone(match.time_brt, match.date, targetTz, lang);
-                      return (
-                        <div className="flex items-center justify-center gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">
-                          <Clock className="w-3.5 h-3.5 text-zinc-550" />
-                          <span>{formattedTime}</span>
+                      })()}
+
+                      {lang === 'pt' && match.broadcasts && match.broadcasts.length > 0 && (
+                        <div className="flex flex-col items-center gap-1 mt-3">
+                          <span className="text-[9px] font-bold text-zinc-550 uppercase tracking-wider">{t("where_to_watch")}</span>
+                          <div className="flex items-center gap-2 mt-1">
+                            {match.broadcasts.map((channel) => (
+                              <BroadcastIcon key={channel} channel={channel} />
+                            ))}
+                          </div>
                         </div>
-                      );
-                    })()}
-
-                    {lang === 'pt' && match.broadcasts && match.broadcasts.length > 0 && (
-                      <div className="flex flex-col items-center gap-1 mt-3">
-                        <span className="text-[9px] font-bold text-zinc-550 uppercase tracking-wider">{t("where_to_watch")}</span>
-                        <div className="flex items-center gap-2 mt-1">
-                          {match.broadcasts.map((channel) => (
-                            <BroadcastIcon key={channel} channel={channel} />
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Add to Calendar Button & Accordion */}
-                    <div className="w-full mt-4 flex flex-col gap-2">
-                      <button
-                        onClick={() => setOpenDropdownId(openDropdownId === match.id ? null : match.id)}
-                        className="w-full flex items-center justify-center gap-1.5 bg-zinc-950 hover:bg-zinc-900 text-zinc-400 hover:text-white font-bold py-2.5 px-4 rounded-xl text-xs border border-zinc-900 hover:border-zinc-800 transition-all cursor-pointer"
-                      >
-                        <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
-                        <span>{t("add_to_calendar")}</span>
-                        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${openDropdownId === match.id ? "rotate-180" : ""}`} />
-                      </button>
-
-                      {openDropdownId === match.id && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          className="w-full bg-[#0a0a0a] border border-zinc-900 rounded-xl p-2 flex flex-col gap-1 overflow-hidden"
-                        >
-                          <a
-                            href={getGoogleCalendarUrl(getEventData(match))}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-2.5 hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
-                          >
-                            <span className="w-2 h-2 rounded-full bg-[#db4437] shrink-0" />
-                            <span>{t("google_calendar")}</span>
-                          </a>
-                          <a
-                            href={getOutlookCalendarUrl(getEventData(match))}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-2.5 hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
-                          >
-                            <span className="w-2 h-2 rounded-full bg-[#0078d4] shrink-0" />
-                            <span>{t("outlook_calendar")}</span>
-                          </a>
-                          <button
-                            onClick={() => downloadIcsFile(getEventData(match))}
-                            className="flex items-center justify-center gap-2.5 w-full hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
-                          >
-                            <span className="w-2 h-2 rounded-full bg-zinc-550 shrink-0" />
-                            <span>{t("download_ics")}</span>
-                          </button>
-                        </motion.div>
                       )}
+
+                      {/* Add to Calendar Button & Accordion */}
+                      <div className="w-full mt-4 flex flex-col gap-2">
+                        <button
+                          onClick={() => setOpenDropdownId(openDropdownId === match.id ? null : match.id)}
+                          className="w-full flex items-center justify-center gap-1.5 bg-zinc-950 hover:bg-zinc-900 text-zinc-400 hover:text-white font-bold py-2.5 px-4 rounded-xl text-xs border border-zinc-900 hover:border-zinc-800 transition-all cursor-pointer"
+                        >
+                          <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
+                          <span>{t("add_to_calendar")}</span>
+                          <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${openDropdownId === match.id ? "rotate-180" : ""}`} />
+                        </button>
+
+                        {openDropdownId === match.id && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            className="w-full bg-[#0a0a0a] border border-zinc-900 rounded-xl p-2 flex flex-col gap-1 overflow-hidden"
+                          >
+                            <a
+                              href={getGoogleCalendarUrl(getEventData(match))}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center justify-center gap-2.5 hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
+                            >
+                              <span className="w-2 h-2 rounded-full bg-[#db4437] shrink-0" />
+                              <span>{t("google_calendar")}</span>
+                            </a>
+                            <a
+                              href={getOutlookCalendarUrl(getEventData(match))}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center justify-center gap-2.5 hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
+                            >
+                              <span className="w-2 h-2 rounded-full bg-[#0078d4] shrink-0" />
+                              <span>{t("outlook_calendar")}</span>
+                            </a>
+                            <button
+                              onClick={() => downloadIcsFile(getEventData(match))}
+                              className="flex items-center justify-center gap-2.5 w-full hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
+                            >
+                              <span className="w-2 h-2 rounded-full bg-zinc-550 shrink-0" />
+                              <span>{t("download_ics")}</span>
+                            </button>
+                          </motion.div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="w-full bg-[#141414] rounded-2xl py-8 px-6 border border-zinc-900 flex flex-col items-center">
-                <CalendarIcon className="w-12 h-12 text-[#2ecc71] mb-3 opacity-80" />
-                <div className="text-[#2ecc71] font-black italic text-xl uppercase tracking-wider">
-                  {t("free_day")}
+                  ))}
                 </div>
-              </div>
-            )}
+              ) : (
+                <div className="w-full bg-[#141414] rounded-2xl py-8 px-6 border border-zinc-900 flex flex-col items-center">
+                  <CalendarIcon className="w-12 h-12 text-[#2ecc71] mb-3 opacity-80" />
+                  <div className="text-[#2ecc71] font-black italic text-xl uppercase tracking-wider text-center">
+                    {t("free_day")}
+                  </div>
+                </div>
+              )}
+            </div>
 
-            {/* Share Result Button */}
-            {date && (
+            {/* Mobile Buttons */}
+            <div className="w-full mt-2 flex md:hidden flex-col gap-3">
+              {showSubscribe && (
+                <button
+                  onClick={() => setIsFeedModalOpen(true)}
+                  className="w-full flex items-center justify-center gap-2 font-bold uppercase tracking-wider py-3.5 px-4 rounded-xl bg-zinc-950 hover:bg-zinc-900 text-[#ffcc00] border border-zinc-900 hover:border-zinc-800 text-xs md:text-sm transition-all cursor-pointer"
+                >
+                  <CalendarIcon className="w-4 h-4 text-[#ffcc00]" />
+                  <span>{t("subscribe_full_calendar")}</span>
+                </button>
+              )}
+              {date && (
+                <button
+                  onClick={handleCopyText}
+                  className={`w-full flex items-center justify-center gap-2 font-bold uppercase tracking-wider py-3.5 px-4 rounded-xl transition-all border text-xs md:text-sm ${
+                    copied 
+                      ? "bg-[#2ecc71]/10 text-[#2ecc71] border-[#2ecc71]/30" 
+                      : "bg-zinc-950 hover:bg-zinc-900 text-zinc-300 border-zinc-900 hover:border-zinc-800 hover:text-white"
+                  }`}
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-4 h-4 text-[#2ecc71]" />
+                      <span>{t("copied")}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Share2 className="w-4 h-4 text-[#ffcc00]" />
+                      <span>{t("share_result")}</span>
+                    </>
+                  )}
+                </button>
+              )}
               <button
-                onClick={handleCopyText}
-                className={`mt-5 w-full flex items-center justify-center gap-2 font-bold uppercase tracking-wider py-3.5 px-4 rounded-xl transition-all border text-xs md:text-sm ${
-                  copied 
-                    ? "bg-[#2ecc71]/10 text-[#2ecc71] border-[#2ecc71]/30" 
-                    : "bg-zinc-950 hover:bg-zinc-900 text-zinc-300 border-zinc-900 hover:border-zinc-800 hover:text-white"
-                }`}
+                onClick={onClose}
+                className="w-full bg-zinc-900 hover:bg-zinc-850 text-white font-bold uppercase tracking-widest py-4 rounded-xl transition-all border border-zinc-800 hover:border-zinc-700"
               >
-                {copied ? (
-                  <>
-                    <Check className="w-4 h-4 text-[#2ecc71]" />
-                    <span>{t("copied")}</span>
-                  </>
-                ) : (
-                  <>
-                    <Share2 className="w-4 h-4 text-[#ffcc00]" />
-                    <span>{t("share_result")}</span>
-                  </>
-                )}
+                {t("new_search")}
               </button>
-            )}
+            </div>
 
-            <button
-              onClick={onClose}
-              className="mt-4 w-full bg-zinc-900 hover:bg-zinc-850 text-white font-bold uppercase tracking-widest py-4 rounded-xl transition-all border border-zinc-800 hover:border-zinc-700"
-            >
-              {t("new_search")}
-            </button>
+            <CalendarFeedModal
+              isOpen={isFeedModalOpen}
+              onClose={() => setIsFeedModalOpen(false)}
+              teamCode={teamCode}
+              teamName={translateTeamName(teamCode, teamName, lang)}
+            />
           </motion.div>
         </motion.div>
       )}

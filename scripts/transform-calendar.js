@@ -48,7 +48,15 @@ function resolveBroadcasts(date, teamCode, opponentCode, matchNumber, matchId) {
     }
   }
 
-  // 3. Stage-specific rules (Knockout final phases)
+  // 3. Friendly match rules
+  if (matchId && matchId.startsWith('friendly')) {
+    if (teamCode === 'BRA' || opponentCode === 'BRA') {
+      return ["Globo", "SporTV"];
+    }
+    return ["SporTV"];
+  }
+
+  // 4. Stage-specific rules (Knockout final phases)
   // Match 101 & 102 (Semifinals), Match 104 (Final)
   if (matchNumber === 101 || matchNumber === 102 || matchNumber === 104) {
     return ["Globo", "SBT", "SporTV", "CazéTV"];

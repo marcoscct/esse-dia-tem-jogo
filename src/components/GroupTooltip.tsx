@@ -39,12 +39,18 @@ export default function GroupTooltip({ text, groupLetter }: GroupTooltipProps) {
     e.stopPropagation();
     if (timeoutId) {
       clearTimeout(timeoutId);
+      setTimeoutId(null);
     }
-    setShowTooltip(true);
-    const id = setTimeout(() => {
+    
+    if (showTooltip) {
       setShowTooltip(false);
-    }, 2500); // give a bit more time for reading 4 teams
-    setTimeoutId(id);
+    } else {
+      setShowTooltip(true);
+      const id = setTimeout(() => {
+        setShowTooltip(false);
+      }, 2500); // give a bit more time for reading 4 teams
+      setTimeoutId(id);
+    }
   };
 
   const handleMouseEnter = () => {

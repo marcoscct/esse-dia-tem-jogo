@@ -318,8 +318,8 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
             </button>
 
             {/* Left Column */}
-            <div className="flex flex-col items-center md:items-start md:justify-center flex-1 w-full md:w-[45%]">
-              <div className="flex items-center gap-3 mb-2 justify-center md:justify-start mt-4 md:mt-0">
+            <div className="flex flex-col items-center md:items-center md:justify-center flex-1 w-full md:w-[45%]">
+              <div className="flex items-center gap-3 mb-2 justify-center mt-4 md:mt-0">
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
@@ -332,7 +332,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                   {config.heading}
                 </h2>
               </div>
-              <h3 className="text-white font-bold text-lg uppercase tracking-wider mb-1 text-center md:text-left">
+              <h3 className="text-white font-bold text-lg uppercase tracking-wider mb-1 text-center">
                 {config.subheading}
               </h3>
 
@@ -544,6 +544,23 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
               ) : (
                 <div className="w-full bg-[#141414] rounded-2xl py-8 px-6 border border-zinc-900 flex flex-col items-center">
                   <CalendarIcon className="w-12 h-12 text-[#2ecc71] mb-3 opacity-80" />
+                  {date && (
+                    <div className="text-zinc-550 font-bold text-xs uppercase tracking-widest mb-1.5">
+                      {(() => {
+                        const formattedDate = (() => {
+                          const parts = date.split("-");
+                          if (parts.length < 3) return date;
+                          return lang === 'en' ? `${parts[1]}/${parts[2]}` : `${parts[2]}/${parts[1]}`;
+                        })();
+                        const formattedEndDate = endDate ? (() => {
+                          const parts = endDate.split("-");
+                          if (parts.length < 3) return endDate;
+                          return lang === 'en' ? `${parts[1]}/${parts[2]}` : `${parts[2]}/${parts[1]}`;
+                        })() : "";
+                        return formattedEndDate ? `${formattedDate} - ${formattedEndDate}` : formattedDate;
+                      })()}
+                    </div>
+                  )}
                   <div className="text-[#2ecc71] font-black italic text-xl uppercase tracking-wider text-center">
                     {t("free_day")}
                   </div>

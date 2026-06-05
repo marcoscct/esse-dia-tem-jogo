@@ -53,6 +53,8 @@ export const es = {
   "timezone_mode_stadium_desc": "Husos del lugar del partido",
   "timezone_mode_custom": "Personalizado",
   "timezone_mode_custom_desc": "Elige un huso horario",
+  "timezone_group_popular": "Populares",
+  "timezone_group_all": "Todos los Husos Horarios",
   "calendar_feed_title": "Calendario Completo",
   "calendar_feed_locked_title": "Suscribirse al Calendario Completo",
   "calendar_feed_unlocked_title": "¡Calendario Liberado!",

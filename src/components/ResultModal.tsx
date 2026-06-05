@@ -10,6 +10,22 @@ import { useLanguage } from "./TranslationProvider";
 import { translateTeamName, translateOpponentName, translatePhase, translateCondition } from "@/locales/i18n-utils";
 import { getGoogleCalendarUrl, getOutlookCalendarUrl, downloadIcsFile } from "@/lib/calendar-utils";
 import CalendarFeedModal from "./CalendarFeedModal";
+import GroupTooltip from "./GroupTooltip";
+
+function renderWithGroupTooltip(text: string | null | undefined, keyPrefix: string) {
+  if (!text) return null;
+  const regex = /(Grupo\s+[A-L]|Group\s+[A-L])/i;
+  const parts = text.split(regex);
+  if (parts.length === 1) return text;
+
+  return parts.map((part, i) => {
+    const match = part.match(/^(?:Grupo|Group)\s+([A-L])$/i);
+    if (match) {
+      return <GroupTooltip key={`${keyPrefix}-${i}`} text={part} groupLetter={match[1].toUpperCase()} />;
+    }
+    return <span key={`${keyPrefix}-${i}`}>{part}</span>;
+  });
+}
 
 function BroadcastIcon({ channel }: { channel: string }) {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -362,12 +378,12 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                     <div key={match.id} className="w-full bg-[#141414] rounded-2xl p-5 border border-zinc-900 flex flex-col items-center">
                       {match.condition && (
                         <div className={`text-[10px] font-black uppercase tracking-wider py-1.5 px-4 rounded-full mb-3 text-center border ${config.bgTheme} ${config.themeColor} border-${config.themeColor}/20`}>
-                          {translateCondition(match.condition, lang)}
+                          {renderWithGroupTooltip(translateCondition(match.condition, lang), `cond-${match.id}`)}
                         </div>
                       )}
                       
                       <div className="text-[10px] font-bold text-zinc-650 uppercase tracking-widest mb-3">
-                        {translatePhase(match.phase, lang)}
+                        {renderWithGroupTooltip(translatePhase(match.phase, lang), `phase-${match.id}`)}
                         {endDate && ` • ${(() => {
                           const parts = match.date.split("-");
                           if (parts.length < 3) return match.date;
@@ -402,7 +418,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                       </div>
 
                       <div className="font-black uppercase tracking-tight text-md text-white mb-2 text-center">
-                        {translateTeamName(match.team_code, match.team_name, lang)} x {translateOpponentName(match.opponent_code, match.opponent_name, lang)}
+                        {translateTeamName(match.team_code, match.team_name, lang)} x {renderWithGroupTooltip(translateOpponentName(match.opponent_code, match.opponent_name, lang), `opp-${match.id}`)}
                       </div>
 
                       <div className="flex items-center justify-center gap-1 text-zinc-600 font-bold text-[9px] uppercase tracking-wide text-center">
@@ -416,10 +432,18 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                       </div>
 
                       {(() => {
+                        const formattedDate = (() => {
+                          const parts = match.date.split("-");
+                          if (parts.length < 3) return match.date;
+                          return lang === 'en' ? `${parts[1]}/${parts[2]}` : `${parts[2]}/${parts[1]}`;
+                        })();
+
                         if (!match.time_brt) {
                           return (
                             <div className="flex items-center justify-center gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">
-                              <Clock className="w-3.5 h-3.5 text-zinc-550" />
+                              <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
+                              <span>{formattedDate}</span>
+                              <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />
                               <span>{t("time_tbd")}</span>
                             </div>
                           );
@@ -437,7 +461,9 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                         const formattedTime = formatMatchTimeInTimezone(match.time_brt, match.date, targetTz, lang);
                         return (
                           <div className="flex items-center justify-center gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">
-                            <Clock className="w-3.5 h-3.5 text-zinc-550" />
+                            <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
+                            <span>{formattedDate}</span>
+                            <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />
                             <span>{formattedTime}</span>
                           </div>
                         );

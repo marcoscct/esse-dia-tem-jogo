@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useLanguage, type TimezoneMode } from "./TranslationProvider";
 import { motion, AnimatePresence } from "framer-motion";
 import { Settings, X, Check, Clock, Globe } from "lucide-react";
@@ -21,6 +21,46 @@ const COMMON_TIMEZONES = [
   { value: 'Asia/Seoul', labelPt: 'Seul (KST)', labelEn: 'Seoul (KST)', labelEs: 'Seúl (KST)' },
   { value: 'Australia/Sydney', labelPt: 'Sydney (AEST)', labelEn: 'Sydney (AEST)', labelEs: 'Sídney (AEST)' },
 ];
+
+function getTimezoneOffsetMinutes(timezone: string): number {
+  try {
+    const date = new Date();
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: timezone,
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: false
+    });
+    const parts = formatter.formatToParts(date);
+    const getVal = (type: string) => Number(parts.find(p => p.type === type)!.value);
+    
+    const y = getVal('year');
+    const m = getVal('month');
+    const d = getVal('day');
+    const hr = getVal('hour');
+    const min = getVal('minute');
+    const sec = getVal('second');
+    
+    const tzUtc = Date.UTC(y, m - 1, d, hr, min, sec);
+    const actualUtc = date.getTime();
+    
+    return Math.round((tzUtc - actualUtc) / 60000);
+  } catch {
+    return 0;
+  }
+}
+
+function formatOffset(offsetMinutes: number): string {
+  const sign = offsetMinutes >= 0 ? '+' : '-';
+  const abs = Math.abs(offsetMinutes);
+  const hours = String(Math.floor(abs / 60)).padStart(2, '0');
+  const minutes = String(abs % 60).padStart(2, '0');
+  return `GMT${sign}${hours}:${minutes}`;
+}
 
 export default function SettingsPanel() {
   const { lang, t, timezoneMode, setTimezoneMode, deviceTzAbbr, customTimezone, setCustomTimezone, deviceTimezone } = useLanguage();
@@ -53,15 +93,46 @@ export default function SettingsPanel() {
     }
   ] as const;
 
-  const timezoneOptions = [...COMMON_TIMEZONES];
-  if (deviceTimezone && !timezoneOptions.some(opt => opt.value === deviceTimezone)) {
-    timezoneOptions.unshift({
-      value: deviceTimezone,
-      labelPt: `Local (${deviceTzAbbr})`,
-      labelEn: `Local (${deviceTzAbbr})`,
-      labelEs: `Local (${deviceTzAbbr})`,
+  const popularOptions = useMemo(() => {
+    const popular = [...COMMON_TIMEZONES];
+    if (deviceTimezone && !popular.some(opt => opt.value === deviceTimezone)) {
+      popular.unshift({
+        value: deviceTimezone,
+        labelPt: `Local (${deviceTzAbbr})`,
+        labelEn: `Local (${deviceTzAbbr})`,
+        labelEs: `Local (${deviceTzAbbr})`,
+      });
+    }
+    return popular;
+  }, [deviceTimezone, deviceTzAbbr]);
+
+  const timezoneOptions = useMemo(() => {
+    let supportedTimezones: string[] = [];
+    try {
+      supportedTimezones = Intl.supportedValuesOf('timeZone');
+    } catch {
+      supportedTimezones = COMMON_TIMEZONES.map(z => z.value);
+    }
+
+    const zones = supportedTimezones.map(tz => {
+      const offsetMin = getTimezoneOffsetMinutes(tz);
+      const formatted = formatOffset(offsetMin);
+      return {
+        value: tz,
+        offsetMinutes: offsetMin,
+        label: `(${formatted}) ${tz.replace(/_/g, ' ')}`,
+      };
     });
-  }
+
+    zones.sort((a, b) => {
+      if (a.offsetMinutes !== b.offsetMinutes) {
+        return a.offsetMinutes - b.offsetMinutes;
+      }
+      return a.value.localeCompare(b.value);
+    });
+
+    return zones;
+  }, []);
 
   return (
     <div className="relative">
@@ -159,11 +230,25 @@ export default function SettingsPanel() {
                               onChange={(e) => setCustomTimezone(e.target.value)}
                               className="w-full bg-zinc-950 text-xs text-zinc-300 font-bold border border-zinc-850 rounded-xl py-2.5 px-3 focus:outline-none focus:border-[#ffcc00] focus:ring-1 focus:ring-[#ffcc00]/20 cursor-pointer"
                             >
-                              {timezoneOptions.map((tz) => (
-                                <option key={tz.value} value={tz.value}>
-                                  {lang === 'en' ? tz.labelEn : lang === 'es' ? tz.labelEs : tz.labelPt}
-                                </option>
-                              ))}
+                              <optgroup label={t("timezone_group_popular") || "Populares"}>
+                                {popularOptions.map((tz) => {
+                                  const offsetMin = getTimezoneOffsetMinutes(tz.value);
+                                  const formatted = formatOffset(offsetMin);
+                                  const label = lang === 'en' ? tz.labelEn : lang === 'es' ? tz.labelEs : tz.labelPt;
+                                  return (
+                                    <option key={`pop-${tz.value}`} value={tz.value}>
+                                      {`(${formatted}) ${label}`}
+                                    </option>
+                                  );
+                                })}
+                              </optgroup>
+                              <optgroup label={t("timezone_group_all") || "Todos os Fusos"}>
+                                {timezoneOptions.map((tz) => (
+                                  <option key={`all-${tz.value}`} value={tz.value}>
+                                    {tz.label}
+                                  </option>
+                                ))}
+                              </optgroup>
                             </select>
                           </motion.div>
                         )}

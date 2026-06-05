@@ -53,6 +53,8 @@ export const pt = {
   "timezone_mode_stadium_desc": "Fuso do local do jogo",
   "timezone_mode_custom": "Personalizado",
   "timezone_mode_custom_desc": "Escolha um fuso horário",
+  "timezone_group_popular": "Populares",
+  "timezone_group_all": "Todos os Fusos",
   "calendar_feed_title": "Agenda Completa",
   "calendar_feed_locked_title": "Assinar Agenda Completa",
   "calendar_feed_unlocked_title": "Agenda Liberada!",

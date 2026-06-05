@@ -164,3 +164,18 @@ export async function queryAllGamesOnDateClient(startDate: string, endDate?: str
     matches,
   };
 }
+
+
+/**
+ * Client-side query: returns the 4 teams of a given group.
+ */
+export async function getGroupTeamsClient(groupLetter: string) {
+  const calendar = await getClientCalendar();
+  const teams = [];
+  for (const [code, team] of Object.entries(calendar.teams)) {
+    if (team.group === groupLetter) {
+      teams.push({ code, name: team.name, flag: team.flag });
+    }
+  }
+  return teams;
+}

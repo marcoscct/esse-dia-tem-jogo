@@ -201,10 +201,18 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                   </div>
                 </div>
                 {(() => {
+                  const formattedDate = (() => {
+                    const parts = match.date.split("-");
+                    if (parts.length < 3) return match.date;
+                    return lang === 'en' ? `${parts[1]}/${parts[2]}` : `${parts[2]}/${parts[1]}`;
+                  })();
+
                   if (!match.time_brt) {
                     return (
                       <div className="flex items-center gap-1.5 text-zinc-455 font-bold text-xs bg-zinc-950 py-1.5 px-4 rounded-full mt-1 border border-zinc-900">
-                        <Clock className="w-3.5 h-3.5 text-zinc-550" />
+                        <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
+                        <span>{formattedDate}</span>
+                        <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />
                         <span>{t("time_tbd")}</span>
                       </div>
                     );
@@ -222,7 +230,9 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                   const formattedTime = formatMatchTimeInTimezone(match.time_brt, match.date, targetTz, lang);
                   return (
                     <div className="flex items-center gap-1.5 text-zinc-455 font-bold text-xs bg-zinc-950 py-1.5 px-4 rounded-full mt-1 border border-zinc-900">
-                      <Clock className="w-3.5 h-3.5 text-zinc-550" />
+                      <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
+                      <span>{formattedDate}</span>
+                      <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />
                       <span>{formattedTime}</span>
                     </div>
                   );

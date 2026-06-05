@@ -53,6 +53,8 @@ export const en = {
   "timezone_mode_stadium_desc": "Stadium timezone",
   "timezone_mode_custom": "Custom",
   "timezone_mode_custom_desc": "Choose any timezone",
+  "timezone_group_popular": "Popular",
+  "timezone_group_all": "All Timezones",
   "calendar_feed_title": "Full Schedule",
   "calendar_feed_locked_title": "Subscribe to Full Schedule",
   "calendar_feed_unlocked_title": "Calendar Unlocked!",

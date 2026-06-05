@@ -5,13 +5,15 @@ import type { Language } from '@/locales/i18n-utils';
 import { translate } from '@/locales/i18n-utils';
 import { getTimezoneAbbreviation } from '@/lib/date-utils';
 
-export type TimezoneMode = 'device' | 'brt' | 'stadium';
+export type TimezoneMode = 'device' | 'brt' | 'stadium' | 'custom';
 
 interface SettingsContextType {
   lang: Language;
   t: (key: string, params?: Record<string, string>) => string;
   timezoneMode: TimezoneMode;
   setTimezoneMode: (mode: TimezoneMode) => void;
+  customTimezone: string;
+  setCustomTimezone: (tz: string) => void;
   deviceTimezone: string;
   deviceTzAbbr: string;
 }
@@ -21,6 +23,8 @@ const SettingsContext = createContext<SettingsContextType>({
   t: (key) => key,
   timezoneMode: 'device',
   setTimezoneMode: () => {},
+  customTimezone: 'America/Sao_Paulo',
+  setCustomTimezone: () => {},
   deviceTimezone: 'America/Sao_Paulo',
   deviceTzAbbr: 'BRT',
 });
@@ -29,6 +33,7 @@ export function TranslationProvider({ lang, children }: { lang: Language; childr
   const t = (key: string, params?: Record<string, string>) => translate(key, lang, params);
   
   const [timezoneMode, setTimezoneModeState] = useState<TimezoneMode>('device');
+  const [customTimezone, setCustomTimezoneState] = useState('America/Sao_Paulo');
   const [deviceTimezone, setDeviceTimezone] = useState('America/Sao_Paulo');
   const [deviceTzAbbr, setDeviceTzAbbr] = useState('BRT');
 
@@ -47,10 +52,27 @@ export function TranslationProvider({ lang, children }: { lang: Language; childr
 
     // Load from localStorage
     const saved = localStorage.getItem("timezoneMode");
-    if (saved === 'device' || saved === 'brt' || saved === 'stadium') {
+    if (saved === 'device' || saved === 'brt' || saved === 'stadium' || saved === 'custom') {
       setTimeout(() => {
         setTimezoneModeState(saved);
       }, 0);
+    }
+
+    const savedCustomTz = localStorage.getItem("customTimezone");
+    if (savedCustomTz) {
+      setTimeout(() => {
+        setCustomTimezoneState(savedCustomTz);
+      }, 0);
+    } else {
+      // Fallback to resolved timezone on mount if not saved
+      try {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (tz) {
+          setTimeout(() => {
+            setCustomTimezoneState(tz);
+          }, 0);
+        }
+      } catch {}
     }
   }, []);
 
@@ -63,12 +85,23 @@ export function TranslationProvider({ lang, children }: { lang: Language; childr
     }
   };
 
+  const setCustomTimezone = (tz: string) => {
+    setCustomTimezoneState(tz);
+    try {
+      localStorage.setItem("customTimezone", tz);
+    } catch (err) {
+      console.warn("Failed to save customTimezone to localStorage:", err);
+    }
+  };
+
   return (
     <SettingsContext.Provider value={{
       lang,
       t,
       timezoneMode,
       setTimezoneMode,
+      customTimezone,
+      setCustomTimezone,
       deviceTimezone,
       deviceTzAbbr
     }}>

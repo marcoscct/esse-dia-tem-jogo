@@ -28,15 +28,20 @@ export default function CalendarFeedModal({ isOpen, onClose, teamCode, teamName 
     }
   }, [isOpen]);
 
-  // Listen to window focus to check time spent on WhatsApp
+  // Listen to window focus/visibility to check time spent on WhatsApp
   useEffect(() => {
     if (!clickTime) return;
 
-    const handleFocus = () => {
+    let checked = false;
+
+    const checkTime = () => {
+      if (checked) return;
+      checked = true;
+
       const timeSpentAway = (Date.now() - clickTime) / 1000;
       
-      // If spent at least 4 seconds, we assume they shared
-      if (timeSpentAway >= 4) {
+      // If spent at least 2.5 seconds, we assume they shared
+      if (timeSpentAway >= 2.5) {
         setIsUnlocked(true);
         try {
           localStorage.setItem("calendar_unlocked", "true");
@@ -50,8 +55,21 @@ export default function CalendarFeedModal({ isOpen, onClose, teamCode, teamName 
       }
     };
 
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        checkTime();
+      }
+    };
+
+    const handleFocus = () => {
+      checkTime();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("focus", handleFocus);
+    
     return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("focus", handleFocus);
     };
   }, [clickTime, t]);

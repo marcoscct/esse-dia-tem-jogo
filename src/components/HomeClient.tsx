@@ -176,24 +176,21 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
         Espaço para Banner Topo
       </div>
 
-      <main className="flex-1 flex flex-col items-center px-4 w-full max-w-2xl mx-auto pt-6 pb-12">
-        {/* Header / Hero */}
-        <header className="w-full flex flex-col items-center text-center mb-6 gap-4">
+      <main className="flex-1 w-full max-w-5xl mx-auto px-4 pt-6 md:pt-20 pb-6 md:pb-8 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-10 lg:gap-16">
+        {/* Header / Hero (Logo na esquerda no desktop) */}
+        <header className="flex flex-col items-center justify-center shrink-0">
           {/* Logo */}
-          <div className="w-40 h-40 md:w-52 md:h-52">
+          <div className="w-40 h-40 md:w-[280px] md:h-[280px] lg:w-[340px] lg:h-[340px]">
             <img
               src="/logo.png"
               alt={t("title")}
               className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,204,0,0.3)]"
             />
           </div>
-          <p className="text-zinc-400 text-sm md:text-base max-w-xs md:max-w-md mx-auto leading-tight">
-            {t("description")}
-          </p>
         </header>
 
-        {/* Main Form Card */}
-        <div className="w-full bg-[#111111] rounded-3xl p-5 md:p-8 shadow-2xl border border-zinc-800">
+        {/* Main Form Card (Coluna da direita no desktop) */}
+        <div className="w-full max-w-xl lg:max-w-2xl bg-[#111111] rounded-3xl p-5 md:p-8 shadow-2xl border border-zinc-800 shrink">
           <form onSubmit={handleVerify} className="flex flex-col gap-5">
             {/* Mode Switcher */}
             <div className="flex items-center justify-center gap-3 md:gap-5 mb-1 border-b border-zinc-900 pb-4">
@@ -364,16 +361,17 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
       </div>
 
       {/* Footer Info */}
-      <footer className="w-full flex flex-col items-center justify-center gap-2 py-6 bg-black text-zinc-500 text-xs border-t border-zinc-950">
+      <footer className="w-full flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 py-4 md:py-5 bg-black text-zinc-500 text-xs border-t border-zinc-950">
         <div className="flex items-center gap-1.5 flex-wrap justify-center text-zinc-500">
           <RefreshCw className="w-3.5 h-3.5" />
           <span>{t("last_updated", { date: lastUpdated })}</span>
           <span>|</span>
           <NextLink href={`${langPrefix}/devlog`} className="hover:text-[#ffcc00] font-bold transition-colors">
-            v1.5.0
+            v1.6.0
           </NextLink>
         </div>
-        <div className="flex items-center gap-4 text-zinc-500 mt-1 flex-wrap justify-center">
+        <div className="hidden md:block text-zinc-700">•</div>
+        <div className="flex items-center gap-4 text-zinc-500 mt-1 md:mt-0 flex-wrap justify-center">
           <NextLink href={`${langPrefix}/sobre`} className="hover:text-[#ffcc00] transition-colors">{t("about")}</NextLink>
           <span>•</span>
           <NextLink href={`${langPrefix}/devlog`} className="hover:text-[#ffcc00] transition-colors">{t("devlog")}</NextLink>

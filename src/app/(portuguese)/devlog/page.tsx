@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import LocalizedDevlogPage from '../_localized/devlog-page';
+import LocalizedDevlogPage from '../../_localized/devlog-page';
 
 export const metadata: Metadata = {
   title: "Novidades do Projeto — Esse Dia Tem Jogo?",

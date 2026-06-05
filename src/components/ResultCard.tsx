@@ -89,7 +89,7 @@ interface ResultCardProps {
 }
 
 export default function ResultCard({ matches = [] }: ResultCardProps) {
-  const { lang, t, timezoneMode, deviceTimezone } = useLanguage();
+  const { lang, t, timezoneMode, deviceTimezone, customTimezone } = useLanguage();
   const [isFeedModalOpen, setIsFeedModalOpen] = useState(false);
 
   const firstMatch = matches[0];
@@ -215,6 +215,8 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                     targetTz = deviceTimezone;
                   } else if (timezoneMode === 'stadium') {
                     targetTz = getVenueIanaTimezone(match.city, match.venue);
+                  } else if (timezoneMode === 'custom') {
+                    targetTz = customTimezone;
                   }
                   
                   const formattedTime = formatMatchTimeInTimezone(match.time_brt, match.date, targetTz, lang);

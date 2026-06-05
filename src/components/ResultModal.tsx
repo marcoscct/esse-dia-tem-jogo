@@ -98,7 +98,7 @@ interface ResultModalProps {
 export default function ResultModal({ matches = [], isOpen, onClose, date, endDate }: ResultModalProps) {
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
-  const { lang, t, timezoneMode, deviceTimezone } = useLanguage();
+  const { lang, t, timezoneMode, deviceTimezone, customTimezone } = useLanguage();
   const [isFeedModalOpen, setIsFeedModalOpen] = useState(false);
 
   const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
@@ -319,21 +319,10 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
               <h3 className="text-white font-bold text-lg uppercase tracking-wider mb-1 text-center md:text-left">
                 {config.subheading}
               </h3>
-              <p className="text-zinc-500 text-sm text-center md:text-left mb-6 max-w-xs leading-tight">
-                {config.description}
-              </p>
 
               {/* Desktop Buttons */}
-              <div className="w-full mt-auto hidden md:flex flex-col gap-3 pt-4">
-                {showSubscribe && (
-                  <button
-                    onClick={() => setIsFeedModalOpen(true)}
-                    className="w-full flex items-center justify-center gap-2 font-bold uppercase tracking-wider py-3.5 px-4 rounded-xl bg-zinc-950 hover:bg-zinc-900 text-[#ffcc00] border border-zinc-900 hover:border-zinc-800 text-xs md:text-sm transition-all cursor-pointer"
-                  >
-                    <CalendarIcon className="w-4 h-4 text-[#ffcc00]" />
-                    <span>{t("subscribe_full_calendar")}</span>
-                  </button>
-                )}
+              <div className="w-full mt-8 hidden md:flex flex-col gap-3">
+                {/* Subscribe button moved to match accordion */}
                 {date && (
                   <button
                     onClick={handleCopyText}
@@ -441,6 +430,8 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                           targetTz = deviceTimezone;
                         } else if (timezoneMode === 'stadium') {
                           targetTz = getVenueIanaTimezone(match.city, match.venue);
+                        } else if (timezoneMode === 'custom') {
+                          targetTz = customTimezone;
                         }
                         
                         const formattedTime = formatMatchTimeInTimezone(match.time_brt, match.date, targetTz, lang);
@@ -505,6 +496,19 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                               <span className="w-2 h-2 rounded-full bg-zinc-550 shrink-0" />
                               <span>{t("download_ics")}</span>
                             </button>
+                            
+                            {showSubscribe && (
+                              <div className="w-full h-px bg-zinc-900/80 my-1" />
+                            )}
+                            {showSubscribe && (
+                              <button
+                                onClick={() => setIsFeedModalOpen(true)}
+                                className="flex items-center justify-center gap-2.5 w-full hover:bg-zinc-900/60 text-[#ffcc00] hover:text-[#ffd633] font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
+                              >
+                                <CalendarIcon className="w-3 h-3 text-[#ffcc00]" />
+                                <span>{t("subscribe_full_calendar")}</span>
+                              </button>
+                            )}
                           </motion.div>
                         )}
                       </div>
@@ -523,15 +527,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
 
             {/* Mobile Buttons */}
             <div className="w-full mt-2 flex md:hidden flex-col gap-3">
-              {showSubscribe && (
-                <button
-                  onClick={() => setIsFeedModalOpen(true)}
-                  className="w-full flex items-center justify-center gap-2 font-bold uppercase tracking-wider py-3.5 px-4 rounded-xl bg-zinc-950 hover:bg-zinc-900 text-[#ffcc00] border border-zinc-900 hover:border-zinc-800 text-xs md:text-sm transition-all cursor-pointer"
-                >
-                  <CalendarIcon className="w-4 h-4 text-[#ffcc00]" />
-                  <span>{t("subscribe_full_calendar")}</span>
-                </button>
-              )}
+              {/* Subscribe button moved to match accordion */}
               {date && (
                 <button
                   onClick={handleCopyText}

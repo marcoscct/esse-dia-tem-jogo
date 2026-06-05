@@ -1,7 +1,7 @@
 import { getAllTeamSlugs, getTeamBySlug } from '@/lib/calendar';
 import { getTeamMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
-import LocalizedTeamPage from '../_localized/team-page';
+import LocalizedTeamPage from '../../_localized/team-page';
 
 interface Props {
   params: Promise<{ team: string }>;

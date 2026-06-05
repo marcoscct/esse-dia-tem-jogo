@@ -1,7 +1,7 @@
 import { getAllDates } from '@/lib/calendar';
 import { parseDateParam } from '@/lib/date-utils';
 import type { Metadata } from 'next';
-import LocalizedTodosPage from '../../_localized/todos-page';
+import LocalizedTodosPage from '../../../_localized/todos-page';
 
 interface Props {
   params: Promise<{ date: string }>;

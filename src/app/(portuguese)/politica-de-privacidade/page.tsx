@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import LocalizedPrivacyPage from '../_localized/privacy-page';
+import LocalizedPrivacyPage from '../../_localized/privacy-page';
 
 export const metadata: Metadata = {
   title: "Política de Privacidade — Esse Dia Tem Jogo?",

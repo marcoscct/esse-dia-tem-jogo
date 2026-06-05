@@ -2,7 +2,7 @@ import { getAllStaticRoutes, getTeamBySlug, queryDate } from '@/lib/calendar';
 import { parseDateParam } from '@/lib/date-utils';
 import { getDatePageMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
-import LocalizedDatePage from '../../_localized/date-page';
+import LocalizedDatePage from '../../../_localized/date-page';
 
 interface Props {
   params: Promise<{ team: string; date: string }>;

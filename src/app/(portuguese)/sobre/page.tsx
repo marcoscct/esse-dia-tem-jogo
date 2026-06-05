@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import LocalizedAboutPage from '../_localized/about-page';
+import LocalizedAboutPage from '../../_localized/about-page';
 
 export const metadata: Metadata = {
   title: "Sobre Nós — Esse Dia Tem Jogo?",

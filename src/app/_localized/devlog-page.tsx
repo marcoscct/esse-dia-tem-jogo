@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Sparkles, Calendar, Globe, Layers, Zap, Flame, Award } from "lucide-react";
+import { ArrowLeft, Sparkles, Calendar, Globe, Layers, Zap, Flame, Award, Tv } from "lucide-react";
 import type { Language } from "@/locales/i18n-utils";
 
 interface Props {
@@ -15,6 +15,17 @@ const content = {
     subtitle: "Acompanhe a evolução, atualizações e avanços do site versão por versão.",
     footer: "Esse Dia Tem Jogo © 2026. Todos os direitos reservados.",
     devlogs: [
+      {
+        version: "v1.6.0",
+        date: "05 de Junho, 2026",
+        title: "📺 Canais de Transmissão (Onde Assistir)",
+        icon: Tv,
+        highlights: [
+          "Integração de informações completas de canais de transmissão (Globo, SBT, SporTV, Premiere, YouTube, etc.) para cada partida do calendário.",
+          "Visualização clara do canal transmissor diretamente nos cards de resultado das partidas.",
+          "Traduções multilíngues automatizadas para os nomes e descrições dos canais de transmissão de acordo com a preferência do usuário."
+        ]
+      },
       {
         version: "v1.5.0",
         date: "04 de Junho, 2026",
@@ -91,6 +102,17 @@ const content = {
     footer: "Is There a Game Today © 2026. All rights reserved.",
     devlogs: [
       {
+        version: "v1.6.0",
+        date: "June 5, 2026",
+        title: "📺 Broadcast Channels (Where to Watch)",
+        icon: Tv,
+        highlights: [
+          "Integrated comprehensive broadcasting channel information (Globo, SBT, SporTV, Premiere, YouTube, etc.) for each scheduled match.",
+          "Clear display of the transmitting channels directly on the match result cards.",
+          "Automated multilingual translations for broadcasting network names based on the user's selected language."
+        ]
+      },
+      {
         version: "v1.5.0",
         date: "June 4, 2026",
         title: "🌍 International Friendlies & Search Quality",
@@ -165,6 +187,17 @@ const content = {
     subtitle: "Sigue la evolución, actualizaciones y avances del sitio versión por versión.",
     footer: "¿Este Día Hay Partido? © 2026. Todos los derechos reservados.",
     devlogs: [
+      {
+        version: "v1.6.0",
+        date: "05 de Junho, 2026",
+        title: "📺 Canales de Transmisión (Dónde Ver)",
+        icon: Tv,
+        highlights: [
+          "Integración de información detallada de canales de transmisión (Globo, SBT, SporTV, Premiere, YouTube, etc.) para cada partido del calendario.",
+          "Visualización clara del canal transmisor directamente en las tarjetas de resultado de los partidos.",
+          "Traducción automática multilingüe de los nombres y descripciones de los canales emisores según la preferencia del usuario."
+        ]
+      },
       {
         version: "v1.5.0",
         date: "04 de Junio, 2026",

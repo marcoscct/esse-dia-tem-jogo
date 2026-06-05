@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import LocalizedTermsPage from '../_localized/terms-page';
+import LocalizedTermsPage from '../../_localized/terms-page';
 
 export const metadata: Metadata = {
   title: "Termos de Uso — Esse Dia Tem Jogo?",

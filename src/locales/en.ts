@@ -51,6 +51,8 @@ export const en = {
   "timezone_mode_brt": "Brasília (BRT)",
   "timezone_mode_stadium": "Stadium (Local)",
   "timezone_mode_stadium_desc": "Stadium timezone",
+  "timezone_mode_custom": "Custom",
+  "timezone_mode_custom_desc": "Choose any timezone",
   "calendar_feed_title": "Full Schedule",
   "calendar_feed_locked_title": "Subscribe to Full Schedule",
   "calendar_feed_unlocked_title": "Calendar Unlocked!",

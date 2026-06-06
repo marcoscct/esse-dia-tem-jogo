@@ -475,7 +475,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
 
                         if (!match.time_brt) {
                           return (
-                            <div className="flex items-center justify-center gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">
+                            <div className="flex items-center justify-center flex-nowrap whitespace-nowrap gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">
                               <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
                               <span>{formattedDate}</span>
                               <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />
@@ -486,7 +486,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                         
                         const formattedTime = formatMatchTimeInTimezone(match.time_brt, match.date, targetTz, lang);
                         return (
-                          <div className="flex items-center justify-center gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">
+                          <div className="flex items-center justify-center flex-nowrap whitespace-nowrap gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">
                             <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
                             <span>{formattedDate}</span>
                             <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />

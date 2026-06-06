@@ -337,7 +337,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
             animate={{ scale: 1, y: 0, opacity: 1 }}
             exit={{ scale: 0.9, y: 30, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className={`relative w-full max-w-[560px] md:max-w-[850px] bg-[#0d0d0d] rounded-[2rem] p-6 md:p-8 shadow-2xl border-4 ${config.borderColor} flex flex-col md:flex-row md:items-stretch gap-6 md:gap-8 z-10 overflow-hidden`}
+            className={`relative w-full max-w-[560px] md:max-w-[850px] bg-[#0d0d0d] rounded-[2rem] p-5 sm:p-6 md:p-8 shadow-2xl border-4 ${config.borderColor} flex flex-col md:flex-row md:items-stretch gap-6 md:gap-8 z-10 overflow-hidden`}
           >
             {/* Close button */}
             <button
@@ -405,7 +405,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
               {gameState !== 'none' && matches.length > 0 ? (
                 <div className="w-full max-h-[400px] md:max-h-[480px] overflow-y-auto pr-2 flex flex-col gap-4 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
                   {matches.map(match => (
-                    <div key={match.id} className="w-full bg-[#141414] rounded-2xl p-5 border border-zinc-900 flex flex-col items-center">
+                    <div key={match.id} className="w-full bg-[#141414] rounded-2xl p-4 sm:p-5 border border-zinc-900 flex flex-col items-center">
                       {match.condition && (
                         <div className={`text-[10px] font-black uppercase tracking-wider py-1.5 px-4 rounded-full mb-3 text-center border ${config.bgTheme} ${config.themeColor} border-${config.themeColor}/20`}>
                           {renderWithGroupTooltip(translateCondition(match.condition, lang), `cond-${match.id}`)}
@@ -475,7 +475,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
 
                         if (!match.time_brt) {
                           return (
-                            <div className="flex items-center justify-center flex-nowrap whitespace-nowrap gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">
+                            <div className="flex items-center justify-center flex-nowrap whitespace-nowrap gap-1 md:gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-3 sm:px-4 rounded-full mt-3 text-[11px] sm:text-xs border border-zinc-900 w-fit max-w-full">
                               <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
                               <span>{formattedDate}</span>
                               <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />
@@ -486,7 +486,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                         
                         const formattedTime = formatMatchTimeInTimezone(match.time_brt, match.date, targetTz, lang);
                         return (
-                          <div className="flex items-center justify-center flex-nowrap whitespace-nowrap gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-4 rounded-full mt-3 text-xs border border-zinc-900">
+                          <div className="flex items-center justify-center flex-nowrap whitespace-nowrap gap-1 md:gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-3 sm:px-4 rounded-full mt-3 text-[11px] sm:text-xs border border-zinc-900 w-fit max-w-full">
                             <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
                             <span>{formattedDate}</span>
                             <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />

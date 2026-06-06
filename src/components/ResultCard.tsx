@@ -166,7 +166,7 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
   }[gameState];
 
   return (
-    <div className={`w-full bg-[#111] rounded-3xl p-6 md:p-8 shadow-2xl border-2 ${config.borderColor} flex flex-col md:flex-row gap-6 items-stretch`}>
+    <div className={`w-full bg-[#111] rounded-3xl p-5 sm:p-6 md:p-8 shadow-2xl border-2 ${config.borderColor} flex flex-col md:flex-row gap-6 items-stretch`}>
       {/* Left Column: Status info */}
       <div className="flex-1 flex flex-col md:flex-row gap-4 items-center md:items-start text-center md:text-left">
         <div className="flex-shrink-0">
@@ -244,7 +244,7 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
 
                   if (!match.time_brt) {
                     return (
-                      <div className="flex items-center flex-nowrap whitespace-nowrap gap-1.5 text-zinc-455 font-bold text-xs bg-zinc-950 py-1.5 px-4 rounded-full mt-1 border border-zinc-900">
+                      <div className="flex items-center flex-nowrap whitespace-nowrap gap-1 md:gap-1.5 text-zinc-455 font-bold text-[11px] sm:text-xs bg-zinc-950 py-1.5 px-3 sm:px-4 rounded-full mt-1 border border-zinc-900 w-fit max-w-full">
                         <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
                         <span>{formattedDate}</span>
                         <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />
@@ -255,7 +255,7 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                   
                   const formattedTime = formatMatchTimeInTimezone(match.time_brt, match.date, targetTz, lang);
                   return (
-                    <div className="flex items-center flex-nowrap whitespace-nowrap gap-1.5 text-zinc-455 font-bold text-xs bg-zinc-950 py-1.5 px-4 rounded-full mt-1 border border-zinc-900">
+                    <div className="flex items-center flex-nowrap whitespace-nowrap gap-1 md:gap-1.5 text-zinc-455 font-bold text-[11px] sm:text-xs bg-zinc-950 py-1.5 px-3 sm:px-4 rounded-full mt-1 border border-zinc-900 w-fit max-w-full">
                       <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
                       <span>{formattedDate}</span>
                       <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />

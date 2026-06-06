@@ -34,7 +34,7 @@ const LOCALIZED_CONFIG = {
 };
 
 /** Base metadata shared across all pages */
-export function getBaseMetadata(lang: Language = 'pt'): Metadata {
+export function getBaseMetadata(lang: Language = 'pt', isClubs: boolean = false): Metadata {
   const config = LOCALIZED_CONFIG[lang];
   const canonicalUrl = lang === 'pt' ? SITE_URL : `${SITE_URL}/${lang}`;
   
@@ -44,7 +44,7 @@ export function getBaseMetadata(lang: Language = 'pt'): Metadata {
     authors: [{ name: 'Castro Brothers', url: 'https://divertical.com.br' }],
     creator: 'Castro Brothers',
     publisher: 'Castro Brothers',
-    robots: { index: true, follow: true },
+    robots: isClubs ? { index: false, follow: false } : { index: true, follow: true },
     openGraph: {
       siteName: config.siteName,
       locale: config.locale,
@@ -61,9 +61,9 @@ export function getBaseMetadata(lang: Language = 'pt'): Metadata {
 }
 
 /** Metadata for the home page */
-export function getHomeMetadata(lang: Language = 'pt'): Metadata {
+export function getHomeMetadata(lang: Language = 'pt', isClubs: boolean = false): Metadata {
   const config = LOCALIZED_CONFIG[lang];
-  const base = getBaseMetadata(lang);
+  const base = getBaseMetadata(lang, isClubs);
   
   const ptKeywords = [
     'tem jogo hoje',
@@ -97,7 +97,8 @@ export function getHomeMetadata(lang: Language = 'pt'): Metadata {
 
   const keywords = lang === 'en' ? enKeywords : lang === 'es' ? esKeywords : ptKeywords;
 
-  const canonicalUrl = lang === 'pt' ? SITE_URL : `${SITE_URL}/${lang}`;
+  const pathPrefix = isClubs ? '/times' : '';
+  const canonicalUrl = lang === 'pt' ? `${SITE_URL}${pathPrefix}` : `${SITE_URL}/${lang}${pathPrefix}`;
 
   return {
     ...base,
@@ -114,18 +115,28 @@ export function getHomeMetadata(lang: Language = 'pt'): Metadata {
 }
 
 /** Metadata for a team overview page — /[team] */
-export function getTeamMetadata(team: Team & { code: string }, lang: Language = 'pt'): Metadata {
-  const base = getBaseMetadata(lang);
+export function getTeamMetadata(team: Team & { code: string }, lang: Language = 'pt', isClubs: boolean = false): Metadata {
+  const base = getBaseMetadata(lang, isClubs);
   const teamName = translateTeamName(team.code, team.name, lang);
   
-  let description = `Veja todos os jogos da ${teamName} ${team.flag} na Copa do Mundo 2026. Datas, horários e adversários confirmados.`;
-  if (lang === 'en') {
-    description = `Check all World Cup 2026 matches for ${teamName} ${team.flag}. Confirmed dates, times, and opponents.`;
-  } else if (lang === 'es') {
-    description = `Mira todos los partidos de ${teamName} ${team.flag} en la Copa del Mundo 2026. Fechas, horarios y rivales confirmados.`;
+  let description = `Veja todos os jogos do ${teamName} ${team.flag} na temporada. Datas, horários e adversários confirmados.`;
+  if (isClubs) {
+    if (lang === 'en') {
+      description = `Check all matches for ${teamName} ${team.flag}. Confirmed dates, times, and opponents.`;
+    } else if (lang === 'es') {
+      description = `Mira todos los partidos de ${teamName} ${team.flag}. Fechas, horarios y rivales confirmados.`;
+    }
+  } else {
+    description = `Veja todos os jogos da ${teamName} ${team.flag} na Copa do Mundo 2026. Datas, horários e adversários confirmados.`;
+    if (lang === 'en') {
+      description = `Check all World Cup 2026 matches for ${teamName} ${team.flag}. Confirmed dates, times, and opponents.`;
+    } else if (lang === 'es') {
+      description = `Mira todos los partidos de ${teamName} ${team.flag} en la Copa del Mundo 2026. Fechas, horarios y rivales confirmados.`;
+    }
   }
 
-  const pathSuffix = lang === 'pt' ? `/${team.slug}` : `/${lang}/${team.slug}`;
+  const pathPrefix = isClubs ? '/times' : '';
+  const pathSuffix = lang === 'pt' ? `${pathPrefix}/${team.slug}` : `/${lang}${pathPrefix}/${team.slug}`;
   const url = `${SITE_URL}${pathSuffix}`;
 
   return {
@@ -134,7 +145,7 @@ export function getTeamMetadata(team: Team & { code: string }, lang: Language = 
     description,
     keywords: [
       `${teamName.toLowerCase()} matches`,
-      `${teamName.toLowerCase()} world cup 2026`,
+      `${teamName.toLowerCase()} schedule`,
     ],
     openGraph: {
       ...base.openGraph,
@@ -151,16 +162,21 @@ export function getDatePageMetadata(
   team: Team & { code: string },
   date: string,
   result: { hasGame: boolean; matches: MatchWithTeam[] },
-  lang: Language = 'pt'
+  lang: Language = 'pt',
+  isClubs: boolean = false
 ): Metadata {
-  const base = getBaseMetadata(lang);
+  const base = getBaseMetadata(lang, isClubs);
   const formattedDate = formatDateLong(date, lang);
   const teamName = translateTeamName(team.code, team.name, lang);
   
-  const pathSuffix = lang === 'pt' ? `/${team.slug}/${date}` : `/${lang}/${team.slug}/${date}`;
+  const pathPrefix = isClubs ? '/times' : '';
+  const pathSuffix = lang === 'pt' ? `${pathPrefix}/${team.slug}/${date}` : `/${lang}${pathPrefix}/${team.slug}/${date}`;
   const url = `${SITE_URL}${pathSuffix}`;
 
   let description: string;
+  const compName = isClubs ? 'Brasileirão/Libertadores/Copa do Brasil' : 'Copa do Mundo 2026';
+  const compNameEn = isClubs ? 'Brasileirão/Libertadores/Copa do Brasil' : 'World Cup 2026';
+  const compNameEs = isClubs ? 'Brasileirão/Libertadores/Copa del Mundo 2026' : 'Copa del Mundo 2026';
 
   if (result.hasGame) {
     const hasConfirmed = result.matches.some(m => m.status === 'confirmed' || m.status === 'played');
@@ -170,26 +186,26 @@ export function getDatePageMetadata(
 
     if (hasConfirmed) {
       if (lang === 'en') {
-        description = `GAME DAY! ${teamName} vs ${opponent} — World Cup 2026 ${phase}. ${
+        description = `GAME DAY! ${teamName} vs ${opponent} — ${compNameEn} ${phase}. ${
           match.time_brt ? `At ${match.time_brt} BRT.` : 'Kickoff time to be confirmed.'
         }`;
       } else if (lang === 'es') {
-        description = `¡HAY PARTIDO! ${teamName} x ${opponent} — ${phase} de la Copa del Mundo 2026. ${
+        description = `¡HAY PARTIDO! ${teamName} x ${opponent} — ${phase} de ${compNameEs}. ${
           match.time_brt ? `A las ${match.time_brt} (hora de Brasilia).` : 'Horario a confirmar.'
         }`;
       } else {
-        description = `TEM JOGO! ${teamName} x ${opponent} — ${phase} da Copa do Mundo 2026. ${
+        description = `TEM JOGO! ${teamName} x ${opponent} — ${phase} do ${compName}. ${
           match.time_brt ? `Às ${match.time_brt} (horário de Brasília).` : 'Horário a confirmar.'
         }`;
       }
     } else {
       const condition = translateCondition(match.condition, lang) || 'TBD';
       if (lang === 'en') {
-        description = `POSSIBLE GAME! ${teamName} may play on ${formattedDate} (World Cup 2026 ${phase}). Scenario: ${condition}.`;
+        description = `POSSIBLE GAME! ${teamName} may play on ${formattedDate} (${compNameEn} ${phase}). Scenario: ${condition}.`;
       } else if (lang === 'es') {
-        description = `¡POSIBLE PARTIDO! ${teamName} podría jugar el día ${formattedDate} (${phase} de la Copa del Mundo 2026). Condición: ${condition}.`;
+        description = `¡POSIBLE PARTIDO! ${teamName} podría jugar el día ${formattedDate} (${phase} de ${compNameEs}). Condición: ${condition}.`;
       } else {
-        description = `POSSÍVEL JOGO! ${teamName} pode jogar no dia ${formattedDate} (${phase} da Copa do Mundo 2026). Condição: ${condition}.`;
+        description = `POSSÍVEL JOGO! ${teamName} pode jogar no dia ${formattedDate} (${phase} do ${compName}). Condição: ${condition}.`;
       }
     }
   } else {

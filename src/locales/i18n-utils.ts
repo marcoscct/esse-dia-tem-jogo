@@ -162,6 +162,20 @@ export function translatePhase(phase: string, lang: Language): string {
   
   const phaseLower = phase.toLowerCase();
   
+  // Match "Xª rodada", "Xa rodada", "Xª Rodada", "X rodada" etc.
+  const rodadaMatch = phase.match(/^(\d+)[ªaº]?\s+rodada/i);
+  if (rodadaMatch) {
+    const num = rodadaMatch[1];
+    return lang === 'en' ? `Round ${num}` : `Jornada ${num}`;
+  }
+
+  // Match "Grupo - Rodada X"
+  const grupoRodadaMatch = phase.match(/^Grupo\s+-\s+Rodada\s+(\d+)/i);
+  if (grupoRodadaMatch) {
+    const num = grupoRodadaMatch[1];
+    return lang === 'en' ? `Group Stage - Round ${num}` : `Fase de Grupos - Jornada ${num}`;
+  }
+
   if (phaseLower.includes('fase de grupos') || phaseLower.includes('matchday')) {
     if (phaseLower.startsWith('matchday')) {
       // e.g. "Matchday 1" -> "Jornada 1" / "Matchday 1"

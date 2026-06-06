@@ -263,12 +263,59 @@ const TEAM_TO_ISO: Record<string, string> = {
   ZIM: "zw"
 };
 
+const CLUB_BADGES: Record<string, string> = {
+  PAL: "https://s.sde.globo.com/media/organizations/2019/07/06/Palmeiras.svg",
+  FLA: "https://s.sde.globo.com/media/organizations/2018/04/10/Flamengo-2018.svg",
+  FLU: "https://s.sde.globo.com/media/organizations/2018/03/11/fluminense.svg",
+  CAP: "https://s.sde.globo.com/media/organizations/2026/01/07/Athletico-PR.svg",
+  RBB: "https://s.sde.globo.com/media/organizations/2021/06/28/bragantino.svg",
+  BAH: "https://s.sde.globo.com/media/organizations/2018/03/11/bahia.svg",
+  CFC: "https://s.sde.globo.com/media/organizations/2018/03/11/coritiba.svg",
+  SAO: "https://s.sde.globo.com/media/organizations/2018/03/11/sao-paulo.svg",
+  CAM: "https://s.sde.globo.com/media/organizations/2018/03/10/atletico-mg.svg",
+  COR: "https://s.sde.globo.com/media/organizations/2024/10/09/Corinthians_2024_Q4ahot4.svg",
+  CRU: "https://s.sde.globo.com/media/organizations/2021/02/13/cruzeiro_2021.svg",
+  BOT: "https://s.sde.globo.com/media/organizations/2019/02/04/botafogo-svg.svg",
+  VIT: "https://s.sde.globo.com/media/organizations/2025/12/18/Vitoria_2025.svg",
+  INT: "https://s.sde.globo.com/media/organizations/2018/03/11/internacional.svg",
+  SAN: "https://s.sde.globo.com/media/organizations/2018/03/12/santos.svg",
+  GRE: "https://s.sde.globo.com/media/organizations/2018/03/12/gremio.svg",
+  VAS: "https://s.sde.globo.com/media/organizations/2021/09/04/vasco_SVG.svg",
+  REM: "https://s.sde.globo.com/media/organizations/2021/02/25/Remo-PA.svg",
+  MIR: "https://s.sde.globo.com/media/organizations/2024/08/20/mirassol-novo-svg-71690.svg",
+  CHA: "https://s.sde.globo.com/media/organizations/2021/06/21/CHAPECOENSE-2018.svg",
+  SPT: "https://s.sde.globo.com/media/organizations/2018/03/11/sport.svg",
+  VNO: "https://s.sde.globo.com/media/organizations/2021/04/07/vilanova.svg",
+  SBD: "https://s.sde.globo.com/media/organizations/2022/01/20/Sao_Bernardo.svg",
+  NAU: "https://s.sde.globo.com/media/organizations/2019/01/03/Nautico.svg",
+  FOR: "https://s.sde.globo.com/media/organizations/2021/09/19/Fortaleza_2021_1.svg",
+  GOI: "https://s.sde.globo.com/media/organizations/2021/03/01/GOIAS-2021.svg",
+  NOV: "https://s.sde.globo.com/media/organizations/2019/01/08/Novohorizontino.svg",
+  CRI: "https://s.sde.globo.com/media/teams/2026/01/16/criciuma-2026-svg-79692.svg",
+  ATH: "https://s.sde.globo.com/media/organizations/2025/01/22/Athletic_Club-mineiro.svg",
+  JUV: "https://s.sde.globo.com/media/organizations/2021/04/29/Juventude-2021-01.svg",
+  OPE: "https://s.sde.globo.com/media/organizations/2018/12/27/Operário-PR.svg",
+  CRB: "https://s.sde.globo.com/media/organizations/2018/03/11/crb.svg",
+  CEA: "https://s.sde.globo.com/media/organizations/2019/10/10/ceara.svg",
+  ACG: "https://s.sde.globo.com/media/organizations/2020/07/02/atletico-go-2020.svg",
+  CUI: "https://s.sde.globo.com/media/organizations/2018/12/26/Cuiaba_EC.svg",
+  BSP: "https://s.sde.globo.com/media/organizations/2024/05/15/BFC.svg",
+  AVA: "https://s.sde.globo.com/media/organizations/2024/05/12/avaí.svg",
+  LEC: "https://s.sde.globo.com/media/organizations/2018/03/11/londrina.svg",
+  PON: "https://s.sde.globo.com/media/organizations/2019/03/17/ponte-preta.svg",
+  AME: "https://s.sde.globo.com/media/organizations/2024/05/07/America-MG-branco.svg"
+};
+
 /**
  * Returns the circular flag SVG URL for a given team code.
  * Falls back to a generic globe if not found.
  */
 export function getFlagUrl(teamCode: string): string {
-  const iso = TEAM_TO_ISO[teamCode.toUpperCase()];
+  const code = teamCode.toUpperCase();
+  if (CLUB_BADGES[code]) {
+    return CLUB_BADGES[code];
+  }
+  const iso = TEAM_TO_ISO[code];
   if (!iso) return "https://hatscripts.github.io/circle-flags/flags/xx.svg";
   return `https://hatscripts.github.io/circle-flags/flags/${iso}.svg`;
 }

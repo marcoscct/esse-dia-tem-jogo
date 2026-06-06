@@ -3,10 +3,35 @@ import type { Calendar, DateQueryResult, MatchWithTeam } from "./types";
 let cachedCalendar: Calendar | null = null;
 let fetchPromise: Promise<Calendar> | null = null;
 
+let cachedClubsCalendar: Calendar | null = null;
+let fetchClubsPromise: Promise<Calendar> | null = null;
+
 /**
- * Fetch calendar.json from client-side and cache it in memory.
+ * Fetch calendar.json or clubs_calendar.json from client-side and cache it in memory.
  */
-export async function getClientCalendar(): Promise<Calendar> {
+export async function getClientCalendar(isClubs: boolean = false): Promise<Calendar> {
+  if (isClubs) {
+    if (cachedClubsCalendar) return cachedClubsCalendar;
+
+    if (!fetchClubsPromise) {
+      fetchClubsPromise = fetch("/data/clubs_calendar.json")
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to load clubs calendar data on client");
+          return res.json() as Promise<Calendar>;
+        })
+        .then((calendar) => {
+          cachedClubsCalendar = calendar;
+          return calendar;
+        })
+        .catch((err) => {
+          fetchClubsPromise = null;
+          throw err;
+        });
+    }
+
+    return fetchClubsPromise;
+  }
+
   if (cachedCalendar) return cachedCalendar;
 
   if (!fetchPromise) {
@@ -31,8 +56,8 @@ export async function getClientCalendar(): Promise<Calendar> {
 /**
  * Client-side query: checks if a team (by slug) has a game on a given date or range.
  */
-export async function queryDateClient(teamSlug: string, startDate: string, endDate?: string): Promise<DateQueryResult> {
-  const calendar = await getClientCalendar();
+export async function queryDateClient(teamSlug: string, startDate: string, endDate?: string, isClubs: boolean = false): Promise<DateQueryResult> {
+  const calendar = await getClientCalendar(isClubs);
 
   // Find the team by slug
   const entry = Object.entries(calendar.teams).find(
@@ -102,8 +127,8 @@ function getKnockoutGenericTeams(calendar: Calendar, matchNumber: number): [stri
 /**
  * Client-side query: returns all games from all active teams on a given date or range.
  */
-export async function queryAllGamesOnDateClient(startDate: string, endDate?: string): Promise<DateQueryResult> {
-  const calendar = await getClientCalendar();
+export async function queryAllGamesOnDateClient(startDate: string, endDate?: string, isClubs: boolean = false): Promise<DateQueryResult> {
+  const calendar = await getClientCalendar(isClubs);
   const matches: MatchWithTeam[] = [];
   const seenMatches = new Set<string>();
 
@@ -125,7 +150,7 @@ export async function queryAllGamesOnDateClient(startDate: string, endDate?: str
       if (!seenMatches.has(matchKey)) {
         seenMatches.add(matchKey);
         
-        if (match.phase_slug !== 'group_stage' && match.status === 'possible' && match.match_number) {
+        if (!isClubs && match.phase_slug !== 'group_stage' && match.status === 'possible' && match.match_number) {
           const [sideA, sideB] = getKnockoutGenericTeams(calendar, match.match_number);
           matches.push({
             ...match,
@@ -169,8 +194,8 @@ export async function queryAllGamesOnDateClient(startDate: string, endDate?: str
 /**
  * Client-side query: returns the 4 teams of a given group.
  */
-export async function getGroupTeamsClient(groupLetter: string) {
-  const calendar = await getClientCalendar();
+export async function getGroupTeamsClient(groupLetter: string, isClubs: boolean = false) {
+  const calendar = await getClientCalendar(isClubs);
   const teams = [];
   for (const [code, team] of Object.entries(calendar.teams)) {
     if (team.group === groupLetter) {

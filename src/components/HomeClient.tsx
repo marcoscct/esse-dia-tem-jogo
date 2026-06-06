@@ -20,11 +20,15 @@ interface HomeClientProps {
   initialDate?: string;
   initialMode?: "team" | "date-only";
   result?: { hasGame: boolean; matches: MatchWithTeam[] };
+  isClubs?: boolean;
 }
 
-export default function HomeClient({ teams, lastUpdated, initialTeam, initialDate, initialMode = "team", result }: HomeClientProps) {
+export default function HomeClient({ teams, lastUpdated, initialTeam, initialDate, initialMode = "team", result, isClubs = false }: HomeClientProps) {
   const { lang, t } = useLanguage();
-  const [selectedTeam, setSelectedTeam] = useState(initialTeam || (teams.find(t => t.code === "BRA")?.slug || teams[0]?.slug));
+  const defaultTeam = isClubs
+    ? (teams[0]?.slug)
+    : (teams.find(t => t.code === "BRA")?.slug || teams[0]?.slug);
+  const [selectedTeam, setSelectedTeam] = useState(initialTeam || defaultTeam);
   const [selectedDate, setSelectedDate] = useState(() => {
     if (initialDate) return initialDate;
     const d = new Date();
@@ -59,11 +63,11 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
           try {
             setIsLoading(true);
             if (initialTeam && initialDate) {
-              const res = await queryDateClient(initialTeam, initialDate, ate);
+              const res = await queryDateClient(initialTeam, initialDate, ate, isClubs);
               setLocalResult(res);
               setIsModalOpen(true);
             } else if (initialDate) {
-              const res = await queryAllGamesOnDateClient(initialDate, ate);
+              const res = await queryAllGamesOnDateClient(initialDate, ate, isClubs);
               setLocalResult(res);
               setIsModalOpen(true);
             }
@@ -131,21 +135,22 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
       const activeEndDate = isRangeEnabled && endDate ? endDate : undefined;
       const queryParam = activeEndDate ? `?ate=${activeEndDate}` : "";
       const langPath = lang === 'pt' ? '' : `/${lang}`;
+      const basePrefix = isClubs ? `${langPath}/times` : langPath;
       
       try {
         setIsLoading(true);
         if (mode === "team" && selectedTeam) {
-          const res = await queryDateClient(selectedTeam, selectedDate, activeEndDate);
+          const res = await queryDateClient(selectedTeam, selectedDate, activeEndDate, isClubs);
           setLocalResult(res);
           setShouldOpenModal(true);
           setIsModalOpen(true);
-          window.history.pushState(null, "", `${langPath}/${selectedTeam}/${selectedDate}${queryParam}`);
+          window.history.pushState(null, "", `${basePrefix}/${selectedTeam}/${selectedDate}${queryParam}`);
         } else if (mode === "date-only") {
-          const res = await queryAllGamesOnDateClient(selectedDate, activeEndDate);
+          const res = await queryAllGamesOnDateClient(selectedDate, activeEndDate, isClubs);
           setLocalResult(res);
           setShouldOpenModal(true);
           setIsModalOpen(true);
-          window.history.pushState(null, "", `${langPath}/todos/${selectedDate}${queryParam}`);
+          window.history.pushState(null, "", `${basePrefix}/todos/${selectedDate}${queryParam}`);
         }
       } catch (err) {
         console.error("Failed to query date client-side:", err);
@@ -160,10 +165,11 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
     setShouldOpenModal(false);
     setLocalResult(null);
     const langPath = lang === 'pt' ? '' : `/${lang}`;
+    const basePrefix = isClubs ? `${langPath}/times` : langPath;
     if (mode === "team") {
-      window.history.pushState(null, "", `${langPath}/${selectedTeam}`);
+      window.history.pushState(null, "", `${basePrefix}/${selectedTeam}`);
     } else {
-      window.history.pushState(null, "", `${langPath || '/'}`);
+      window.history.pushState(null, "", `${basePrefix || '/'}`);
     }
   };
 

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AlertTriangle, CheckCircle2, Clock, Calendar as CalendarIcon, X, HelpCircle, Share2, Check, ChevronDown } from "lucide-react";
 import type { MatchWithTeam } from "@/lib/types";
-import { formatTimeBRT, getVenueIanaTimezone, formatMatchTimeInTimezone } from "@/lib/date-utils";
+import { formatTimeBRT, getVenueIanaTimezone, formatMatchTimeInTimezone, formatMatchDateInTimezone } from "@/lib/date-utils";
 import { getFlagUrl } from "@/lib/flag-codes";
 import { useLanguage } from "./TranslationProvider";
 import { translateTeamName, translateOpponentName, translatePhase, translateCondition } from "@/locales/i18n-utils";
@@ -46,8 +46,6 @@ function BroadcastIcon({ channel }: { channel: string }) {
 
   const info = channelInfo[channel] || { logo: "", name: channel };
 
-  if (!info.logo) return null;
-
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (timeoutId) {
@@ -70,6 +68,38 @@ function BroadcastIcon({ channel }: { channel: string }) {
       clearTimeout(timeoutId);
     }
   };
+
+  if (!info.logo) {
+    return (
+      <div className="relative flex items-center justify-center">
+        <button
+          onClick={handleClick}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className="h-8 px-2.5 rounded-lg overflow-hidden flex items-center justify-center bg-zinc-950 border border-zinc-850 hover:border-zinc-700 transition-all focus:outline-none cursor-pointer"
+        >
+          <span className="text-[10px] font-black tracking-tight text-zinc-300 uppercase">{info.name}</span>
+        </button>
+        
+        <AnimatePresence>
+          {showTooltip && (
+            <motion.div
+              initial={{ opacity: 0, y: 5, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 5, scale: 0.95 }}
+              transition={{ duration: 0.15 }}
+              className="absolute bottom-full mb-2.5 z-20 px-2.5 py-1 text-[10px] font-black text-white bg-zinc-900 border border-zinc-800 rounded-md shadow-lg whitespace-nowrap pointer-events-none"
+            >
+              {info.name}
+              {/* Arrow */}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] border-4 border-transparent border-t-zinc-900" />
+              <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-zinc-800 -z-10" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  }
 
   return (
     <div className="relative flex items-center justify-center">
@@ -432,11 +462,16 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                       </div>
 
                       {(() => {
-                        const formattedDate = (() => {
-                          const parts = match.date.split("-");
-                          if (parts.length < 3) return match.date;
-                          return lang === 'en' ? `${parts[1]}/${parts[2]}` : `${parts[2]}/${parts[1]}`;
-                        })();
+                        let targetTz = 'America/Sao_Paulo';
+                        if (timezoneMode === 'device') {
+                          targetTz = deviceTimezone;
+                        } else if (timezoneMode === 'stadium') {
+                          targetTz = getVenueIanaTimezone(match.city, match.venue);
+                        } else if (timezoneMode === 'custom') {
+                          targetTz = customTimezone;
+                        }
+
+                        const formattedDate = formatMatchDateInTimezone(match.time_brt, match.date, targetTz, lang);
 
                         if (!match.time_brt) {
                           return (
@@ -447,15 +482,6 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                               <span>{t("time_tbd")}</span>
                             </div>
                           );
-                        }
-                        
-                        let targetTz = 'America/Sao_Paulo';
-                        if (timezoneMode === 'device') {
-                          targetTz = deviceTimezone;
-                        } else if (timezoneMode === 'stadium') {
-                          targetTz = getVenueIanaTimezone(match.city, match.venue);
-                        } else if (timezoneMode === 'custom') {
-                          targetTz = customTimezone;
                         }
                         
                         const formattedTime = formatMatchTimeInTimezone(match.time_brt, match.date, targetTz, lang);
@@ -547,16 +573,28 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                   {date && (
                     <div className="text-zinc-550 font-bold text-xs uppercase tracking-widest mb-1.5">
                       {(() => {
-                        const formattedDate = (() => {
-                          const parts = date.split("-");
-                          if (parts.length < 3) return date;
-                          return lang === 'en' ? `${parts[1]}/${parts[2]}` : `${parts[2]}/${parts[1]}`;
-                        })();
-                        const formattedEndDate = endDate ? (() => {
-                          const parts = endDate.split("-");
-                          if (parts.length < 3) return endDate;
-                          return lang === 'en' ? `${parts[1]}/${parts[2]}` : `${parts[2]}/${parts[1]}`;
-                        })() : "";
+                        const getSingleFormattedWithWeekday = (dStr: string) => {
+                          try {
+                            const [y, m, d] = dStr.split("-").map(Number);
+                            const tempDate = new Date(y, m - 1, d); // local date
+                            const localesMap = { pt: 'pt-BR', en: 'en-US', es: 'es-ES' };
+                            const parts = new Intl.DateTimeFormat(localesMap[lang], {
+                              day: '2-digit',
+                              month: '2-digit',
+                              weekday: 'long'
+                            }).formatToParts(tempDate);
+                            const dayVal = parts.find(p => p.type === 'day')?.value || '';
+                            const monthVal = parts.find(p => p.type === 'month')?.value || '';
+                            const weekdayVal = parts.find(p => p.type === 'weekday')?.value || '';
+                            const dateFmt = lang === 'en' ? `${monthVal}/${dayVal}` : `${dayVal}/${monthVal}`;
+                            return `${dateFmt} (${weekdayVal.toUpperCase()})`;
+                          } catch {
+                            return dStr;
+                          }
+                        };
+
+                        const formattedDate = getSingleFormattedWithWeekday(date);
+                        const formattedEndDate = endDate ? getSingleFormattedWithWeekday(endDate) : "";
                         return formattedEndDate ? `${formattedDate} - ${formattedEndDate}` : formattedDate;
                       })()}
                     </div>

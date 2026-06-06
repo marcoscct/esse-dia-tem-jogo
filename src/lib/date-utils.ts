@@ -256,3 +256,28 @@ export function formatMatchTimeInTimezone(timeBrt: string, dateStr: string, targ
   const abbr = getTimezoneAbbreviation(targetTz, matchDate);
   return `${timeString} (${abbr})`;
 }
+
+export function formatMatchDateInTimezone(timeBrt: string | null, dateStr: string, targetTz: string, lang: Language = 'pt'): string {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const [hh, mm] = timeBrt ? timeBrt.split(':').map(Number) : [12, 0];
+  
+  // Original is BRT (UTC-3), we add 3 hours to get UTC date object
+  const matchDate = new Date(Date.UTC(y, m - 1, d, hh + 3, mm, 0));
+  
+  const localesMap = { pt: 'pt-BR', en: 'en-US', es: 'es-ES' };
+  
+  const formatter = new Intl.DateTimeFormat(localesMap[lang], {
+    day: '2-digit',
+    month: '2-digit',
+    weekday: 'long',
+    timeZone: targetTz
+  });
+  
+  const parts = formatter.formatToParts(matchDate);
+  const day = parts.find(p => p.type === 'day')?.value || '';
+  const month = parts.find(p => p.type === 'month')?.value || '';
+  const weekday = parts.find(p => p.type === 'weekday')?.value || '';
+  
+  const dateFormatted = lang === 'en' ? `${month}/${day}` : `${day}/${month}`;
+  return `${dateFormatted} (${weekday.toUpperCase()})`;
+}

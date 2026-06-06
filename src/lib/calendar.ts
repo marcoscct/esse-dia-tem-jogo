@@ -24,13 +24,33 @@ import type {
 // ─── Internal cache (singleton per build/runtime) ────────────────────────────
 
 let _calendar: Calendar | null = null;
+let _clubsCalendar: Calendar | null = null;
 
 /**
  * Returns the parsed Calendar object.
  * Uses a module-level cache so the JSON is only parsed once per server process.
  * On the client, call `fetchCalendar()` instead.
  */
-export function getCalendar(): Calendar {
+export function getCalendar(isClubs: boolean = false): Calendar {
+  if (isClubs) {
+    if (_clubsCalendar) return _clubsCalendar;
+
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const fs = require('fs');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const path = require('path');
+      const filePath = path.join(process.cwd(), 'public', 'data', 'clubs_calendar.json');
+      const raw = fs.readFileSync(filePath, 'utf-8');
+      _clubsCalendar = JSON.parse(raw) as Calendar;
+    } catch {
+      console.warn('Fallback to require for clubs_calendar.json');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      _clubsCalendar = require('../../public/data/clubs_calendar.json') as Calendar;
+    }
+    return _clubsCalendar;
+  }
+
   if (_calendar) return _calendar;
 
   try {
@@ -56,8 +76,9 @@ export function getCalendar(): Calendar {
  * Fetches calendar.json from the public directory.
  * Use this on the CLIENT SIDE where `require` is not available.
  */
-export async function fetchCalendar(): Promise<Calendar> {
-  const res = await fetch('/data/calendar.json', {
+export async function fetchCalendar(isClubs: boolean = false): Promise<Calendar> {
+  const url = isClubs ? '/data/clubs_calendar.json' : '/data/calendar.json';
+  const res = await fetch(url, {
     // Cache aggressively — revalidate every 5 minutes in production
     next: { revalidate: 300 },
   });
@@ -68,8 +89,8 @@ export async function fetchCalendar(): Promise<Calendar> {
 // ─── Team Helpers ─────────────────────────────────────────────────────────────
 
 /** Returns all teams as an array of TeamSummary objects, sorted alphabetically with Brasil first. */
-export function getAllTeams(): TeamSummary[] {
-  const calendar = getCalendar();
+export function getAllTeams(isClubs: boolean = false): TeamSummary[] {
+  const calendar = getCalendar(isClubs);
   const list = Object.entries(calendar.teams).map(([code, team]) => ({
     code,
     name: team.name,
@@ -86,14 +107,14 @@ export function getAllTeams(): TeamSummary[] {
 }
 
 /** Returns a team by its 3-letter ISO code (e.g. "BRA"). Returns null if not found. */
-export function getTeamByCode(code: string): Team | null {
-  const calendar = getCalendar();
+export function getTeamByCode(code: string, isClubs: boolean = false): Team | null {
+  const calendar = getCalendar(isClubs);
   return calendar.teams[code.toUpperCase()] ?? null;
 }
 
 /** Returns a team by its URL slug (e.g. "brasil"). Returns null if not found. */
-export function getTeamBySlug(slug: string): (Team & { code: string }) | null {
-  const calendar = getCalendar();
+export function getTeamBySlug(slug: string, isClubs: boolean = false): (Team & { code: string }) | null {
+  const calendar = getCalendar(isClubs);
   const entry = Object.entries(calendar.teams).find(
     ([, team]) => team.slug === slug.toLowerCase()
   );
@@ -111,8 +132,8 @@ export function getTeamBySlug(slug: string): (Team & { code: string }) | null {
  * @param date      - ISO date string "YYYY-MM-DD"
  * @returns         - DateQueryResult with hasGame flag and match details
  */
-export function queryDate(teamCodes: string | string[], date: string): DateQueryResult {
-  const calendar = getCalendar();
+export function queryDate(teamCodes: string | string[], date: string, isClubs: boolean = false): DateQueryResult {
+  const calendar = getCalendar(isClubs);
   const codes = Array.isArray(teamCodes)
     ? teamCodes.map((c) => c.toUpperCase())
     : [teamCodes.toUpperCase()];
@@ -150,9 +171,10 @@ export function queryDate(teamCodes: string | string[], date: string): DateQuery
  */
 export function getTeamMatches(
   code: string,
-  options?: { status?: Match['status'] }
+  options?: { status?: Match['status'] },
+  isClubs: boolean = false
 ): Match[] {
-  const team = getTeamByCode(code);
+  const team = getTeamByCode(code, isClubs);
   if (!team) return [];
 
   let matches = [...team.matches].sort(
@@ -170,8 +192,8 @@ export function getTeamMatches(
  * Returns all confirmed match dates for a team.
  * Useful for highlighting dates in a calendar picker.
  */
-export function getTeamGameDates(code: string): string[] {
-  const team = getTeamByCode(code);
+export function getTeamGameDates(code: string, isClubs: boolean = false): string[] {
+  const team = getTeamByCode(code, isClubs);
   if (!team) return [];
   return team.matches
     .filter((m) => m.status !== 'eliminated')
@@ -185,8 +207,8 @@ export function getTeamGameDates(code: string): string[] {
  * Generates all team+date route pairs for Next.js generateStaticParams.
  * Includes both confirmed and possible matches so SEO pages exist for all scenarios.
  */
-export function getAllStaticRoutes(): StaticRoute[] {
-  const calendar = getCalendar();
+export function getAllStaticRoutes(isClubs: boolean = false): StaticRoute[] {
+  const calendar = getCalendar(isClubs);
   const routes: StaticRoute[] = [];
   const seen = new Set<string>();
 
@@ -209,8 +231,8 @@ export function getAllStaticRoutes(): StaticRoute[] {
  * Returns a list of all unique team slugs.
  * Used to generate /[team] static pages.
  */
-export function getAllTeamSlugs(): string[] {
-  const calendar = getCalendar();
+export function getAllTeamSlugs(isClubs: boolean = false): string[] {
+  const calendar = getCalendar(isClubs);
   return Object.values(calendar.teams).map((t) => t.slug);
 }
 
@@ -218,8 +240,8 @@ export function getAllTeamSlugs(): string[] {
  * Returns all unique dates in the calendar.
  * Used for sitemaps and static generation.
  */
-export function getAllDates(): string[] {
-  const routes = getAllStaticRoutes();
+export function getAllDates(isClubs: boolean = false): string[] {
+  const routes = getAllStaticRoutes(isClubs);
   const dates = routes.map((r) => r.date);
   return Array.from(new Set(dates)).sort();
 }
@@ -250,8 +272,8 @@ function getKnockoutGenericTeams(calendar: Calendar, matchNumber: number): [stri
 /**
  * Server-side query: returns all games from all active teams on a given date.
  */
-export function queryAllGamesOnDate(date: string): DateQueryResult {
-  const calendar = getCalendar();
+export function queryAllGamesOnDate(date: string, isClubs: boolean = false): DateQueryResult {
+  const calendar = getCalendar(isClubs);
   const matches: MatchWithTeam[] = [];
   const seenMatches = new Set<string>();
 
@@ -269,7 +291,7 @@ export function queryAllGamesOnDate(date: string): DateQueryResult {
       if (!seenMatches.has(matchKey)) {
         seenMatches.add(matchKey);
         
-        if (match.phase_slug !== 'group_stage' && match.status === 'possible' && match.match_number) {
+        if (!isClubs && match.phase_slug !== 'group_stage' && match.status === 'possible' && match.match_number) {
           const [sideA, sideB] = getKnockoutGenericTeams(calendar, match.match_number);
           matches.push({
             ...match,
@@ -308,6 +330,6 @@ export function queryAllGamesOnDate(date: string): DateQueryResult {
 
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 
-export function getCalendarMeta() {
-  return getCalendar().meta;
+export function getCalendarMeta(isClubs: boolean = false) {
+  return getCalendar(isClubs).meta;
 }

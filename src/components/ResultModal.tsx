@@ -42,6 +42,11 @@ function BroadcastIcon({ channel }: { channel: string }) {
     SBT: { logo: "/images/sbt.png", name: "SBT" },
     SporTV: { logo: "/images/sportv.png", name: "SporTV" },
     CazéTV: { logo: "/images/cazetv.png", name: "CazéTV" },
+    Premiere: { logo: "/images/premiere.png", name: "Premiere" },
+    ESPN: { logo: "/images/espn.png", name: "ESPN" },
+    "Disney+": { logo: "/images/disney.png", name: "Disney+" },
+    HBO: { logo: "/images/hbo.png", name: "HBO" },
+    Max: { logo: "/images/hbo.png", name: "Max" },
   };
 
   const info = channelInfo[channel] || { logo: "", name: channel };

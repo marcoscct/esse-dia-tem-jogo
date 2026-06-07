@@ -101,6 +101,8 @@ function getBroadcasts(competition, match) {
     if (label.includes('premiere')) channels.push('Premiere');
     if (label.includes('prime') || label.includes('amazon')) channels.push('Prime Video');
     if (label.includes('espn')) channels.push('ESPN');
+    if (label.includes('disney')) channels.push('Disney+');
+    if (label.includes('hbo') || label.includes('max')) channels.push('Max');
     if (label.includes('paramount')) channels.push('Paramount+');
     if (channels.length > 0) return channels;
   }

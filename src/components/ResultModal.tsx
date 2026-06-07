@@ -208,8 +208,13 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
     } else {
       const gamesList = matches
         .map((match) => {
-          const transTeam = translateTeamName(match.team_code, match.team_name, lang);
-          const transOpp = translateOpponentName(match.opponent_code, match.opponent_name, lang);
+          const isHomeSelected = match.is_home !== false;
+          const leftName = isHomeSelected
+            ? translateTeamName(match.team_code, match.team_name, lang)
+            : translateOpponentName(match.opponent_code, match.opponent_name, lang);
+          const rightName = isHomeSelected
+            ? translateOpponentName(match.opponent_code, match.opponent_name, lang)
+            : translateTeamName(match.team_code, match.team_name, lang);
           const conditionStr = match.condition ? ` (${translateCondition(match.condition, lang)})` : "";
           const datePrefix = formattedEndDate 
             ? `${(() => {
@@ -218,7 +223,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                 return lang === 'en' ? `${p[1]}/${p[2]}` : `${p[2]}/${p[1]}`;
               })()}: ` 
             : "";
-          return `- ${datePrefix}${transTeam} x ${transOpp}${conditionStr}`;
+          return `- ${datePrefix}${leftName} x ${rightName}${conditionStr}`;
         })
         .join("\n");
 
@@ -245,7 +250,10 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
     const phaseTrans = translatePhase(match.phase, lang);
     
     const separator = lang === 'pt' ? ' x ' : ' vs ';
-    const title = `${teamNameTrans}${separator}${opponentNameTrans}`;
+    const isHomeSelected = match.is_home !== false;
+    const leftName = isHomeSelected ? teamNameTrans : opponentNameTrans;
+    const rightName = isHomeSelected ? opponentNameTrans : teamNameTrans;
+    const title = `${leftName}${separator}${rightName}`;
     
     const location = `${match.venue}, ${match.city}`;
     
@@ -421,35 +429,66 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                         })()}`}
                       </div>
 
-                      <div className="flex items-center justify-center gap-6 mb-3">
-                        <div className="flex flex-col items-center gap-1.5 w-20">
-                          <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-850">
-                            <img 
-                              src={getFlagUrl(match.team_code)} 
-                              alt={translateTeamName(match.team_code, match.team_name, lang)} 
-                              className="w-full h-full object-cover" 
-                            />
-                          </div>
-                          <span className="text-[10px] font-black text-zinc-455 uppercase">{match.team_code}</span>
-                        </div>
+                      {(() => {
+                        const isHomeSelected = match.is_home !== false;
+                        const leftCode = isHomeSelected ? match.team_code : (match.opponent_code || 'TBD');
+                        const leftName = isHomeSelected
+                          ? translateTeamName(match.team_code, match.team_name, lang)
+                          : translateOpponentName(match.opponent_code, match.opponent_name, lang);
+                        const leftFlag = isHomeSelected
+                          ? getFlagUrl(match.team_code)
+                          : (match.opponent_code ? getFlagUrl(match.opponent_code) : "https://hatscripts.github.io/circle-flags/flags/xx.svg");
 
-                        <span className="text-zinc-700 font-black text-lg italic">X</span>
+                        const rightCode = isHomeSelected ? (match.opponent_code || 'TBD') : match.team_code;
+                        const rightName = isHomeSelected
+                          ? translateOpponentName(match.opponent_code, match.opponent_name, lang)
+                          : translateTeamName(match.team_code, match.team_name, lang);
+                        const rightFlag = isHomeSelected
+                          ? (match.opponent_code ? getFlagUrl(match.opponent_code) : "https://hatscripts.github.io/circle-flags/flags/xx.svg")
+                          : getFlagUrl(match.team_code);
 
-                        <div className="flex flex-col items-center gap-1.5 w-20">
-                          <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-855 bg-zinc-950 flex items-center justify-center">
-                            <img 
-                              src={match.opponent_code ? getFlagUrl(match.opponent_code) : "https://hatscripts.github.io/circle-flags/flags/xx.svg"} 
-                              alt={translateOpponentName(match.opponent_code, match.opponent_name, lang)} 
-                              className="w-full h-full object-cover" 
-                            />
-                          </div>
-                          <span className="text-[10px] font-black text-zinc-455 uppercase">{match.opponent_code || "TBD"}</span>
-                        </div>
-                      </div>
+                        return (
+                          <>
+                            <div className="flex items-center justify-center gap-6 mb-3">
+                              <div className="flex flex-col items-center gap-1.5 w-20">
+                                <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-850">
+                                  <img 
+                                    src={leftFlag} 
+                                    alt={leftName} 
+                                    className="w-full h-full object-cover" 
+                                  />
+                                </div>
+                                <span className="text-[10px] font-black text-zinc-455 uppercase">{leftCode}</span>
+                              </div>
 
-                      <div className="font-black uppercase tracking-tight text-md text-white mb-2 text-center">
-                        {translateTeamName(match.team_code, match.team_name, lang)} x {renderWithGroupTooltip(translateOpponentName(match.opponent_code, match.opponent_name, lang), `opp-${match.id}`)}
-                      </div>
+                              <span className="text-zinc-700 font-black text-lg italic">X</span>
+
+                              <div className="flex flex-col items-center gap-1.5 w-20">
+                                <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-855 bg-zinc-950 flex items-center justify-center">
+                                  <img 
+                                    src={rightFlag} 
+                                    alt={rightName} 
+                                    className="w-full h-full object-cover" 
+                                  />
+                                </div>
+                                <span className="text-[10px] font-black text-zinc-455 uppercase">{rightCode}</span>
+                              </div>
+                            </div>
+
+                            <div className="font-black uppercase tracking-tight text-md text-white mb-2 text-center">
+                              {isHomeSelected ? (
+                                <>
+                                  {translateTeamName(match.team_code, match.team_name, lang)} x {renderWithGroupTooltip(translateOpponentName(match.opponent_code, match.opponent_name, lang), `opp-${match.id}`)}
+                                </>
+                              ) : (
+                                <>
+                                  {translateOpponentName(match.opponent_code, match.opponent_name, lang)} x {renderWithGroupTooltip(translateTeamName(match.team_code, match.team_name, lang), `team-${match.id}`)}
+                                </>
+                              )}
+                            </div>
+                          </>
+                        );
+                      })()}
 
                       <div className="flex items-center justify-center gap-1 text-zinc-600 font-bold text-[9px] uppercase tracking-wide text-center">
                         <span>{match.venue}</span>

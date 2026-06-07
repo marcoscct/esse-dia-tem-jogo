@@ -210,7 +210,8 @@ async function main() {
                 city: g.sede ? g.sede.nome_popular : null,
                 status: 'confirmed',
                 result: g.placar_oficial_mandante !== null ? { home: g.placar_oficial_mandante, away: g.placar_oficial_visitante } : null,
-                broadcasts: getBroadcasts(comp.id, g)
+                broadcasts: getBroadcasts(comp.id, g),
+                is_home: true
               });
             }
 
@@ -229,7 +230,8 @@ async function main() {
                 city: g.sede ? g.sede.nome_popular : null,
                 status: 'confirmed',
                 result: g.placar_oficial_mandante !== null ? { home: g.placar_oficial_mandante, away: g.placar_oficial_visitante } : null,
-                broadcasts: getBroadcasts(comp.id, g)
+                broadcasts: getBroadcasts(comp.id, g),
+                is_home: false
               });
             }
           });
@@ -286,7 +288,8 @@ async function main() {
                 city: g.sede ? g.sede.nome_popular : null,
                 status: 'confirmed',
                 result: g.placar_oficial_mandante !== null ? { home: g.placar_oficial_mandante, away: g.placar_oficial_visitante } : null,
-                broadcasts: getBroadcasts('copa-do-brasil', g)
+                broadcasts: getBroadcasts('copa-do-brasil', g),
+                is_home: true
               });
             }
 
@@ -305,7 +308,8 @@ async function main() {
                 city: g.sede ? g.sede.nome_popular : null,
                 status: 'confirmed',
                 result: g.placar_oficial_mandante !== null ? { home: g.placar_oficial_mandante, away: g.placar_oficial_visitante } : null,
-                broadcasts: getBroadcasts('copa-do-brasil', g)
+                broadcasts: getBroadcasts('copa-do-brasil', g),
+                is_home: false
               });
             }
           });
@@ -360,7 +364,8 @@ async function main() {
                     city: g.sede ? g.sede.nome_popular : null,
                     status: 'confirmed',
                     result: g.placar_oficial_mandante !== null ? { home: g.placar_oficial_mandante, away: g.placar_oficial_visitante } : null,
-                    broadcasts: getBroadcasts('libertadores', g)
+                    broadcasts: getBroadcasts('libertadores', g),
+                    is_home: true
                   });
                 }
 
@@ -379,7 +384,8 @@ async function main() {
                     city: g.sede ? g.sede.nome_popular : null,
                     status: 'confirmed',
                     result: g.placar_oficial_mandante !== null ? { home: g.placar_oficial_mandante, away: g.placar_oficial_visitante } : null,
-                    broadcasts: getBroadcasts('libertadores', g)
+                    broadcasts: getBroadcasts('libertadores', g),
+                    is_home: false
                   });
                 }
               });

@@ -212,23 +212,46 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                   {translatePhase(match.phase, lang)}
                 </div>
                 <div className="flex items-center gap-4 justify-center mb-2 w-full">
-                  <div className="flex items-center gap-2">
-                    <img
-                      src={getFlagUrl(match.team_code)}
-                      alt={translateTeamName(match.team_code, match.team_name, lang)}
-                      className="w-8 h-8 rounded-full object-cover ring-1 ring-zinc-700"
-                    />
-                    <span className="font-bold text-sm text-white">{translateTeamName(match.team_code, match.team_name, lang)}</span>
-                  </div>
-                  <span className="text-zinc-500 font-bold text-xs">X</span>
-                  <div className="flex items-center gap-2">
-                    <img
-                      src={match.opponent_code ? getFlagUrl(match.opponent_code) : "https://hatscripts.github.io/circle-flags/flags/xx.svg"}
-                      alt={translateOpponentName(match.opponent_code, match.opponent_name, lang)}
-                      className="w-8 h-8 rounded-full object-cover ring-1 ring-zinc-700 bg-zinc-950"
-                    />
-                    <span className="font-bold text-sm text-white">{translateOpponentName(match.opponent_code, match.opponent_name, lang)}</span>
-                  </div>
+                  {(() => {
+                    const isHomeSelected = match.is_home !== false;
+                    const leftCode = isHomeSelected ? match.team_code : (match.opponent_code || '');
+                    const leftName = isHomeSelected
+                      ? translateTeamName(match.team_code, match.team_name, lang)
+                      : translateOpponentName(match.opponent_code, match.opponent_name, lang);
+                    const leftFlag = isHomeSelected
+                      ? getFlagUrl(match.team_code)
+                      : (match.opponent_code ? getFlagUrl(match.opponent_code) : "https://hatscripts.github.io/circle-flags/flags/xx.svg");
+
+                    const rightCode = isHomeSelected ? (match.opponent_code || '') : match.team_code;
+                    const rightName = isHomeSelected
+                      ? translateOpponentName(match.opponent_code, match.opponent_name, lang)
+                      : translateTeamName(match.team_code, match.team_name, lang);
+                    const rightFlag = isHomeSelected
+                      ? (match.opponent_code ? getFlagUrl(match.opponent_code) : "https://hatscripts.github.io/circle-flags/flags/xx.svg")
+                      : getFlagUrl(match.team_code);
+
+                    return (
+                      <>
+                        <div className="flex items-center gap-2">
+                          <img
+                            src={leftFlag}
+                            alt={leftName}
+                            className="w-8 h-8 rounded-full object-cover ring-1 ring-zinc-700"
+                          />
+                          <span className="font-bold text-sm text-white">{leftName}</span>
+                        </div>
+                        <span className="text-zinc-500 font-bold text-xs">X</span>
+                        <div className="flex items-center gap-2">
+                          <img
+                            src={rightFlag}
+                            alt={rightName}
+                            className="w-8 h-8 rounded-full object-cover ring-1 ring-zinc-700 bg-zinc-950"
+                          />
+                          <span className="font-bold text-sm text-white">{rightName}</span>
+                        </div>
+                      </>
+                    );
+                  })()}
                 </div>
                 {(() => {
                   let targetTz = 'America/Sao_Paulo';

@@ -59,8 +59,8 @@ function computeProximities(
 
 export default function TeamCarousel({ teams, selected, onSelect, onScrollComplete }: TeamCarouselProps) {
   const { lang } = useLanguage();
-  const brasilIndex = teams.findIndex((t) => t.code === "BRA");
-  const startIndex = brasilIndex >= 0 ? brasilIndex : 0;
+  const initialSelectedIdx = teams.findIndex((t) => t.slug === selected);
+  const startIndex = initialSelectedIdx >= 0 ? initialSelectedIdx : 0;
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,

@@ -436,7 +436,8 @@ function transform(rawJson) {
           : null,
         condition: null,
         condition_type: null,
-        match_number: matchIndex
+        match_number: matchIndex,
+        is_home: true
       });
     }
 
@@ -460,7 +461,8 @@ function transform(rawJson) {
           : null,
         condition: null,
         condition_type: null,
-        match_number: matchIndex
+        match_number: matchIndex,
+        is_home: false
       });
     }
   }
@@ -669,7 +671,8 @@ function transform(rawJson) {
             : null,
           condition: null,
           condition_type: null,
-          match_number: matchNumber
+          match_number: matchNumber,
+          is_home: isTeam1
         });
       } else {
         let cond = '';
@@ -705,6 +708,7 @@ function transform(rawJson) {
           }
         }
 
+        const isSlotAOnPath = isSlotOnPath(bMatch.slotA, spec.pathMatches, bMatch.matchNumber, team.group, spec.conditionType);
         const opponentName = getOpponentDescription(bMatch, spec.pathMatches, team.group, spec.conditionType);
 
         team.matches.push({
@@ -723,7 +727,8 @@ function transform(rawJson) {
           result: null,
           condition: cond,
           condition_type: condType,
-          match_number: matchNumber
+          match_number: matchNumber,
+          is_home: isSlotAOnPath
         });
       }
     }
@@ -776,7 +781,8 @@ function transform(rawJson) {
           result: f.result || null,
           condition: null,
           condition_type: null,
-          match_number: null
+          match_number: null,
+          is_home: true
         });
       }
 
@@ -797,7 +803,8 @@ function transform(rawJson) {
           result: f.result || null,
           condition: null,
           condition_type: null,
-          match_number: null
+          match_number: null,
+          is_home: false
         });
       }
     }

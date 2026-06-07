@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AlertTriangle, CheckCircle2, Clock, Calendar as CalendarIcon, HelpCircle } from "lucide-react";
 import type { MatchWithTeam } from "@/lib/types";
 import { getVenueIanaTimezone, formatMatchTimeInTimezone, formatMatchDateInTimezone } from "@/lib/date-utils";
-import { getFlagUrl } from "@/lib/flag-codes";
+import { getFlagUrl, isClubCode } from "@/lib/flag-codes";
 import { useLanguage } from "./TranslationProvider";
-import { translateTeamName, translateOpponentName, translatePhase, translateCondition } from "@/locales/i18n-utils";
+import { translateTeamName, translateOpponentName, translatePhase, translateCondition, getCompetitionName } from "@/locales/i18n-utils";
 import CalendarFeedModal from "./CalendarFeedModal";
 
 function BroadcastIcon({ channel }: { channel: string }) {
@@ -209,7 +209,10 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                   </span>
                 )}
                 <div className="text-[10px] font-bold text-zinc-550 uppercase tracking-widest mb-2">
-                  {translatePhase(match.phase, lang)}
+                  {(() => {
+                    const comp = getCompetitionName(match.phase_slug, lang);
+                    return comp ? `${comp} • ${translatePhase(match.phase, lang)}` : translatePhase(match.phase, lang);
+                  })()}
                 </div>
                 <div className="flex items-center gap-4 justify-center mb-2 w-full">
                   {(() => {
@@ -230,13 +233,16 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                       ? (match.opponent_code ? getFlagUrl(match.opponent_code) : "https://hatscripts.github.io/circle-flags/flags/xx.svg")
                       : getFlagUrl(match.team_code);
 
+                    const leftIsClub = isClubCode(leftCode);
+                    const rightIsClub = isClubCode(rightCode);
+
                     return (
                       <>
                         <div className="flex items-center gap-2">
                           <img
                             src={leftFlag}
                             alt={leftName}
-                            className="w-8 h-8 rounded-full object-cover ring-1 ring-zinc-700"
+                            className={leftIsClub ? "w-8 h-8 object-contain" : "w-8 h-8 rounded-full object-cover ring-1 ring-zinc-700"}
                           />
                           <span className="font-bold text-sm text-white">{leftName}</span>
                         </div>
@@ -245,7 +251,7 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                           <img
                             src={rightFlag}
                             alt={rightName}
-                            className="w-8 h-8 rounded-full object-cover ring-1 ring-zinc-700 bg-zinc-950"
+                            className={rightIsClub ? "w-8 h-8 object-contain" : "w-8 h-8 rounded-full object-cover ring-1 ring-zinc-700 bg-zinc-950"}
                           />
                           <span className="font-bold text-sm text-white">{rightName}</span>
                         </div>

@@ -225,3 +225,36 @@ export function getLanguagePath(currentPathname: string, targetLang: Language): 
   
   return '/' + segments.join('/');
 }
+
+// Returns the translated competition name based on the phase_slug
+export function getCompetitionName(phaseSlug: string, lang: Language): string {
+  const slug = phaseSlug.toLowerCase();
+  if (slug.includes('campeonato-brasileiro') || slug === 'brasileirao-a') {
+    return 'Brasileirão Série A';
+  }
+  if (slug.includes('brasileiro-serie-b') || slug === 'brasileirao-b') {
+    return 'Brasileirão Série B';
+  }
+  if (slug.includes('copa-do-brasil')) {
+    return 'Copa do Brasil';
+  }
+  if (slug.includes('libertadores')) {
+    return 'Libertadores';
+  }
+  if (slug === 'friendly') {
+    return lang === 'en' ? 'Friendly' : lang === 'es' ? 'Amistoso' : 'Amistoso';
+  }
+  // If it's a world cup phase slug:
+  if (
+    slug === 'group_stage' ||
+    slug === 'round_of_32' ||
+    slug === 'round_of_16' ||
+    slug === 'quarter_finals' ||
+    slug === 'semi_finals' ||
+    slug === 'third_place' ||
+    slug === 'final'
+  ) {
+    return lang === 'en' ? 'World Cup' : lang === 'es' ? 'Copa del Mundo' : 'Copa do Mundo';
+  }
+  return '';
+}

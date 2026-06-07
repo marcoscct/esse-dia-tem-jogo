@@ -319,3 +319,10 @@ export function getFlagUrl(teamCode: string): string {
   if (!iso) return "https://hatscripts.github.io/circle-flags/flags/xx.svg";
   return `https://hatscripts.github.io/circle-flags/flags/${iso}.svg`;
 }
+
+/**
+ * Returns whether a given team code belongs to a club.
+ */
+export function isClubCode(teamCode: string): boolean {
+  return !!CLUB_BADGES[teamCode.toUpperCase()];
+}

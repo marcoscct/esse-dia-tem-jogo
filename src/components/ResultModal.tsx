@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AlertTriangle, CheckCircle2, Clock, Calendar as CalendarIcon, X, HelpCircle, Share2, Check, ChevronDown } from "lucide-react";
 import type { MatchWithTeam } from "@/lib/types";
 import { formatTimeBRT, getVenueIanaTimezone, formatMatchTimeInTimezone, formatMatchDateInTimezone } from "@/lib/date-utils";
-import { getFlagUrl } from "@/lib/flag-codes";
+import { getFlagUrl, isClubCode } from "@/lib/flag-codes";
 import { useLanguage } from "./TranslationProvider";
-import { translateTeamName, translateOpponentName, translatePhase, translateCondition } from "@/locales/i18n-utils";
+import { translateTeamName, translateOpponentName, translatePhase, translateCondition, getCompetitionName } from "@/locales/i18n-utils";
 import { getGoogleCalendarUrl, getOutlookCalendarUrl, downloadIcsFile } from "@/lib/calendar-utils";
 import CalendarFeedModal from "./CalendarFeedModal";
 import GroupTooltip from "./GroupTooltip";
@@ -421,12 +421,22 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                       )}
                       
                       <div className="text-[10px] font-bold text-zinc-650 uppercase tracking-widest mb-3">
-                        {renderWithGroupTooltip(translatePhase(match.phase, lang), `phase-${match.id}`)}
-                        {endDate && ` • ${(() => {
-                          const parts = match.date.split("-");
-                          if (parts.length < 3) return match.date;
-                          return lang === 'en' ? `${parts[1]}/${parts[2]}` : `${parts[2]}/${parts[1]}`;
-                        })()}`}
+                        {(() => {
+                          const comp = getCompetitionName(match.phase_slug, lang);
+                          const phaseText = translatePhase(match.phase, lang);
+                          const label = comp ? `${comp} • ${phaseText}` : phaseText;
+                          
+                          return (
+                            <>
+                              {renderWithGroupTooltip(label, `phase-${match.id}`)}
+                              {endDate && ` • ${(() => {
+                                const parts = match.date.split("-");
+                                if (parts.length < 3) return match.date;
+                                return lang === 'en' ? `${parts[1]}/${parts[2]}` : `${parts[2]}/${parts[1]}`;
+                              })()}`}
+                            </>
+                          );
+                        })()}
                       </div>
 
                       {(() => {
@@ -447,15 +457,18 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                           ? (match.opponent_code ? getFlagUrl(match.opponent_code) : "https://hatscripts.github.io/circle-flags/flags/xx.svg")
                           : getFlagUrl(match.team_code);
 
+                        const leftIsClub = isClubCode(leftCode);
+                        const rightIsClub = isClubCode(rightCode);
+
                         return (
                           <>
                             <div className="flex items-center justify-center gap-6 mb-3">
                               <div className="flex flex-col items-center gap-1.5 w-20">
-                                <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-850">
+                                <div className={leftIsClub ? "w-12 h-12 flex items-center justify-center" : "w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-850"}>
                                   <img 
                                     src={leftFlag} 
                                     alt={leftName} 
-                                    className="w-full h-full object-cover" 
+                                    className={leftIsClub ? "w-full h-full object-contain" : "w-full h-full object-cover"} 
                                   />
                                 </div>
                                 <span className="text-[10px] font-black text-zinc-455 uppercase">{leftCode}</span>
@@ -464,11 +477,11 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                               <span className="text-zinc-700 font-black text-lg italic">X</span>
 
                               <div className="flex flex-col items-center gap-1.5 w-20">
-                                <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-855 bg-zinc-950 flex items-center justify-center">
+                                <div className={rightIsClub ? "w-12 h-12 flex items-center justify-center" : "w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-855 bg-zinc-950 flex items-center justify-center"}>
                                   <img 
                                     src={rightFlag} 
                                     alt={rightName} 
-                                    className="w-full h-full object-cover" 
+                                    className={rightIsClub ? "w-full h-full object-contain" : "w-full h-full object-cover"} 
                                   />
                                 </div>
                                 <span className="text-[10px] font-black text-zinc-455 uppercase">{rightCode}</span>

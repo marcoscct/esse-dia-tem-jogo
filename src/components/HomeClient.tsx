@@ -12,6 +12,7 @@ import TeamCarousel from "./TeamCarousel";
 import { queryDateClient, queryAllGamesOnDateClient } from "@/lib/client-calendar";
 import { useLanguage } from "./TranslationProvider";
 import { translateTeamName, translateOpponentName, translatePhase, translateCondition } from "@/locales/i18n-utils";
+import { getFlagUrl } from "@/lib/flag-codes";
 
 // Wait, Next.js Link import:
 import NextLink from "next/link";
@@ -464,8 +465,14 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
             {activeTeamData && (
               <div className="mt-4 p-5 bg-zinc-950 border border-zinc-900 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-xl shrink-0">
-                    {activeTeamData.flag}
+                  <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 ring-2 ring-zinc-850">
+                    <img
+                      src={getFlagUrl(activeTeamData.code)}
+                      alt={activeTeamData.name}
+                      width={40}
+                      height={40}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div>
                     <h3 className="font-black text-sm uppercase text-white tracking-wider">
@@ -521,7 +528,6 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
           </h2>
           <div className="flex flex-col gap-4">
             {[
-              { q: t("seo_faq_q1"), a: t("seo_faq_a1") },
               { q: t("seo_faq_q2"), a: t("seo_faq_a2") },
               { q: t("seo_faq_q3"), a: t("seo_faq_a3") },
               { q: t("seo_faq_q4"), a: t("seo_faq_a4") }
@@ -565,7 +571,16 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                   href={path || "/"}
                   className="px-3 py-2 bg-zinc-950 border border-zinc-900 rounded-xl text-xs hover:border-[#ffcc00] hover:text-[#ffcc00] transition-all flex items-center gap-1.5"
                 >
-                  <span>{tItem.flag}</span>
+                  <div className="w-4 h-4 rounded-full overflow-hidden shrink-0">
+                    <img
+                      src={getFlagUrl(tItem.code)}
+                      alt={tItem.name}
+                      width={16}
+                      height={16}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   <span>{tItem.name}</span>
                 </NextLink>
               );

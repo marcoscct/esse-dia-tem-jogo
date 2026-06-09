@@ -95,7 +95,7 @@ function BroadcastIcon({ channel }: { channel: string }) {
         onMouseLeave={handleMouseLeave}
         className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center bg-zinc-950 border border-zinc-850 hover:border-zinc-700 transition-all p-1.5 focus:outline-none cursor-pointer"
       >
-        <img src={info.logo} alt={info.name} className="w-full h-full object-contain" />
+        <img src={info.logo} alt={info.name} width={20} height={20} loading="lazy" className="w-full h-full object-contain" />
       </button>
       
       <AnimatePresence>
@@ -247,6 +247,9 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                           <img
                             src={leftFlag}
                             alt={leftName}
+                            width={32}
+                            height={32}
+                            loading="lazy"
                             className={leftIsClub ? "w-8 h-8 object-contain" : "w-8 h-8 rounded-full object-cover ring-1 ring-zinc-700"}
                           />
                           <span className="font-bold text-sm text-white">{leftName}</span>
@@ -256,6 +259,9 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                           <img
                             src={rightFlag}
                             alt={rightName}
+                            width={32}
+                            height={32}
+                            loading="lazy"
                             className={rightIsClub ? "w-8 h-8 object-contain" : "w-8 h-8 rounded-full object-cover ring-1 ring-zinc-700 bg-zinc-950"}
                           />
                           <span className="font-bold text-sm text-white">{rightName}</span>

@@ -6,15 +6,17 @@ import Script from "next/script";
 import "./globals.css";
 
 const kanit = Kanit({
-  weight: ["400", "700", "800", "900"],
-  style: ["normal", "italic"],
+  weight: ["700", "900"],
+  style: ["normal"],
   subsets: ["latin"],
   variable: "--font-kanit",
+  display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -57,23 +59,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-        <Script id="register-sw" strategy="afterInteractive">
-          {`
-            if ('serviceWorker' in navigator) {
-              var register = function() {
-                navigator.serviceWorker.register('/sw.js').then(
-                  function(reg) { console.log('SW registered:', reg.scope); },
-                  function(err) { console.log('SW failed:', err); }
-                );
-              };
-              if (document.readyState === 'complete' || document.readyState === 'interactive') {
-                register();
-              } else {
-                window.addEventListener('load', register);
-              }
-            }
-          `}
-        </Script>
+
         {/* Google Tag (gtag.js) */}
         {googleTagId && (
           <>

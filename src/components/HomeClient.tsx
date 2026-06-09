@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 
 import { Calendar as CalendarIcon, RefreshCw, Loader2 } from "lucide-react";
 import Image from "next/image";
 import type { TeamSummary, MatchWithTeam } from "@/lib/types";
-import ResultModal from "./ResultModal";
+const ResultModal = dynamic(() => import("./ResultModal"), { ssr: false });
 import TeamCarousel from "./TeamCarousel";
 import { queryDateClient, queryAllGamesOnDateClient } from "@/lib/client-calendar";
 import { useLanguage } from "./TranslationProvider";

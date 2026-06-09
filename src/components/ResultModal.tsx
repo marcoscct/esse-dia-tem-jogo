@@ -114,7 +114,7 @@ function BroadcastIcon({ channel }: { channel: string }) {
         onMouseLeave={handleMouseLeave}
         className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center bg-zinc-950 border border-zinc-850 hover:border-zinc-700 transition-all p-1.5 focus:outline-none cursor-pointer"
       >
-        <img src={info.logo} alt={info.name} className="w-full h-full object-contain" />
+        <img src={info.logo} alt={info.name} width={20} height={20} loading="lazy" className="w-full h-full object-contain" />
       </button>
       
       <AnimatePresence>
@@ -472,7 +472,10 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                                 <div className={leftIsClub ? "w-12 h-12 flex items-center justify-center" : "w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-850"}>
                                   <img 
                                     src={leftFlag} 
-                                    alt={leftName} 
+                                    alt={leftName}
+                                    width={48}
+                                    height={48}
+                                    loading="lazy"
                                     className={leftIsClub ? "w-full h-full object-contain" : "w-full h-full object-cover"} 
                                   />
                                 </div>
@@ -485,7 +488,10 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                                 <div className={rightIsClub ? "w-12 h-12 flex items-center justify-center" : "w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-855 bg-zinc-950 flex items-center justify-center"}>
                                   <img 
                                     src={rightFlag} 
-                                    alt={rightName} 
+                                    alt={rightName}
+                                    width={48}
+                                    height={48}
+                                    loading="lazy"
                                     className={rightIsClub ? "w-full h-full object-contain" : "w-full h-full object-cover"} 
                                   />
                                 </div>

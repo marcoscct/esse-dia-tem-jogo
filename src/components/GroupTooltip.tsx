@@ -95,6 +95,9 @@ export default function GroupTooltip({ text, groupLetter }: GroupTooltipProps) {
                     <img
                       src={getFlagUrl(t.code)}
                       alt={t.code}
+                      width={20}
+                      height={20}
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   </div>

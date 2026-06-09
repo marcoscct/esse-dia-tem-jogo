@@ -253,6 +253,8 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
                   <img
                     src={getFlagUrl(t.code)}
                     alt={`Bandeira ${translateTeamName(t.code, t.name, lang)}`}
+                    width={56}
+                    height={56}
                     className="w-full h-full object-cover rounded-full pointer-events-none"
                     draggable={false}
                     loading="lazy"

@@ -12,7 +12,23 @@ const nextConfig: NextConfig = {
     ]
   },
 
-
+  // Cache static JSON data files aggressively on edge and client
+  async headers() {
+    return [
+      {
+        source: "/data/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=3600",
+          },
+        ],
+      },
+    ];
+  },
+  experimental: {
+    cpus: 1,
+  },
 };
 
 export default nextConfig;

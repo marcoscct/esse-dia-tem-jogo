@@ -13,6 +13,8 @@ export const en = {
   "verify": "Verify",
   "last_updated": "Data updated: {date}",
   "about": "About",
+  "contact": "Contact",
+  "cookie_policy": "Cookie Policy",
   "devlog": "Changelog",
   "privacy": "Privacy Policy",
   "terms_of_use": "Terms of Use",
@@ -21,6 +23,9 @@ export const en = {
   "devlog_title": "Project Changelog",
   "devlog_subtitle": "Track the evolution and updates of the website version by version.",
   "where_to_watch": "Where to watch:",
+  "seo_about_technical_desc": "Is There a Game Today is an online utility and sports calendar database. The website provides indexing and quick queries of dates and times of national team and club football matches to assist in planning social and corporate commitments.",
+  "about_us_author_title": "Project Creators",
+  "about_us_author_desc": "Marcos Castro and the Castro Brothers team are pioneering content creators on the Brazilian internet, known for their YouTube channel with over 4 million subscribers, games like UTC - Um Joystick Um Violão, and various entertainment projects.",
   
   // Results config
   "has_game_heading": "Game Day!",
@@ -132,5 +137,24 @@ export const en = {
     "CRO": "Croatia",
     "GHA": "Ghana",
     "PAN": "Panama"
-  } as Record<string, string>
+  } as Record<string, string>,
+
+  // AdSense / SEO Content below the fold
+  "seo_about_title": "About Is There a Game Today?",
+  "seo_about_desc": "Is There a Game Today is your ideal date planner helper. Created in partnership with the Castro Brothers team, the tool allows you to instantly check the football match schedule to avoid scheduling important social events at the same time as crucial matches of your country or favorite team.",
+  "seo_how_it_works_title": "How It Works?",
+  "seo_how_it_works_step1": "Choose the country or team you want to follow in the top carousel.",
+  "seo_how_it_works_step2": "Select a specific day in the calendar or enable the date range search.",
+  "seo_how_it_works_step3": "Press 'Verify' to see the result quickly and directly.",
+  "seo_faq_title": "Frequently Asked Questions (FAQ)",
+  "seo_faq_q1": "How does the full schedule subscription work?",
+  "seo_faq_a1": "After searching, you can click on 'Subscribe' to integrate the match calendar automatically with your preferred application (Google Calendar, Apple Calendar, or Outlook). The calendar is dynamic and updates itself as your team advances.",
+  "seo_faq_q2": "Where do match dates and times come from?",
+  "seo_faq_a2": "Our database is updated constantly with official information from competition organizing committees. We account for local timezones and TV broadcasts.",
+  "seo_faq_q3": "Do results show club matches or only national teams?",
+  "seo_faq_a3": "The tool supports both major national teams and club championships (national and international). You can toggle the search mode as you prefer.",
+  "seo_faq_q4": "What are matches with a 'Possible Game' status?",
+  "seo_faq_a4": "In knockout stages, the opponent and date depend on group stage standings. The site calculates all possible scenarios so you know in advance when your team *could* play, helping you avoid surprises.",
+  "seo_available_teams_title": "Select a Team to View the Full Schedule:",
+  "seo_team_default_desc": "Check the full match schedule for {team}. See dates, times, and broadcast channels for all rounds, keeping your calendar free on game days."
 };

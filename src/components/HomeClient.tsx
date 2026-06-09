@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 
-import { Calendar as CalendarIcon, RefreshCw, Loader2 } from "lucide-react";
+import { Calendar as CalendarIcon, RefreshCw, Loader2, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import type { TeamSummary, MatchWithTeam } from "@/lib/types";
 const ResultModal = dynamic(() => import("./ResultModal"), { ssr: false });
 import TeamCarousel from "./TeamCarousel";
 import { queryDateClient, queryAllGamesOnDateClient } from "@/lib/client-calendar";
 import { useLanguage } from "./TranslationProvider";
+import { translateTeamName, translateOpponentName, translatePhase, translateCondition } from "@/locales/i18n-utils";
 
 // Wait, Next.js Link import:
 import NextLink from "next/link";
@@ -44,6 +45,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
   const [shouldOpenModal, setShouldOpenModal] = useState(!!result);
   const [localResult, setLocalResult] = useState<{ hasGame: boolean; matches: MatchWithTeam[] } | null>(result || null);
   const [isLoading, setIsLoading] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   
   // Range date selection states
   const [isRangeEnabled, setIsRangeEnabled] = useState(false);
@@ -175,6 +177,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
     }
   };
 
+  const activeTeamData = teams.find(t => t.slug === selectedTeam);
   const langPrefix = lang === 'pt' ? '' : `/${lang}`;
 
   return (
@@ -366,6 +369,212 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
         />
       </main>
 
+      {/* Seção Informativa para SEO e AdSense (Abaixo da Dobra) */}
+      <section className="w-full max-w-4xl mx-auto px-6 py-12 flex flex-col gap-12 border-t border-zinc-900 mt-8">
+        
+        {/* Bloco Dinâmico de Contexto do Jogo (SEO e Crawlers) */}
+        {localResult && (
+          <div className="bg-zinc-950 rounded-3xl p-6 border border-zinc-800 shadow-xl flex flex-col gap-4">
+            <h2 className="text-sm md:text-base font-black uppercase tracking-wider text-[#ffcc00] flex items-center gap-2">
+              <span className="text-lg">🔍</span>
+              {t("verify")} - {(() => {
+                const parts = (initialDate || selectedDate).split("-");
+                if (parts.length < 3) return initialDate || selectedDate;
+                return lang === 'en' ? `${parts[1]}/${parts[2]}/${parts[0]}` : `${parts[2]}/${parts[1]}/${parts[0]}`;
+              })()}
+            </h2>
+            <div className="w-12 h-1 bg-[#ffcc00] rounded-full"></div>
+            <div className="text-zinc-400 text-sm md:text-base leading-relaxed space-y-3">
+              {localResult.matches.length > 0 ? (
+                localResult.matches.map((m, idx) => {
+                  const opponentNameTrans = translateOpponentName(m.opponent_code, m.opponent_name, lang);
+                  const phaseTrans = translatePhase(m.phase, lang);
+                  const dateStr = (() => {
+                    const parts = m.date.split("-");
+                    if (parts.length < 3) return m.date;
+                    return lang === 'en' ? `${parts[1]}/${parts[2]}/${parts[0]}` : `${parts[2]}/${parts[1]}/${parts[0]}`;
+                  })();
+                  const teamNameTrans = translateTeamName(m.team_code, m.team_name, lang);
+                  
+                  if (m.status === 'confirmed' || m.status === 'played') {
+                    return (
+                      <p key={idx} className="border-l-2 border-[#ffcc00] pl-3">
+                        {lang === 'en' ? (
+                          `Confirmed Match: ${teamNameTrans} will play against ${opponentNameTrans} on ${dateStr} for the ${phaseTrans}. The match will take place at the ${m.venue} in ${m.city}, ${m.country}.`
+                        ) : lang === 'es' ? (
+                          `Partido Confirmado: ${teamNameTrans} jugará contra ${opponentNameTrans} el ${dateStr} para la ${phaseTrans}. El partido se disputará en el ${m.venue} en ${m.city}, ${m.country}.`
+                        ) : (
+                          `Jogo Confirmado: O ${teamNameTrans} enfrentará o ${opponentNameTrans} no dia ${dateStr} pela ${phaseTrans}. A partida acontecerá no estádio ${m.venue} em ${m.city}, ${m.country}.`
+                        )}
+                      </p>
+                    );
+                  } else {
+                    const condTrans = translateCondition(m.condition, lang) || "";
+                    return (
+                      <p key={idx} className="border-l-2 border-orange-500 pl-3">
+                        {lang === 'en' ? (
+                          `Possible Match Scenario: ${teamNameTrans} may play against ${opponentNameTrans} on ${dateStr} for the ${phaseTrans}. Condition: ${condTrans}.`
+                        ) : lang === 'es' ? (
+                          `Escenario de Partido Posible: ${teamNameTrans} podría jugar contra ${opponentNameTrans} el ${dateStr} para la ${phaseTrans}. Condición: ${condTrans}.`
+                        ) : (
+                          `Cenário de Possível Jogo: O ${teamNameTrans} poderá jogar contra o ${opponentNameTrans} no dia ${dateStr} pela ${phaseTrans}. Condição: ${condTrans}.`
+                        )}
+                      </p>
+                    );
+                  }
+                })
+              ) : (
+                <p className="border-l-2 border-green-500 pl-3">
+                  {lang === 'en' ? (
+                    `No football matches are scheduled for ${activeTeamData ? activeTeamData.name : ""} on the date of ${(() => {
+                      const parts = (initialDate || selectedDate).split("-");
+                      if (parts.length < 3) return initialDate || selectedDate;
+                      return `${parts[1]}/${parts[2]}/${parts[0]}`;
+                    })()}.`
+                  ) : lang === 'es' ? (
+                    `No hay partidos de fútbol programados para ${activeTeamData ? activeTeamData.name : ""} en la fecha del ${(() => {
+                      const parts = (initialDate || selectedDate).split("-");
+                      if (parts.length < 3) return initialDate || selectedDate;
+                      return `${parts[2]}/${parts[1]}/${parts[0]}`;
+                    })()}.`
+                  ) : (
+                    `Não há partidas de futebol agendadas para o ${activeTeamData ? activeTeamData.name : ""} na data de ${(() => {
+                      const parts = (initialDate || selectedDate).split("-");
+                      if (parts.length < 3) return initialDate || selectedDate;
+                      return `${parts[2]}/${parts[1]}/${parts[0]}`;
+                    })()}.`
+                  )}
+                </p>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Bloco 1: Sobre o Projeto / Descrição do Time */}
+        <div className="bg-[#111111] rounded-3xl p-6 md:p-8 border border-zinc-800 shadow-xl">
+          <div className="flex flex-col gap-4">
+            <h2 className="text-xl md:text-2xl font-black uppercase tracking-wider text-[#ffcc00] flex items-center gap-2">
+              <span className="text-2xl">⚽</span>
+              {t("seo_about_title")}
+            </h2>
+            <div className="w-12 h-1 bg-[#ffcc00] rounded-full"></div>
+            <p className="text-zinc-400 leading-relaxed text-sm md:text-base">
+              {t("seo_about_desc")}
+            </p>
+            {activeTeamData && (
+              <div className="mt-4 p-5 bg-zinc-950 border border-zinc-900 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-xl shrink-0">
+                    {activeTeamData.flag}
+                  </div>
+                  <div>
+                    <h3 className="font-black text-sm uppercase text-white tracking-wider">
+                      {activeTeamData.name}
+                    </h3>
+                    <p className="text-xs text-zinc-500 mt-1">
+                      {t("seo_team_default_desc", { team: activeTeamData.name })}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Bloco 2: Como Funciona */}
+        <div className="flex flex-col gap-6">
+          <h2 className="text-lg md:text-xl font-black uppercase tracking-wider text-white border-b border-zinc-900 pb-3">
+            {t("seo_how_it_works_title")}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-zinc-950 rounded-2xl p-5 border border-zinc-900 flex flex-col gap-2">
+              <div className="w-8 h-8 rounded-full bg-[#ffcc00]/10 flex items-center justify-center text-xs font-black text-[#ffcc00] border border-[#ffcc00]/20">
+                1
+              </div>
+              <p className="text-zinc-400 text-xs md:text-sm leading-relaxed">
+                {t("seo_how_it_works_step1")}
+              </p>
+            </div>
+            <div className="bg-zinc-950 rounded-2xl p-5 border border-zinc-900 flex flex-col gap-2">
+              <div className="w-8 h-8 rounded-full bg-[#ffcc00]/10 flex items-center justify-center text-xs font-black text-[#ffcc00] border border-[#ffcc00]/20">
+                2
+              </div>
+              <p className="text-zinc-400 text-xs md:text-sm leading-relaxed">
+                {t("seo_how_it_works_step2")}
+              </p>
+            </div>
+            <div className="bg-zinc-950 rounded-2xl p-5 border border-zinc-900 flex flex-col gap-2">
+              <div className="w-8 h-8 rounded-full bg-[#ffcc00]/10 flex items-center justify-center text-xs font-black text-[#ffcc00] border border-[#ffcc00]/20">
+                3
+              </div>
+              <p className="text-zinc-400 text-xs md:text-sm leading-relaxed">
+                {t("seo_how_it_works_step3")}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bloco 3: Acordeão de FAQ */}
+        <div className="flex flex-col gap-6">
+          <h2 className="text-lg md:text-xl font-black uppercase tracking-wider text-white border-b border-zinc-900 pb-3">
+            {t("seo_faq_title")}
+          </h2>
+          <div className="flex flex-col gap-4">
+            {[
+              { q: t("seo_faq_q1"), a: t("seo_faq_a1") },
+              { q: t("seo_faq_q2"), a: t("seo_faq_a2") },
+              { q: t("seo_faq_q3"), a: t("seo_faq_a3") },
+              { q: t("seo_faq_q4"), a: t("seo_faq_a4") }
+            ].map((item, idx) => {
+              const isOpen = openFaqIndex === idx;
+              return (
+                <div 
+                  key={idx} 
+                  className="bg-[#111111] border border-zinc-850 rounded-2xl overflow-hidden transition-all duration-200"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
+                    className="w-full px-5 py-4 flex items-center justify-between text-left font-bold text-sm md:text-base text-white hover:text-[#ffcc00] transition-colors focus:outline-none cursor-pointer"
+                  >
+                    <span>{item.q}</span>
+                    <ChevronDown className={`w-4 h-4 text-zinc-550 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180 text-[#ffcc00]" : ""}`} />
+                  </button>
+                  {isOpen && (
+                    <div className="px-5 pb-5 pt-1 text-zinc-400 text-xs md:text-sm leading-relaxed border-t border-zinc-900">
+                      {item.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Bloco 4: Links Rápidos das Seleções (Internal Linking) */}
+        <div className="flex flex-col gap-4 border-t border-zinc-900 pt-8">
+          <h3 className="font-bold text-xs md:text-sm text-[#ffcc00] uppercase tracking-wider">
+            {t("seo_available_teams_title")}
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {teams.map((tItem) => {
+              const path = isClubs ? `${langPrefix}/times/${tItem.slug}` : `${langPrefix}/${tItem.slug}`;
+              return (
+                <NextLink
+                  key={tItem.code}
+                  href={path || "/"}
+                  className="px-3 py-2 bg-zinc-950 border border-zinc-900 rounded-xl text-xs hover:border-[#ffcc00] hover:text-[#ffcc00] transition-all flex items-center gap-1.5"
+                >
+                  <span>{tItem.flag}</span>
+                  <span>{tItem.name}</span>
+                </NextLink>
+              );
+            })}
+          </div>
+        </div>
+
+      </section>
+
       {/* Banner Inferior — hidden but structure preserved */}
       <div className="w-full bg-[#ffcc00] text-black font-bold text-center py-3 text-sm md:text-base tracking-widest uppercase hidden">
         Espaço para Banner Inferior
@@ -377,19 +586,23 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
           <RefreshCw className="w-3.5 h-3.5" />
           <span>{t("last_updated", { date: lastUpdated })}</span>
           <span>|</span>
-          <NextLink href={`${langPrefix}/devlog`} className="hover:text-[#ffcc00] font-bold transition-colors">
+          <NextLink href={`${langPrefix}/devlog`} prefetch={false} className="hover:text-[#ffcc00] font-bold transition-colors">
             v1.6.0
           </NextLink>
         </div>
         <div className="hidden md:block text-zinc-700">•</div>
         <div className="flex items-center gap-4 text-zinc-500 mt-1 md:mt-0 flex-wrap justify-center">
-          <NextLink href={`${langPrefix}/sobre`} className="hover:text-[#ffcc00] transition-colors">{t("about")}</NextLink>
+          <NextLink href={`${langPrefix}/sobre`} prefetch={false} className="hover:text-[#ffcc00] transition-colors">{t("about")}</NextLink>
           <span>•</span>
-          <NextLink href={`${langPrefix}/devlog`} className="hover:text-[#ffcc00] transition-colors">{t("devlog")}</NextLink>
+          <NextLink href={`${langPrefix}/contato`} prefetch={false} className="hover:text-[#ffcc00] transition-colors">{t("contact")}</NextLink>
           <span>•</span>
-          <NextLink href={`${langPrefix}/politica-de-privacidade`} className="hover:text-[#ffcc00] transition-colors">{t("privacy")}</NextLink>
+          <NextLink href={`${langPrefix}/devlog`} prefetch={false} className="hover:text-[#ffcc00] transition-colors">{t("devlog")}</NextLink>
           <span>•</span>
-          <NextLink href={`${langPrefix}/termos-de-uso`} className="hover:text-[#ffcc00] transition-colors">{t("terms_of_use")}</NextLink>
+          <NextLink href={`${langPrefix}/politica-de-privacidade`} prefetch={false} className="hover:text-[#ffcc00] transition-colors">{t("privacy")}</NextLink>
+          <span>•</span>
+          <NextLink href={`${langPrefix}/politica-de-cookies`} prefetch={false} className="hover:text-[#ffcc00] transition-colors">{t("cookie_policy")}</NextLink>
+          <span>•</span>
+          <NextLink href={`${langPrefix}/termos-de-uso`} prefetch={false} className="hover:text-[#ffcc00] transition-colors">{t("terms_of_use")}</NextLink>
         </div>
       </footer>
 

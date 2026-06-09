@@ -13,6 +13,8 @@ export const pt = {
   "verify": "Verificar",
   "last_updated": "Dados atualizados: {date}",
   "about": "Sobre",
+  "contact": "Contato",
+  "cookie_policy": "Política de Cookies",
   "devlog": "Novidades",
   "privacy": "Privacidade",
   "terms_of_use": "Termos de Uso",
@@ -21,6 +23,9 @@ export const pt = {
   "devlog_title": "Novidades do Projeto",
   "devlog_subtitle": "Acompanhe a evolução e os avanços do site versão por versão.",
   "where_to_watch": "Onde assistir:",
+  "seo_about_technical_desc": "O Esse Dia Tem Jogo é um utilitário online e banco de dados de calendário esportivo. O site fornece indexação e consultas rápidas de datas e horários de partidas de futebol de seleções e clubes para auxiliar no planejamento de compromissos sociais e corporativos.",
+  "about_us_author_title": "Idealizadores do Projeto",
+  "about_us_author_desc": "Marcos Castro e a equipe dos Castro Brothers são criadores de conteúdo pioneiros na internet brasileira, conhecidos pelo canal do YouTube com mais de 4 milhões de inscritos, jogos como UTC - Um Joystick Um Violão e diversos projetos de entretenimento.",
   
   // Results config
   "has_game_heading": "Tem Jogo!",
@@ -81,6 +86,25 @@ export const pt = {
   "share_free_single": "Pode marcar compromisso no dia {date}! Eu já garanti que a agenda está livre em http://www.essediatemjogo.com.br",
   "share_busy_range": "Não marque nada nesses dias! Os seguintes jogos podem ocorrer entre os dias {start} e {end}:\n{games}\n\nConfira você também em http://www.essediatemjogo.com.br",
   "share_busy_single": "Não marque nada nesse dia! Os seguintes jogos podem ocorrer no dia {date}:\n{games}\n\nConfira você também em http://www.essediatemjogo.com.br",
+
+  // AdSense / SEO Content below the fold
+  "seo_about_title": "Sobre o Esse Dia Tem Jogo?",
+  "seo_about_desc": "O Esse Dia Tem Jogo é o seu aliado ideal para o planejamento de datas. Criada em parceria com a equipe dos Castro Brothers, a ferramenta permite consultar instantaneamente a tabela de jogos de futebol para evitar marcar eventos sociais importantes no mesmo horário de confrontos cruciais da sua seleção ou time favorito.",
+  "seo_how_it_works_title": "Como Funciona?",
+  "seo_how_it_works_step1": "Escolha o time ou seleção que deseja acompanhar no carrossel superior.",
+  "seo_how_it_works_step2": "Selecione um dia específico no calendário ou habilite a busca por intervalo de datas.",
+  "seo_how_it_works_step3": "Pressione 'Verificar' para ver o resultado de forma simples e direta.",
+  "seo_faq_title": "Perguntas Frequentes (FAQ)",
+  "seo_faq_q1": "Como funciona a assinatura da agenda completa?",
+  "seo_faq_a1": "Após fazer uma busca, você pode clicar em 'Assinar Agenda' para integrar o calendário de jogos automaticamente ao seu aplicativo de preferência (Google Agenda, Apple Calendar ou Outlook). O calendário é dinâmico e se atualiza sozinho conforme o time avança de fase.",
+  "seo_faq_q2": "De onde vêm as datas e horários dos jogos?",
+  "seo_faq_a2": "Nosso banco de dados é atualizado constantemente com informações oficiais dos comitês organizadores das competições. Levamos em conta fusos horários locais e transmissões de TV.",
+  "seo_faq_q3": "Os resultados mostram jogos de clubes ou apenas seleções?",
+  "seo_faq_a3": "A ferramenta oferece suporte tanto para grandes seleções mundiais quanto para campeonatos de clubes nacionais e internacionais. Você pode alternar o modo de busca conforme sua preferência.",
+  "seo_faq_q4": "O que são as partidas com status de 'Possível Jogo'?",
+  "seo_faq_a4": "Em fases de mata-mata ou eliminatórias, o adversário e a data dependem da classificação na fase de grupos. O site calcula todos os cenários possíveis para que você saiba com antecedência quando seu time *poderia* jogar, ajudando a evitar imprevistos.",
+  "seo_available_teams_title": "Selecione uma Seleção para ver a Agenda Completa:",
+  "seo_team_default_desc": "Confira o calendário completo de partidas de {team}. Veja datas, horários e canais de transmissão de todas as rodadas, mantendo sua agenda livre nos dias de jogos.",
 
   // Team names (Portuguese, defaults from calendar.json)
   "teams": {} as Record<string, string>

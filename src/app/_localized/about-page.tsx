@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, Mail } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import type { Language } from "@/locales/i18n-utils";
 
@@ -24,9 +24,7 @@ const content = {
     about_us_title: "👥 Quem Somos (Castro Brothers)",
     about_us_p1: "O projeto foi idealizado e construído pela equipe dos Castro Brothers, criadores de conteúdo pioneiros na internet brasileira (conhecidos pelo canal do YouTube, o jogo UTC - Um Joystick Um Violão, e diversos outros projetos de entretenimento).",
     about_us_p2: "Decidimos criar esta ferramenta para uso próprio e de nossa comunidade, garantindo que ninguém perca os momentos mais emocionantes do futebol.",
-    contact_title: "✉️ Fale Conosco",
-    contact_p1: "Tem alguma sugestão de liga que gostaria de ver no site? Encontrou algum horário incorreto ou gostaria de falar sobre anúncios ou parcerias comerciais?",
-    contact_label: "E-mail de Contato",
+    technical_desc: "O Esse Dia Tem Jogo é um utilitário online e banco de dados de calendário esportivo. O site fornece indexação e consultas rápidas de datas e horários de partidas de futebol de seleções e clubes para auxiliar no planejamento de compromissos sociais e corporativos.",
     footer: "Esse Dia Tem Jogo © 2026. Todos os direitos reservados."
   },
   en: {
@@ -45,9 +43,7 @@ const content = {
     about_us_title: "👥 Who We Are (Castro Brothers)",
     about_us_p1: "The project was conceptualized and built by the Castro Brothers team, pioneering content creators on the Brazilian internet (known for their YouTube channel, the game UTC - Um Joystick Um Violão, and several other entertainment projects).",
     about_us_p2: "We decided to create this tool for ourselves and our community to ensure no one misses football's most exciting moments.",
-    contact_title: "✉️ Contact Us",
-    contact_p1: "Do you have a suggestion for a league you'd like to see on the site? Found an incorrect match time, or want to discuss ads or partnerships?",
-    contact_label: "Contact Email",
+    technical_desc: "Is There a Game Today is an online utility and sports calendar database. The website provides indexing and quick queries of dates and times of national team and club football matches to assist in planning social and corporate commitments.",
     footer: "Is There a Game Today © 2026. All rights reserved."
   },
   es: {
@@ -66,9 +62,7 @@ const content = {
     about_us_title: "👥 Quiénes Somos (Castro Brothers)",
     about_us_p1: "El proyecto fue ideado y construido por el equipo de los Castro Brothers, creadores de contenido pioneiros en la internet brasileña (conocidos por su canal de YouTube, el juego UTC - Um Joystick Um Violão, y diversos proyectos de entretenimiento).",
     about_us_p2: "Decidimos crear esta herramienta para nuestro propio uso y el de nuestra comunidad, asegurando que nadie se pierda los momentos más emocionantes del fútbol.",
-    contact_title: "✉️ Contáctanos",
-    contact_p1: "¿Tienes alguna sugerencia de liga que te gustaría ver en el sitio? ¿Encontraste un horario incorrecto o deseas hablar sobre publicidad o alianzas comerciales?",
-    contact_label: "Correo electrónico",
+    technical_desc: "¿Este Día Hay Partido? es una utilidad en línea y base de datos del calendario deportivo. El sitio web proporciona indexación y consultas rápidas de fechas y horarios de partidos de fútbol de selecciones y clubes para ayudar a planificar compromisos sociales y corporativos.",
     footer: "¿Este Día Hay Partido? © 2026. Todos los derechos reservados."
   }
 };
@@ -104,6 +98,13 @@ export default function LocalizedAboutPage({ lang }: Props) {
         {/* Content Box */}
         <div className="bg-[#111111] rounded-3xl p-6 md:p-10 border border-zinc-800 shadow-2xl space-y-8 text-zinc-300 leading-relaxed text-sm md:text-base">
           
+          {/* Descrição técnica prioritária para bots */}
+          <section className="p-5 bg-zinc-950 border border-zinc-900 rounded-2xl border-l-4 border-l-[#ffcc00]">
+            <p className="font-sans font-bold text-white text-xs md:text-sm leading-relaxed">
+              {t.technical_desc}
+            </p>
+          </section>
+
           <section className="space-y-4">
             <h2 className="font-display font-black text-xl md:text-2xl text-white uppercase tracking-wide flex items-center gap-2">
               {t.problem_title}
@@ -138,24 +139,6 @@ export default function LocalizedAboutPage({ lang }: Props) {
             </h2>
             <p>{t.about_us_p1}</p>
             <p>{t.about_us_p2}</p>
-          </section>
-
-          <section className="space-y-4">
-            <h2 className="font-display font-black text-xl md:text-2xl text-white uppercase tracking-wide flex items-center gap-2">
-              {t.contact_title}
-            </h2>
-            <p>{t.contact_p1}</p>
-            <div className="bg-zinc-950 p-5 rounded-2xl border border-zinc-850 flex items-center gap-4">
-              <div className="w-12 h-12 bg-[#ffcc00]/10 rounded-xl flex items-center justify-center text-[#ffcc00] shrink-0">
-                <Mail className="w-6 h-6" />
-              </div>
-              <div>
-                <span className="text-xs text-zinc-500 block font-bold uppercase tracking-wider">{t.contact_label}</span>
-                <a href="mailto:contato@essediatemjogo.com.br" className="text-white hover:text-[#ffcc00] font-display font-bold text-base md:text-lg transition-colors">
-                  contato@essediatemjogo.com.br
-                </a>
-              </div>
-            </div>
           </section>
 
           <div className="pt-6 border-t border-zinc-800 text-xs text-zinc-500 text-center">

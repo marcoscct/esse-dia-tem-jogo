@@ -13,6 +13,8 @@ export const es = {
   "verify": "Verificar",
   "last_updated": "Datos actualizados: {date}",
   "about": "Sobre nosotros",
+  "contact": "Contacto",
+  "cookie_policy": "Política de Cookies",
   "devlog": "Novedades",
   "privacy": "Privacidad",
   "terms_of_use": "Términos de Uso",
@@ -21,6 +23,9 @@ export const es = {
   "devlog_title": "Novedades del Proyecto",
   "devlog_subtitle": "Sigue la evolución y los avances del sitio versión por versión.",
   "where_to_watch": "Dónde ver:",
+  "seo_about_technical_desc": "¿Este Día Hay Partido? es una utilidad en línea y base de datos del calendario deportivo. El sitio web proporciona indexación y consultas rápidas de fechas y horarios de partidos de fútbol de selecciones y clubes para ayudar a planificar compromisos sociales y corporativos.",
+  "about_us_author_title": "Creadores del Proyecto",
+  "about_us_author_desc": "Marcos Castro y el equipo de Castro Brothers son creadores de contenido pioneros en el internet brasileño, conocidos por su canal de YouTube con más de 4 millones de suscriptores, juegos como UTC - Um Joystick Um Violão, y diversos proyectos de entretenimiento.",
   
   // Results config
   "has_game_heading": "¡Hay Partido!",
@@ -132,5 +137,24 @@ export const es = {
     "CRO": "Croacia",
     "GHA": "Ghana",
     "PAN": "Panamá"
-  } as Record<string, string>
+  } as Record<string, string>,
+
+  // AdSense / SEO Content below the fold
+  "seo_about_title": "¿Qué es ¿Este Día Hay Partido?",
+  "seo_about_desc": "¿Este Día Hay Partido? es tu planificador ideal de fechas. Creada en colaboración con el equipo de los Castro Brothers, esta herramienta te permite consultar al instante el calendario de partidos de fútbol para evitar programar eventos sociales importantes a la misma hora que los partidos cruciales de tu selección o equipo favorito.",
+  "seo_how_it_works_title": "¿Cómo Funciona?",
+  "seo_how_it_works_step1": "Elige el país o equipo que deseas seguir en el carrusel superior.",
+  "seo_how_it_works_step2": "Selecciona un día específico en el calendario o activa la búsqueda por rango de fechas.",
+  "seo_how_it_works_step3": "Presiona 'Verificar' para ver el resultado de forma rápida y sencilla.",
+  "seo_faq_title": "Preguntas Frecuentes (FAQ)",
+  "seo_faq_q1": "¿Cómo funciona la suscripción al calendario completo?",
+  "seo_faq_a1": "Tras realizar la búsqueda, puedes hacer clic en 'Suscribirse' para integrar el calendario de partidos automáticamente en tu aplicación favorita (Google Calendar, Apple Calendar o Outlook). El calendario es dinámico y se actualiza solo a medida que tu equipo avanza de ronda.",
+  "seo_faq_q2": "¿De dónde provienen las fechas y horarios de los partidos?",
+  "seo_faq_a2": "Nuestra base de datos se actualiza constantemente con información oficial de los comités organizadores de las competiciones. Tenemos en cuenta los husos horarios locales y las transmisiones de televisión.",
+  "seo_faq_q3": "¿Los resultados muestran partidos de clubes o solo selecciones nacionales?",
+  "seo_faq_a3": "La herramienta ofrece soporte tanto para grandes selecciones mundiales como para campeonatos de clubes (nacionales e internacionales). Puedes cambiar el modo de búsqueda según prefieras.",
+  "seo_faq_q4": "¿Qué son los partidos con el estado de 'Posible Partido'?",
+  "seo_faq_a4": "En las fases eliminatorias, el rival y la fecha dependen de la clasificación en la fase de grupos. El sitio calcula todos los escenarios posibles para que sepas con antelación cuándo *podría* jugar tu equipo, ayudándote a evitar sorpresas." ,
+  "seo_available_teams_title": "Selecciona un Equipo para Ver el Calendario Completo:",
+  "seo_team_default_desc": "Consulta el calendario completo de partidos de {team}. Consulta fechas, horarios y canales de transmisión para todas las rondas, manteniendo tu agenda libre los días de partido."
 };

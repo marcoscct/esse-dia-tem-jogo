@@ -469,6 +469,6 @@ export function getTeamKnockoutPaths(groupLetter: string): {
   return {
     group_1st: match1st ? tracePath(match1st.matchNumber) : [],
     group_2nd: match2nd ? tracePath(match2nd.matchNumber) : [],
-    group_3rd: matches3rd.map(m => tracePath(m.matchNumber))
+    group_3rd: matches3rd.slice(0, 1).map(m => tracePath(m.matchNumber))
   };
 }

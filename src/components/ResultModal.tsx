@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AlertTriangle, CheckCircle2, Clock, Calendar as CalendarIcon, X, HelpCircle, Share2, Check, ChevronDown } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Clock, Calendar as CalendarIcon, X, HelpCircle, Share2, Check, ChevronDown, ChevronUp, Maximize2, Minimize2 } from "lucide-react";
 import type { MatchWithTeam } from "@/lib/types";
 import { formatTimeBRT, getVenueIanaTimezone, formatMatchTimeInTimezone, formatMatchDateInTimezone } from "@/lib/date-utils";
 import { getFlagUrl, isClubCode } from "@/lib/flag-codes";
@@ -149,7 +149,7 @@ interface ResultModalProps {
 export default function ResultModal({ matches = [], isOpen, onClose, date, endDate }: ResultModalProps) {
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
-  const { lang, t, timezoneMode, deviceTimezone, customTimezone } = useLanguage();
+  const { lang, t, timezoneMode, customTimezone, deviceTimezone, compactMode } = useLanguage();
   const [isFeedModalOpen, setIsFeedModalOpen] = useState(false);
 
   const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
@@ -508,15 +508,17 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                         );
                       })()}
 
-                      <div className="flex items-center justify-center gap-1 text-zinc-600 font-bold text-[9px] uppercase tracking-wide text-center">
-                        <span>{match.venue}</span>
-                        {match.city && match.city !== match.venue && (
-                          <>
-                            <span>•</span>
-                            <span>{match.city}</span>
-                          </>
-                        )}
-                      </div>
+                      {!compactMode && (
+                        <div className="flex items-center justify-center gap-1 text-zinc-600 font-bold text-[9px] uppercase tracking-wide text-center">
+                          <span>{match.venue}</span>
+                          {match.city && match.city !== match.venue && (
+                            <>
+                              <span>•</span>
+                              <span>{match.city}</span>
+                            </>
+                          )}
+                        </div>
+                      )}
 
                       {(() => {
                         let targetTz = 'America/Sao_Paulo';
@@ -532,7 +534,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
 
                         if (!match.time_brt) {
                           return (
-                            <div className="flex items-center justify-center flex-nowrap whitespace-nowrap gap-1 md:gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-3 sm:px-4 rounded-full mt-3 text-[11px] sm:text-xs border border-zinc-900 w-fit max-w-full">
+                            <div className={`flex items-center justify-center flex-nowrap whitespace-nowrap gap-1 md:gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-3 sm:px-4 rounded-full text-[11px] sm:text-xs border border-zinc-900 w-fit max-w-full ${compactMode ? 'mt-1' : 'mt-3'}`}>
                               <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
                               <span>{formattedDate}</span>
                               <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />
@@ -543,7 +545,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                         
                         const formattedTime = formatMatchTimeInTimezone(match.time_brt, match.date, targetTz, lang);
                         return (
-                          <div className="flex items-center justify-center flex-nowrap whitespace-nowrap gap-1 md:gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-3 sm:px-4 rounded-full mt-3 text-[11px] sm:text-xs border border-zinc-900 w-fit max-w-full">
+                          <div className={`flex items-center justify-center flex-nowrap whitespace-nowrap gap-1 md:gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-3 sm:px-4 rounded-full text-[11px] sm:text-xs border border-zinc-900 w-fit max-w-full ${compactMode ? 'mt-1' : 'mt-3'}`}>
                             <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
                             <span>{formattedDate}</span>
                             <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />
@@ -552,7 +554,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                         );
                       })()}
 
-                      {lang === 'pt' && match.broadcasts && match.broadcasts.length > 0 && (
+                      {!compactMode && lang === 'pt' && match.broadcasts && match.broadcasts.length > 0 && (
                         <div className="flex flex-col items-center gap-1 mt-3">
                           <span className="text-[9px] font-bold text-zinc-550 uppercase tracking-wider">{t("where_to_watch")}</span>
                           <div className="flex items-center gap-2 mt-1">
@@ -564,63 +566,65 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                       )}
 
                       {/* Add to Calendar Button & Accordion */}
-                      <div className="w-full mt-4 flex flex-col gap-2">
-                        <button
-                          onClick={() => setOpenDropdownId(openDropdownId === match.id ? null : match.id)}
-                          className="w-full flex items-center justify-center gap-1.5 bg-zinc-950 hover:bg-zinc-900 text-zinc-400 hover:text-white font-bold py-2.5 px-4 rounded-xl text-xs border border-zinc-900 hover:border-zinc-800 transition-all cursor-pointer"
-                        >
-                          <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
-                          <span>{t("add_to_calendar")}</span>
-                          <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${openDropdownId === match.id ? "rotate-180" : ""}`} />
-                        </button>
-
-                        {openDropdownId === match.id && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            className="w-full bg-[#0a0a0a] border border-zinc-900 rounded-xl p-2 flex flex-col gap-1 overflow-hidden"
+                      {!compactMode && (
+                        <div className="w-full mt-4 flex flex-col gap-2">
+                          <button
+                            onClick={() => setOpenDropdownId(openDropdownId === match.id ? null : match.id)}
+                            className="w-full flex items-center justify-center gap-1.5 bg-zinc-950 hover:bg-zinc-900 text-zinc-400 hover:text-white font-bold py-2.5 px-4 rounded-xl text-xs border border-zinc-900 hover:border-zinc-800 transition-all cursor-pointer"
                           >
-                            <a
-                              href={getGoogleCalendarUrl(getEventData(match))}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center justify-center gap-2.5 hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
+                            <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
+                            <span>{t("add_to_calendar")}</span>
+                            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${openDropdownId === match.id ? "rotate-180" : ""}`} />
+                          </button>
+
+                          {openDropdownId === match.id && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              className="w-full bg-[#0a0a0a] border border-zinc-900 rounded-xl p-2 flex flex-col gap-1 overflow-hidden"
                             >
-                              <span className="w-2 h-2 rounded-full bg-[#db4437] shrink-0" />
-                              <span>{t("google_calendar")}</span>
-                            </a>
-                            <a
-                              href={getOutlookCalendarUrl(getEventData(match))}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center justify-center gap-2.5 hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
-                            >
-                              <span className="w-2 h-2 rounded-full bg-[#0078d4] shrink-0" />
-                              <span>{t("outlook_calendar")}</span>
-                            </a>
-                            <button
-                              onClick={() => downloadIcsFile(getEventData(match))}
-                              className="flex items-center justify-center gap-2.5 w-full hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
-                            >
-                              <span className="w-2 h-2 rounded-full bg-zinc-550 shrink-0" />
-                              <span>{t("download_ics")}</span>
-                            </button>
-                            
-                            {showSubscribe && (
-                              <div className="w-full h-px bg-zinc-900/80 my-1" />
-                            )}
-                            {showSubscribe && (
-                              <button
-                                onClick={() => setIsFeedModalOpen(true)}
-                                className="flex items-center justify-center gap-2.5 w-full hover:bg-zinc-900/60 text-[#ffcc00] hover:text-[#ffd633] font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
+                              <a
+                                href={getGoogleCalendarUrl(getEventData(match))}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center gap-2.5 hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
                               >
-                                <CalendarIcon className="w-3 h-3 text-[#ffcc00]" />
-                                <span>{t("subscribe_full_calendar")}</span>
+                                <span className="w-2 h-2 rounded-full bg-[#db4437] shrink-0" />
+                                <span>{t("google_calendar")}</span>
+                              </a>
+                              <a
+                                href={getOutlookCalendarUrl(getEventData(match))}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center gap-2.5 hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
+                              >
+                                <span className="w-2 h-2 rounded-full bg-[#0078d4] shrink-0" />
+                                <span>{t("outlook_calendar")}</span>
+                              </a>
+                              <button
+                                onClick={() => downloadIcsFile(getEventData(match))}
+                                className="flex items-center justify-center gap-2.5 w-full hover:bg-zinc-900/60 text-zinc-300 hover:text-white font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
+                              >
+                                <span className="w-2 h-2 rounded-full bg-zinc-550 shrink-0" />
+                                <span>{t("download_ics")}</span>
                               </button>
-                            )}
-                          </motion.div>
-                        )}
-                      </div>
+                              
+                              {showSubscribe && (
+                                <div className="w-full h-px bg-zinc-900/80 my-1" />
+                              )}
+                              {showSubscribe && (
+                                <button
+                                  onClick={() => setIsFeedModalOpen(true)}
+                                  className="flex items-center justify-center gap-2.5 w-full hover:bg-zinc-900/60 text-[#ffcc00] hover:text-[#ffd633] font-bold py-2 px-3 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer border border-transparent hover:border-zinc-900"
+                                >
+                                  <CalendarIcon className="w-3 h-3 text-[#ffcc00]" />
+                                  <span>{t("subscribe_full_calendar")}</span>
+                                </button>
+                              )}
+                            </motion.div>
+                          )}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>

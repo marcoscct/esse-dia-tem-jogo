@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowLeft, Sparkles, Calendar, Globe, Layers, Zap, Flame, Award, Tv } from "lucide-react";
+import Image from "next/image";
 import type { Language } from "@/locales/i18n-utils";
 
 interface Props {
@@ -286,9 +287,11 @@ export default function LocalizedDevlogPage({ lang }: Props) {
             {t.back}
           </Link>
           <div className="w-20 h-20 mb-4 drop-shadow-[0_0_15px_rgba(255,204,0,0.2)]">
-            <img
+            <Image
               src="/logo.png"
               alt="Logo"
+              width={80}
+              height={80}
               className="w-full h-full object-contain"
             />
           </div>

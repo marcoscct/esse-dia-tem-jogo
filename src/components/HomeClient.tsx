@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Calendar as CalendarIcon, RefreshCw, Loader2 } from "lucide-react";
+import Image from "next/image";
 import type { TeamSummary, MatchWithTeam } from "@/lib/types";
 import ResultModal from "./ResultModal";
 import TeamCarousel from "./TeamCarousel";
@@ -187,9 +188,12 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
         <header className="flex flex-col items-center justify-center shrink-0">
           {/* Logo */}
           <div className="w-40 h-40 md:w-[280px] md:h-[280px] lg:w-[340px] lg:h-[340px]">
-            <img
+            <Image
               src="/logo.png"
               alt={t("title")}
+              width={340}
+              height={340}
+              priority
               className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,204,0,0.3)]"
             />
           </div>

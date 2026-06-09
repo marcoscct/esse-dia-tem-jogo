@@ -63,7 +63,7 @@ function formatOffset(offsetMinutes: number): string {
 }
 
 export default function SettingsPanel() {
-  const { lang, t, timezoneMode, setTimezoneMode, deviceTzAbbr, customTimezone, setCustomTimezone, deviceTimezone } = useLanguage();
+  const { lang, t, timezoneMode, setTimezoneMode, deviceTzAbbr, customTimezone, setCustomTimezone, deviceTimezone, compactMode, setCompactMode } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
   const options = [
@@ -177,6 +177,37 @@ export default function SettingsPanel() {
                 >
                   <X className="w-4 h-4" />
                 </button>
+              </div>
+
+              {/* Display Mode Selection Section */}
+              <div className="flex flex-col gap-2.5 mb-2">
+                <span className="text-[10px] font-black uppercase tracking-widest text-[#ffcc00]">
+                  {t("display_mode_title") || "Exibição dos Jogos"}
+                </span>
+
+                <div className="flex flex-col gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setCompactMode(!compactMode)}
+                    className={`flex items-center justify-between gap-3 w-full px-4 py-3 rounded-2xl border text-left transition-all cursor-pointer ${
+                      compactMode
+                        ? "bg-[#ffcc00]/10 border-[#ffcc00]/30 text-white shadow-[0_0_15px_rgba(255,204,0,0.05)]"
+                        : "bg-zinc-950/40 border-zinc-900 text-zinc-400 hover:bg-zinc-900/50 hover:text-white hover:border-zinc-800"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="flex flex-col">
+                        <span className="text-xs font-bold">{t("display_mode_compact") || "Versão Resumida"}</span>
+                        <span className="text-[9px] text-zinc-550 font-medium leading-none mt-0.5">
+                          {t("display_mode_compact_desc") || "Ocultar agenda e transmissão"}
+                        </span>
+                      </div>
+                    </div>
+                    <div className={`w-10 h-6 rounded-full p-1 transition-colors ${compactMode ? "bg-[#ffcc00]" : "bg-zinc-800"}`}>
+                      <div className={`w-4 h-4 rounded-full bg-white transition-transform ${compactMode ? "translate-x-4" : "translate-x-0"}`} />
+                    </div>
+                  </button>
+                </div>
               </div>
 
               {/* Timezone Selection Section */}

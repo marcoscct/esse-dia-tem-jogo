@@ -6,7 +6,10 @@ const nextConfig: NextConfig = {
 
   // Image optimization settings
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      { protocol: "https", hostname: "s.sde.globo.com" },
+      { protocol: "https", hostname: "hatscripts.github.io" }
+    ]
   },
 
   experimental: {

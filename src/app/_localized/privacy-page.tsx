@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
 import type { Language } from "@/locales/i18n-utils";
 
 interface Props {
@@ -83,9 +84,11 @@ export default function LocalizedPrivacyPage({ lang }: Props) {
             {t.back}
           </Link>
           <div className="w-24 h-24 mb-4">
-            <img
+            <Image
               src="/logo.png"
               alt="Esse Dia Tem Jogo?"
+              width={96}
+              height={96}
               className="w-full h-full object-contain"
             />
           </div>

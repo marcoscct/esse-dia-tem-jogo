@@ -16,6 +16,8 @@ interface SettingsContextType {
   setCustomTimezone: (tz: string) => void;
   deviceTimezone: string;
   deviceTzAbbr: string;
+  compactMode: boolean;
+  setCompactMode: (v: boolean) => void;
 }
 
 const SettingsContext = createContext<SettingsContextType>({
@@ -27,6 +29,8 @@ const SettingsContext = createContext<SettingsContextType>({
   setCustomTimezone: () => {},
   deviceTimezone: 'America/Sao_Paulo',
   deviceTzAbbr: 'BRT',
+  compactMode: false,
+  setCompactMode: () => {},
 });
 
 export function TranslationProvider({ lang, children }: { lang: Language; children: React.ReactNode }) {
@@ -36,6 +40,7 @@ export function TranslationProvider({ lang, children }: { lang: Language; childr
   const [customTimezone, setCustomTimezoneState] = useState('America/Sao_Paulo');
   const [deviceTimezone, setDeviceTimezone] = useState('America/Sao_Paulo');
   const [deviceTzAbbr, setDeviceTzAbbr] = useState('BRT');
+  const [compactModeState, setCompactModeState] = useState(false);
 
   useEffect(() => {
     // Detect device timezone
@@ -74,6 +79,13 @@ export function TranslationProvider({ lang, children }: { lang: Language; childr
         }
       } catch {}
     }
+
+    const savedCompact = localStorage.getItem("compactMode");
+    if (savedCompact !== null) {
+      setTimeout(() => {
+        setCompactModeState(savedCompact === 'true');
+      }, 0);
+    }
   }, []);
 
   const setTimezoneMode = (mode: TimezoneMode) => {
@@ -94,6 +106,15 @@ export function TranslationProvider({ lang, children }: { lang: Language; childr
     }
   };
 
+  const setCompactMode = (v: boolean) => {
+    setCompactModeState(v);
+    try {
+      localStorage.setItem("compactMode", v.toString());
+    } catch (err) {
+      console.warn("Failed to save compactMode to localStorage:", err);
+    }
+  };
+
   return (
     <SettingsContext.Provider value={{
       lang,
@@ -103,7 +124,9 @@ export function TranslationProvider({ lang, children }: { lang: Language; childr
       customTimezone,
       setCustomTimezone,
       deviceTimezone,
-      deviceTzAbbr
+      deviceTzAbbr,
+      compactMode: compactModeState,
+      setCompactMode
     }}>
       {children}
     </SettingsContext.Provider>

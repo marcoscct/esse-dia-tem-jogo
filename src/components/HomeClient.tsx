@@ -194,7 +194,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
           {/* Logo */}
           <div className="w-40 h-40 md:w-[280px] md:h-[280px] lg:w-[340px] lg:h-[340px]">
             <Image
-              src="/logo.png"
+              src="/logo.webp"
               alt={t("title")}
               width={340}
               height={340}
@@ -213,7 +213,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                 type="button"
                 onClick={() => setMode("team")}
                 className={`font-black uppercase tracking-wider text-xs md:text-sm transition-all pb-1.5 relative ${
-                  mode === "team" ? "text-[#ffcc00]" : "text-zinc-500 hover:text-zinc-300"
+                  mode === "team" ? "text-[#ffcc00]" : "text-zinc-400 hover:text-zinc-300"
                 }`}
               >
                 {t("select_team")}
@@ -222,13 +222,13 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                 )}
               </button>
               
-              <span className="text-zinc-600 font-bold uppercase text-xs md:text-sm pb-1.5">{t("or")}</span>
+              <span className="text-zinc-400 font-bold uppercase text-xs md:text-sm pb-1.5">{t("or")}</span>
               
               <button
                 type="button"
                 onClick={() => setMode("date-only")}
                 className={`font-black uppercase tracking-wider text-xs md:text-sm transition-all pb-1.5 relative ${
-                  mode === "date-only" ? "text-[#ffcc00]" : "text-zinc-500 hover:text-zinc-300"
+                  mode === "date-only" ? "text-[#ffcc00]" : "text-zinc-400 hover:text-zinc-300"
                 }`}
               >
                 {t("select_day_only")}
@@ -323,7 +323,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
 
             {/* Checkbox for date range */}
             <div className="flex items-center justify-center -mt-1">
-              <label className="flex items-center gap-2 cursor-pointer text-xs md:text-sm text-zinc-500 hover:text-zinc-300 select-none">
+              <label className="flex items-center gap-2 cursor-pointer text-xs md:text-sm text-zinc-400 hover:text-zinc-300 select-none">
                 <input
                   type="checkbox"
                   checked={isRangeEnabled}
@@ -478,7 +478,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                     <h3 className="font-black text-sm uppercase text-white tracking-wider">
                       {activeTeamData.name}
                     </h3>
-                    <p className="text-xs text-zinc-500 mt-1">
+                    <p className="text-xs text-zinc-400 mt-1">
                       {t("seo_team_default_desc", { team: activeTeamData.name })}
                     </p>
                   </div>
@@ -544,7 +544,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                     className="w-full px-5 py-4 flex items-center justify-between text-left font-bold text-sm md:text-base text-white hover:text-[#ffcc00] transition-colors focus:outline-none cursor-pointer"
                   >
                     <span>{item.q}</span>
-                    <ChevronDown className={`w-4 h-4 text-zinc-550 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180 text-[#ffcc00]" : ""}`} />
+                    <ChevronDown className={`w-4 h-4 text-zinc-400 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180 text-[#ffcc00]" : ""}`} />
                   </button>
                   {isOpen && (
                     <div className="px-5 pb-5 pt-1 text-zinc-400 text-xs md:text-sm leading-relaxed border-t border-zinc-900">
@@ -596,8 +596,8 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
       </div>
 
       {/* Footer Info */}
-      <footer className="w-full flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 py-4 md:py-5 bg-black text-zinc-500 text-xs border-t border-zinc-950">
-        <div className="flex items-center gap-1.5 flex-wrap justify-center text-zinc-500">
+      <footer className="w-full flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 py-4 md:py-5 bg-black text-zinc-400 text-xs border-t border-zinc-950">
+        <div className="flex items-center gap-1.5 flex-wrap justify-center text-zinc-400">
           <RefreshCw className="w-3.5 h-3.5" />
           <span>{t("last_updated", { date: lastUpdated })}</span>
           <span>|</span>
@@ -605,8 +605,8 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
             v1.6.0
           </NextLink>
         </div>
-        <div className="hidden md:block text-zinc-700">•</div>
-        <div className="flex items-center gap-4 text-zinc-500 mt-1 md:mt-0 flex-wrap justify-center">
+        <div className="hidden md:block text-zinc-400">•</div>
+        <div className="flex items-center gap-4 text-zinc-400 mt-1 md:mt-0 flex-wrap justify-center">
           <NextLink href={`${langPrefix}/sobre`} prefetch={false} className="hover:text-[#ffcc00] transition-colors">{t("about")}</NextLink>
           <span>•</span>
           <NextLink href={`${langPrefix}/contato`} prefetch={false} className="hover:text-[#ffcc00] transition-colors">{t("contact")}</NextLink>

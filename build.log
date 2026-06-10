@@ -1,0 +1,9 @@
+
+> Build error occurred
+Error: ENOENT: no such file or directory, mkdir 'F:\Castro Brothers Dropbox\Pasta da equipe Castro Brothers\Apps\Vai ter Jogo\esse-dia-tem-jogo\C:\Users\MARCOS~1\AppData\Local\Temp\esse-dia-tem-jogo-next '
+    at ignore-listed frames {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'mkdir',
+  path: 'F:\\Castro Brothers Dropbox\\Pasta da equipe Castro Brothers\\Apps\\Vai ter Jogo\\esse-dia-tem-jogo\\C:\\Users\\MARCOS~1\\AppData\\Local\\Temp\\esse-dia-tem-jogo-next '
+}

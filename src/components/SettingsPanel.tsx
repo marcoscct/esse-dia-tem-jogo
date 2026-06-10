@@ -173,7 +173,7 @@ export default function SettingsPanel() {
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="text-zinc-500 hover:text-white transition-colors cursor-pointer p-1"
+                  className="text-zinc-400 hover:text-white transition-colors cursor-pointer p-1"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -198,7 +198,7 @@ export default function SettingsPanel() {
                     <div className="flex items-center gap-3">
                       <div className="flex flex-col">
                         <span className="text-xs font-bold">{t("display_mode_compact") || "Versão Resumida"}</span>
-                        <span className="text-[9px] text-zinc-550 font-medium leading-none mt-0.5">
+                        <span className="text-[9px] text-zinc-400 font-medium leading-none mt-0.5">
                           {t("display_mode_compact_desc") || "Ocultar agenda e transmissão"}
                         </span>
                       </div>
@@ -239,7 +239,7 @@ export default function SettingsPanel() {
                             <div className="flex flex-col">
                               <span className="text-xs font-bold">{opt.label}</span>
                               {opt.desc && (
-                                <span className="text-[9px] text-zinc-550 font-medium leading-none mt-0.5">
+                                <span className="text-[9px] text-zinc-400 font-medium leading-none mt-0.5">
                                   {opt.desc}
                                 </span>
                               )}

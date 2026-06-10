@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable */
 /**
  * scripts/transform-clubs.js
  * Scrapes and compiles Série A, Série B, Libertadores, and Copa do Brasil fixtures

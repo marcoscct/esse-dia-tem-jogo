@@ -270,13 +270,13 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
     let description = "";
     if (lang === 'pt') {
       const localTimeText = localTimeFormatted ? ` / ${localTimeFormatted} (horário local)` : "";
-      description = `Esse Dia Tem Jogo! ⚽\n\nPartida: ${title}\nFase: ${phaseTrans}\nEstádio: ${match.venue}\nCidade: ${match.city}\nHorário: ${timeStrBrt}${localTimeText}\n\nEvite marcar compromissos nesse horário!\nConsulte mais datas em: http://www.essediatemjogo.com.br`;
+      description = `Esse Dia Tem Jogo! ⚽\n\nPartida: ${title}\nFase: ${phaseTrans}\nEstádio: ${match.venue}\nCidade: ${match.city}\nHorário: ${timeStrBrt}${localTimeText}\n\nEvite marcar compromissos nesse horário!\nConsulte mais datas em: https://www.essediatemjogo.com.br`;
     } else if (lang === 'es') {
       const localTimeText = localTimeFormatted ? ` / ${localTimeFormatted} (hora local)` : "";
-      description = `¡Hay Partido! ⚽\n\nPartido: ${title}\nFase: ${phaseTrans}\nEstadio: ${match.venue}\nCiudad: ${match.city}\nHorario: ${timeStrBrt}${localTimeText}\n\n¡Evita programar compromisos a esta hora!\nConsulta más fechas en: http://www.essediatemjogo.com.br`;
+      description = `¡Hay Partido! ⚽\n\nPartido: ${title}\nFase: ${phaseTrans}\nEstadio: ${match.venue}\nCiudad: ${match.city}\nHorario: ${timeStrBrt}${localTimeText}\n\n¡Evita programar compromisos a esta hora!\nConsulta más fechas en: https://www.essediatemjogo.com.br`;
     } else {
       const localTimeText = localTimeFormatted ? ` / ${localTimeFormatted} (local time)` : "";
-      description = `Game Day! ⚽\n\nMatch: ${title}\nPhase: ${phaseTrans}\nVenue: ${match.venue}\nCity: ${match.city}\nTime: ${timeStrBrt}${localTimeText}\n\nAvoid scheduling commitments during this time!\nCheck more dates at: http://www.essediatemjogo.com.br`;
+      description = `Game Day! ⚽\n\nMatch: ${title}\nPhase: ${phaseTrans}\nVenue: ${match.venue}\nCity: ${match.city}\nTime: ${timeStrBrt}${localTimeText}\n\nAvoid scheduling commitments during this time!\nCheck more dates at: https://www.essediatemjogo.com.br`;
     }
 
     return {
@@ -355,7 +355,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
             {/* Close button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 text-zinc-550 hover:text-white transition-colors bg-zinc-950 rounded-full p-2 border border-zinc-900 z-20"
+              className="absolute top-4 right-4 text-zinc-400 hover:text-white transition-colors bg-zinc-950 rounded-full p-2 border border-zinc-900 z-20"
             >
               <X className="w-5 h-5" />
             </button>
@@ -482,7 +482,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                                 <span className="text-[10px] font-black text-zinc-455 uppercase">{leftCode}</span>
                               </div>
 
-                              <span className="text-zinc-700 font-black text-lg italic">X</span>
+                              <span className="text-zinc-400 font-black text-lg italic">X</span>
 
                               <div className="flex flex-col items-center gap-1.5 w-20">
                                 <div className={rightIsClub ? "w-12 h-12 flex items-center justify-center" : "w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-855 bg-zinc-950 flex items-center justify-center"}>
@@ -515,7 +515,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                       })()}
 
                       {!compactMode && (
-                        <div className="flex items-center justify-center gap-1 text-zinc-600 font-bold text-[9px] uppercase tracking-wide text-center">
+                        <div className="flex items-center justify-center gap-1 text-zinc-400 font-bold text-[9px] uppercase tracking-wide text-center">
                           <span>{match.venue}</span>
                           {match.city && match.city !== match.venue && (
                             <>
@@ -541,9 +541,9 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                         if (!match.time_brt) {
                           return (
                             <div className={`flex items-center justify-center flex-nowrap whitespace-nowrap gap-1 md:gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-3 sm:px-4 rounded-full text-[11px] sm:text-xs border border-zinc-900 w-fit max-w-full ${compactMode ? 'mt-1' : 'mt-3'}`}>
-                              <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
+                              <CalendarIcon className="w-3.5 h-3.5 text-zinc-400" />
                               <span>{formattedDate}</span>
-                              <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />
+                              <Clock className="w-3.5 h-3.5 text-zinc-400 ml-1.5" />
                               <span>{t("time_tbd")}</span>
                             </div>
                           );
@@ -552,9 +552,9 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                         const formattedTime = formatMatchTimeInTimezone(match.time_brt, match.date, targetTz, lang);
                         return (
                           <div className={`flex items-center justify-center flex-nowrap whitespace-nowrap gap-1 md:gap-1.5 text-white font-bold bg-zinc-950 py-1.5 px-3 sm:px-4 rounded-full text-[11px] sm:text-xs border border-zinc-900 w-fit max-w-full ${compactMode ? 'mt-1' : 'mt-3'}`}>
-                            <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
+                            <CalendarIcon className="w-3.5 h-3.5 text-zinc-400" />
                             <span>{formattedDate}</span>
-                            <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />
+                            <Clock className="w-3.5 h-3.5 text-zinc-400 ml-1.5" />
                             <span>{formattedTime}</span>
                           </div>
                         );
@@ -562,7 +562,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
 
                       {!compactMode && lang === 'pt' && match.broadcasts && match.broadcasts.length > 0 && (
                         <div className="flex flex-col items-center gap-1 mt-3">
-                          <span className="text-[9px] font-bold text-zinc-550 uppercase tracking-wider">{t("where_to_watch")}</span>
+                          <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider">{t("where_to_watch")}</span>
                           <div className="flex items-center gap-2 mt-1">
                             {match.broadcasts.map((channel) => (
                               <BroadcastIcon key={channel} channel={channel} />
@@ -578,7 +578,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                             onClick={() => setOpenDropdownId(openDropdownId === match.id ? null : match.id)}
                             className="w-full flex items-center justify-center gap-1.5 bg-zinc-950 hover:bg-zinc-900 text-zinc-400 hover:text-white font-bold py-2.5 px-4 rounded-xl text-xs border border-zinc-900 hover:border-zinc-800 transition-all cursor-pointer"
                           >
-                            <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
+                            <CalendarIcon className="w-3.5 h-3.5 text-zinc-400" />
                             <span>{t("add_to_calendar")}</span>
                             <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${openDropdownId === match.id ? "rotate-180" : ""}`} />
                           </button>
@@ -638,7 +638,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                 <div className="w-full bg-[#141414] rounded-2xl py-8 px-6 border border-zinc-900 flex flex-col items-center">
                   <CalendarIcon className="w-12 h-12 text-[#2ecc71] mb-3 opacity-80" />
                   {date && (
-                    <div className="text-zinc-550 font-bold text-xs uppercase tracking-widest mb-1.5">
+                    <div className="text-zinc-400 font-bold text-xs uppercase tracking-widest mb-1.5">
                       {(() => {
                         const getSingleFormattedWithWeekday = (dStr: string) => {
                           try {

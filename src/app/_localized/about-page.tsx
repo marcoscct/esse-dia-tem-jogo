@@ -82,7 +82,7 @@ export default function LocalizedAboutPage({ lang }: Props) {
           </Link>
           <div className="w-24 h-24 mb-4">
             <Image
-              src="/logo.png"
+              src="/logo.webp"
               alt="Esse Dia Tem Jogo?"
               width={96}
               height={96}
@@ -123,12 +123,12 @@ export default function LocalizedAboutPage({ lang }: Props) {
               <div className="bg-zinc-950 p-4 rounded-2xl border border-zinc-800 text-center">
                 <span className="block text-2xl mb-1">⚽</span>
                 <span className="font-display font-bold text-red-500 block uppercase tracking-wide">{t.solution_yes}</span>
-                <span className="text-xs text-zinc-500">{t.solution_yes_desc}</span>
+                <span className="text-xs text-zinc-400">{t.solution_yes_desc}</span>
               </div>
               <div className="bg-zinc-950 p-4 rounded-2xl border border-zinc-800 text-center">
                 <span className="block text-2xl mb-1">😌</span>
                 <span className="font-display font-bold text-[#ffcc00] block uppercase tracking-wide">{t.solution_no}</span>
-                <span className="text-xs text-zinc-500">{t.solution_no_desc}</span>
+                <span className="text-xs text-zinc-400">{t.solution_no_desc}</span>
               </div>
             </div>
           </section>
@@ -141,7 +141,7 @@ export default function LocalizedAboutPage({ lang }: Props) {
             <p>{t.about_us_p2}</p>
           </section>
 
-          <div className="pt-6 border-t border-zinc-800 text-xs text-zinc-500 text-center">
+          <div className="pt-6 border-t border-zinc-800 text-xs text-zinc-400 text-center">
             {t.footer}
           </div>
         </div>

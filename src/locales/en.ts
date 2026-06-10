@@ -82,10 +82,10 @@ export const en = {
   "subscribe_full_calendar": "Subscribe to Full Schedule",
 
   // Share templates
-  "share_free_range": "You can schedule plans between {start} and {end}! I've already checked that the schedule is free at http://www.essediatemjogo.com.br",
-  "share_free_single": "You can schedule plans on {date}! I've already checked that the schedule is free at http://www.essediatemjogo.com.br",
-  "share_busy_range": "Don't schedule anything on these days! The following games may occur between {start} and {end}:\n{games}\n\nCheck yours too at http://www.essediatemjogo.com.br",
-  "share_busy_single": "Don't schedule anything on this day! The following games may occur on {date}:\n{games}\n\nCheck yours too at http://www.essediatemjogo.com.br",
+  "share_free_range": "You can schedule plans between {start} and {end}! I've already checked that the schedule is free at https://www.essediatemjogo.com.br",
+  "share_free_single": "You can schedule plans on {date}! I've already checked that the schedule is free at https://www.essediatemjogo.com.br",
+  "share_busy_range": "Don't schedule anything on these days! The following games may occur between {start} and {end}:\n{games}\n\nCheck yours too at https://www.essediatemjogo.com.br",
+  "share_busy_single": "Don't schedule anything on this day! The following games may occur on {date}:\n{games}\n\nCheck yours too at https://www.essediatemjogo.com.br",
 
   // Team names (English mapping)
   "teams": {

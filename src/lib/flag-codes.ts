@@ -313,11 +313,11 @@ const CLUB_BADGES: Record<string, string> = {
 export function getFlagUrl(teamCode: string): string {
   const code = teamCode.toUpperCase();
   if (CLUB_BADGES[code]) {
-    return CLUB_BADGES[code];
+    return `/badges/${code.toLowerCase()}.svg`;
   }
   const iso = TEAM_TO_ISO[code];
-  if (!iso) return "https://hatscripts.github.io/circle-flags/flags/xx.svg";
-  return `https://hatscripts.github.io/circle-flags/flags/${iso}.svg`;
+  if (!iso) return "/flags/xx.svg";
+  return `/flags/${code.toLowerCase()}.svg`;
 }
 
 /**

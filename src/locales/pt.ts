@@ -82,10 +82,10 @@ export const pt = {
   "subscribe_full_calendar": "Assinar Agenda da Seleção",
 
   // Share templates
-  "share_free_range": "Pode marcar compromisso entre os dias {start} e {end}! Eu já garanti que a agenda está livre em http://www.essediatemjogo.com.br",
-  "share_free_single": "Pode marcar compromisso no dia {date}! Eu já garanti que a agenda está livre em http://www.essediatemjogo.com.br",
-  "share_busy_range": "Não marque nada nesses dias! Os seguintes jogos podem ocorrer entre os dias {start} e {end}:\n{games}\n\nConfira você também em http://www.essediatemjogo.com.br",
-  "share_busy_single": "Não marque nada nesse dia! Os seguintes jogos podem ocorrer no dia {date}:\n{games}\n\nConfira você também em http://www.essediatemjogo.com.br",
+  "share_free_range": "Pode marcar compromisso entre os dias {start} e {end}! Eu já garanti que a agenda está livre em https://www.essediatemjogo.com.br",
+  "share_free_single": "Pode marcar compromisso no dia {date}! Eu já garanti que a agenda está livre em https://www.essediatemjogo.com.br",
+  "share_busy_range": "Não marque nada nesses dias! Os seguintes jogos podem ocorrer entre os dias {start} e {end}:\n{games}\n\nConfira você também em https://www.essediatemjogo.com.br",
+  "share_busy_single": "Não marque nada nesse dia! Os seguintes jogos podem ocorrer no dia {date}:\n{games}\n\nConfira você também em https://www.essediatemjogo.com.br",
 
   // AdSense / SEO Content below the fold
   "seo_about_title": "Sobre o Esse Dia Tem Jogo?",

@@ -82,10 +82,10 @@ export const es = {
   "subscribe_full_calendar": "Suscribirse al Calendario Completo",
 
   // Share templates
-  "share_free_range": "¡Puedes programar compromisos entre el {start} y el {end}! Ya me aseguré de que la agenda esté libre en http://www.essediatemjogo.com.br",
-  "share_free_single": "¡Puedes programar compromisos el {date}! Ya me aseguré de que la agenda esté libre en http://www.essediatemjogo.com.br",
-  "share_busy_range": "¡No programes nada en estos días! Los siguientes partidos pueden ocurrir entre el {start} y el {end}:\n{games}\n\nConsulta el tuyo también en http://www.essediatemjogo.com.br",
-  "share_busy_single": "¡No programes nada este día! Los siguientes partidos pueden ocurrir el {date}:\n{games}\n\nConsulta el tuyo también en http://www.essediatemjogo.com.br",
+  "share_free_range": "¡Puedes programar compromisos entre el {start} y el {end}! Ya me aseguré de que la agenda esté libre en https://www.essediatemjogo.com.br",
+  "share_free_single": "¡Puedes programar compromisos el {date}! Ya me aseguré de que la agenda esté libre en https://www.essediatemjogo.com.br",
+  "share_busy_range": "¡No programes nada en estos días! Los siguientes partidos pueden ocurrir entre el {start} y el {end}:\n{games}\n\nConsulta el tuyo también en https://www.essediatemjogo.com.br",
+  "share_busy_single": "¡No programes nada este día! Los siguientes partidos pueden ocurrir el {date}:\n{games}\n\nConsulta el tuyo también en https://www.essediatemjogo.com.br",
 
   // Team names (Spanish mapping)
   "teams": {

@@ -213,7 +213,7 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                     {translateCondition(match.condition, lang)}
                   </span>
                 )}
-                <div className="text-[10px] font-bold text-zinc-550 uppercase tracking-widest mb-2">
+                <div className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-2">
                   {(() => {
                     const comp = getCompetitionName(match.phase_slug, lang);
                     return comp ? `${comp} • ${translatePhase(match.phase, lang)}` : translatePhase(match.phase, lang);
@@ -254,7 +254,7 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                           />
                           <span className="font-bold text-sm text-white">{leftName}</span>
                         </div>
-                        <span className="text-zinc-500 font-bold text-xs">X</span>
+                        <span className="text-zinc-400 font-bold text-xs">X</span>
                         <div className="flex items-center gap-2">
                           <img
                             src={rightFlag}
@@ -285,9 +285,9 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                   if (!match.time_brt) {
                     return (
                       <div className="flex items-center flex-nowrap whitespace-nowrap gap-1 md:gap-1.5 text-zinc-455 font-bold text-[11px] sm:text-xs bg-zinc-950 py-1.5 px-3 sm:px-4 rounded-full mt-1 border border-zinc-900 w-fit max-w-full">
-                        <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
+                        <CalendarIcon className="w-3.5 h-3.5 text-zinc-400" />
                         <span>{formattedDate}</span>
-                        <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />
+                        <Clock className="w-3.5 h-3.5 text-zinc-400 ml-1.5" />
                         <span>{t("time_tbd")}</span>
                       </div>
                     );
@@ -296,9 +296,9 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                   const formattedTime = formatMatchTimeInTimezone(match.time_brt, match.date, targetTz, lang);
                   return (
                     <div className="flex items-center flex-nowrap whitespace-nowrap gap-1 md:gap-1.5 text-zinc-455 font-bold text-[11px] sm:text-xs bg-zinc-950 py-1.5 px-3 sm:px-4 rounded-full mt-1 border border-zinc-900 w-fit max-w-full">
-                      <CalendarIcon className="w-3.5 h-3.5 text-zinc-550" />
+                      <CalendarIcon className="w-3.5 h-3.5 text-zinc-400" />
                       <span>{formattedDate}</span>
-                      <Clock className="w-3.5 h-3.5 text-zinc-550 ml-1.5" />
+                      <Clock className="w-3.5 h-3.5 text-zinc-400 ml-1.5" />
                       <span>{formattedTime}</span>
                     </div>
                   );
@@ -306,7 +306,7 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
 
                 {lang === 'pt' && match.broadcasts && match.broadcasts.length > 0 && (
                   <div className="flex flex-col items-center gap-1 mt-3">
-                    <span className="text-[9px] font-bold text-zinc-550 uppercase tracking-wider">{t("where_to_watch")}</span>
+                    <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider">{t("where_to_watch")}</span>
                     <div className="flex items-center gap-2 mt-1">
                       {match.broadcasts.map((channel) => (
                         <BroadcastIcon key={channel} channel={channel} />

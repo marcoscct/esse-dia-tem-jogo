@@ -91,7 +91,7 @@ export default function LocalizedTermsPage({ lang }: Props) {
           </Link>
           <div className="w-24 h-24 mb-4">
             <Image
-              src="/logo.png"
+              src="/logo.webp"
               alt="Esse Dia Tem Jogo?"
               width={96}
               height={96}
@@ -153,7 +153,7 @@ export default function LocalizedTermsPage({ lang }: Props) {
             <p>{t.s5_p1}</p>
           </section>
 
-          <div className="pt-6 border-t border-zinc-800 text-xs text-zinc-500 text-center">
+          <div className="pt-6 border-t border-zinc-800 text-xs text-zinc-400 text-center">
             {t.footer}
           </div>
         </div>

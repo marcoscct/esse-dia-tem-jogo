@@ -288,7 +288,7 @@ export default function LocalizedDevlogPage({ lang }: Props) {
           </Link>
           <div className="w-20 h-20 mb-4 drop-shadow-[0_0_15px_rgba(255,204,0,0.2)]">
             <Image
-              src="/logo.png"
+              src="/logo.webp"
               alt="Logo"
               width={80}
               height={80}
@@ -325,7 +325,7 @@ export default function LocalizedDevlogPage({ lang }: Props) {
                     <span className="bg-[#ffcc00]/10 text-[#ffcc00] font-display font-black text-sm uppercase px-3 py-1 rounded-full tracking-wider border border-[#ffcc00]/20">
                       {log.version}
                     </span>
-                    <span className="text-xs text-zinc-500 font-semibold uppercase tracking-wider">
+                    <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">
                       {log.date}
                     </span>
                   </div>
@@ -351,7 +351,7 @@ export default function LocalizedDevlogPage({ lang }: Props) {
         </div>
 
         {/* Footer */}
-        <div className="mt-16 pt-6 border-t border-zinc-900 text-xs text-zinc-500 text-center">
+        <div className="mt-16 pt-6 border-t border-zinc-900 text-xs text-zinc-400 text-center">
           {t.footer}
         </div>
       </main>

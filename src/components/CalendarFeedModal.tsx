@@ -132,7 +132,7 @@ export default function CalendarFeedModal({ isOpen, onClose, teamCode, teamName 
             </div>
             <button
               onClick={onClose}
-              className="text-zinc-500 hover:text-white transition-colors cursor-pointer p-1 rounded-lg hover:bg-zinc-900"
+              className="text-zinc-400 hover:text-white transition-colors cursor-pointer p-1 rounded-lg hover:bg-zinc-900"
             >
               <X className="w-5 h-5" />
             </button>
@@ -207,10 +207,10 @@ export default function CalendarFeedModal({ isOpen, onClose, teamCode, teamName 
                     </div>
                     <div className="flex flex-col">
                       <span className="text-xs font-black text-white">{t("google_calendar") || "Google Agenda"}</span>
-                      <span className="text-[9px] text-zinc-500">{t("subscribe_google_desc") || "Inscrição direta em um clique"}</span>
+                      <span className="text-[9px] text-zinc-400">{t("subscribe_google_desc") || "Inscrição direta em um clique"}</span>
                     </div>
                   </div>
-                  <Check className="w-4 h-4 text-zinc-600" />
+                  <Check className="w-4 h-4 text-zinc-400" />
                 </a>
 
                 {/* Webcal standard link */}
@@ -224,10 +224,10 @@ export default function CalendarFeedModal({ isOpen, onClose, teamCode, teamName 
                     </div>
                     <div className="flex flex-col">
                       <span className="text-xs font-black text-white">{t("webcal_subscribe_btn") || "iPhone / Mac / Outlook"}</span>
-                      <span className="text-[9px] text-zinc-500">{t("subscribe_webcal_desc") || "Abre o app nativo do seu aparelho"}</span>
+                      <span className="text-[9px] text-zinc-400">{t("subscribe_webcal_desc") || "Abre o app nativo do seu aparelho"}</span>
                     </div>
                   </div>
-                  <Check className="w-4 h-4 text-zinc-600" />
+                  <Check className="w-4 h-4 text-zinc-400" />
                 </a>
 
                 {/* Copy URL feed */}
@@ -243,10 +243,10 @@ export default function CalendarFeedModal({ isOpen, onClose, teamCode, teamName 
                       <span className="text-xs font-black text-white">
                         {copied ? (t("copied") || "Copiado!") : (t("copy_feed_url_btn") || "Copiar link do calendário")}
                       </span>
-                      <span className="text-[9px] text-zinc-500">{t("copy_feed_url_desc") || "Para adicionar manualmente no app"}</span>
+                      <span className="text-[9px] text-zinc-400">{t("copy_feed_url_desc") || "Para adicionar manualmente no app"}</span>
                     </div>
                   </div>
-                  <Copy className="w-4 h-4 text-zinc-600" />
+                  <Copy className="w-4 h-4 text-zinc-400" />
                 </button>
               </div>
             )}

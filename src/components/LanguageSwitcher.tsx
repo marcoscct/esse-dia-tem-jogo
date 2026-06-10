@@ -93,7 +93,7 @@ export default function LanguageSwitcher() {
               className={`flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider transition-all cursor-pointer ${
                 isActive
                   ? "bg-[#ffcc00] text-black shadow-[0_0_12px_rgba(255,204,0,0.2)] scale-105"
-                  : "text-zinc-500 hover:text-zinc-200 hover:bg-zinc-900/55"
+                  : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/55"
               }`}
             >
               <span className="font-bold normal-case tracking-normal px-0.5">

@@ -72,7 +72,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "http://schema.org/",
+              "@context": "https://schema.org/",
               "@type": "WebApplication",
               "name": "Esse Dia Tem Jogo?",
               "description": "Descubra se seu time ou seleção joga na data que você escolher. Evite marcar compromissos importantes no mesmo horário de confrontos cruciais da sua seleção ou time favorito.",

@@ -8,6 +8,8 @@ import { Calendar as CalendarIcon, RefreshCw, Loader2, ChevronDown } from "lucid
 import Image from "next/image";
 import type { TeamSummary, MatchWithTeam } from "@/lib/types";
 const ResultModal = dynamic(() => import("./ResultModal"), { ssr: false });
+const SupportModal = dynamic(() => import("./SupportModal"), { ssr: false });
+const SupportBottomBar = dynamic(() => import("./SupportBottomBar"), { ssr: false });
 import TeamCarousel from "./TeamCarousel";
 import { queryDateClient, queryAllGamesOnDateClient } from "@/lib/client-calendar";
 import { useLanguage } from "./TranslationProvider";
@@ -621,6 +623,9 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
         </div>
       </footer>
 
+      {/* Support / PIX Floating Bar & Automatic Popup */}
+      <SupportBottomBar />
+      <SupportModal />
     </div>
   );
 }

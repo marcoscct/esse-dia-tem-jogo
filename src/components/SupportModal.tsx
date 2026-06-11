@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Heart, X } from "lucide-react";
 
 // Edit your Livepix support link here:
-export const LIVEPIX_URL = "https://livepix.gg/essediatemjogo";
+export const LIVEPIX_URL = "https://livepix.gg/castrobrothers";
 
 interface Props {
   // Option to manually trigger the modal (e.g. from the header button)

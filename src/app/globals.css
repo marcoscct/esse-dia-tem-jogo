@@ -8,8 +8,9 @@
   --color-bg-dark: #0d0d0d;
   --color-bg-card: #1a1a1a;
   
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-kanit), var(--font-inter), ui-sans-serif, system-ui;
+  --font-sans: var(--font-krona), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-krona), var(--font-inter), ui-sans-serif, system-ui;
+  --font-details: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {

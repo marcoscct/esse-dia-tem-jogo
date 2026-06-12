@@ -214,7 +214,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
               <button
                 type="button"
                 onClick={() => setMode("team")}
-                className={`font-black uppercase tracking-wider text-xs md:text-sm transition-all pb-1.5 relative ${
+                className={`font-black uppercase tracking-wider text-[10px] md:text-xs transition-all pb-1.5 relative ${
                   mode === "team" ? "text-[#ffcc00]" : "text-zinc-400 hover:text-zinc-300"
                 }`}
               >
@@ -224,12 +224,12 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                 )}
               </button>
               
-              <span className="text-zinc-400 font-bold uppercase text-xs md:text-sm pb-1.5">{t("or")}</span>
+              <span className="text-zinc-400 font-bold uppercase text-[10px] md:text-xs pb-1.5">{t("or")}</span>
               
               <button
                 type="button"
                 onClick={() => setMode("date-only")}
-                className={`font-black uppercase tracking-wider text-xs md:text-sm transition-all pb-1.5 relative ${
+                className={`font-black uppercase tracking-wider text-[10px] md:text-xs transition-all pb-1.5 relative ${
                   mode === "date-only" ? "text-[#ffcc00]" : "text-zinc-400 hover:text-zinc-300"
                 }`}
               >
@@ -258,7 +258,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
             <div className="flex flex-col md:flex-row items-start justify-center gap-4 w-full">
               {/* Start Date */}
               <div className="flex flex-col items-center gap-1.5 text-center w-full flex-1">
-                <label htmlFor="date" className="uppercase text-[#ffcc00] font-black tracking-widest text-xs md:text-sm cursor-pointer">
+                <label htmlFor="date" className="font-display uppercase text-[#ffcc00] font-black tracking-widest text-[10px] md:text-xs cursor-pointer">
                   {isRangeEnabled ? t("start_date") : t("select_date")}
                 </label>
                 <div className="w-8 h-1 bg-[#ffcc00] rounded-full mb-1"></div>
@@ -296,7 +296,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                     className="overflow-hidden w-full flex-1"
                   >
                     <div className="flex flex-col items-center gap-1.5 text-center md:pt-0">
-                      <label htmlFor="endDate" className="uppercase text-[#ffcc00] font-black tracking-widest text-xs md:text-sm cursor-pointer">
+                      <label htmlFor="endDate" className="font-display uppercase text-[#ffcc00] font-black tracking-widest text-[10px] md:text-xs cursor-pointer">
                         {t("end_date")}
                       </label>
                       <div className="w-8 h-1 bg-[#ffcc00] rounded-full mb-1"></div>
@@ -347,7 +347,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
             <button
               type="submit"
               disabled={isLoading || !selectedDate || (isRangeEnabled && !endDate)}
-              className="mt-1 w-full bg-[#ffcc00] hover:bg-[#e6b800] text-black font-black uppercase tracking-widest text-lg md:text-xl py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(255,204,0,0.2)] hover:shadow-[0_0_25px_rgba(255,204,0,0.4)] flex items-center justify-center gap-2 cursor-pointer"
+              className="mt-1 w-full bg-[#ffcc00] hover:bg-[#e6b800] text-black font-black uppercase tracking-widest text-base md:text-lg py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(255,204,0,0.2)] hover:shadow-[0_0_25px_rgba(255,204,0,0.4)] flex items-center justify-center gap-2 cursor-pointer"
             >
               {isLoading ? (
                 <>
@@ -373,12 +373,12 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
       </main>
 
       {/* Seção Informativa para SEO e AdSense (Abaixo da Dobra) */}
-      <section className="w-full max-w-4xl mx-auto px-6 py-12 flex flex-col gap-12 border-t border-zinc-900 mt-8">
+      <section className="w-full max-w-4xl mx-auto px-6 py-12 flex flex-col gap-12 border-t border-zinc-900 mt-8 font-details">
         
         {/* Bloco Dinâmico de Contexto do Jogo (SEO e Crawlers) */}
         {localResult && (
           <div className="bg-zinc-950 rounded-3xl p-6 border border-zinc-800 shadow-xl flex flex-col gap-4">
-            <h2 className="text-sm md:text-base font-black uppercase tracking-wider text-[#ffcc00] flex items-center gap-2">
+            <h2 className="font-display text-xs md:text-sm font-black uppercase tracking-wider text-[#ffcc00] flex items-center gap-2">
               <span className="text-lg">🔍</span>
               {t("verify")} - {(() => {
                 const parts = (initialDate || selectedDate).split("-");
@@ -387,7 +387,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
               })()}
             </h2>
             <div className="w-12 h-1 bg-[#ffcc00] rounded-full"></div>
-            <div className="text-zinc-400 text-sm md:text-base leading-relaxed space-y-3">
+            <div className="text-zinc-400 text-sm md:text-base leading-relaxed space-y-3 font-details">
               {localResult.matches.length > 0 ? (
                 localResult.matches.map((m, idx) => {
                   const opponentNameTrans = translateOpponentName(m.opponent_code, m.opponent_name, lang);
@@ -456,7 +456,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
         {/* Bloco 1: Sobre o Projeto / Descrição do Time */}
         <div className="bg-[#111111] rounded-3xl p-6 md:p-8 border border-zinc-800 shadow-xl">
           <div className="flex flex-col gap-4">
-            <h2 className="text-xl md:text-2xl font-black uppercase tracking-wider text-[#ffcc00] flex items-center gap-2">
+            <h2 className="font-display text-lg md:text-xl font-black uppercase tracking-wider text-[#ffcc00] flex items-center gap-2">
               <span className="text-2xl">⚽</span>
               {t("seo_about_title")}
             </h2>
@@ -477,7 +477,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                     />
                   </div>
                   <div>
-                    <h3 className="font-black text-sm uppercase text-white tracking-wider">
+                    <h3 className="font-display font-black text-xs uppercase text-white tracking-wider">
                       {activeTeamData.name}
                     </h3>
                     <p className="text-xs text-zinc-400 mt-1">
@@ -492,7 +492,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
 
         {/* Bloco 2: Como Funciona */}
         <div className="flex flex-col gap-6">
-          <h2 className="text-lg md:text-xl font-black uppercase tracking-wider text-white border-b border-zinc-900 pb-3">
+          <h2 className="font-display text-sm md:text-base font-black uppercase tracking-wider text-white border-b border-zinc-900 pb-3">
             {t("seo_how_it_works_title")}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -525,7 +525,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
 
         {/* Bloco 3: Acordeão de FAQ */}
         <div className="flex flex-col gap-6">
-          <h2 className="text-lg md:text-xl font-black uppercase tracking-wider text-white border-b border-zinc-900 pb-3">
+          <h2 className="font-display text-sm md:text-base font-black uppercase tracking-wider text-white border-b border-zinc-900 pb-3">
             {t("seo_faq_title")}
           </h2>
           <div className="flex flex-col gap-4">
@@ -561,7 +561,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
 
         {/* Bloco 4: Links Rápidos das Seleções (Internal Linking) */}
         <div className="flex flex-col gap-4 border-t border-zinc-900 pt-8">
-          <h3 className="font-bold text-xs md:text-sm text-[#ffcc00] uppercase tracking-wider">
+          <h3 className="font-display font-black text-[10px] md:text-xs text-[#ffcc00] uppercase tracking-wider">
             {t("seo_available_teams_title")}
           </h3>
           <div className="flex flex-wrap gap-2">
@@ -598,7 +598,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
       </div>
 
       {/* Footer Info */}
-      <footer className="w-full flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 py-4 md:py-5 bg-black text-zinc-400 text-xs border-t border-zinc-950">
+      <footer className="w-full flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 py-4 md:py-5 bg-black text-zinc-400 text-xs border-t border-zinc-950 font-details">
         <div className="flex items-center gap-1.5 flex-wrap justify-center text-zinc-400">
           <RefreshCw className="w-3.5 h-3.5" />
           <span>{t("last_updated", { date: lastUpdated })}</span>

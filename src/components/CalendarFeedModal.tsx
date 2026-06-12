@@ -151,7 +151,7 @@ export default function CalendarFeedModal({ isOpen, onClose, teamCode, teamName 
                 ? (t("calendar_feed_unlocked_title") || "Agenda Liberada!") 
                 : (t("calendar_feed_locked_title") || `Agenda do ${teamName}`)}
             </h3>
-            <p className="text-xs text-zinc-400 leading-relaxed px-2">
+            <p className="text-xs text-zinc-400 leading-relaxed px-2 font-details">
               {isUnlocked
                 ? (t("calendar_feed_unlocked_desc") || "Escolha seu aplicativo de preferência abaixo para se inscrever e receber atualizações em tempo real.")
                 : (t("calendar_feed_locked_desc") || "Receba todos os jogos da seleção direto na agenda do seu celular. Os horários e adversários de fases eliminatórias se auto-atualizam ou são cancelados conforme os resultados reais.")}
@@ -163,7 +163,7 @@ export default function CalendarFeedModal({ isOpen, onClose, teamCode, teamName 
             {!isUnlocked ? (
               /* Locked Flow */
               <div className="flex flex-col gap-4">
-                <div className="bg-zinc-900/40 border border-zinc-900 rounded-2xl p-4 text-xs text-zinc-400 text-left flex flex-col gap-2">
+                <div className="bg-zinc-900/40 border border-zinc-900 rounded-2xl p-4 text-xs text-zinc-400 text-left flex flex-col gap-2 font-details">
                   <span className="font-bold text-zinc-300 flex items-center gap-1.5">
                     <Check className="w-4 h-4 text-[#ffcc00]" />
                     <span>{t("calendar_feed_feature_1") || "Sincronização 100% Automática"}</span>
@@ -207,7 +207,7 @@ export default function CalendarFeedModal({ isOpen, onClose, teamCode, teamName 
                     </div>
                     <div className="flex flex-col">
                       <span className="text-xs font-black text-white">{t("google_calendar") || "Google Agenda"}</span>
-                      <span className="text-[9px] text-zinc-400">{t("subscribe_google_desc") || "Inscrição direta em um clique"}</span>
+                      <span className="text-[9px] text-zinc-400 font-details">{t("subscribe_google_desc") || "Inscrição direta em um clique"}</span>
                     </div>
                   </div>
                   <Check className="w-4 h-4 text-zinc-400" />
@@ -224,7 +224,7 @@ export default function CalendarFeedModal({ isOpen, onClose, teamCode, teamName 
                     </div>
                     <div className="flex flex-col">
                       <span className="text-xs font-black text-white">{t("webcal_subscribe_btn") || "iPhone / Mac / Outlook"}</span>
-                      <span className="text-[9px] text-zinc-400">{t("subscribe_webcal_desc") || "Abre o app nativo do seu aparelho"}</span>
+                      <span className="text-[9px] text-zinc-400 font-details">{t("subscribe_webcal_desc") || "Abre o app nativo do seu aparelho"}</span>
                     </div>
                   </div>
                   <Check className="w-4 h-4 text-zinc-400" />
@@ -243,7 +243,7 @@ export default function CalendarFeedModal({ isOpen, onClose, teamCode, teamName 
                       <span className="text-xs font-black text-white">
                         {copied ? (t("copied") || "Copiado!") : (t("copy_feed_url_btn") || "Copiar link do calendário")}
                       </span>
-                      <span className="text-[9px] text-zinc-400">{t("copy_feed_url_desc") || "Para adicionar manualmente no app"}</span>
+                      <span className="text-[9px] text-zinc-400 font-details">{t("copy_feed_url_desc") || "Para adicionar manualmente no app"}</span>
                     </div>
                   </div>
                   <Copy className="w-4 h-4 text-zinc-400" />

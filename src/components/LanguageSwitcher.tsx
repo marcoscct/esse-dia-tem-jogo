@@ -72,7 +72,7 @@ export default function LanguageSwitcher() {
                     }`}
                   >
                     <span className="text-base leading-none select-none">{l.flag}</span>
-                    <span className="normal-case font-bold">{l.fullLabel}</span>
+                    <span className="normal-case font-bold font-details">{l.fullLabel}</span>
                   </button>
                 );
               })}
@@ -96,7 +96,7 @@ export default function LanguageSwitcher() {
                   : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/55"
               }`}
             >
-              <span className="font-bold normal-case tracking-normal px-0.5">
+              <span className="font-bold normal-case tracking-normal px-0.5 font-details">
                 {l.fullLabel}
               </span>
             </button>

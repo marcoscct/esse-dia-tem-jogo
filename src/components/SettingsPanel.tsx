@@ -198,7 +198,7 @@ export default function SettingsPanel() {
                     <div className="flex items-center gap-3">
                       <div className="flex flex-col">
                         <span className="text-xs font-bold">{t("display_mode_compact") || "Versão Resumida"}</span>
-                        <span className="text-[9px] text-zinc-400 font-medium leading-none mt-0.5">
+                        <span className="text-[9px] text-zinc-400 font-medium leading-none mt-0.5 font-details">
                           {t("display_mode_compact_desc") || "Ocultar agenda e transmissão"}
                         </span>
                       </div>
@@ -239,7 +239,7 @@ export default function SettingsPanel() {
                             <div className="flex flex-col">
                               <span className="text-xs font-bold">{opt.label}</span>
                               {opt.desc && (
-                                <span className="text-[9px] text-zinc-400 font-medium leading-none mt-0.5">
+                                <span className="text-[9px] text-zinc-400 font-medium leading-none mt-0.5 font-details">
                                   {opt.desc}
                                 </span>
                               )}
@@ -259,7 +259,7 @@ export default function SettingsPanel() {
                             <select
                               value={customTimezone}
                               onChange={(e) => setCustomTimezone(e.target.value)}
-                              className="w-full bg-zinc-950 text-xs text-zinc-300 font-bold border border-zinc-850 rounded-xl py-2.5 px-3 focus:outline-none focus:border-[#ffcc00] focus:ring-1 focus:ring-[#ffcc00]/20 cursor-pointer"
+                              className="w-full bg-zinc-950 text-xs text-zinc-300 font-bold border border-zinc-850 rounded-xl py-2.5 px-3 focus:outline-none focus:border-[#ffcc00] focus:ring-1 focus:ring-[#ffcc00]/20 cursor-pointer font-details"
                             >
                               <optgroup label={t("timezone_group_popular") || "Populares"}>
                                 {popularOptions.map((tz) => {

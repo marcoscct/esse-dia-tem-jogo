@@ -218,7 +218,7 @@ export default function TeamCarousel({ teams, selected, onSelect, onScrollComple
             const g = Math.round(161 + p * (204 - 161));
             const b = Math.round(170 + p * (0 - 170));
             const textColor = `rgb(${r}, ${g}, ${b})`;
-            const fontSize = `${10.5 + p * 7.5}px`;
+            const fontSize = `${8.5 + p * 5.5}px`;
             const fontWeight = p > 0.85 ? "900" : "500";
             const textTransform = "uppercase" as const;
             const translateY = (1 - p) * -2 + p * 16;

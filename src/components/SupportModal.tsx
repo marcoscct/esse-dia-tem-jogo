@@ -115,7 +115,7 @@ export default function SupportModal({ triggerOpen = false, onCloseTrigger }: Pr
               {t("support_modal_title")}
             </h2>
             
-            <p className="text-zinc-400 text-xs md:text-sm leading-relaxed mt-4 mb-6">
+            <p className="text-zinc-400 text-xs md:text-sm leading-relaxed mt-4 mb-6 font-details">
               {t("support_modal_desc")}
             </p>
 
@@ -130,7 +130,7 @@ export default function SupportModal({ triggerOpen = false, onCloseTrigger }: Pr
             </button>
 
             {/* Sub-text */}
-            <span className="text-[10px] text-zinc-550 mt-4 leading-normal">
+            <span className="text-[10px] text-zinc-550 mt-4 leading-normal font-details">
               A contribuição é totalmente opcional e voluntária. Obrigado pelo apoio!
             </span>
           </motion.div>

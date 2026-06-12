@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Kanit, Inter } from "next/font/google";
+import { Kanit, Inter, Krona_One } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -16,6 +16,13 @@ const kanit = Kanit({
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const kronaOne = Krona_One({
+  weight: ["400"],
+  subsets: ["latin"],
+  variable: "--font-krona",
   display: "swap",
 });
 
@@ -64,7 +71,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${kanit.variable} ${inter.variable} h-full antialiased`}
+      className={`${kanit.variable} ${inter.variable} ${kronaOne.variable} h-full antialiased`}
     >
       <head>
         {/* Structured Data (Schema.org WebApplication) */}

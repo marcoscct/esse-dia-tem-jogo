@@ -67,7 +67,7 @@ export default function SupportBottomBar() {
 
           {/* Text and Actions */}
           <div className="flex-1 flex flex-col gap-2.5">
-            <p className="text-zinc-300 text-xs font-bold leading-relaxed pr-6">
+            <p className="text-zinc-300 text-xs font-bold leading-relaxed pr-6 font-details">
               {t("support_desc")}
             </p>
             

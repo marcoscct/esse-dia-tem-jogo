@@ -371,7 +371,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                 >
                   {config.icon}
                 </motion.div>
-                <h2 className={`${config.themeColor} font-black italic text-3xl md:text-4xl uppercase tracking-tighter leading-none`}>
+                <h2 className={`${config.themeColor} font-black text-2xl md:text-3xl uppercase tracking-tighter leading-none`}>
                   {config.heading}
                 </h2>
               </div>
@@ -482,7 +482,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                                 <span className="text-[10px] font-black text-zinc-455 uppercase">{leftCode}</span>
                               </div>
 
-                              <span className="text-zinc-400 font-black text-lg italic">X</span>
+                              <span className="text-zinc-400 font-black text-lg">X</span>
 
                               <div className="flex flex-col items-center gap-1.5 w-20">
                                 <div className={rightIsClub ? "w-12 h-12 flex items-center justify-center" : "w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-855 bg-zinc-950 flex items-center justify-center"}>
@@ -499,14 +499,14 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                               </div>
                             </div>
 
-                            <div className="font-black uppercase tracking-tight text-md text-white mb-2 text-center">
+                            <div className="font-black uppercase tracking-tight text-sm md:text-base text-white mb-2 text-center">
                               {isHomeSelected ? (
                                 <>
-                                  {translateTeamName(match.team_code, match.team_name, lang)} x {renderWithGroupTooltip(translateOpponentName(match.opponent_code, match.opponent_name, lang), `opp-${match.id}`)}
+                                  {renderWithGroupTooltip(translateTeamName(match.team_code, match.team_name, lang), `team-${match.id}`)} x {renderWithGroupTooltip(translateOpponentName(match.opponent_code, match.opponent_name, lang), `opp-${match.id}`)}
                                 </>
                               ) : (
                                 <>
-                                  {translateOpponentName(match.opponent_code, match.opponent_name, lang)} x {renderWithGroupTooltip(translateTeamName(match.team_code, match.team_name, lang), `team-${match.id}`)}
+                                  {renderWithGroupTooltip(translateOpponentName(match.opponent_code, match.opponent_name, lang), `opp-${match.id}`)} x {renderWithGroupTooltip(translateTeamName(match.team_code, match.team_name, lang), `team-${match.id}`)}
                                 </>
                               )}
                             </div>
@@ -515,7 +515,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                       })()}
 
                       {!compactMode && (
-                        <div className="flex items-center justify-center gap-1 text-zinc-400 font-bold text-[9px] uppercase tracking-wide text-center">
+                        <div className="font-details flex items-center justify-center gap-1 text-zinc-400 font-bold text-[9px] uppercase tracking-wide text-center">
                           <span>{match.venue}</span>
                           {match.city && match.city !== match.venue && (
                             <>
@@ -587,7 +587,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                             <motion.div
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: "auto" }}
-                              className="w-full bg-[#0a0a0a] border border-zinc-900 rounded-xl p-2 flex flex-col gap-1 overflow-hidden"
+                              className="w-full bg-[#0a0a0a] border border-zinc-900 rounded-xl p-2 flex flex-col gap-1 overflow-hidden font-details"
                             >
                               <a
                                 href={getGoogleCalendarUrl(getEventData(match))}
@@ -666,7 +666,7 @@ export default function ResultModal({ matches = [], isOpen, onClose, date, endDa
                       })()}
                     </div>
                   )}
-                  <div className="text-[#2ecc71] font-black italic text-xl uppercase tracking-wider text-center">
+                  <div className="text-[#2ecc71] font-black text-lg uppercase tracking-wider text-center">
                     {t("free_day")}
                   </div>
                 </div>

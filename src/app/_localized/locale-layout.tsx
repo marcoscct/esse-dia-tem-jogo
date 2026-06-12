@@ -1,4 +1,4 @@
-import { Kanit, Inter } from "next/font/google";
+import { Kanit, Inter, Krona_One } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "../globals.css";
 import { TranslationProvider } from "@/components/TranslationProvider";
@@ -19,6 +19,13 @@ const inter = Inter({
   display: "swap",
 });
 
+const kronaOne = Krona_One({
+  weight: ["400"],
+  subsets: ["latin"],
+  variable: "--font-krona",
+  display: "swap",
+});
+
 interface Props {
   children: React.ReactNode;
   lang: Language;
@@ -26,7 +33,7 @@ interface Props {
 
 export default function LocalizedLayout({ children, lang }: Props) {
   return (
-    <div className={`${kanit.variable} ${inter.variable} min-h-screen font-sans bg-[#050505] text-white relative`}>
+    <div className={`${kanit.variable} ${inter.variable} ${kronaOne.variable} min-h-screen font-sans bg-[#050505] text-white relative`}>
       <TranslationProvider lang={lang}>
         <HeaderControls />
         {children}

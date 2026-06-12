@@ -7,6 +7,22 @@ import { getFlagUrl, isClubCode } from "@/lib/flag-codes";
 import { useLanguage } from "./TranslationProvider";
 import { translateTeamName, translateOpponentName, translatePhase, translateCondition, getCompetitionName } from "@/locales/i18n-utils";
 import CalendarFeedModal from "./CalendarFeedModal";
+import GroupTooltip from "./GroupTooltip";
+
+function renderWithGroupTooltip(text: string | null | undefined, keyPrefix: string) {
+  if (!text) return null;
+  const regex = /(Grupo\s+[A-L]|Group\s+[A-L])/i;
+  const parts = text.split(regex);
+  if (parts.length === 1) return text;
+
+  return parts.map((part, i) => {
+    const match = part.match(/^(?:Grupo|Group)\s+([A-L])$/i);
+    if (match) {
+      return <GroupTooltip key={`${keyPrefix}-${i}`} text={part} groupLetter={match[1].toUpperCase()} />;
+    }
+    return <span key={`${keyPrefix}-${i}`}>{part}</span>;
+  });
+}
 
 function BroadcastIcon({ channel }: { channel: string }) {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -178,13 +194,13 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
           {config.icon}
         </div>
         <div className="flex-1 flex flex-col justify-center">
-          <h2 className={`${config.themeColor} font-black italic text-3xl uppercase tracking-tighter leading-none mb-1`}>
+          <h2 className={`${config.themeColor} font-black text-2xl uppercase tracking-tighter leading-none mb-1`}>
             {config.heading}
           </h2>
           <h3 className="text-white font-bold text-lg uppercase tracking-wider mb-2">
             {config.subheading}
           </h3>
-          <p className="text-zinc-400 text-sm leading-tight max-w-[220px]">
+          <p className="text-zinc-400 text-sm leading-tight max-w-[220px] font-details">
             {config.description}
           </p>
           {showSubscribe && (
@@ -209,7 +225,7 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
             {matches.map((match, i) => (
               <div key={match.id} className={`w-full flex flex-col items-center text-center ${i > 0 ? "border-t border-zinc-900 pt-4" : ""}`}>
                 {match.condition && (
-                  <span className={`text-[9px] font-black uppercase tracking-wider px-3 py-1 rounded-full mb-2 border ${config.bgTheme} ${config.themeColor} border-${config.themeColor}/20`}>
+                  <span className={`font-details text-[9px] font-black uppercase tracking-wider px-3 py-1 rounded-full mb-2 border ${config.bgTheme} ${config.themeColor} border-${config.themeColor}/20`}>
                     {translateCondition(match.condition, lang)}
                   </span>
                 )}
@@ -252,7 +268,7 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                             loading="lazy"
                             className={leftIsClub ? "w-8 h-8 object-contain" : "w-8 h-8 rounded-full object-cover ring-1 ring-zinc-700"}
                           />
-                          <span className="font-bold text-sm text-white">{leftName}</span>
+                          <span className="font-bold text-xs md:text-sm text-white">{renderWithGroupTooltip(leftName, `left-${match.id}`)}</span>
                         </div>
                         <span className="text-zinc-400 font-bold text-xs">X</span>
                         <div className="flex items-center gap-2">
@@ -262,9 +278,9 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
                             width={32}
                             height={32}
                             loading="lazy"
-                            className={rightIsClub ? "w-8 h-8 object-contain" : "w-8 h-8 rounded-full object-cover ring-1 ring-zinc-700 bg-zinc-950"}
+                            className={rightIsClub ? "w-8 h-8 object-cover object-center rounded-full ring-1 ring-zinc-700 bg-zinc-950" : "w-8 h-8 rounded-full object-cover ring-1 ring-zinc-700 bg-zinc-950"}
                           />
-                          <span className="font-bold text-sm text-white">{rightName}</span>
+                          <span className="font-bold text-xs md:text-sm text-white">{renderWithGroupTooltip(rightName, `right-${match.id}`)}</span>
                         </div>
                       </>
                     );
@@ -322,7 +338,7 @@ export default function ResultCard({ matches = [] }: ResultCardProps) {
             <div className="w-12 h-12 mb-2 text-[#2ecc71]">
               <CalendarIcon className="w-full h-full" />
             </div>
-            <div className="text-[#2ecc71] font-black italic text-xl uppercase tracking-wide">
+            <div className="text-[#2ecc71] font-black text-lg uppercase tracking-wide">
               {t("free_day")}
             </div>
           </div>

@@ -75,7 +75,7 @@ export default function LocalizedPrivacyPage({ lang }: Props) {
   const langPrefix = lang === "pt" ? "" : `/${lang}`;
 
   return (
-    <div className="min-h-screen bg-[#050505] text-zinc-100 font-sans selection:bg-[#ffcc00] selection:text-black">
+    <div className="min-h-screen bg-[#050505] text-zinc-100 font-details selection:bg-[#ffcc00] selection:text-black">
       <main className="max-w-3xl mx-auto px-6 py-12">
         {/* Header */}
         <div className="flex flex-col items-center mb-10 text-center">

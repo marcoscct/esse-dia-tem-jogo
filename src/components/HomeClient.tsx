@@ -295,7 +295,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                     transition={{ duration: 0.2 }}
                     className="overflow-hidden w-full flex-1"
                   >
-                    <div className="flex flex-col items-center gap-1.5 text-center md:pt-0">
+                    <div className="flex flex-col items-center gap-1.5 text-center md:pt-0 w-full">
                       <label htmlFor="endDate" className="font-display uppercase text-[#ffcc00] font-black tracking-widest text-[10px] md:text-xs cursor-pointer">
                         {t("end_date")}
                       </label>

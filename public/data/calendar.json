@@ -4944,7 +4944,7 @@
         },
         {
           "id": "wc2026-022-par",
-          "date": "2026-06-19",
+          "date": "2026-06-20",
           "time_brt": "00:00",
           "opponent_code": "TUR",
           "opponent_name": "Turquia",
@@ -5329,7 +5329,7 @@
         },
         {
           "id": "wc2026-020-aus",
-          "date": "2026-06-13",
+          "date": "2026-06-14",
           "time_brt": "01:00",
           "opponent_code": "TUR",
           "opponent_name": "Turquia",
@@ -5714,7 +5714,7 @@
       "matches": [
         {
           "id": "wc2026-020-tur",
-          "date": "2026-06-13",
+          "date": "2026-06-14",
           "time_brt": "01:00",
           "opponent_code": "AUS",
           "opponent_name": "Austrália",
@@ -5736,7 +5736,7 @@
         },
         {
           "id": "wc2026-022-tur",
-          "date": "2026-06-19",
+          "date": "2026-06-20",
           "time_brt": "00:00",
           "opponent_code": "PAR",
           "opponent_name": "Paraguai",
@@ -7966,7 +7966,7 @@
         },
         {
           "id": "wc2026-034-jpn",
-          "date": "2026-06-20",
+          "date": "2026-06-21",
           "time_brt": "01:00",
           "opponent_code": "TUN",
           "opponent_name": "Tunísia",
@@ -8688,7 +8688,7 @@
         },
         {
           "id": "wc2026-034-tun",
-          "date": "2026-06-20",
+          "date": "2026-06-21",
           "time_brt": "01:00",
           "opponent_code": "JPN",
           "opponent_name": "Japão",
@@ -9093,7 +9093,7 @@
         },
         {
           "id": "wc2026-042-bel",
-          "date": "2026-06-26",
+          "date": "2026-06-27",
           "time_brt": "00:00",
           "opponent_code": "NZL",
           "opponent_name": "Nova Zelândia",
@@ -9501,7 +9501,7 @@
         },
         {
           "id": "wc2026-041-egy",
-          "date": "2026-06-26",
+          "date": "2026-06-27",
           "time_brt": "00:00",
           "opponent_code": "IRN",
           "opponent_name": "Irã",
@@ -9886,7 +9886,7 @@
         },
         {
           "id": "wc2026-041-irn",
-          "date": "2026-06-26",
+          "date": "2026-06-27",
           "time_brt": "00:00",
           "opponent_code": "EGY",
           "opponent_name": "Egito",
@@ -10293,7 +10293,7 @@
         },
         {
           "id": "wc2026-042-nzl",
-          "date": "2026-06-26",
+          "date": "2026-06-27",
           "time_brt": "00:00",
           "opponent_code": "BEL",
           "opponent_name": "Bélgica",
@@ -14142,7 +14142,7 @@
         },
         {
           "id": "wc2026-058-alg",
-          "date": "2026-06-22",
+          "date": "2026-06-23",
           "time_brt": "00:00",
           "opponent_code": "JOR",
           "opponent_name": "Jordânia",
@@ -14505,7 +14505,7 @@
       "matches": [
         {
           "id": "wc2026-056-aut",
-          "date": "2026-06-16",
+          "date": "2026-06-17",
           "time_brt": "01:00",
           "opponent_code": "JOR",
           "opponent_name": "Jordânia",
@@ -14913,7 +14913,7 @@
         },
         {
           "id": "wc2026-056-jor",
-          "date": "2026-06-16",
+          "date": "2026-06-17",
           "time_brt": "01:00",
           "opponent_code": "AUT",
           "opponent_name": "Áustria",
@@ -14935,7 +14935,7 @@
         },
         {
           "id": "wc2026-058-jor",
-          "date": "2026-06-22",
+          "date": "2026-06-23",
           "time_brt": "00:00",
           "opponent_code": "ALG",
           "opponent_name": "Argélia",

@@ -104,29 +104,69 @@ const OUTPUT_PATH =
   path.join(__dirname, '..', 'public', 'data', 'calendar.json');
 
 // ─── Timezone conversion ──────────────────────────────────────────────────────
-function parseTimeToBRT(timeStr) {
-  if (!timeStr) return null;
+function convertDateTimeToBRT(dateStr, timeStr) {
+  if (!dateStr) return { date: null, time_brt: null };
+  if (!timeStr) return { date: dateStr, time_brt: null };
 
   const match = timeStr.match(/^(\d{2}):(\d{2})\s+UTC([+-]\d{1,2})$/);
   if (!match) {
     const bareMatch = timeStr.match(/^(\d{2}):(\d{2})$/);
     if (bareMatch) {
-      const utcHour = parseInt(bareMatch[1], 10);
-      const minute = parseInt(bareMatch[2], 10);
-      const brtHour = ((utcHour - 3) % 24 + 24) % 24;
-      return `${String(brtHour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+      try {
+        const isoString = `${dateStr}T${timeStr}:00Z`;
+        const d = new Date(isoString);
+        if (isNaN(d.getTime())) {
+          return { date: dateStr, time_brt: timeStr };
+        }
+        const f = new Intl.DateTimeFormat('sv-SE', {
+          timeZone: 'America/Sao_Paulo',
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        });
+        const formatted = f.format(d);
+        const parts = formatted.split(' ');
+        return { date: parts[0], time_brt: parts[1] };
+      } catch (e) {
+        return { date: dateStr, time_brt: timeStr };
+      }
     }
-    return null;
+    return { date: dateStr, time_brt: null };
   }
 
-  const localHour = parseInt(match[1], 10);
-  const minute = parseInt(match[2], 10);
-  const offsetHours = parseInt(match[3], 10);
+  try {
+    const localHour = parseInt(match[1], 10);
+    const minute = parseInt(match[2], 10);
+    const offsetHours = parseInt(match[3], 10);
 
-  const utcHour = ((localHour - offsetHours) % 24 + 24) % 24;
-  const brtHour = ((utcHour - 3) % 24 + 24) % 24;
+    const sign = offsetHours >= 0 ? '+' : '-';
+    const absHours = Math.abs(offsetHours);
+    const offsetStr = `${sign}${String(absHours).padStart(2, '0')}:00`;
+    const isoString = `${dateStr}T${String(localHour).padStart(2, '0')}:${String(minute).padStart(2, '0')}:00${offsetStr}`;
 
-  return `${String(brtHour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+    const d = new Date(isoString);
+    if (isNaN(d.getTime())) {
+      return { date: dateStr, time_brt: null };
+    }
+
+    const f = new Intl.DateTimeFormat('sv-SE', {
+      timeZone: 'America/Sao_Paulo',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
+    const formatted = f.format(d);
+    const parts = formatted.split(' ');
+    return { date: parts[0], time_brt: parts[1] };
+  } catch (e) {
+    return { date: dateStr, time_brt: null };
+  }
 }
 
 // ─── Team map ─────────────────────────────────────────────────────────────────
@@ -412,8 +452,7 @@ function transform(rawJson) {
     const phaseSlug = slugifyPhase(rawMatch.round);
     if (phaseSlug !== 'group_stage') continue; // Handled separately
 
-    const date = rawMatch.date || null;
-    const timeBrt = parseTimeToBRT(rawMatch.time);
+    const { date, time_brt: timeBrt } = convertDateTimeToBRT(rawMatch.date || null, rawMatch.time);
     const venue = rawMatch.ground || 'A definir';
     const id = `wc2026-${String(++matchIndex).padStart(3, '0')}`;
 
@@ -650,10 +689,12 @@ function transform(rawJson) {
         const oppCode = isTeam1 ? isConfirmedThisTeam.team2Code : isConfirmedThisTeam.team1Code;
         const oppMeta = TEAM_MAP[isTeam1 ? rawMatch.team2 : rawMatch.team1];
         
+        const { date: shiftedDate, time_brt: shiftedTime } = convertDateTimeToBRT(rawMatch.date || bMatch.date, rawMatch.time);
+        
         team.matches.push({
           id: `wc2026-${matchNumber}-${teamCode.toLowerCase()}`,
-          date: rawMatch.date || bMatch.date,
-          time_brt: parseTimeToBRT(rawMatch.time) || bMatch.time_brt || null,
+          date: shiftedDate || bMatch.date,
+          time_brt: shiftedTime || bMatch.time_brt || null,
           opponent_code: oppCode,
           opponent_name: oppMeta ? oppMeta.name : (isTeam1 ? rawMatch.team2 : rawMatch.team1),
           opponent_flag: oppMeta ? oppMeta.flag : null,

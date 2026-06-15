@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.2",
-    "last_updated": "2026-06-14",
+    "last_updated": "2026-06-15",
     "source": "OpenFootball worldcup.json (auto-transform + dynamic bracket)",
     "competition": "FIFA World Cup 2026",
     "competition_slug": "world_cup_2026",
@@ -5363,8 +5363,12 @@
           "venue": "Vancouver",
           "city": "Vancouver",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 20,
@@ -5748,8 +5752,12 @@
           "venue": "Vancouver",
           "city": "Vancouver",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 20,
@@ -6155,8 +6163,12 @@
           "venue": "Houston",
           "city": "Houston",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 7,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 25,
@@ -6527,8 +6539,12 @@
           "venue": "Houston",
           "city": "Houston",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 7,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 25,
@@ -6890,8 +6906,12 @@
           "venue": "Philadelphia",
           "city": "Philadelphia",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 26,
@@ -7252,8 +7272,12 @@
           "venue": "Philadelphia",
           "city": "Philadelphia",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 26,
@@ -7615,8 +7639,12 @@
           "venue": "Dallas (Arlington)",
           "city": "Dallas (Arlington)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 31,
@@ -7977,8 +8005,12 @@
           "venue": "Dallas (Arlington)",
           "city": "Dallas (Arlington)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 31,
@@ -8339,8 +8371,12 @@
           "venue": "Monterrey (Guadalupe)",
           "city": "Monterrey (Guadalupe)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 5,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 32,
@@ -8700,8 +8736,12 @@
           "venue": "Monterrey (Guadalupe)",
           "city": "Monterrey (Guadalupe)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 5,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 32,

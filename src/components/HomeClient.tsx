@@ -624,8 +624,8 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
       </footer>
 
       {/* Support / PIX Floating Bar & Automatic Popup */}
-      <SupportBottomBar />
-      <SupportModal />
+      {/* <SupportBottomBar /> */}
+      {/* <SupportModal /> */}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.2",
-    "last_updated": "2026-06-16",
+    "last_updated": "2026-06-17",
     "source": "OpenFootball worldcup.json (auto-transform + dynamic bracket)",
     "competition": "FIFA World Cup 2026",
     "competition_slug": "world_cup_2026",
@@ -12302,8 +12302,12 @@
           "venue": "New York/New Jersey (East Rutherford)",
           "city": "New York/New Jersey (East Rutherford)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 3,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 49,
@@ -12674,8 +12678,12 @@
           "venue": "New York/New Jersey (East Rutherford)",
           "city": "New York/New Jersey (East Rutherford)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 3,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 49,
@@ -13036,8 +13044,12 @@
           "venue": "Boston (Foxborough)",
           "city": "Boston (Foxborough)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 4,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 50,
@@ -13421,8 +13433,12 @@
           "venue": "Boston (Foxborough)",
           "city": "Boston (Foxborough)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 4,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 50,
@@ -13828,8 +13844,12 @@
           "venue": "Kansas City",
           "city": "Kansas City",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 3,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 55,
@@ -14224,8 +14244,12 @@
           "venue": "Kansas City",
           "city": "Kansas City",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 3,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 55,
@@ -14611,8 +14635,12 @@
           "venue": "San Francisco Bay Area (Santa Clara)",
           "city": "San Francisco Bay Area (Santa Clara)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 3,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 56,
@@ -15019,8 +15047,12 @@
           "venue": "San Francisco Bay Area (Santa Clara)",
           "city": "San Francisco Bay Area (Santa Clara)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 3,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 56,

@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.2",
-    "last_updated": "2026-06-17",
+    "last_updated": "2026-06-18",
     "source": "OpenFootball worldcup.json (auto-transform + dynamic bracket)",
     "competition": "FIFA World Cup 2026",
     "competition_slug": "world_cup_2026",
@@ -15482,8 +15482,12 @@
           "venue": "Houston",
           "city": "Houston",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 61,
@@ -15879,8 +15883,12 @@
           "venue": "Houston",
           "city": "Houston",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 61,
@@ -16266,8 +16274,12 @@
           "venue": "Mexico City",
           "city": "Mexico City",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 3,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 62,
@@ -16675,8 +16687,12 @@
           "venue": "Mexico City",
           "city": "Mexico City",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 3,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 62,
@@ -17106,8 +17122,12 @@
           "venue": "Dallas (Arlington)",
           "city": "Dallas (Arlington)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 4,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 67,
@@ -17523,8 +17543,12 @@
           "venue": "Dallas (Arlington)",
           "city": "Dallas (Arlington)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 4,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 67,
@@ -17909,8 +17933,12 @@
           "venue": "Toronto",
           "city": "Toronto",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 68,
@@ -18295,8 +18323,12 @@
           "venue": "Toronto",
           "city": "Toronto",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 68,

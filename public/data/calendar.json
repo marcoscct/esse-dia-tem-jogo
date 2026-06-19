@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.2",
-    "last_updated": "2026-06-18",
+    "last_updated": "2026-06-19",
     "source": "OpenFootball worldcup.json (auto-transform + dynamic bracket)",
     "competition": "FIFA World Cup 2026",
     "competition_slug": "world_cup_2026",
@@ -58,8 +58,12 @@
           "venue": "Guadalajara (Zapopan)",
           "city": "Guadalajara (Zapopan)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 4,
@@ -426,8 +430,12 @@
           "venue": "Atlanta",
           "city": "Atlanta",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 3,
@@ -791,8 +799,12 @@
           "venue": "Guadalajara (Zapopan)",
           "city": "Guadalajara (Zapopan)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 4,
@@ -1156,8 +1168,12 @@
           "venue": "Atlanta",
           "city": "Atlanta",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 3,
@@ -1521,8 +1537,12 @@
           "venue": "Vancouver",
           "city": "Vancouver",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 6,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 10,
@@ -1886,8 +1906,12 @@
           "venue": "Los Angeles (Inglewood)",
           "city": "Los Angeles (Inglewood)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 4,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 9,
@@ -2252,8 +2276,12 @@
           "venue": "Vancouver",
           "city": "Vancouver",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 6,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 10,
@@ -2639,8 +2667,12 @@
           "venue": "Los Angeles (Inglewood)",
           "city": "Los Angeles (Inglewood)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 4,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 9,

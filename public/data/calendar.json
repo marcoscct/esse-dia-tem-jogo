@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.2",
-    "last_updated": "2026-06-19",
+    "last_updated": "2026-06-20",
     "source": "OpenFootball worldcup.json (auto-transform + dynamic bracket)",
     "competition": "FIFA World Cup 2026",
     "competition_slug": "world_cup_2026",
@@ -3063,8 +3063,12 @@
           "venue": "Philadelphia",
           "city": "Philadelphia",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 3,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 16,
@@ -3474,8 +3478,12 @@
           "venue": "Boston (Foxborough)",
           "city": "Boston (Foxborough)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 15,
@@ -3839,8 +3847,12 @@
           "venue": "Philadelphia",
           "city": "Philadelphia",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 3,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 16,
@@ -4229,8 +4241,12 @@
           "venue": "Boston (Foxborough)",
           "city": "Boston (Foxborough)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 15,
@@ -4620,8 +4636,12 @@
           "venue": "Seattle",
           "city": "Seattle",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 21,
@@ -5010,8 +5030,12 @@
           "venue": "San Francisco Bay Area (Santa Clara)",
           "city": "San Francisco Bay Area (Santa Clara)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 22,
@@ -5421,8 +5445,12 @@
           "venue": "Seattle",
           "city": "Seattle",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 21,
@@ -5810,8 +5838,12 @@
           "venue": "San Francisco Bay Area (Santa Clara)",
           "city": "San Francisco Bay Area (Santa Clara)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 22,

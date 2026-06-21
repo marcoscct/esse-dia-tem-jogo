@@ -542,6 +542,102 @@ function calculatePossibleRanks(groupLetter, rawMatches) {
   return possibleRanks;
 }
 
+function compareRecords(a, b) {
+  if (a.points !== b.points) return a.points - b.points;
+  if (a.gd !== b.gd) return a.gd - b.gd;
+  return a.gs - b.gs;
+}
+
+function calculatePossible3rdRecords(groupLetter, rawMatches) {
+  const g = groupLetter.toUpperCase();
+  const groupTeams = Object.values(TEAM_MAP)
+    .filter(t => t.group === g)
+    .map(t => t.code);
+
+  const groupMatches = rawMatches.filter(m => {
+    const t1 = TEAM_MAP[m.team1];
+    const t2 = TEAM_MAP[m.team2];
+    return t1 && t2 && t1.group === g && t2.group === g;
+  });
+
+  const playedMatches = groupMatches.filter(m => m.score);
+  const unplayedMatches = groupMatches.filter(m => !m.score);
+
+  const records = [];
+
+  const scorelines = [[3, 0], [1, 0], [0, 0], [0, 1], [0, 3]];
+  const outcomes = [];
+  function generate(index, currentSimulation) {
+    if (index === unplayedMatches.length) {
+      outcomes.push(currentSimulation);
+      return;
+    }
+    const match = unplayedMatches[index];
+    scorelines.forEach(score => {
+      generate(index + 1, [
+        ...currentSimulation,
+        {
+          team1: match.team1,
+          team2: match.team2,
+          score: { ft: score }
+        }
+      ]);
+    });
+  }
+
+  if (unplayedMatches.length <= 4) {
+    generate(0, []);
+  } else {
+    return groupTeams.map(code => ({ code, points: 0, gd: -10, gs: 0 }));
+  }
+
+  outcomes.forEach(simMatches => {
+    const allMatches = [...playedMatches, ...simMatches];
+    const table = {};
+    groupTeams.forEach(code => {
+      table[code] = { code, points: 0, gd: 0, gs: 0 };
+    });
+
+    allMatches.forEach(m => {
+      const t1Code = TEAM_MAP[m.team1].code;
+      const t2Code = TEAM_MAP[m.team2].code;
+      const s1 = m.score.ft[0];
+      const s2 = m.score.ft[1];
+
+      table[t1Code].gs += s1;
+      table[t2Code].gs += s2;
+      table[t1Code].gd += (s1 - s2);
+      table[t2Code].gd += (s2 - s1);
+
+      if (s1 > s2) {
+        table[t1Code].points += 3;
+      } else if (s2 > s1) {
+        table[t2Code].points += 3;
+      } else {
+        table[t1Code].points += 1;
+        table[t2Code].points += 1;
+      }
+    });
+
+    const sorted = rankGroupTeams(Object.values(table), allMatches);
+    const t3 = sorted[2];
+    records.push({ code: t3.code, points: t3.points, gd: t3.gd, gs: t3.gs });
+  });
+
+  const unique = [];
+  const seen = new Set();
+  records.forEach(r => {
+    const key = `${r.code}-${r.points}-${r.gd}-${r.gs}`;
+    if (!seen.has(key)) {
+      seen.add(key);
+      unique.push(r);
+    }
+  });
+
+  return unique;
+}
+
+
 function calculateGroupStandings(groupLetter, rawMatches) {
   const g = groupLetter.toUpperCase();
   const groupTeams = Object.values(TEAM_MAP)
@@ -684,6 +780,19 @@ function transform(rawJson) {
     groupStandings[letter] = calculateGroupStandings(letter, matches);
   });
 
+  // Calculate possible ranks and 3rd place records for all groups
+  const groupPossibleRanks = {};
+  const groupPossible3rdRecords = {};
+  const worstPossible3rdRecords = {};
+
+  letters.forEach(letter => {
+    groupPossibleRanks[letter] = calculatePossibleRanks(letter, matches);
+    groupPossible3rdRecords[letter] = calculatePossible3rdRecords(letter, matches);
+    const sorted = [...groupPossible3rdRecords[letter]].sort(compareRecords);
+    worstPossible3rdRecords[letter] = sorted[0];
+  });
+
+
   // Calculate 3rd place rankings if all groups are done
   let thirdPlaceRankings = null;
   const allGroupsDone = letters.every(l => groupStandings[l] !== null);
@@ -757,26 +866,47 @@ function transform(rawJson) {
   // 4. Generate Possible Knockout Matches
   for (const teamCode of Object.keys(teams)) {
     const team = teams[teamCode];
-    const standings = groupStandings[team.group];
+    const possibleRanks = groupPossibleRanks[team.group][teamCode];
     
     // Determine allowed position paths for this team
-    let allowedPositions = ['1st', '2nd', '3rd'];
-    if (standings !== null) {
-      const position = standings[teamCode];
-      if (position === 1) allowedPositions = ['1st'];
-      else if (position === 2) allowedPositions = ['2nd'];
-      else if (position === 3) {
-        if (thirdPlaceRankings === null || thirdPlaceRankings.has(teamCode)) {
-          allowedPositions = ['3rd'];
+    let allowedPositions = [];
+    if (possibleRanks) {
+      if (possibleRanks.has(1)) allowedPositions.push('1st');
+      if (possibleRanks.has(2)) allowedPositions.push('2nd');
+      if (possibleRanks.has(3)) {
+        if (allGroupsDone) {
+          if (thirdPlaceRankings !== null && thirdPlaceRankings.has(teamCode)) {
+            allowedPositions.push('3rd');
+          }
         } else {
-          allowedPositions = [];
-          team.status = 'eliminated';
+          // Check if this team's possible 3rd place record can qualify
+          const teamRecords = groupPossible3rdRecords[team.group].filter(r => r.code === teamCode);
+          let canQualify = false;
+          for (const r of teamRecords) {
+            const otherWorst = [];
+            for (const l of letters) {
+              if (l !== team.group) {
+                otherWorst.push(worstPossible3rdRecords[l]);
+              }
+            }
+            const allRecords = [r, ...otherWorst].sort((a,b) => compareRecords(b, a));
+            const rank = allRecords.indexOf(r) + 1;
+            if (rank <= 8) {
+              canQualify = true;
+              break;
+            }
+          }
+          if (canQualify) {
+            allowedPositions.push('3rd');
+          }
         }
-      } else {
-        allowedPositions = [];
-        team.status = 'eliminated';
       }
     }
+
+    if (allowedPositions.length === 0) {
+      team.status = 'eliminated';
+    }
+
 
     if (allowedPositions.length === 0) continue; // Eliminated, no knockout matches
 

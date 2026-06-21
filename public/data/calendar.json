@@ -95,50 +95,6 @@
           ]
         },
         {
-          "id": "wc2026-73-mex-possible",
-          "date": "2026-06-28",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "2º do Grupo B",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Los Angeles Stadium",
-          "city": "Los Angeles",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo A",
-          "condition_type": "group_2nd",
-          "match_number": 73,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-74-mex-possible",
-          "date": "2026-06-29",
-          "time_brt": "17:30",
-          "opponent_code": null,
-          "opponent_name": "1º do Grupo E",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo A",
-          "condition_type": "group_3rd",
-          "match_number": 74,
-          "is_home": false,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-79-mex-possible",
           "date": "2026-06-30",
           "time_brt": "22:00",
@@ -157,54 +113,6 @@
           "match_number": 79,
           "is_home": true,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-90-mex-possible",
-          "date": "2026-07-04",
-          "time_brt": "14:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 75",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "NRG Stadium",
-          "city": "Houston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo A",
-          "condition_type": "knockout_advance",
-          "match_number": 90,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-89-mex-possible",
-          "date": "2026-07-04",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 77",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Lincoln Financial Field",
-          "city": "Filadélfia",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo A",
-          "condition_type": "knockout_advance",
-          "match_number": 89,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -233,30 +141,6 @@
           ]
         },
         {
-          "id": "wc2026-97-mex-possible",
-          "date": "2026-07-09",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 89",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo A e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 97,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-99-mex-possible",
           "date": "2026-07-11",
           "time_brt": "18:00",
@@ -276,31 +160,6 @@
           "is_home": false,
           "broadcasts": [
             "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-101-mex-possible",
-          "date": "2026-07-14",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 98",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo A e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 101,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
             "SporTV",
             "CazéTV"
           ]
@@ -511,28 +370,6 @@
           ]
         },
         {
-          "id": "wc2026-79-rsa-possible",
-          "date": "2026-06-30",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "3º do Grupo C/E/F/H/I",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Estadio Azteca",
-          "city": "Cidade do México",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo A",
-          "condition_type": "group_1st",
-          "match_number": 79,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-90-rsa-possible",
           "date": "2026-07-04",
           "time_brt": "14:00",
@@ -581,30 +418,6 @@
           ]
         },
         {
-          "id": "wc2026-92-rsa-possible",
-          "date": "2026-07-05",
-          "time_brt": "21:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 80",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Estadio Azteca",
-          "city": "Cidade do México",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo A",
-          "condition_type": "knockout_advance",
-          "match_number": 92,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-97-rsa-possible",
           "date": "2026-07-09",
           "time_brt": "17:00",
@@ -621,30 +434,6 @@
           "condition": "Caso passe em 2º do Grupo A e avance para as 4ªˢ",
           "condition_type": "knockout_advance",
           "match_number": 97,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-99-rsa-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 91",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo A e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
           "is_home": false,
           "broadcasts": [
             "Globo",
@@ -678,36 +467,11 @@
           ]
         },
         {
-          "id": "wc2026-102-rsa-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo A e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-rsa-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
           "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
+          "opponent_name": "Perdedor da Partida 102",
           "opponent_flag": null,
           "phase": "Disputa de 3º Lugar",
           "phase_slug": "third_place",
@@ -719,7 +483,7 @@
           "condition": "Caso dispute o 3º lugar",
           "condition_type": "knockout_advance",
           "match_number": 103,
-          "is_home": false,
+          "is_home": true,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -731,7 +495,7 @@
           "date": "2026-07-19",
           "time_brt": "16:00",
           "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
+          "opponent_name": "Vencedor da Partida 102",
           "opponent_flag": null,
           "phase": "Final",
           "phase_slug": "final",
@@ -743,7 +507,7 @@
           "condition": "Caso chegue à Final",
           "condition_type": "knockout_advance",
           "match_number": 104,
-          "is_home": false,
+          "is_home": true,
           "broadcasts": [
             "Globo",
             "SBT",
@@ -880,28 +644,6 @@
           ]
         },
         {
-          "id": "wc2026-79-kor-possible",
-          "date": "2026-06-30",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "3º do Grupo C/E/F/H/I",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Estadio Azteca",
-          "city": "Cidade do México",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo A",
-          "condition_type": "group_1st",
-          "match_number": 79,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-90-kor-possible",
           "date": "2026-07-04",
           "time_brt": "14:00",
@@ -950,30 +692,6 @@
           ]
         },
         {
-          "id": "wc2026-92-kor-possible",
-          "date": "2026-07-05",
-          "time_brt": "21:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 80",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Estadio Azteca",
-          "city": "Cidade do México",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo A",
-          "condition_type": "knockout_advance",
-          "match_number": 92,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-97-kor-possible",
           "date": "2026-07-09",
           "time_brt": "17:00",
@@ -990,30 +708,6 @@
           "condition": "Caso passe em 2º do Grupo A e avance para as 4ªˢ",
           "condition_type": "knockout_advance",
           "match_number": 97,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-99-kor-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 91",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo A e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
           "is_home": false,
           "broadcasts": [
             "Globo",
@@ -1047,36 +741,11 @@
           ]
         },
         {
-          "id": "wc2026-102-kor-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo A e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-kor-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
           "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
+          "opponent_name": "Perdedor da Partida 102",
           "opponent_flag": null,
           "phase": "Disputa de 3º Lugar",
           "phase_slug": "third_place",
@@ -1088,7 +757,7 @@
           "condition": "Caso dispute o 3º lugar",
           "condition_type": "knockout_advance",
           "match_number": 103,
-          "is_home": false,
+          "is_home": true,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -1100,7 +769,7 @@
           "date": "2026-07-19",
           "time_brt": "16:00",
           "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
+          "opponent_name": "Vencedor da Partida 102",
           "opponent_flag": null,
           "phase": "Final",
           "phase_slug": "final",
@@ -1112,7 +781,7 @@
           "condition": "Caso chegue à Final",
           "condition_type": "knockout_advance",
           "match_number": 104,
-          "is_home": false,
+          "is_home": true,
           "broadcasts": [
             "Globo",
             "SBT",
@@ -1249,28 +918,6 @@
           ]
         },
         {
-          "id": "wc2026-79-cze-possible",
-          "date": "2026-06-30",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "3º do Grupo C/E/F/H/I",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Estadio Azteca",
-          "city": "Cidade do México",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo A",
-          "condition_type": "group_1st",
-          "match_number": 79,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-90-cze-possible",
           "date": "2026-07-04",
           "time_brt": "14:00",
@@ -1319,30 +966,6 @@
           ]
         },
         {
-          "id": "wc2026-92-cze-possible",
-          "date": "2026-07-05",
-          "time_brt": "21:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 80",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Estadio Azteca",
-          "city": "Cidade do México",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo A",
-          "condition_type": "knockout_advance",
-          "match_number": 92,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-97-cze-possible",
           "date": "2026-07-09",
           "time_brt": "17:00",
@@ -1359,30 +982,6 @@
           "condition": "Caso passe em 2º do Grupo A e avance para as 4ªˢ",
           "condition_type": "knockout_advance",
           "match_number": 97,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-99-cze-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 91",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo A e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
           "is_home": false,
           "broadcasts": [
             "Globo",
@@ -1416,36 +1015,11 @@
           ]
         },
         {
-          "id": "wc2026-102-cze-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo A e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-cze-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
           "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
+          "opponent_name": "Perdedor da Partida 102",
           "opponent_flag": null,
           "phase": "Disputa de 3º Lugar",
           "phase_slug": "third_place",
@@ -1457,7 +1031,7 @@
           "condition": "Caso dispute o 3º lugar",
           "condition_type": "knockout_advance",
           "match_number": 103,
-          "is_home": false,
+          "is_home": true,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -1469,7 +1043,7 @@
           "date": "2026-07-19",
           "time_brt": "16:00",
           "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
+          "opponent_name": "Vencedor da Partida 102",
           "opponent_flag": null,
           "phase": "Final",
           "phase_slug": "final",
@@ -1481,7 +1055,7 @@
           "condition": "Caso chegue à Final",
           "condition_type": "knockout_advance",
           "match_number": 104,
-          "is_home": false,
+          "is_home": true,
           "broadcasts": [
             "Globo",
             "SBT",
@@ -1596,28 +1170,6 @@
           ]
         },
         {
-          "id": "wc2026-74-can-possible",
-          "date": "2026-06-29",
-          "time_brt": "17:30",
-          "opponent_code": null,
-          "opponent_name": "1º do Grupo E",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo B",
-          "condition_type": "group_3rd",
-          "match_number": 74,
-          "is_home": false,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-85-can-possible",
           "date": "2026-07-02",
           "time_brt": "00:00",
@@ -1656,30 +1208,6 @@
           "condition": "Caso passe em 2º do Grupo B",
           "condition_type": "knockout_advance",
           "match_number": 90,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-89-can-possible",
-          "date": "2026-07-04",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 77",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Lincoln Financial Field",
-          "city": "Filadélfia",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo B",
-          "condition_type": "knockout_advance",
-          "match_number": 89,
           "is_home": true,
           "broadcasts": [
             "Globo",
@@ -1988,28 +1516,6 @@
           ]
         },
         {
-          "id": "wc2026-85-bih-possible",
-          "date": "2026-07-02",
-          "time_brt": "00:00",
-          "opponent_code": null,
-          "opponent_name": "3º do Grupo E/F/G/I/J",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "BC Place",
-          "city": "Vancouver",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo B",
-          "condition_type": "group_1st",
-          "match_number": 85,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-90-bih-possible",
           "date": "2026-07-04",
           "time_brt": "14:00",
@@ -2058,30 +1564,6 @@
           ]
         },
         {
-          "id": "wc2026-96-bih-possible",
-          "date": "2026-07-07",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 87",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "BC Place",
-          "city": "Vancouver",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo B",
-          "condition_type": "knockout_advance",
-          "match_number": 96,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-97-bih-possible",
           "date": "2026-07-09",
           "time_brt": "17:00",
@@ -2098,30 +1580,6 @@
           "condition": "Caso passe em 2º do Grupo B e avance para as 4ªˢ",
           "condition_type": "knockout_advance",
           "match_number": 97,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-100-bih-possible",
-          "date": "2026-07-11",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 95",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
-          "city": "Kansas City",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo B e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 100,
           "is_home": false,
           "broadcasts": [
             "Globo",
@@ -2155,36 +1613,11 @@
           ]
         },
         {
-          "id": "wc2026-102-bih-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 99",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo B e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-bih-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
           "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
+          "opponent_name": "Perdedor da Partida 102",
           "opponent_flag": null,
           "phase": "Disputa de 3º Lugar",
           "phase_slug": "third_place",
@@ -2196,7 +1629,7 @@
           "condition": "Caso dispute o 3º lugar",
           "condition_type": "knockout_advance",
           "match_number": 103,
-          "is_home": false,
+          "is_home": true,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -2208,7 +1641,7 @@
           "date": "2026-07-19",
           "time_brt": "16:00",
           "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
+          "opponent_name": "Vencedor da Partida 102",
           "opponent_flag": null,
           "phase": "Final",
           "phase_slug": "final",
@@ -2220,7 +1653,7 @@
           "condition": "Caso chegue à Final",
           "condition_type": "knockout_advance",
           "match_number": 104,
-          "is_home": false,
+          "is_home": true,
           "broadcasts": [
             "Globo",
             "SBT",
@@ -2313,28 +1746,6 @@
           ]
         },
         {
-          "id": "wc2026-73-qat-possible",
-          "date": "2026-06-28",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "2º do Grupo A",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Los Angeles Stadium",
-          "city": "Los Angeles",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo B",
-          "condition_type": "group_2nd",
-          "match_number": 73,
-          "is_home": false,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-74-qat-possible",
           "date": "2026-06-29",
           "time_brt": "17:30",
@@ -2353,52 +1764,6 @@
           "match_number": 74,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-85-qat-possible",
-          "date": "2026-07-02",
-          "time_brt": "00:00",
-          "opponent_code": null,
-          "opponent_name": "3º do Grupo E/F/G/I/J",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "BC Place",
-          "city": "Vancouver",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo B",
-          "condition_type": "group_1st",
-          "match_number": 85,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-90-qat-possible",
-          "date": "2026-07-04",
-          "time_brt": "14:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 75",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "NRG Stadium",
-          "city": "Houston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo B",
-          "condition_type": "knockout_advance",
-          "match_number": 90,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -2427,35 +1792,11 @@
           ]
         },
         {
-          "id": "wc2026-96-qat-possible",
-          "date": "2026-07-07",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 87",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "BC Place",
-          "city": "Vancouver",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo B",
-          "condition_type": "knockout_advance",
-          "match_number": 96,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-97-qat-possible",
           "date": "2026-07-09",
           "time_brt": "17:00",
           "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 89",
+          "opponent_name": "Vencedor da Partida 90",
           "opponent_flag": null,
           "phase": "Quartas de Final",
           "phase_slug": "quarter_finals",
@@ -2464,34 +1805,10 @@
           "country": "EUA/México/Canadá",
           "status": "possible",
           "result": null,
-          "condition": "Caso passe em 2º do Grupo B e avance para as 4ªˢ",
+          "condition": "Caso passe como melhor 3º do Grupo B e avance para as 4ªˢ",
           "condition_type": "knockout_advance",
           "match_number": 97,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-100-qat-possible",
-          "date": "2026-07-11",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 95",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
-          "city": "Kansas City",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo B e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 100,
-          "is_home": false,
+          "is_home": true,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -2512,35 +1829,10 @@
           "country": "EUA/México/Canadá",
           "status": "possible",
           "result": null,
-          "condition": "Caso passe em 2º do Grupo B e avance para a Semifinal",
+          "condition": "Caso passe como melhor 3º do Grupo B e avance para a Semifinal",
           "condition_type": "knockout_advance",
           "match_number": 101,
           "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-102-qat-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 99",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo B e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": false,
           "broadcasts": [
             "Globo",
             "SBT",
@@ -2553,7 +1845,7 @@
           "date": "2026-07-18",
           "time_brt": "18:00",
           "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
+          "opponent_name": "Perdedor da Partida 102",
           "opponent_flag": null,
           "phase": "Disputa de 3º Lugar",
           "phase_slug": "third_place",
@@ -2565,7 +1857,7 @@
           "condition": "Caso dispute o 3º lugar",
           "condition_type": "knockout_advance",
           "match_number": 103,
-          "is_home": false,
+          "is_home": true,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -2577,7 +1869,7 @@
           "date": "2026-07-19",
           "time_brt": "16:00",
           "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
+          "opponent_name": "Vencedor da Partida 102",
           "opponent_flag": null,
           "phase": "Final",
           "phase_slug": "final",
@@ -2589,7 +1881,7 @@
           "condition": "Caso chegue à Final",
           "condition_type": "knockout_advance",
           "match_number": 104,
-          "is_home": false,
+          "is_home": true,
           "broadcasts": [
             "Globo",
             "SBT",
@@ -2727,28 +2019,6 @@
           ]
         },
         {
-          "id": "wc2026-74-sui-possible",
-          "date": "2026-06-29",
-          "time_brt": "17:30",
-          "opponent_code": null,
-          "opponent_name": "1º do Grupo E",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo B",
-          "condition_type": "group_3rd",
-          "match_number": 74,
-          "is_home": false,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-85-sui-possible",
           "date": "2026-07-02",
           "time_brt": "00:00",
@@ -2787,30 +2057,6 @@
           "condition": "Caso passe em 2º do Grupo B",
           "condition_type": "knockout_advance",
           "match_number": 90,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-89-sui-possible",
-          "date": "2026-07-04",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 77",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Lincoln Financial Field",
-          "city": "Filadélfia",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo B",
-          "condition_type": "knockout_advance",
-          "match_number": 89,
           "is_home": true,
           "broadcasts": [
             "Globo",
@@ -3807,7 +3053,7 @@
       "flag": "🇭🇹",
       "group": "C",
       "type": "national_team",
-      "status": "active",
+      "status": "eliminated",
       "matches": [
         {
           "id": "wc2026-014-hai",
@@ -3883,291 +3129,6 @@
           "match_number": 18,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-76-hai-possible",
-          "date": "2026-06-29",
-          "time_brt": "14:00",
-          "opponent_code": null,
-          "opponent_name": "2º do Grupo F",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Houston Stadium",
-          "city": "Houston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo C",
-          "condition_type": "group_1st",
-          "match_number": 76,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-75-hai-possible",
-          "date": "2026-06-29",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "1º do Grupo F",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Estadio Monterrey",
-          "city": "Monterrey",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo C",
-          "condition_type": "group_2nd",
-          "match_number": 75,
-          "is_home": false,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-74-hai-possible",
-          "date": "2026-06-29",
-          "time_brt": "17:30",
-          "opponent_code": null,
-          "opponent_name": "1º do Grupo E",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo C",
-          "condition_type": "group_3rd",
-          "match_number": 74,
-          "is_home": false,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-90-hai-possible",
-          "date": "2026-07-04",
-          "time_brt": "14:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 73",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "NRG Stadium",
-          "city": "Houston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo C",
-          "condition_type": "knockout_advance",
-          "match_number": 90,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-89-hai-possible",
-          "date": "2026-07-04",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 77",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Lincoln Financial Field",
-          "city": "Filadélfia",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo C",
-          "condition_type": "knockout_advance",
-          "match_number": 89,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-91-hai-possible",
-          "date": "2026-07-05",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 78",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo C",
-          "condition_type": "knockout_advance",
-          "match_number": 91,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-97-hai-possible",
-          "date": "2026-07-09",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 89",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo C e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 97,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-99-hai-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 92",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo C e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-101-hai-possible",
-          "date": "2026-07-14",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 98",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo C e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 101,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-102-hai-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo C e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-103-hai-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-hai-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
             "CazéTV"
           ]
         }
@@ -4673,28 +3634,6 @@
           ]
         },
         {
-          "id": "wc2026-74-usa-possible",
-          "date": "2026-06-29",
-          "time_brt": "17:30",
-          "opponent_code": null,
-          "opponent_name": "1º do Grupo E",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo D",
-          "condition_type": "group_3rd",
-          "match_number": 74,
-          "is_home": false,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-81-usa-possible",
           "date": "2026-07-01",
           "time_brt": "21:00",
@@ -4717,52 +3656,6 @@
           ]
         },
         {
-          "id": "wc2026-88-usa-possible",
-          "date": "2026-07-03",
-          "time_brt": "15:00",
-          "opponent_code": null,
-          "opponent_name": "2º do Grupo G",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo D",
-          "condition_type": "group_2nd",
-          "match_number": 88,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-89-usa-possible",
-          "date": "2026-07-04",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 77",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Lincoln Financial Field",
-          "city": "Filadélfia",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo D",
-          "condition_type": "knockout_advance",
-          "match_number": 89,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-94-usa-possible",
           "date": "2026-07-06",
           "time_brt": "21:00",
@@ -4779,54 +3672,6 @@
           "condition": "Caso passe em 1º do Grupo D",
           "condition_type": "knockout_advance",
           "match_number": 94,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-95-usa-possible",
-          "date": "2026-07-07",
-          "time_brt": "13:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 86",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Mercedes-Benz Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo D",
-          "condition_type": "knockout_advance",
-          "match_number": 95,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-97-usa-possible",
-          "date": "2026-07-09",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 90",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo D e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 97,
           "is_home": true,
           "broadcasts": [
             "Globo",
@@ -4859,30 +3704,6 @@
           ]
         },
         {
-          "id": "wc2026-100-usa-possible",
-          "date": "2026-07-11",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 96",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
-          "city": "Kansas City",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo D e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 100,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-101-usa-possible",
           "date": "2026-07-14",
           "time_brt": "16:00",
@@ -4899,31 +3720,6 @@
           "condition": "Caso passe em 1º do Grupo D e avance para a Semifinal",
           "condition_type": "knockout_advance",
           "match_number": 101,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-102-usa-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 99",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo D e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
           "is_home": false,
           "broadcasts": [
             "Globo",
@@ -5089,28 +3885,6 @@
           ]
         },
         {
-          "id": "wc2026-81-par-possible",
-          "date": "2026-07-01",
-          "time_brt": "21:00",
-          "opponent_code": null,
-          "opponent_name": "3º do Grupo B/E/F/I/J",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Levi's Stadium",
-          "city": "San Francisco",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo D",
-          "condition_type": "group_1st",
-          "match_number": 81,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-88-par-possible",
           "date": "2026-07-03",
           "time_brt": "15:00",
@@ -5149,30 +3923,6 @@
           "condition": "Caso passe como melhor 3º do Grupo D",
           "condition_type": "knockout_advance",
           "match_number": 89,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-94-par-possible",
-          "date": "2026-07-06",
-          "time_brt": "21:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 82",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Lumen Field",
-          "city": "Seattle",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo D",
-          "condition_type": "knockout_advance",
-          "match_number": 94,
           "is_home": true,
           "broadcasts": [
             "Globo",
@@ -5229,30 +3979,6 @@
           ]
         },
         {
-          "id": "wc2026-98-par-possible",
-          "date": "2026-07-10",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 93",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "SoFi Stadium",
-          "city": "Los Angeles",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo D e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 98,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-100-par-possible",
           "date": "2026-07-11",
           "time_brt": "22:00",
@@ -5281,7 +4007,7 @@
           "date": "2026-07-14",
           "time_brt": "16:00",
           "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 97",
+          "opponent_name": "Vencedor da Partida 98",
           "opponent_flag": null,
           "phase": "Semifinal",
           "phase_slug": "semi_finals",
@@ -5290,10 +4016,10 @@
           "country": "EUA/México/Canadá",
           "status": "possible",
           "result": null,
-          "condition": "Caso passe em 1º do Grupo D e avance para a Semifinal",
+          "condition": "Caso passe como melhor 3º do Grupo D e avance para a Semifinal",
           "condition_type": "knockout_advance",
           "match_number": 101,
-          "is_home": false,
+          "is_home": true,
           "broadcasts": [
             "Globo",
             "SBT",
@@ -5331,7 +4057,7 @@
           "date": "2026-07-18",
           "time_brt": "18:00",
           "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 102",
+          "opponent_name": "Perdedor da Partida 101",
           "opponent_flag": null,
           "phase": "Disputa de 3º Lugar",
           "phase_slug": "third_place",
@@ -5343,7 +4069,7 @@
           "condition": "Caso dispute o 3º lugar",
           "condition_type": "knockout_advance",
           "match_number": 103,
-          "is_home": true,
+          "is_home": false,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -5355,7 +4081,7 @@
           "date": "2026-07-19",
           "time_brt": "16:00",
           "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 102",
+          "opponent_name": "Vencedor da Partida 101",
           "opponent_flag": null,
           "phase": "Final",
           "phase_slug": "final",
@@ -5367,7 +4093,7 @@
           "condition": "Caso chegue à Final",
           "condition_type": "knockout_advance",
           "match_number": 104,
-          "is_home": true,
+          "is_home": false,
           "broadcasts": [
             "Globo",
             "SBT",
@@ -5504,28 +4230,6 @@
           ]
         },
         {
-          "id": "wc2026-81-aus-possible",
-          "date": "2026-07-01",
-          "time_brt": "21:00",
-          "opponent_code": null,
-          "opponent_name": "3º do Grupo B/E/F/I/J",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Levi's Stadium",
-          "city": "San Francisco",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo D",
-          "condition_type": "group_1st",
-          "match_number": 81,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-88-aus-possible",
           "date": "2026-07-03",
           "time_brt": "15:00",
@@ -5564,30 +4268,6 @@
           "condition": "Caso passe como melhor 3º do Grupo D",
           "condition_type": "knockout_advance",
           "match_number": 89,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-94-aus-possible",
-          "date": "2026-07-06",
-          "time_brt": "21:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 82",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Lumen Field",
-          "city": "Seattle",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo D",
-          "condition_type": "knockout_advance",
-          "match_number": 94,
           "is_home": true,
           "broadcasts": [
             "Globo",
@@ -5644,30 +4324,6 @@
           ]
         },
         {
-          "id": "wc2026-98-aus-possible",
-          "date": "2026-07-10",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 93",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "SoFi Stadium",
-          "city": "Los Angeles",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo D e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 98,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-100-aus-possible",
           "date": "2026-07-11",
           "time_brt": "22:00",
@@ -5696,7 +4352,7 @@
           "date": "2026-07-14",
           "time_brt": "16:00",
           "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 97",
+          "opponent_name": "Vencedor da Partida 98",
           "opponent_flag": null,
           "phase": "Semifinal",
           "phase_slug": "semi_finals",
@@ -5705,10 +4361,10 @@
           "country": "EUA/México/Canadá",
           "status": "possible",
           "result": null,
-          "condition": "Caso passe em 1º do Grupo D e avance para a Semifinal",
+          "condition": "Caso passe como melhor 3º do Grupo D e avance para a Semifinal",
           "condition_type": "knockout_advance",
           "match_number": 101,
-          "is_home": false,
+          "is_home": true,
           "broadcasts": [
             "Globo",
             "SBT",
@@ -5746,7 +4402,7 @@
           "date": "2026-07-18",
           "time_brt": "18:00",
           "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 102",
+          "opponent_name": "Perdedor da Partida 101",
           "opponent_flag": null,
           "phase": "Disputa de 3º Lugar",
           "phase_slug": "third_place",
@@ -5758,7 +4414,7 @@
           "condition": "Caso dispute o 3º lugar",
           "condition_type": "knockout_advance",
           "match_number": 103,
-          "is_home": true,
+          "is_home": false,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -5770,7 +4426,7 @@
           "date": "2026-07-19",
           "time_brt": "16:00",
           "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 102",
+          "opponent_name": "Vencedor da Partida 101",
           "opponent_flag": null,
           "phase": "Final",
           "phase_slug": "final",
@@ -5782,7 +4438,7 @@
           "condition": "Caso chegue à Final",
           "condition_type": "knockout_advance",
           "match_number": 104,
-          "is_home": true,
+          "is_home": false,
           "broadcasts": [
             "Globo",
             "SBT",
@@ -5798,7 +4454,7 @@
       "flag": "🇹🇷",
       "group": "D",
       "type": "national_team",
-      "status": "active",
+      "status": "eliminated",
       "matches": [
         {
           "id": "wc2026-020-tur",
@@ -5871,315 +4527,6 @@
           "match_number": 23,
           "is_home": true,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-74-tur-possible",
-          "date": "2026-06-29",
-          "time_brt": "17:30",
-          "opponent_code": null,
-          "opponent_name": "1º do Grupo E",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo D",
-          "condition_type": "group_3rd",
-          "match_number": 74,
-          "is_home": false,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-81-tur-possible",
-          "date": "2026-07-01",
-          "time_brt": "21:00",
-          "opponent_code": null,
-          "opponent_name": "3º do Grupo B/E/F/I/J",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Levi's Stadium",
-          "city": "San Francisco",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo D",
-          "condition_type": "group_1st",
-          "match_number": 81,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-88-tur-possible",
-          "date": "2026-07-03",
-          "time_brt": "15:00",
-          "opponent_code": null,
-          "opponent_name": "2º do Grupo G",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo D",
-          "condition_type": "group_2nd",
-          "match_number": 88,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-89-tur-possible",
-          "date": "2026-07-04",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 77",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Lincoln Financial Field",
-          "city": "Filadélfia",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo D",
-          "condition_type": "knockout_advance",
-          "match_number": 89,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-94-tur-possible",
-          "date": "2026-07-06",
-          "time_brt": "21:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 82",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Lumen Field",
-          "city": "Seattle",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo D",
-          "condition_type": "knockout_advance",
-          "match_number": 94,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-95-tur-possible",
-          "date": "2026-07-07",
-          "time_brt": "13:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 86",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Mercedes-Benz Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo D",
-          "condition_type": "knockout_advance",
-          "match_number": 95,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-97-tur-possible",
-          "date": "2026-07-09",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 90",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo D e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 97,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-98-tur-possible",
-          "date": "2026-07-10",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 93",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "SoFi Stadium",
-          "city": "Los Angeles",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo D e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 98,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-100-tur-possible",
-          "date": "2026-07-11",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 96",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
-          "city": "Kansas City",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo D e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 100,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-101-tur-possible",
-          "date": "2026-07-14",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 97",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo D e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 101,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-102-tur-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 99",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo D e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-103-tur-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 102",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-tur-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 102",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
             "CazéTV"
           ]
         }
@@ -6319,54 +4666,6 @@
           ]
         },
         {
-          "id": "wc2026-78-ger-possible",
-          "date": "2026-06-30",
-          "time_brt": "14:00",
-          "opponent_code": null,
-          "opponent_name": "2º do Grupo I",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo E",
-          "condition_type": "group_2nd",
-          "match_number": 78,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-79-ger-possible",
-          "date": "2026-06-30",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "1º do Grupo A",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Estadio Azteca",
-          "city": "Cidade do México",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo E",
-          "condition_type": "group_3rd",
-          "match_number": 79,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-89-ger-possible",
           "date": "2026-07-04",
           "time_brt": "18:00",
@@ -6383,54 +4682,6 @@
           "condition": "Caso passe em 1º do Grupo E",
           "condition_type": "knockout_advance",
           "match_number": 89,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-91-ger-possible",
-          "date": "2026-07-05",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 76",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo E",
-          "condition_type": "knockout_advance",
-          "match_number": 91,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-92-ger-possible",
-          "date": "2026-07-05",
-          "time_brt": "21:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 80",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Estadio Azteca",
-          "city": "Cidade do México",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo E",
-          "condition_type": "knockout_advance",
-          "match_number": 92,
           "is_home": true,
           "broadcasts": [
             "Globo",
@@ -6463,30 +4714,6 @@
           ]
         },
         {
-          "id": "wc2026-99-ger-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 92",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo E e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-101-ger-possible",
           "date": "2026-07-14",
           "time_brt": "16:00",
@@ -6503,31 +4730,6 @@
           "condition": "Caso passe em 1º do Grupo E e avance para a Semifinal",
           "condition_type": "knockout_advance",
           "match_number": 101,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-102-ger-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo E e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
           "is_home": true,
           "broadcasts": [
             "Globo",
@@ -6672,28 +4874,6 @@
           ]
         },
         {
-          "id": "wc2026-74-cuw-possible",
-          "date": "2026-06-29",
-          "time_brt": "17:30",
-          "opponent_code": null,
-          "opponent_name": "3º do Grupo A/B/C/D/F",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo E",
-          "condition_type": "group_1st",
-          "match_number": 74,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-78-cuw-possible",
           "date": "2026-06-30",
           "time_brt": "14:00",
@@ -6734,30 +4914,6 @@
           "match_number": 79,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-89-cuw-possible",
-          "date": "2026-07-04",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 77",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Lincoln Financial Field",
-          "city": "Filadélfia",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo E",
-          "condition_type": "knockout_advance",
-          "match_number": 89,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -6810,30 +4966,6 @@
           ]
         },
         {
-          "id": "wc2026-97-cuw-possible",
-          "date": "2026-07-09",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 90",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo E e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 97,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-99-cuw-possible",
           "date": "2026-07-11",
           "time_brt": "18:00",
@@ -6853,31 +4985,6 @@
           "is_home": true,
           "broadcasts": [
             "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-101-cuw-possible",
-          "date": "2026-07-14",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 98",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo E e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 101,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
             "SporTV",
             "CazéTV"
           ]
@@ -6912,7 +5019,7 @@
           "date": "2026-07-18",
           "time_brt": "18:00",
           "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 102",
+          "opponent_name": "Perdedor da Partida 101",
           "opponent_flag": null,
           "phase": "Disputa de 3º Lugar",
           "phase_slug": "third_place",
@@ -6924,7 +5031,7 @@
           "condition": "Caso dispute o 3º lugar",
           "condition_type": "knockout_advance",
           "match_number": 103,
-          "is_home": true,
+          "is_home": false,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -6936,7 +5043,7 @@
           "date": "2026-07-19",
           "time_brt": "16:00",
           "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 102",
+          "opponent_name": "Vencedor da Partida 101",
           "opponent_flag": null,
           "phase": "Final",
           "phase_slug": "final",
@@ -6948,7 +5055,7 @@
           "condition": "Caso chegue à Final",
           "condition_type": "knockout_advance",
           "match_number": 104,
-          "is_home": true,
+          "is_home": false,
           "broadcasts": [
             "Globo",
             "SBT",
@@ -7042,28 +5149,6 @@
           ]
         },
         {
-          "id": "wc2026-74-civ-possible",
-          "date": "2026-06-29",
-          "time_brt": "17:30",
-          "opponent_code": null,
-          "opponent_name": "3º do Grupo A/B/C/D/F",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo E",
-          "condition_type": "group_1st",
-          "match_number": 74,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-78-civ-possible",
           "date": "2026-06-30",
           "time_brt": "14:00",
@@ -7104,30 +5189,6 @@
           "match_number": 79,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-89-civ-possible",
-          "date": "2026-07-04",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 77",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Lincoln Financial Field",
-          "city": "Filadélfia",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo E",
-          "condition_type": "knockout_advance",
-          "match_number": 89,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -7180,30 +5241,6 @@
           ]
         },
         {
-          "id": "wc2026-97-civ-possible",
-          "date": "2026-07-09",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 90",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo E e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 97,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-99-civ-possible",
           "date": "2026-07-11",
           "time_brt": "18:00",
@@ -7223,31 +5260,6 @@
           "is_home": true,
           "broadcasts": [
             "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-101-civ-possible",
-          "date": "2026-07-14",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 98",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo E e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 101,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
             "SporTV",
             "CazéTV"
           ]
@@ -7282,7 +5294,7 @@
           "date": "2026-07-18",
           "time_brt": "18:00",
           "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 102",
+          "opponent_name": "Perdedor da Partida 101",
           "opponent_flag": null,
           "phase": "Disputa de 3º Lugar",
           "phase_slug": "third_place",
@@ -7294,7 +5306,7 @@
           "condition": "Caso dispute o 3º lugar",
           "condition_type": "knockout_advance",
           "match_number": 103,
-          "is_home": true,
+          "is_home": false,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -7306,7 +5318,7 @@
           "date": "2026-07-19",
           "time_brt": "16:00",
           "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 102",
+          "opponent_name": "Vencedor da Partida 101",
           "opponent_flag": null,
           "phase": "Final",
           "phase_slug": "final",
@@ -7318,7 +5330,7 @@
           "condition": "Caso chegue à Final",
           "condition_type": "knockout_advance",
           "match_number": 104,
-          "is_home": true,
+          "is_home": false,
           "broadcasts": [
             "Globo",
             "SBT",
@@ -7413,28 +5425,6 @@
           ]
         },
         {
-          "id": "wc2026-74-ecu-possible",
-          "date": "2026-06-29",
-          "time_brt": "17:30",
-          "opponent_code": null,
-          "opponent_name": "3º do Grupo A/B/C/D/F",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo E",
-          "condition_type": "group_1st",
-          "match_number": 74,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-78-ecu-possible",
           "date": "2026-06-30",
           "time_brt": "14:00",
@@ -7475,30 +5465,6 @@
           "match_number": 79,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-89-ecu-possible",
-          "date": "2026-07-04",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 77",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Lincoln Financial Field",
-          "city": "Filadélfia",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo E",
-          "condition_type": "knockout_advance",
-          "match_number": 89,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -7551,30 +5517,6 @@
           ]
         },
         {
-          "id": "wc2026-97-ecu-possible",
-          "date": "2026-07-09",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 90",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo E e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 97,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-99-ecu-possible",
           "date": "2026-07-11",
           "time_brt": "18:00",
@@ -7594,31 +5536,6 @@
           "is_home": true,
           "broadcasts": [
             "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-101-ecu-possible",
-          "date": "2026-07-14",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 98",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo E e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 101,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
             "SporTV",
             "CazéTV"
           ]
@@ -7653,7 +5570,7 @@
           "date": "2026-07-18",
           "time_brt": "18:00",
           "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 102",
+          "opponent_name": "Perdedor da Partida 101",
           "opponent_flag": null,
           "phase": "Disputa de 3º Lugar",
           "phase_slug": "third_place",
@@ -7665,7 +5582,7 @@
           "condition": "Caso dispute o 3º lugar",
           "condition_type": "knockout_advance",
           "match_number": 103,
-          "is_home": true,
+          "is_home": false,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -7677,7 +5594,7 @@
           "date": "2026-07-19",
           "time_brt": "16:00",
           "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 102",
+          "opponent_name": "Vencedor da Partida 101",
           "opponent_flag": null,
           "phase": "Final",
           "phase_slug": "final",
@@ -7689,7 +5606,7 @@
           "condition": "Caso chegue à Final",
           "condition_type": "knockout_advance",
           "match_number": 104,
-          "is_home": true,
+          "is_home": false,
           "broadcasts": [
             "Globo",
             "SBT",
@@ -8814,7 +6731,7 @@
       "flag": "🇹🇳",
       "group": "F",
       "type": "national_team",
-      "status": "active",
+      "status": "eliminated",
       "matches": [
         {
           "id": "wc2026-032-tun",
@@ -8887,291 +6804,6 @@
           "match_number": 36,
           "is_home": true,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-75-tun-possible",
-          "date": "2026-06-29",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "2º do Grupo C",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Estadio Monterrey",
-          "city": "Monterrey",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo F",
-          "condition_type": "group_1st",
-          "match_number": 75,
-          "is_home": true,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-76-tun-possible",
-          "date": "2026-06-29",
-          "time_brt": "14:00",
-          "opponent_code": null,
-          "opponent_name": "1º do Grupo C",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Houston Stadium",
-          "city": "Houston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo F",
-          "condition_type": "group_2nd",
-          "match_number": 76,
-          "is_home": false,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-74-tun-possible",
-          "date": "2026-06-29",
-          "time_brt": "17:30",
-          "opponent_code": null,
-          "opponent_name": "1º do Grupo E",
-          "opponent_flag": null,
-          "phase": "16 avos de Final",
-          "phase_slug": "round_of_32",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo F",
-          "condition_type": "group_3rd",
-          "match_number": 74,
-          "is_home": false,
-          "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-90-tun-possible",
-          "date": "2026-07-04",
-          "time_brt": "14:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 73",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "NRG Stadium",
-          "city": "Houston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo F",
-          "condition_type": "knockout_advance",
-          "match_number": 90,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-89-tun-possible",
-          "date": "2026-07-04",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 77",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Lincoln Financial Field",
-          "city": "Filadélfia",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo F",
-          "condition_type": "knockout_advance",
-          "match_number": 89,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-91-tun-possible",
-          "date": "2026-07-05",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 78",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo F",
-          "condition_type": "knockout_advance",
-          "match_number": 91,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-97-tun-possible",
-          "date": "2026-07-09",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 89",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo F e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 97,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-99-tun-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 92",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo F e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-101-tun-possible",
-          "date": "2026-07-14",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 98",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 1º do Grupo F e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 101,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-102-tun-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe em 2º do Grupo F e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-103-tun-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 102",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-tun-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 102",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
             "CazéTV"
           ]
         }

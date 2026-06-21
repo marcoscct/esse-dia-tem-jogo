@@ -8,9 +8,8 @@ name: 🗓️ Update World Cup Calendar
 
 on:
   schedule:
-    # Every day at 03:00 BRT (06:00 UTC) during the Cup
-    - cron: '0 6 * * *'
-  # Also run after results (15 min after typical final whistles in BRT)
+    # Run every 30 minutes to check for finished matches and update standings
+    - cron: '*/30 * * * *'
   # Manual trigger for emergency updates
   workflow_dispatch:
     inputs:

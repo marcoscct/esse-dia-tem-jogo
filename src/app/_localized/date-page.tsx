@@ -16,6 +16,9 @@ export default function LocalizedDatePage({ teamSlug, dateParam }: Props) {
   if (!isoDate) notFound();
 
   const result = queryDate(team.code, isoDate);
+  const sortedMatches = [...team.matches].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
   const teams = getAllTeams();
   const meta = getCalendarMeta();
 
@@ -32,6 +35,7 @@ export default function LocalizedDatePage({ teamSlug, dateParam }: Props) {
         initialTeam={team.slug} 
         initialDate={isoDate} 
         result={{ hasGame: result.hasGame, matches: result.matches }} 
+        initialMatches={sortedMatches}
       />
     </>
   );

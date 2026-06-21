@@ -6,12 +6,12 @@ import dynamic from "next/dynamic";
 
 import { Calendar as CalendarIcon, RefreshCw, Loader2, ChevronDown } from "lucide-react";
 import Image from "next/image";
-import type { TeamSummary, MatchWithTeam } from "@/lib/types";
+import type { TeamSummary, MatchWithTeam, Match } from "@/lib/types";
 const ResultModal = dynamic(() => import("./ResultModal"), { ssr: false });
 const SupportModal = dynamic(() => import("./SupportModal"), { ssr: false });
 const SupportBottomBar = dynamic(() => import("./SupportBottomBar"), { ssr: false });
 import TeamCarousel from "./TeamCarousel";
-import { queryDateClient, queryAllGamesOnDateClient } from "@/lib/client-calendar";
+import { queryDateClient, queryAllGamesOnDateClient, getClientCalendar } from "@/lib/client-calendar";
 import { useLanguage } from "./TranslationProvider";
 import { translateTeamName, translateOpponentName, translatePhase, translateCondition } from "@/locales/i18n-utils";
 import { getFlagUrl } from "@/lib/flag-codes";
@@ -27,14 +27,16 @@ interface HomeClientProps {
   initialMode?: "team" | "date-only";
   result?: { hasGame: boolean; matches: MatchWithTeam[] };
   isClubs?: boolean;
+  initialMatches?: Match[];
 }
 
-export default function HomeClient({ teams, lastUpdated, initialTeam, initialDate, initialMode = "team", result, isClubs = false }: HomeClientProps) {
+export default function HomeClient({ teams, lastUpdated, initialTeam, initialDate, initialMode = "team", result, isClubs = false, initialMatches }: HomeClientProps) {
   const { lang, t } = useLanguage();
   const defaultTeam = isClubs
     ? (teams[0]?.slug)
     : (teams.find(t => t.code === "BRA")?.slug || teams[0]?.slug);
   const [selectedTeam, setSelectedTeam] = useState(initialTeam || defaultTeam);
+  const [selectedTeamMatches, setSelectedTeamMatches] = useState<Match[]>(initialMatches || []);
   const [selectedDate, setSelectedDate] = useState(() => {
     if (initialDate) return initialDate;
     const d = new Date();
@@ -49,6 +51,37 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
   const [localResult, setLocalResult] = useState<{ hasGame: boolean; matches: MatchWithTeam[] } | null>(result || null);
   const [isLoading, setIsLoading] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  // Client-side dynamic match loading for selected team
+  useEffect(() => {
+    if (initialMatches && selectedTeam === initialTeam) {
+      setSelectedTeamMatches(initialMatches);
+      return;
+    }
+
+    let active = true;
+    (async () => {
+      try {
+        const calendar = await getClientCalendar(isClubs);
+        const entry = Object.entries(calendar.teams).find(
+          ([, teamItem]) => teamItem.slug === selectedTeam
+        );
+        if (entry && active) {
+          const [, teamItem] = entry;
+          const sorted = [...teamItem.matches].sort(
+            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+          );
+          setSelectedTeamMatches(sorted);
+        }
+      } catch (err) {
+        console.error("Failed to load matches for selected team client-side:", err);
+      }
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [selectedTeam, isClubs, initialMatches, initialTeam]);
   
   // Range date selection states
   const [isRangeEnabled, setIsRangeEnabled] = useState(false);
@@ -490,6 +523,82 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
           </div>
         </div>
 
+        {/* Bloco: Agenda de Jogos */}
+        {selectedTeamMatches.length > 0 && (
+          <div className="bg-[#111111] rounded-3xl p-6 md:p-8 border border-zinc-800 shadow-xl flex flex-col gap-6 w-full">
+            <h2 className="font-display text-lg md:text-xl font-black uppercase tracking-wider text-[#ffcc00] flex items-center gap-2">
+              <span className="text-2xl">📅</span>
+              {lang === 'en' ? 'Match Schedule' : lang === 'es' ? 'Agenda de Partidos' : 'Agenda de Jogos'}
+            </h2>
+            <div className="w-12 h-1 bg-[#ffcc00] rounded-full"></div>
+            
+            <p className="text-zinc-400 text-xs md:text-sm leading-relaxed">
+              {lang === 'en' 
+                ? `Check all scheduled or potential matches for ${activeTeamData ? activeTeamData.name : ''}.` 
+                : lang === 'es'
+                ? `Consulta todos los partidos confirmados o posibles para ${activeTeamData ? activeTeamData.name : ''}.`
+                : `Confira todos os compromissos confirmados ou possíveis na agenda de jogos da equipe de ${activeTeamData ? activeTeamData.name : ''}.`}
+            </p>
+
+            <div className="flex flex-col gap-3 max-h-[400px] overflow-y-auto pr-2">
+              {selectedTeamMatches.map((match) => {
+                const matchDateFormatted = (() => {
+                  const parts = match.date.split("-");
+                  if (parts.length < 3) return match.date;
+                  return `${parts[2]}/${parts[1]}/${parts[0]}`;
+                })();
+                const isConfirmed = match.status === 'confirmed';
+                return (
+                  <div key={match.id} className="bg-zinc-950 p-4 rounded-2xl border border-zinc-900 flex flex-col gap-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-bold text-[#ffcc00] uppercase tracking-wider">
+                        {matchDateFormatted} {match.time_brt ? `• ${match.time_brt} BRT` : ''}
+                      </span>
+                      <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide border ${
+                        isConfirmed 
+                          ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' 
+                          : 'bg-[#ffcc00]/10 text-[#ffcc00] border-[#ffcc00]/20'
+                      }`}>
+                        {isConfirmed 
+                          ? (lang === 'en' ? 'Confirmed' : lang === 'es' ? 'Confirmado' : 'Confirmado')
+                          : (lang === 'en' ? 'Possible' : lang === 'es' ? 'Posible' : 'Possível')}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-4 mt-1">
+                      <div className="flex items-center gap-2">
+                        {activeTeamData && (
+                          <div className="w-5 h-5 rounded-full overflow-hidden shrink-0">
+                            <img src={getFlagUrl(activeTeamData.code)} alt={activeTeamData.name} className="w-full h-full object-cover" />
+                          </div>
+                        )}
+                        <span className="text-sm font-bold text-white">{activeTeamData ? activeTeamData.name : ''}</span>
+                      </div>
+                      <span className="text-zinc-600 font-black text-xs">VS</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-bold text-white">{translateOpponentName(match.opponent_code, match.opponent_name, lang)}</span>
+                        {match.opponent_code && (
+                          <div className="w-5 h-5 rounded-full overflow-hidden shrink-0">
+                            <img src={getFlagUrl(match.opponent_code)} alt={match.opponent_name} className="w-full h-full object-cover" />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap gap-x-3 gap-y-1 mt-1 border-t border-zinc-900 pt-2 text-[11px] text-zinc-500">
+                      <span>🏆 {translatePhase(match.phase, lang)}</span>
+                      {match.venue && <span>📍 {match.venue} ({match.city}, {match.country})</span>}
+                      {match.broadcasts && match.broadcasts.length > 0 && (
+                        <span>📺 {match.broadcasts.join(', ')}</span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         {/* Bloco 2: Como Funciona */}
         <div className="flex flex-col gap-6">
           <h2 className="font-display text-sm md:text-base font-black uppercase tracking-wider text-white border-b border-zinc-900 pb-3">
@@ -530,6 +639,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
           </h2>
           <div className="flex flex-col gap-4">
             {[
+              { q: t("seo_faq_q1"), a: t("seo_faq_a1") },
               { q: t("seo_faq_q2"), a: t("seo_faq_a2") },
               { q: t("seo_faq_q3"), a: t("seo_faq_a3") },
               { q: t("seo_faq_q4"), a: t("seo_faq_a4") }
@@ -548,11 +658,18 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                     <span>{item.q}</span>
                     <ChevronDown className={`w-4 h-4 text-zinc-400 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180 text-[#ffcc00]" : ""}`} />
                   </button>
-                  {isOpen && (
-                    <div className="px-5 pb-5 pt-1 text-zinc-400 text-xs md:text-sm leading-relaxed border-t border-zinc-900">
-                      {item.a}
-                    </div>
-                  )}
+                  <div 
+                    className="px-5 text-zinc-400 text-xs md:text-sm leading-relaxed border-t border-zinc-900 transition-all duration-300 ease-in-out overflow-hidden"
+                    style={{
+                      maxHeight: isOpen ? "250px" : "0px",
+                      opacity: isOpen ? 1 : 0,
+                      paddingTop: isOpen ? "12px" : "0px",
+                      paddingBottom: isOpen ? "16px" : "0px",
+                      borderTopColor: isOpen ? "rgb(24, 24, 27)" : "transparent"
+                    }}
+                  >
+                    {item.a}
+                  </div>
                 </div>
               );
             })}

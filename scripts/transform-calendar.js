@@ -368,6 +368,180 @@ function isSlotOnPath(slot, teamPath, currentMatchNumber, teamGroup, conditionTy
 }
 
 // ─── Group Standings Calculator ───────────────────────────────────────────────
+// ─── Group Standings Calculator ───────────────────────────────────────────────
+function rankGroupTeams(teamsList, groupMatches) {
+  const pointsGroups = {};
+  teamsList.forEach(t => {
+    if (!pointsGroups[t.points]) pointsGroups[t.points] = [];
+    pointsGroups[t.points].push(t);
+  });
+  
+  const sortedPoints = Object.keys(pointsGroups).map(Number).sort((a, b) => b - a);
+  const finalSorted = [];
+  
+  sortedPoints.forEach(pts => {
+    const tied = pointsGroups[pts];
+    if (tied.length === 1) {
+      finalSorted.push(tied[0]);
+    } else {
+      const h2hTable = {};
+      tied.forEach(t => {
+        h2hTable[t.code] = { code: t.code, points: 0, gd: 0, gs: 0 };
+      });
+      
+      const tiedCodes = new Set(tied.map(t => t.code));
+      
+      groupMatches.forEach(m => {
+        if (!m.score) return;
+        const t1 = TEAM_MAP[m.team1];
+        const t2 = TEAM_MAP[m.team2];
+        if (t1 && t2 && tiedCodes.has(t1.code) && tiedCodes.has(t2.code)) {
+          const s1 = m.score.ft[0];
+          const s2 = m.score.ft[1];
+          h2hTable[t1.code].gs += s1;
+          h2hTable[t2.code].gs += s2;
+          h2hTable[t1.code].gd += (s1 - s2);
+          h2hTable[t2.code].gd += (s2 - s1);
+          if (s1 > s2) {
+            h2hTable[t1.code].points += 3;
+          } else if (s2 > s1) {
+            h2hTable[t2.code].points += 3;
+          } else {
+            h2hTable[t1.code].points += 1;
+            h2hTable[t2.code].points += 1;
+          }
+        }
+      });
+      
+      const sortedTied = tied.sort((a, b) => {
+        const h2hA = h2hTable[a.code];
+        const h2hB = h2hTable[b.code];
+        
+        if (h2hB.points !== h2hA.points) return h2hB.points - h2hA.points;
+        if (h2hB.gd !== h2hA.gd) return h2hB.gd - h2hA.gd;
+        if (h2hB.gs !== h2hA.gs) return h2hB.gs - h2hA.gs;
+        if (b.gd !== a.gd) return b.gd - a.gd;
+        if (b.gs !== a.gs) return b.gs - a.gs;
+        return a.code.localeCompare(b.code);
+      });
+      
+      finalSorted.push(...sortedTied);
+    }
+  });
+  
+  return finalSorted;
+}
+
+function calculatePossibleRanks(groupLetter, rawMatches) {
+  const g = groupLetter.toUpperCase();
+  const groupTeams = Object.values(TEAM_MAP)
+    .filter(t => t.group === g)
+    .map(t => t.code);
+
+  const groupMatches = rawMatches.filter(m => {
+    const t1 = TEAM_MAP[m.team1];
+    const t2 = TEAM_MAP[m.team2];
+    return t1 && t2 && t1.group === g && t2.group === g;
+  });
+
+  const playedMatches = groupMatches.filter(m => m.score);
+  const unplayedMatches = groupMatches.filter(m => !m.score);
+
+  const possibleRanks = {};
+  groupTeams.forEach(code => {
+    possibleRanks[code] = new Set();
+  });
+
+  if (playedMatches.length <= 2) {
+    groupTeams.forEach(code => {
+      possibleRanks[code].add(1);
+      possibleRanks[code].add(2);
+      possibleRanks[code].add(3);
+      possibleRanks[code].add(4);
+    });
+    return possibleRanks;
+  }
+
+  const scorelines = [
+    [3, 0],
+    [1, 0],
+    [0, 0],
+    [0, 1],
+    [0, 3]
+  ];
+
+  const outcomes = [];
+  function generate(index, currentSimulation) {
+    if (index === unplayedMatches.length) {
+      outcomes.push(currentSimulation);
+      return;
+    }
+    const match = unplayedMatches[index];
+    scorelines.forEach(score => {
+      generate(index + 1, [
+        ...currentSimulation,
+        {
+          team1: match.team1,
+          team2: match.team2,
+          score: { ft: score }
+        }
+      ]);
+    });
+  }
+
+  generate(0, []);
+
+  outcomes.forEach(simMatches => {
+    const allMatches = [...playedMatches, ...simMatches];
+    const table = {};
+    groupTeams.forEach(code => {
+      table[code] = { code, points: 0, gd: 0, gs: 0 };
+    });
+
+    allMatches.forEach(m => {
+      const t1Code = TEAM_MAP[m.team1].code;
+      const t2Code = TEAM_MAP[m.team2].code;
+      const s1 = m.score.ft[0];
+      const s2 = m.score.ft[1];
+
+      table[t1Code].gs += s1;
+      table[t2Code].gs += s2;
+      table[t1Code].gd += (s1 - s2);
+      table[t2Code].gd += (s2 - s1);
+
+      if (s1 > s2) {
+        table[t1Code].points += 3;
+      } else if (s2 > s1) {
+        table[t2Code].points += 3;
+      } else {
+        table[t1Code].points += 1;
+        table[t2Code].points += 1;
+      }
+    });
+
+    const sorted = rankGroupTeams(Object.values(table), allMatches);
+
+    let i = 0;
+    while (i < sorted.length) {
+      let j = i + 1;
+      while (j < sorted.length &&
+             sorted[j].points === sorted[i].points &&
+             sorted[j].gd === sorted[i].gd &&
+             sorted[j].gs === sorted[i].gs) {
+        j++;
+      }
+      for (let k = i; k < j; k++) {
+        for (let r = i + 1; r <= j; r++) {
+          possibleRanks[sorted[k].code].add(r);
+        }
+      }
+      i = j;
+    }
+  });
+
+  return possibleRanks;
+}
+
 function calculateGroupStandings(groupLetter, rawMatches) {
   const g = groupLetter.toUpperCase();
   const groupTeams = Object.values(TEAM_MAP)
@@ -381,7 +555,7 @@ function calculateGroupStandings(groupLetter, rawMatches) {
   });
 
   const isFullyPlayed = groupMatches.length === 6 && groupMatches.every(m => m.score);
-  if (!isFullyPlayed) return null; // Keep all possible paths
+  if (!isFullyPlayed) return null;
 
   const table = {};
   groupTeams.forEach(code => {
@@ -409,15 +583,11 @@ function calculateGroupStandings(groupLetter, rawMatches) {
     }
   });
 
-  const sorted = Object.values(table).sort((a, b) => {
-    if (b.points !== a.points) return b.points - a.points;
-    if (b.gd !== a.gd) return b.gd - a.gd;
-    return b.gs - a.gs;
-  });
+  const sorted = rankGroupTeams(Object.values(table), groupMatches);
 
   const standings = {};
   sorted.forEach((team, index) => {
-    standings[team.code] = index + 1; // 1, 2, 3, 4
+    standings[team.code] = index + 1;
   });
 
   return standings;

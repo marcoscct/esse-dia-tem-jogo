@@ -30,6 +30,7 @@ export default function LocalizedTeamPage({ teamSlug }: Props) {
         teams={teams} 
         lastUpdated={meta.last_updated} 
         initialTeam={team.slug} 
+        initialMatches={sortedMatches}
       />
     </>
   );

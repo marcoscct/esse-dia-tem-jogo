@@ -8893,8 +8893,12 @@
           "venue": "Miami (Miami Gardens)",
           "city": "Miami (Miami Gardens)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 46,
@@ -9610,8 +9614,12 @@
           "venue": "Miami (Miami Gardens)",
           "city": "Miami (Miami Gardens)",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 46,

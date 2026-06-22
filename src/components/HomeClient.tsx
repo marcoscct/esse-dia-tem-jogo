@@ -36,7 +36,9 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
     ? (teams[0]?.slug)
     : (teams.find(t => t.code === "BRA")?.slug || teams[0]?.slug);
   const [selectedTeam, setSelectedTeam] = useState(initialTeam || defaultTeam);
-  const [selectedTeamMatches, setSelectedTeamMatches] = useState<Match[]>(initialMatches || []);
+  const [selectedTeamMatches, setSelectedTeamMatches] = useState<Match[]>(() => {
+    return (initialMatches || []).filter(m => m.phase_slug !== 'friendly');
+  });
   const [selectedDate, setSelectedDate] = useState(() => {
     if (initialDate) return initialDate;
     const d = new Date();
@@ -55,7 +57,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
   // Client-side dynamic match loading for selected team
   useEffect(() => {
     if (initialMatches && selectedTeam === initialTeam) {
-      setSelectedTeamMatches(initialMatches);
+      setSelectedTeamMatches(initialMatches.filter(m => m.phase_slug !== 'friendly'));
       return;
     }
 
@@ -68,9 +70,9 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
         );
         if (entry && active) {
           const [, teamItem] = entry;
-          const sorted = [...teamItem.matches].sort(
-            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-          );
+          const sorted = [...teamItem.matches]
+            .filter(m => m.phase_slug !== 'friendly')
+            .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
           setSelectedTeamMatches(sorted);
         }
       } catch (err) {
@@ -547,6 +549,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                   if (parts.length < 3) return match.date;
                   return `${parts[2]}/${parts[1]}/${parts[0]}`;
                 })();
+                const isPlayed = match.status === 'played' || !!match.result;
                 const isConfirmed = match.status === 'confirmed';
                 return (
                   <div key={match.id} className="bg-zinc-950 p-4 rounded-2xl border border-zinc-900 flex flex-col gap-2">
@@ -555,11 +558,15 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                         {matchDateFormatted} {match.time_brt ? `• ${match.time_brt} BRT` : ''}
                       </span>
                       <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide border ${
-                        isConfirmed 
+                        isPlayed
+                          ? 'bg-zinc-800 text-zinc-400 border-zinc-700'
+                          : isConfirmed 
                           ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' 
                           : 'bg-[#ffcc00]/10 text-[#ffcc00] border-[#ffcc00]/20'
                       }`}>
-                        {isConfirmed 
+                        {isPlayed
+                          ? (lang === 'en' ? 'Finished' : lang === 'es' ? 'Finalizado' : 'Finalizado')
+                          : isConfirmed 
                           ? (lang === 'en' ? 'Confirmed' : lang === 'es' ? 'Confirmado' : 'Confirmado')
                           : (lang === 'en' ? 'Possible' : lang === 'es' ? 'Posible' : 'Possível')}
                       </span>
@@ -574,7 +581,17 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
                         )}
                         <span className="text-sm font-bold text-white">{activeTeamData ? activeTeamData.name : ''}</span>
                       </div>
-                      <span className="text-zinc-600 font-black text-xs">VS</span>
+
+                      {isPlayed && match.result ? (
+                        <div className="flex items-center gap-2 px-3 py-1 bg-zinc-900 border border-zinc-800 rounded-lg text-sm font-black text-[#ffcc00] tabular-nums">
+                          <span>{match.is_home ? match.result.goals_home : match.result.goals_away}</span>
+                          <span className="text-zinc-600 font-bold">-</span>
+                          <span>{match.is_home ? match.result.goals_away : match.result.goals_home}</span>
+                        </div>
+                      ) : (
+                        <span className="text-zinc-600 font-black text-xs">VS</span>
+                      )}
+
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-bold text-white">{translateOpponentName(match.opponent_code, match.opponent_name, lang)}</span>
                         {match.opponent_code && (

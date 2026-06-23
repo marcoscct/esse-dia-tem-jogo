@@ -1,0 +1,78 @@
+name: ⚡ Purge Cloudflare Cache on Vercel Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  await-and-purge:
+    name: Wait for Vercel & Purge Cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Vercel Deployment
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "❌ Error: VERCEL_TOKEN secret is not set."
+            exit 1
+          fi
+          
+          echo "🔍 Checking Vercel deployment status for commit: $COMMIT_SHA"
+          
+          # Poll Vercel API until the deployment for this commit is READY
+          # Times out after 30 minutes (60 attempts * 30 seconds)
+          attempts=0
+          max_attempts=60
+          
+          while [ $attempts -lt $max_attempts ]; do
+            # Fetch latest deployments matching the githubCommitSha metadata
+            response=$(curl -s -H "Authorization: Bearer $VERCEL_TOKEN" "https://api.vercel.com/v6/deployments?meta-githubCommitSha=$COMMIT_SHA")
+            
+            # Extract state of the deployment
+            state=$(echo "$response" | jq -r '.deployments[0].state // empty')
+            url=$(echo "$response" | jq -r '.deployments[0].url // empty')
+            
+            echo "⏱️ Attempt $((attempts+1))/$max_attempts: State is '$state'"
+            
+            if [ "$state" = "READY" ]; then
+              echo "✅ Vercel deployment is READY at https://$url"
+              exit 0
+            elif [ "$state" = "ERROR" ] || [ "$state" = "CANCELED" ]; then
+              echo "❌ Vercel deployment failed or was canceled (State: $state)"
+              exit 1
+            fi
+            
+            attempts=$((attempts+1))
+            sleep 30
+          done
+          
+          echo "❌ Timeout waiting for Vercel deployment to succeed."
+          exit 1
+
+      - name: Purge Cloudflare Cache
+        env:
+          CF_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -z "$CF_ZONE_ID" ] || [ -z "$CF_API_TOKEN" ]; then
+            echo "❌ Error: CLOUDFLARE_ZONE_ID or CLOUDFLARE_API_TOKEN is not set."
+            exit 1
+          fi
+          
+          echo "🚀 Purging all cache on Cloudflare..."
+          response=$(curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache" \
+            -H "Authorization: Bearer $CF_API_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}')
+          
+          success=$(echo "$response" | jq -r '.success')
+          
+          if [ "$success" = "true" ]; then
+            echo "✅ Cloudflare cache purged successfully!"
+          else
+            echo "❌ Cloudflare purge failed: $response"
+            exit 1
+          fi

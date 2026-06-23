@@ -1017,32 +1017,50 @@ function transform(rawJson) {
           is_home: isTeam1
         });
       } else {
-        let cond = '';
+        let cond = null;
         let condType = spec.conditionType;
 
         const isFirstMatch = matchNumber === spec.pathMatches[0];
+        const isPositionGuaranteed = possibleRanks.size === 1;
+
         if (isFirstMatch) {
-          if (condType === 'group_1st') cond = `Caso passe em 1º do Grupo ${team.group}`;
-          else if (condType === 'group_2nd') cond = `Caso passe em 2º do Grupo ${team.group}`;
-          else if (condType === 'group_3rd') cond = `Caso passe como melhor 3º do Grupo ${team.group}`;
+          if (isPositionGuaranteed) {
+            cond = null;
+          } else {
+            if (condType === 'group_1st') cond = `Caso passe em 1º do Grupo ${team.group}`;
+            else if (condType === 'group_2nd') cond = `Caso passe em 2º do Grupo ${team.group}`;
+            else if (condType === 'group_3rd') cond = `Caso passe como melhor 3º do Grupo ${team.group}`;
+          }
         } else {
           condType = 'knockout_advance';
           if (bMatch.phase_slug === 'round_of_16') {
-            if (spec.conditionType === 'group_1st') cond = `Caso passe em 1º do Grupo ${team.group}`;
-            else if (spec.conditionType === 'group_2nd') cond = `Caso passe em 2º do Grupo ${team.group}`;
-            else if (spec.conditionType === 'group_3rd') cond = `Caso passe como melhor 3º do Grupo ${team.group}`;
+            if (isPositionGuaranteed) {
+              cond = `Caso avance para as Oitavas`;
+            } else {
+              if (spec.conditionType === 'group_1st') cond = `Caso passe em 1º do Grupo ${team.group}`;
+              else if (spec.conditionType === 'group_2nd') cond = `Caso passe em 2º do Grupo ${team.group}`;
+              else if (spec.conditionType === 'group_3rd') cond = `Caso passe como melhor 3º do Grupo ${team.group}`;
+            }
           } else if (bMatch.phase_slug === 'quarter_finals') {
-            let prefix = '';
-            if (spec.conditionType === 'group_1st') prefix = `Caso passe em 1º do Grupo ${team.group}`;
-            else if (spec.conditionType === 'group_2nd') prefix = `Caso passe em 2º do Grupo ${team.group}`;
-            else if (spec.conditionType === 'group_3rd') prefix = `Caso passe como melhor 3º do Grupo ${team.group}`;
-            cond = `${prefix} e avance para as 4ªˢ`;
+            if (isPositionGuaranteed) {
+              cond = `Caso avance para as 4ªˢ`;
+            } else {
+              let prefix = '';
+              if (spec.conditionType === 'group_1st') prefix = `Caso passe em 1º do Grupo ${team.group}`;
+              else if (spec.conditionType === 'group_2nd') prefix = `Caso passe em 2º do Grupo ${team.group}`;
+              else if (spec.conditionType === 'group_3rd') prefix = `Caso passe como melhor 3º do Grupo ${team.group}`;
+              cond = `${prefix} e avance para as 4ªˢ`;
+            }
           } else if (bMatch.phase_slug === 'semi_finals') {
-            let prefix = '';
-            if (spec.conditionType === 'group_1st') prefix = `Caso passe em 1º do Grupo ${team.group}`;
-            else if (spec.conditionType === 'group_2nd') prefix = `Caso passe em 2º do Grupo ${team.group}`;
-            else if (spec.conditionType === 'group_3rd') prefix = `Caso passe como melhor 3º do Grupo ${team.group}`;
-            cond = `${prefix} e avance para a Semifinal`;
+            if (isPositionGuaranteed) {
+              cond = `Caso avance para a Semifinal`;
+            } else {
+              let prefix = '';
+              if (spec.conditionType === 'group_1st') prefix = `Caso passe em 1º do Grupo ${team.group}`;
+              else if (spec.conditionType === 'group_2nd') prefix = `Caso passe em 2º do Grupo ${team.group}`;
+              else if (spec.conditionType === 'group_3rd') prefix = `Caso passe como melhor 3º do Grupo ${team.group}`;
+              cond = `${prefix} e avance para a Semifinal`;
+            }
           } else if (bMatch.phase_slug === 'third_place') {
             cond = `Caso dispute o 3º lugar`;
           } else if (bMatch.phase_slug === 'final') {
@@ -1053,8 +1071,12 @@ function transform(rawJson) {
         const isSlotAOnPath = isSlotOnPath(bMatch.slotA, spec.pathMatches, bMatch.matchNumber, team.group, spec.conditionType);
         const opponentName = getOpponentDescription(bMatch, spec.pathMatches, team.group, spec.conditionType);
 
+        const isMatchConfirmed = isFirstMatch && isPositionGuaranteed;
+
         team.matches.push({
-          id: `wc2026-${matchNumber}-${teamCode.toLowerCase()}-possible`,
+          id: isMatchConfirmed
+            ? `wc2026-${matchNumber}-${teamCode.toLowerCase()}`
+            : `wc2026-${matchNumber}-${teamCode.toLowerCase()}-possible`,
           date: bMatch.date,
           time_brt: bMatch.time_brt || null,
           opponent_code: null,
@@ -1065,10 +1087,10 @@ function transform(rawJson) {
           venue: bMatch.venue,
           city: bMatch.city,
           country: 'EUA/México/Canadá',
-          status: 'possible',
+          status: isMatchConfirmed ? 'confirmed' : 'possible',
           result: null,
           condition: cond,
-          condition_type: condType,
+          condition_type: isMatchConfirmed ? null : condType,
           match_number: matchNumber,
           is_home: isSlotAOnPath
         });

@@ -269,14 +269,15 @@ export function formatMatchDateInTimezone(timeBrt: string | null, dateStr: strin
   const formatter = new Intl.DateTimeFormat(localesMap[lang], {
     day: '2-digit',
     month: '2-digit',
-    weekday: 'long',
+    weekday: 'short',
     timeZone: targetTz
   });
   
   const parts = formatter.formatToParts(matchDate);
   const day = parts.find(p => p.type === 'day')?.value || '';
   const month = parts.find(p => p.type === 'month')?.value || '';
-  const weekday = parts.find(p => p.type === 'weekday')?.value || '';
+  const weekdayRaw = parts.find(p => p.type === 'weekday')?.value || '';
+  const weekday = weekdayRaw.replace(/\.$/, '');
   
   const dateFormatted = lang === 'en' ? `${month}/${day}` : `${day}/${month}`;
   return `${dateFormatted} (${weekday.toUpperCase()})`;

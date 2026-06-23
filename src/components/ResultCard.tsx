@@ -11,14 +11,27 @@ import GroupTooltip from "./GroupTooltip";
 
 function renderWithGroupTooltip(text: string | null | undefined, keyPrefix: string) {
   if (!text) return null;
-  const regex = /(Grupo\s+[A-L]|Group\s+[A-L])/i;
+  const regex = /(Grupo\s+[A-L](?:\/[A-L])*|Group\s+[A-L](?:\/[A-L])*)/i;
   const parts = text.split(regex);
   if (parts.length === 1) return text;
 
   return parts.map((part, i) => {
-    const match = part.match(/^(?:Grupo|Group)\s+([A-L])$/i);
+    const match = part.match(/^(Grupo|Group)\s+([A-L](?:\/[A-L])*)$/i);
     if (match) {
-      return <GroupTooltip key={`${keyPrefix}-${i}`} text={part} groupLetter={match[1].toUpperCase()} />;
+      const prefix = match[1];
+      const lettersStr = match[2];
+      const letters = lettersStr.split("/");
+      return (
+        <span key={`${keyPrefix}-${i}`}>
+          <span>{prefix} </span>
+          {letters.map((letter, idx) => (
+            <span key={idx}>
+              {idx > 0 && <span>/</span>}
+              <GroupTooltip text={letter} groupLetter={letter.toUpperCase()} />
+            </span>
+          ))}
+        </span>
+      );
     }
     return <span key={`${keyPrefix}-${i}`}>{part}</span>;
   });

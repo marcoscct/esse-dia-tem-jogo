@@ -689,6 +689,80 @@ function calculateGroupStandings(groupLetter, rawMatches) {
   return standings;
 }
 
+function getTeamByGuaranteedRank(groupLetter, rank, groupPossibleRanks) {
+  const g = groupLetter.toUpperCase();
+  for (const [code, meta] of Object.entries(TEAM_MAP)) {
+    if (meta.group === g) {
+      const possible = groupPossibleRanks[g]?.[meta.code];
+      if (possible && possible.size === 1 && possible.has(rank)) {
+        return meta.code;
+      }
+    }
+  }
+  return null;
+}
+
+function resolveSlotToTeam(slot, groupPossibleRanks, teams) {
+  if (!slot) return null;
+  
+  if (slot.type === '1st') {
+    return getTeamByGuaranteedRank(slot.group, 1, groupPossibleRanks);
+  }
+  if (slot.type === '2nd') {
+    return getTeamByGuaranteedRank(slot.group, 2, groupPossibleRanks);
+  }
+  if (slot.type === '3rd') {
+    return null;
+  }
+  
+  if (slot.type === 'winner' || slot.type === 'loser') {
+    const mNum = slot.matchNumber;
+    let playedMatch = null;
+    let team1 = null;
+    let team2 = null;
+    
+    for (const [tCode, team] of Object.entries(teams)) {
+      const m = team.matches.find(match => match.match_number === mNum);
+      if (m && m.status === 'played' && m.result) {
+        playedMatch = m;
+        if (m.is_home) {
+          team1 = tCode;
+          team2 = m.opponent_code;
+        } else {
+          team1 = m.opponent_code;
+          team2 = tCode;
+        }
+        break;
+      }
+    }
+    
+    if (playedMatch && team1 && team2) {
+      const goals1 = playedMatch.is_home ? playedMatch.result.goals_home : playedMatch.result.goals_away;
+      const goals2 = playedMatch.is_home ? playedMatch.result.goals_away : playedMatch.result.goals_home;
+      
+      let winner = null;
+      let loser = null;
+      if (goals1 > goals2) {
+        winner = team1;
+        loser = team2;
+      } else if (goals2 > goals1) {
+        winner = team2;
+        loser = team1;
+      } else {
+        if (playedMatch.result.winner_code) {
+          winner = playedMatch.result.winner_code;
+          loser = (winner === team1) ? team2 : team1;
+        }
+      }
+      
+      if (slot.type === 'winner') return winner;
+      if (slot.type === 'loser') return loser;
+    }
+  }
+  
+  return null;
+}
+
 // ─── Main transform ───────────────────────────────────────────────────────────
 function transform(rawJson) {
   const TRACKED_CODES = new Set(Object.values(TEAM_MAP).map((t) => t.code));
@@ -846,11 +920,7 @@ function transform(rawJson) {
     const team1Meta = TEAM_MAP[rawMatch.team1];
     const team2Meta = TEAM_MAP[rawMatch.team2];
     if (team1Meta && team2Meta) {
-      const roundSlug = slugifyPhase(rawMatch.round);
-      const possibleMatches = KNOCKOUT_BRACKET.filter(m => m.phase_slug === roundSlug);
-      const matchedBracket = possibleMatches.find(m => {
-        return true;
-      });
+      const matchedBracket = KNOCKOUT_BRACKET.find(m => m.matchNumber === rawMatch.num);
 
       if (matchedBracket) {
         confirmedKnockouts.push({
@@ -1021,7 +1091,7 @@ function transform(rawJson) {
         let condType = spec.conditionType;
 
         const isFirstMatch = matchNumber === spec.pathMatches[0];
-        const isPositionGuaranteed = possibleRanks.size === 1;
+        const isPositionGuaranteed = possibleRanks.size === 1 && spec.conditionType !== 'group_3rd';
 
         if (isFirstMatch) {
           if (isPositionGuaranteed) {
@@ -1170,6 +1240,27 @@ function transform(rawJson) {
           match_number: null,
           is_home: false
         });
+      }
+    }
+  }
+
+  // 4.5 Resolve placeholder opponents dynamically based on completed standings and match results
+  for (const [teamCode, team] of Object.entries(teams)) {
+    for (const match of team.matches) {
+      if (match.phase_slug !== 'group_stage' && match.phase_slug !== 'friendly' && match.opponent_code === null) {
+        const bMatch = KNOCKOUT_BRACKET.find(bm => bm.matchNumber === match.match_number);
+        if (bMatch) {
+          const opponentSlot = match.is_home ? bMatch.slotB : bMatch.slotA;
+          const resolvedOpponentCode = resolveSlotToTeam(opponentSlot, groupPossibleRanks, teams);
+          if (resolvedOpponentCode) {
+            const oppMeta = Object.values(TEAM_MAP).find(t => t.code === resolvedOpponentCode);
+            if (oppMeta) {
+              match.opponent_code = resolvedOpponentCode;
+              match.opponent_name = oppMeta.name;
+              match.opponent_flag = oppMeta.flag;
+            }
+          }
+        }
       }
     }
   }

@@ -3,7 +3,7 @@ name: ⚡ Purge Cloudflare Cache on Vercel Deploy
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   await-and-purge:

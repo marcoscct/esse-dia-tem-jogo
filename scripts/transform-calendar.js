@@ -335,7 +335,7 @@ function getTeamKnockoutPaths(groupLetter) {
   return {
     group_1st: match1st ? tracePath(match1st.matchNumber) : [],
     group_2nd: match2nd ? tracePath(match2nd.matchNumber) : [],
-    group_3rd: matches3rd.slice(0, 1).map(m => tracePath(m.matchNumber))
+    group_3rd: matches3rd.map(m => tracePath(m.matchNumber))
   };
 }
 
@@ -702,7 +702,7 @@ function getTeamByGuaranteedRank(groupLetter, rank, groupPossibleRanks) {
   return null;
 }
 
-function resolveSlotToTeam(slot, groupPossibleRanks, teams) {
+function resolveSlotToTeam(slot, groupPossibleRanks, teams, matchNumber) {
   if (!slot) return null;
   
   if (slot.type === '1st') {
@@ -712,6 +712,20 @@ function resolveSlotToTeam(slot, groupPossibleRanks, teams) {
     return getTeamByGuaranteedRank(slot.group, 2, groupPossibleRanks);
   }
   if (slot.type === '3rd') {
+    const mapping = {
+      74: 'D',
+      77: 'F',
+      79: 'E',
+      80: 'K',
+      81: 'B',
+      82: 'I',
+      85: 'J',
+      87: 'L'
+    };
+    const group = mapping[matchNumber];
+    if (group) {
+      return getTeamByGuaranteedRank(group, 3, groupPossibleRanks);
+    }
     return null;
   }
   
@@ -1251,17 +1265,46 @@ function transform(rawJson) {
         const bMatch = KNOCKOUT_BRACKET.find(bm => bm.matchNumber === match.match_number);
         if (bMatch) {
           const opponentSlot = match.is_home ? bMatch.slotB : bMatch.slotA;
-          const resolvedOpponentCode = resolveSlotToTeam(opponentSlot, groupPossibleRanks, teams);
+          const resolvedOpponentCode = resolveSlotToTeam(opponentSlot, groupPossibleRanks, teams, match.match_number);
           if (resolvedOpponentCode) {
             const oppMeta = Object.values(TEAM_MAP).find(t => t.code === resolvedOpponentCode);
             if (oppMeta) {
               match.opponent_code = resolvedOpponentCode;
               match.opponent_name = oppMeta.name;
               match.opponent_flag = oppMeta.flag;
+
+              if (allGroupsDone) {
+                match.status = 'confirmed';
+                match.condition = null;
+                match.condition_type = null;
+                if (match.id.endsWith('-possible')) {
+                  match.id = match.id.replace('-possible', '');
+                }
+              }
             }
           }
         }
       }
+    }
+  }
+
+  // 4.6 Prune non-symmetric phantom matches when all groups are done
+  if (allGroupsDone) {
+    for (const [teamCode, team] of Object.entries(teams)) {
+      team.matches = team.matches.filter(match => {
+        if (match.phase_slug !== 'group_stage' && match.phase_slug !== 'friendly') {
+          if (match.opponent_code) {
+            const oppTeam = teams[match.opponent_code];
+            if (oppTeam) {
+              const oppMatch = oppTeam.matches.find(m => m.match_number === match.match_number);
+              if (!oppMatch || oppMatch.opponent_code !== teamCode) {
+                return false;
+              }
+            }
+          }
+        }
+        return true;
+      });
     }
   }
 

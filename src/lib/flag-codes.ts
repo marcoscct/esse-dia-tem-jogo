@@ -317,6 +317,9 @@ export function getFlagUrl(teamCode: string): string {
   }
   const iso = TEAM_TO_ISO[code];
   if (!iso) return "/flags/xx.svg";
+  if (code === "CGO") {
+    return "/flags/cod.svg";
+  }
   return `/flags/${code.toLowerCase()}.svg`;
 }
 

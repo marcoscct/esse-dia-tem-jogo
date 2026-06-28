@@ -345,8 +345,12 @@
           "venue": "Los Angeles (Inglewood)",
           "city": "Los Angeles",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 73,
@@ -753,8 +757,12 @@
           "venue": "Los Angeles (Inglewood)",
           "city": "Los Angeles",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 73,
@@ -1911,30 +1919,6 @@
           "match_number": 75,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-90-mar-possible",
-          "date": "2026-07-04",
-          "time_brt": "14:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 73",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "NRG Stadium",
-          "city": "Houston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as Oitavas",
-          "condition_type": "knockout_advance",
-          "match_number": 90,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -4192,30 +4176,6 @@
           "match_number": 75,
           "is_home": true,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-90-ned-possible",
-          "date": "2026-07-04",
-          "time_brt": "14:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 73",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "NRG Stadium",
-          "city": "Houston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as Oitavas",
-          "condition_type": "knockout_advance",
-          "match_number": 90,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },

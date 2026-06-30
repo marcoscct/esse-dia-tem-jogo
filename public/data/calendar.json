@@ -1667,21 +1667,21 @@
           ]
         },
         {
-          "id": "wc2026-91-bra-possible",
+          "id": "wc2026-91-bra",
           "date": "2026-07-05",
           "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 78",
-          "opponent_flag": null,
+          "opponent_code": "NOR",
+          "opponent_name": "Noruega",
+          "opponent_flag": "🇳🇴",
           "phase": "Oitavas de Final",
           "phase_slug": "round_of_16",
           "venue": "New York New Jersey Stadium",
           "city": "Nova York/NJ",
           "country": "EUA/México/Canadá",
-          "status": "possible",
+          "status": "confirmed",
           "result": null,
-          "condition": "Caso avance para as Oitavas",
-          "condition_type": "knockout_advance",
+          "condition": null,
+          "condition_type": null,
           "match_number": 91,
           "is_home": true,
           "broadcasts": [
@@ -3597,8 +3597,12 @@
           "venue": "Dallas (Arlington)",
           "city": "Dallas",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 78,
@@ -4387,30 +4391,6 @@
           "broadcasts": [
             "Globo",
             "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-91-jpn-possible",
-          "date": "2026-07-05",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 78",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as Oitavas",
-          "condition_type": "knockout_advance",
-          "match_number": 91,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
             "SporTV",
             "CazéTV"
           ]
@@ -7178,13 +7158,42 @@
           "venue": "Dallas (Arlington)",
           "city": "Dallas",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 78,
           "is_home": false,
           "broadcasts": [
+            "CazéTV"
+          ]
+        },
+        {
+          "id": "wc2026-91-nor",
+          "date": "2026-07-05",
+          "time_brt": "17:00",
+          "opponent_code": "BRA",
+          "opponent_name": "Brasil",
+          "opponent_flag": "🇧🇷",
+          "phase": "Oitavas de Final",
+          "phase_slug": "round_of_16",
+          "venue": "New York New Jersey Stadium",
+          "city": "Nova York/NJ",
+          "country": "EUA/México/Canadá",
+          "status": "confirmed",
+          "result": null,
+          "condition": null,
+          "condition_type": null,
+          "match_number": 91,
+          "is_home": false,
+          "broadcasts": [
+            "Globo",
+            "SBT",
+            "SporTV",
             "CazéTV"
           ]
         },

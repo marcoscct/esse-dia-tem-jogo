@@ -110,8 +110,12 @@
           "venue": "Mexico City",
           "city": "Cidade do México",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 79,
@@ -356,30 +360,6 @@
           "match_number": 73,
           "is_home": true,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-90-rsa-possible",
-          "date": "2026-07-04",
-          "time_brt": "14:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 75",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "NRG Stadium",
-          "city": "Houston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as Oitavas",
-          "condition_type": "knockout_advance",
-          "match_number": 90,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -772,21 +752,21 @@
           ]
         },
         {
-          "id": "wc2026-90-can-possible",
+          "id": "wc2026-90-can",
           "date": "2026-07-04",
           "time_brt": "14:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 75",
-          "opponent_flag": null,
+          "opponent_code": "MAR",
+          "opponent_name": "Marrocos",
+          "opponent_flag": "🇲🇦",
           "phase": "Oitavas de Final",
           "phase_slug": "round_of_16",
-          "venue": "NRG Stadium",
+          "venue": "Houston",
           "city": "Houston",
           "country": "EUA/México/Canadá",
-          "status": "possible",
+          "status": "confirmed",
           "result": null,
-          "condition": "Caso avance para as Oitavas",
-          "condition_type": "knockout_advance",
+          "condition": null,
+          "condition_type": null,
           "match_number": 90,
           "is_home": true,
           "broadcasts": [
@@ -1651,7 +1631,7 @@
           "opponent_flag": "🇳🇴",
           "phase": "Oitavas de Final",
           "phase_slug": "round_of_16",
-          "venue": "New York New Jersey Stadium",
+          "venue": "New York/New Jersey (East Rutherford)",
           "city": "Nova York/NJ",
           "country": "EUA/México/Canadá",
           "status": "confirmed",
@@ -1903,6 +1883,30 @@
           "match_number": 75,
           "is_home": false,
           "broadcasts": [
+            "CazéTV"
+          ]
+        },
+        {
+          "id": "wc2026-90-mar",
+          "date": "2026-07-04",
+          "time_brt": "14:00",
+          "opponent_code": "CAN",
+          "opponent_name": "Canadá",
+          "opponent_flag": "🇨🇦",
+          "phase": "Oitavas de Final",
+          "phase_slug": "round_of_16",
+          "venue": "Houston",
+          "city": "Houston",
+          "country": "EUA/México/Canadá",
+          "status": "confirmed",
+          "result": null,
+          "condition": null,
+          "condition_type": null,
+          "match_number": 90,
+          "is_home": false,
+          "broadcasts": [
+            "Globo",
+            "SporTV",
             "CazéTV"
           ]
         },
@@ -2574,6 +2578,30 @@
           "condition_type": null,
           "match_number": 74,
           "is_home": false,
+          "broadcasts": [
+            "Globo",
+            "SporTV",
+            "CazéTV"
+          ]
+        },
+        {
+          "id": "wc2026-89-par",
+          "date": "2026-07-04",
+          "time_brt": "18:00",
+          "opponent_code": "FRA",
+          "opponent_name": "França",
+          "opponent_flag": "🇫🇷",
+          "phase": "Oitavas de Final",
+          "phase_slug": "round_of_16",
+          "venue": "Philadelphia",
+          "city": "Filadélfia",
+          "country": "EUA/México/Canadá",
+          "status": "confirmed",
+          "result": null,
+          "condition": null,
+          "condition_type": null,
+          "match_number": 89,
+          "is_home": true,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -3739,8 +3767,12 @@
           "venue": "Mexico City",
           "city": "Cidade do México",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 79,
@@ -6381,21 +6413,21 @@
           ]
         },
         {
-          "id": "wc2026-89-fra-possible",
+          "id": "wc2026-89-fra",
           "date": "2026-07-04",
           "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 74",
-          "opponent_flag": null,
+          "opponent_code": "PAR",
+          "opponent_name": "Paraguai",
+          "opponent_flag": "🇵🇾",
           "phase": "Oitavas de Final",
           "phase_slug": "round_of_16",
-          "venue": "Lincoln Financial Field",
+          "venue": "Philadelphia",
           "city": "Filadélfia",
           "country": "EUA/México/Canadá",
-          "status": "possible",
+          "status": "confirmed",
           "result": null,
-          "condition": "Caso avance para as Oitavas",
-          "condition_type": "knockout_advance",
+          "condition": null,
+          "condition_type": null,
           "match_number": 89,
           "is_home": false,
           "broadcasts": [
@@ -7093,7 +7125,7 @@
           "opponent_flag": "🇧🇷",
           "phase": "Oitavas de Final",
           "phase_slug": "round_of_16",
-          "venue": "New York New Jersey Stadium",
+          "venue": "New York/New Jersey (East Rutherford)",
           "city": "Nova York/NJ",
           "country": "EUA/México/Canadá",
           "status": "confirmed",
@@ -7599,30 +7631,6 @@
           "match_number": 85,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-92-alg-possible",
-          "date": "2026-07-05",
-          "time_brt": "21:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 79",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Estadio Azteca",
-          "city": "Cidade do México",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo J",
-          "condition_type": "knockout_advance",
-          "match_number": 92,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -8591,30 +8599,6 @@
           ]
         },
         {
-          "id": "wc2026-92-cgo-possible",
-          "date": "2026-07-05",
-          "time_brt": "21:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 79",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Estadio Azteca",
-          "city": "Cidade do México",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo K",
-          "condition_type": "knockout_advance",
-          "match_number": 92,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-99-cgo-possible",
           "date": "2026-07-11",
           "time_brt": "18:00",
@@ -9212,30 +9196,6 @@
           "condition_type": null,
           "match_number": 80,
           "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-92-eng-possible",
-          "date": "2026-07-05",
-          "time_brt": "21:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 79",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Estadio Azteca",
-          "city": "Cidade do México",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as Oitavas",
-          "condition_type": "knockout_advance",
-          "match_number": 92,
-          "is_home": false,
           "broadcasts": [
             "Globo",
             "SporTV",

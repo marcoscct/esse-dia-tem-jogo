@@ -5629,8 +5629,12 @@
           "venue": "Los Angeles (Inglewood)",
           "city": "Los Angeles",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 3,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 84,
@@ -7778,8 +7782,12 @@
           "venue": "Los Angeles (Inglewood)",
           "city": "Los Angeles",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 3,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 84,
@@ -8179,30 +8187,6 @@
           "condition": null,
           "condition_type": null,
           "match_number": 83,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-93-por-possible",
-          "date": "2026-07-06",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 84",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as Oitavas",
-          "condition_type": "knockout_advance",
-          "match_number": 93,
           "is_home": true,
           "broadcasts": [
             "Globo",
@@ -9285,30 +9269,6 @@
           "condition_type": null,
           "match_number": 83,
           "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-93-cro-possible",
-          "date": "2026-07-06",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 84",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as Oitavas",
-          "condition_type": "knockout_advance",
-          "match_number": 93,
-          "is_home": true,
           "broadcasts": [
             "Globo",
             "SporTV",

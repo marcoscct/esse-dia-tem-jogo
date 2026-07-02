@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.2",
-    "last_updated": "2026-07-01",
+    "last_updated": "2026-07-02",
     "source": "OpenFootball worldcup.json (auto-transform + dynamic bracket)",
     "competition": "FIFA World Cup 2026",
     "competition_slug": "world_cup_2026",
@@ -974,8 +974,12 @@
           "venue": "San Francisco Bay Area (Santa Clara)",
           "city": "San Francisco",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 81,
@@ -2335,8 +2339,12 @@
           "venue": "San Francisco Bay Area (Santa Clara)",
           "city": "San Francisco",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 81,
@@ -5009,30 +5017,6 @@
           "match_number": 82,
           "is_home": true,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-94-bel-possible",
-          "date": "2026-07-06",
-          "time_brt": "21:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 81",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Lumen Field",
-          "city": "Seattle",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as Oitavas",
-          "condition_type": "knockout_advance",
-          "match_number": 94,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },

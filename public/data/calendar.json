@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.2",
-    "last_updated": "2026-07-02",
+    "last_updated": "2026-07-03",
     "source": "OpenFootball worldcup.json (auto-transform + dynamic bracket)",
     "competition": "FIFA World Cup 2026",
     "competition_slug": "world_cup_2026",
@@ -5646,21 +5646,21 @@
           ]
         },
         {
-          "id": "wc2026-93-esp-possible",
+          "id": "wc2026-93-esp",
           "date": "2026-07-06",
           "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 83",
-          "opponent_flag": null,
+          "opponent_code": "POR",
+          "opponent_name": "Portugal",
+          "opponent_flag": "🇵🇹",
           "phase": "Oitavas de Final",
           "phase_slug": "round_of_16",
           "venue": "Dallas Stadium",
           "city": "Dallas",
           "country": "EUA/México/Canadá",
-          "status": "possible",
+          "status": "confirmed",
           "result": null,
-          "condition": "Caso avance para as Oitavas",
-          "condition_type": "knockout_advance",
+          "condition": null,
+          "condition_type": null,
           "match_number": 93,
           "is_home": false,
           "broadcasts": [
@@ -7799,30 +7799,6 @@
           ]
         },
         {
-          "id": "wc2026-93-aut-possible",
-          "date": "2026-07-06",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 83",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as Oitavas",
-          "condition_type": "knockout_advance",
-          "match_number": 93,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-98-aut-possible",
           "date": "2026-07-10",
           "time_brt": "16:00",
@@ -8182,11 +8158,39 @@
           "venue": "Toronto",
           "city": "Toronto",
           "country": "EUA/México/Canadá",
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 1,
+            "winner_code": null
+          },
+          "condition": null,
+          "condition_type": null,
+          "match_number": 83,
+          "is_home": true,
+          "broadcasts": [
+            "Globo",
+            "SporTV",
+            "CazéTV"
+          ]
+        },
+        {
+          "id": "wc2026-93-por",
+          "date": "2026-07-06",
+          "time_brt": "16:00",
+          "opponent_code": "ESP",
+          "opponent_name": "Espanha",
+          "opponent_flag": "🇪🇸",
+          "phase": "Oitavas de Final",
+          "phase_slug": "round_of_16",
+          "venue": "Dallas Stadium",
+          "city": "Dallas",
+          "country": "EUA/México/Canadá",
           "status": "confirmed",
           "result": null,
           "condition": null,
           "condition_type": null,
-          "match_number": 83,
+          "match_number": 93,
           "is_home": true,
           "broadcasts": [
             "Globo",
@@ -9263,8 +9267,12 @@
           "venue": "Toronto",
           "city": "Toronto",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 83,

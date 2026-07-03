@@ -1321,8 +1321,12 @@
           "venue": "Vancouver",
           "city": "Vancouver",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 85,
@@ -2586,30 +2590,6 @@
           "condition_type": null,
           "match_number": 89,
           "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-96-par-possible",
-          "date": "2026-07-07",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 85",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "BC Place",
-          "city": "Vancouver",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo D",
-          "condition_type": "knockout_advance",
-          "match_number": 96,
-          "is_home": false,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -7476,8 +7456,12 @@
           "venue": "Vancouver",
           "city": "Vancouver",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 85,
@@ -8737,30 +8721,6 @@
           ]
         },
         {
-          "id": "wc2026-96-col-possible",
-          "date": "2026-07-07",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 85",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "BC Place",
-          "city": "Vancouver",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as Oitavas",
-          "condition_type": "knockout_advance",
-          "match_number": 96,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-100-col-possible",
           "date": "2026-07-11",
           "time_brt": "22:00",
@@ -9489,30 +9449,6 @@
           "match_number": 87,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-96-gha-possible",
-          "date": "2026-07-07",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 85",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "BC Place",
-          "city": "Vancouver",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo L",
-          "condition_type": "knockout_advance",
-          "match_number": 96,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },

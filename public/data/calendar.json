@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.2",
-    "last_updated": "2026-07-03",
+    "last_updated": "2026-07-04",
     "source": "OpenFootball worldcup.json (auto-transform + dynamic bracket)",
     "competition": "FIFA World Cup 2026",
     "competition_slug": "world_cup_2026",
@@ -1336,21 +1336,21 @@
           ]
         },
         {
-          "id": "wc2026-96-sui-possible",
+          "id": "wc2026-96-sui",
           "date": "2026-07-07",
           "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 87",
-          "opponent_flag": null,
+          "opponent_code": "COL",
+          "opponent_name": "Colômbia",
+          "opponent_flag": "🇨🇴",
           "phase": "Oitavas de Final",
           "phase_slug": "round_of_16",
           "venue": "BC Place",
           "city": "Vancouver",
           "country": "EUA/México/Canadá",
-          "status": "possible",
+          "status": "confirmed",
           "result": null,
-          "condition": "Caso avance para as Oitavas",
-          "condition_type": "knockout_advance",
+          "condition": null,
+          "condition_type": null,
           "match_number": 96,
           "is_home": true,
           "broadcasts": [
@@ -3750,30 +3750,6 @@
           ]
         },
         {
-          "id": "wc2026-96-ecu-possible",
-          "date": "2026-07-07",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 87",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "BC Place",
-          "city": "Vancouver",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo E",
-          "condition_type": "knockout_advance",
-          "match_number": 96,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-98-ecu-possible",
           "date": "2026-07-10",
           "time_brt": "16:00",
@@ -4483,30 +4459,6 @@
           "condition_type": null,
           "match_number": 77,
           "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-96-swe-possible",
-          "date": "2026-07-07",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 87",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "BC Place",
-          "city": "Vancouver",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo F",
-          "condition_type": "knockout_advance",
-          "match_number": 96,
-          "is_home": true,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -5858,8 +5810,12 @@
           "venue": "Miami (Miami Gardens)",
           "city": "Miami",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 86,
@@ -6534,30 +6490,6 @@
           ]
         },
         {
-          "id": "wc2026-96-sen-possible",
-          "date": "2026-07-07",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 87",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "BC Place",
-          "city": "Vancouver",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo I",
-          "condition_type": "knockout_advance",
-          "match_number": 96,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-98-sen-possible",
           "date": "2026-07-10",
           "time_brt": "16:00",
@@ -7228,8 +7160,12 @@
           "venue": "Miami (Miami Gardens)",
           "city": "Miami",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 86,
@@ -7475,30 +7411,6 @@
           "match_number": 85,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-96-alg-possible",
-          "date": "2026-07-07",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 87",
-          "opponent_flag": null,
-          "phase": "Oitavas de Final",
-          "phase_slug": "round_of_16",
-          "venue": "BC Place",
-          "city": "Vancouver",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo J",
-          "condition_type": "knockout_advance",
-          "match_number": 96,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -8718,13 +8630,41 @@
           "venue": "Kansas City",
           "city": "Kansas City",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 87,
           "is_home": true,
           "broadcasts": [
+            "CazéTV"
+          ]
+        },
+        {
+          "id": "wc2026-96-col",
+          "date": "2026-07-07",
+          "time_brt": "17:00",
+          "opponent_code": "SUI",
+          "opponent_name": "Suíça",
+          "opponent_flag": "🇨🇭",
+          "phase": "Oitavas de Final",
+          "phase_slug": "round_of_16",
+          "venue": "BC Place",
+          "city": "Vancouver",
+          "country": "EUA/México/Canadá",
+          "status": "confirmed",
+          "result": null,
+          "condition": null,
+          "condition_type": null,
+          "match_number": 96,
+          "is_home": false,
+          "broadcasts": [
+            "Globo",
+            "SporTV",
             "CazéTV"
           ]
         },
@@ -9450,8 +9390,12 @@
           "venue": "Kansas City",
           "city": "Kansas City",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 87,

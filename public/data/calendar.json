@@ -364,30 +364,6 @@
           ]
         },
         {
-          "id": "wc2026-97-rsa-possible",
-          "date": "2026-07-09",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 89",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 97,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-101-rsa-possible",
           "date": "2026-07-14",
           "time_brt": "16:00",
@@ -773,30 +749,6 @@
           "condition_type": null,
           "match_number": 90,
           "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-97-can-possible",
-          "date": "2026-07-09",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 89",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 97,
-          "is_home": false,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -1879,21 +1831,21 @@
           ]
         },
         {
-          "id": "wc2026-97-mar-possible",
+          "id": "wc2026-97-mar",
           "date": "2026-07-09",
           "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 89",
-          "opponent_flag": null,
+          "opponent_code": "FRA",
+          "opponent_name": "França",
+          "opponent_flag": "🇫🇷",
           "phase": "Quartas de Final",
           "phase_slug": "quarter_finals",
           "venue": "Boston Stadium",
           "city": "Boston",
           "country": "EUA/México/Canadá",
-          "status": "possible",
+          "status": "confirmed",
           "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
+          "condition": null,
+          "condition_type": null,
           "match_number": 97,
           "is_home": false,
           "broadcasts": [
@@ -2568,8 +2520,12 @@
           "venue": "Philadelphia",
           "city": "Filadélfia",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 89,
@@ -3944,30 +3900,6 @@
           "match_number": 75,
           "is_home": true,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-97-ned-possible",
-          "date": "2026-07-09",
-          "time_brt": "17:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 89",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Boston Stadium",
-          "city": "Boston",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 97,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -6128,12 +6060,40 @@
           "venue": "Philadelphia",
           "city": "Filadélfia",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 89,
           "is_home": false,
+          "broadcasts": [
+            "Globo",
+            "SporTV",
+            "CazéTV"
+          ]
+        },
+        {
+          "id": "wc2026-97-fra",
+          "date": "2026-07-09",
+          "time_brt": "17:00",
+          "opponent_code": "MAR",
+          "opponent_name": "Marrocos",
+          "opponent_flag": "🇲🇦",
+          "phase": "Quartas de Final",
+          "phase_slug": "quarter_finals",
+          "venue": "Boston Stadium",
+          "city": "Boston",
+          "country": "EUA/México/Canadá",
+          "status": "confirmed",
+          "result": null,
+          "condition": null,
+          "condition_type": null,
+          "match_number": 97,
+          "is_home": true,
           "broadcasts": [
             "Globo",
             "SporTV",

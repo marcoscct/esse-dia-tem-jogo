@@ -149,30 +149,6 @@
           ]
         },
         {
-          "id": "wc2026-99-mex-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 91",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-102-mex-possible",
           "date": "2026-07-15",
           "time_brt": "16:00",
@@ -1550,8 +1526,12 @@
           "venue": "New York/New Jersey (East Rutherford)",
           "city": "Nova York/NJ",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 91,
@@ -3642,30 +3622,6 @@
           ]
         },
         {
-          "id": "wc2026-99-ecu-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 91",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo E e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-100-ecu-possible",
           "date": "2026-07-11",
           "time_brt": "22:00",
@@ -4326,30 +4282,6 @@
           "condition": "Caso passe como melhor 3º do Grupo F e avance para as 4ªˢ",
           "condition_type": "knockout_advance",
           "match_number": 98,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-99-swe-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 91",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo F e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
           "is_home": false,
           "broadcasts": [
             "Globo",
@@ -6314,30 +6246,6 @@
           ]
         },
         {
-          "id": "wc2026-99-sen-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 91",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo I e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-100-sen-possible",
           "date": "2026-07-11",
           "time_brt": "22:00",
@@ -6700,8 +6608,12 @@
           "venue": "New York/New Jersey (East Rutherford)",
           "city": "Nova York/NJ",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 91,
@@ -7231,30 +7143,6 @@
           "condition": "Caso passe como melhor 3º do Grupo J e avance para as 4ªˢ",
           "condition_type": "knockout_advance",
           "match_number": 98,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-99-alg-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 91",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo J e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
           "is_home": false,
           "broadcasts": [
             "Globo",
@@ -8119,30 +8007,6 @@
           ]
         },
         {
-          "id": "wc2026-99-cgo-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 91",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo K e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-102-cgo-possible",
           "date": "2026-07-15",
           "time_brt": "16:00",
@@ -8747,30 +8611,6 @@
           "condition": null,
           "condition_type": null,
           "match_number": 92,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-99-eng-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 91",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
           "is_home": false,
           "broadcasts": [
             "Globo",

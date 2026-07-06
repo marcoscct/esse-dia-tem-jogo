@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.2",
-    "last_updated": "2026-07-05",
+    "last_updated": "2026-07-06",
     "source": "OpenFootball worldcup.json (auto-transform + dynamic bracket)",
     "competition": "FIFA World Cup 2026",
     "competition_slug": "world_cup_2026",
@@ -136,8 +136,12 @@
           "venue": "Mexico City",
           "city": "Cidade do México",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 3,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 92,
@@ -1535,31 +1539,6 @@
           "condition": null,
           "condition_type": null,
           "match_number": 91,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-99-bra-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 92",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
           "is_home": true,
           "broadcasts": [
             "Globo",
@@ -3384,30 +3363,6 @@
           ]
         },
         {
-          "id": "wc2026-99-civ-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 92",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-102-civ-possible",
           "date": "2026-07-15",
           "time_brt": "16:00",
@@ -4047,30 +4002,6 @@
           "broadcasts": [
             "Globo",
             "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-99-jpn-possible",
-          "date": "2026-07-11",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 92",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Hard Rock Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 99,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
             "SporTV",
             "CazéTV"
           ]
@@ -6626,21 +6557,21 @@
           ]
         },
         {
-          "id": "wc2026-99-nor-possible",
+          "id": "wc2026-99-nor",
           "date": "2026-07-11",
           "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 92",
-          "opponent_flag": null,
+          "opponent_code": "ENG",
+          "opponent_name": "Inglaterra",
+          "opponent_flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
           "phase": "Quartas de Final",
           "phase_slug": "quarter_finals",
           "venue": "Hard Rock Stadium",
           "city": "Miami",
           "country": "EUA/México/Canadá",
-          "status": "possible",
+          "status": "confirmed",
           "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
+          "condition": null,
+          "condition_type": null,
           "match_number": 99,
           "is_home": true,
           "broadcasts": [
@@ -8606,11 +8537,39 @@
           "venue": "Mexico City",
           "city": "Cidade do México",
           "country": "EUA/México/Canadá",
+          "status": "played",
+          "result": {
+            "goals_home": 3,
+            "goals_away": 2,
+            "winner_code": null
+          },
+          "condition": null,
+          "condition_type": null,
+          "match_number": 92,
+          "is_home": false,
+          "broadcasts": [
+            "Globo",
+            "SporTV",
+            "CazéTV"
+          ]
+        },
+        {
+          "id": "wc2026-99-eng",
+          "date": "2026-07-11",
+          "time_brt": "18:00",
+          "opponent_code": "NOR",
+          "opponent_name": "Noruega",
+          "opponent_flag": "🇳🇴",
+          "phase": "Quartas de Final",
+          "phase_slug": "quarter_finals",
+          "venue": "Hard Rock Stadium",
+          "city": "Miami",
+          "country": "EUA/México/Canadá",
           "status": "confirmed",
           "result": null,
           "condition": null,
           "condition_type": null,
-          "match_number": 92,
+          "match_number": 99,
           "is_home": false,
           "broadcasts": [
             "Globo",

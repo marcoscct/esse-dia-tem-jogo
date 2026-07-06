@@ -925,30 +925,6 @@
           ]
         },
         {
-          "id": "wc2026-98-bih-possible",
-          "date": "2026-07-10",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 93",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "SoFi Stadium",
-          "city": "Los Angeles",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo B e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 98,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-101-bih-possible",
           "date": "2026-07-14",
           "time_brt": "16:00",
@@ -2253,30 +2229,6 @@
           ]
         },
         {
-          "id": "wc2026-98-usa-possible",
-          "date": "2026-07-10",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 93",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "SoFi Stadium",
-          "city": "Los Angeles",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 98,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-101-usa-possible",
           "date": "2026-07-14",
           "time_brt": "16:00",
@@ -3553,30 +3505,6 @@
           ]
         },
         {
-          "id": "wc2026-98-ecu-possible",
-          "date": "2026-07-10",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 93",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "SoFi Stadium",
-          "city": "Los Angeles",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo E e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 98,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-100-ecu-possible",
           "date": "2026-07-11",
           "time_brt": "22:00",
@@ -4197,30 +4125,6 @@
           ]
         },
         {
-          "id": "wc2026-98-swe-possible",
-          "date": "2026-07-10",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 93",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "SoFi Stadium",
-          "city": "Los Angeles",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo F e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 98,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-100-swe-possible",
           "date": "2026-07-11",
           "time_brt": "22:00",
@@ -4584,30 +4488,6 @@
           "condition": null,
           "condition_type": null,
           "match_number": 94,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-98-bel-possible",
-          "date": "2026-07-10",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 93",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "SoFi Stadium",
-          "city": "Los Angeles",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 98,
           "is_home": false,
           "broadcasts": [
             "Globo",
@@ -5280,8 +5160,12 @@
           "venue": "Dallas (Arlington)",
           "city": "Dallas",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 93,
@@ -6149,30 +6033,6 @@
           "match_number": 82,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-98-sen-possible",
-          "date": "2026-07-10",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 93",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "SoFi Stadium",
-          "city": "Los Angeles",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo I e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 98,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -7058,30 +6918,6 @@
           ]
         },
         {
-          "id": "wc2026-98-alg-possible",
-          "date": "2026-07-10",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 93",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "SoFi Stadium",
-          "city": "Los Angeles",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo J e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 98,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-100-alg-possible",
           "date": "2026-07-11",
           "time_brt": "22:00",
@@ -7709,8 +7545,12 @@
           "venue": "Dallas (Arlington)",
           "city": "Dallas",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 93,

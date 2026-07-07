@@ -1248,30 +1248,6 @@
           ]
         },
         {
-          "id": "wc2026-100-sui-possible",
-          "date": "2026-07-11",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 95",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
-          "city": "Kansas City",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 100,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-102-sui-possible",
           "date": "2026-07-15",
           "time_brt": "16:00",
@@ -2452,30 +2428,6 @@
           ]
         },
         {
-          "id": "wc2026-100-par-possible",
-          "date": "2026-07-11",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 95",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
-          "city": "Kansas City",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo D e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 100,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-101-par-possible",
           "date": "2026-07-14",
           "time_brt": "16:00",
@@ -3509,30 +3461,6 @@
           ]
         },
         {
-          "id": "wc2026-100-ecu-possible",
-          "date": "2026-07-11",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 95",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
-          "city": "Kansas City",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo E e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 100,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-101-ecu-possible",
           "date": "2026-07-14",
           "time_brt": "16:00",
@@ -4121,30 +4049,6 @@
           "condition": null,
           "condition_type": null,
           "match_number": 77,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-100-swe-possible",
-          "date": "2026-07-11",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 95",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
-          "city": "Kansas City",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo F e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 100,
           "is_home": false,
           "broadcasts": [
             "Globo",
@@ -4750,8 +4654,12 @@
           "venue": "Atlanta",
           "city": "Atlanta",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 3,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 95,
@@ -6069,30 +5977,6 @@
           ]
         },
         {
-          "id": "wc2026-100-sen-possible",
-          "date": "2026-07-11",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 95",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
-          "city": "Kansas City",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo I e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 100,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-101-sen-possible",
           "date": "2026-07-14",
           "time_brt": "16:00",
@@ -6723,8 +6607,12 @@
           "venue": "Atlanta",
           "city": "Atlanta",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 3,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 95,
@@ -6946,30 +6834,6 @@
           "match_number": 85,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-100-alg-possible",
-          "date": "2026-07-11",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 95",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
-          "city": "Kansas City",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo J e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 100,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -8088,30 +7952,6 @@
           ]
         },
         {
-          "id": "wc2026-100-col-possible",
-          "date": "2026-07-11",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 95",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
-          "city": "Kansas City",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 100,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-102-col-possible",
           "date": "2026-07-15",
           "time_brt": "16:00",
@@ -8800,30 +8640,6 @@
           "match_number": 87,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-100-gha-possible",
-          "date": "2026-07-11",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 95",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
-          "city": "Kansas City",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo L e avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 100,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },

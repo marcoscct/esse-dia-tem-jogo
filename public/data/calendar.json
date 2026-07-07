@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.2",
-    "last_updated": "2026-07-06",
+    "last_updated": "2026-07-07",
     "source": "OpenFootball worldcup.json (auto-transform + dynamic bracket)",
     "competition": "FIFA World Cup 2026",
     "competition_slug": "world_cup_2026",
@@ -2216,8 +2216,12 @@
           "venue": "Seattle",
           "city": "Seattle",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 4,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 94,
@@ -4483,11 +4487,39 @@
           "venue": "Seattle",
           "city": "Seattle",
           "country": "EUA/México/Canadá",
+          "status": "played",
+          "result": {
+            "goals_home": 4,
+            "goals_away": 1,
+            "winner_code": null
+          },
+          "condition": null,
+          "condition_type": null,
+          "match_number": 94,
+          "is_home": false,
+          "broadcasts": [
+            "Globo",
+            "SporTV",
+            "CazéTV"
+          ]
+        },
+        {
+          "id": "wc2026-98-bel",
+          "date": "2026-07-10",
+          "time_brt": "16:00",
+          "opponent_code": "ESP",
+          "opponent_name": "Espanha",
+          "opponent_flag": "🇪🇸",
+          "phase": "Quartas de Final",
+          "phase_slug": "quarter_finals",
+          "venue": "SoFi Stadium",
+          "city": "Los Angeles",
+          "country": "EUA/México/Canadá",
           "status": "confirmed",
           "result": null,
           "condition": null,
           "condition_type": null,
-          "match_number": 94,
+          "match_number": 98,
           "is_home": false,
           "broadcasts": [
             "Globo",
@@ -5177,21 +5209,21 @@
           ]
         },
         {
-          "id": "wc2026-98-esp-possible",
+          "id": "wc2026-98-esp",
           "date": "2026-07-10",
           "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 94",
-          "opponent_flag": null,
+          "opponent_code": "BEL",
+          "opponent_name": "Bélgica",
+          "opponent_flag": "🇧🇪",
           "phase": "Quartas de Final",
           "phase_slug": "quarter_finals",
           "venue": "SoFi Stadium",
           "city": "Los Angeles",
           "country": "EUA/México/Canadá",
-          "status": "possible",
+          "status": "confirmed",
           "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
+          "condition": null,
+          "condition_type": null,
           "match_number": 98,
           "is_home": true,
           "broadcasts": [
@@ -7158,30 +7190,6 @@
           ]
         },
         {
-          "id": "wc2026-98-aut-possible",
-          "date": "2026-07-10",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 94",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "SoFi Stadium",
-          "city": "Los Angeles",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 98,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-101-aut-possible",
           "date": "2026-07-14",
           "time_brt": "16:00",
@@ -7554,30 +7562,6 @@
           "condition": null,
           "condition_type": null,
           "match_number": 93,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-98-por-possible",
-          "date": "2026-07-10",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 94",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "SoFi Stadium",
-          "city": "Los Angeles",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 98,
           "is_home": true,
           "broadcasts": [
             "Globo",
@@ -8624,30 +8608,6 @@
           "condition_type": null,
           "match_number": 83,
           "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-98-cro-possible",
-          "date": "2026-07-10",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 94",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "SoFi Stadium",
-          "city": "Los Angeles",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 98,
-          "is_home": true,
           "broadcasts": [
             "Globo",
             "SporTV",

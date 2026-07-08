@@ -57,6 +57,9 @@ function BroadcastIcon({ channel }: { channel: string }) {
     "Disney+": { logo: "/images/disney.png", name: "Disney+" },
     HBO: { logo: "/images/hbo.png", name: "HBO" },
     Max: { logo: "/images/hbo.png", name: "Max" },
+    Band: { logo: "/images/band.png", name: "Band" },
+    Bandplay: { logo: "/images/bandplay.png", name: "Bandplay" },
+    "ge.globo": { logo: "/images/geglobo.png", name: "ge.globo" },
   };
 
   const info = channelInfo[channel] || { logo: "", name: channel };

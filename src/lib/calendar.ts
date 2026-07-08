@@ -40,13 +40,13 @@ export function getCalendar(isClubs: boolean = false): Calendar {
       const fs = require('fs');
       // eslint-disable-next-line @typescript-eslint/no-require-imports
       const path = require('path');
-      const filePath = path.join(process.cwd(), 'public', 'data', 'clubs_calendar.json');
+      const filePath = path.join(process.cwd(), 'public', 'data', 'calendar.json');
       const raw = fs.readFileSync(filePath, 'utf-8');
       _clubsCalendar = JSON.parse(raw) as Calendar;
     } catch {
-      console.warn('Fallback to require for clubs_calendar.json');
+      console.warn('Fallback to require for calendar.json');
       // eslint-disable-next-line @typescript-eslint/no-require-imports
-      _clubsCalendar = require('../../public/data/clubs_calendar.json') as Calendar;
+      _clubsCalendar = require('../../public/data/calendar.json') as Calendar;
     }
     return _clubsCalendar;
   }
@@ -58,15 +58,15 @@ export function getCalendar(isClubs: boolean = false): Calendar {
     const fs = require('fs');
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const path = require('path');
-    const filePath = path.join(process.cwd(), 'public', 'data', 'calendar.json');
+    const filePath = path.join(process.cwd(), 'public', 'data', 'clubs_calendar.json');
     const raw = fs.readFileSync(filePath, 'utf-8');
     _calendar = JSON.parse(raw) as Calendar;
   } catch {
     // Fallback to require for environments where fs might be tricky (like some edge cases)
     // but process.cwd() should work in Next.js build
-    console.warn('Fallback to require for calendar.json');
+    console.warn('Fallback to require for clubs_calendar.json');
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    _calendar = require('../../public/data/calendar.json') as Calendar;
+    _calendar = require('../../public/data/clubs_calendar.json') as Calendar;
   }
   
   return _calendar;
@@ -77,7 +77,7 @@ export function getCalendar(isClubs: boolean = false): Calendar {
  * Use this on the CLIENT SIDE where `require` is not available.
  */
 export async function fetchCalendar(isClubs: boolean = false): Promise<Calendar> {
-  const url = isClubs ? '/data/clubs_calendar.json' : '/data/calendar.json';
+  const url = isClubs ? '/data/calendar.json' : '/data/clubs_calendar.json';
   const res = await fetch(url, {
     // Cache aggressively — revalidate every 5 minutes in production
     next: { revalidate: 300 },

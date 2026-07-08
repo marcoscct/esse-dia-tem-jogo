@@ -1,8 +1,8 @@
 export const pt = {
   // Common / Home
   "title": "Esse Dia Tem Jogo?",
-  "description": "Descubra se sua seleção joga na data que você escolher.",
-  "select_team": "Escolha a Seleção",
+  "description": "Descubra se seu time joga na data que você escolher.",
+  "select_team": "Escolha o Time",
   "select_day_only": "Escolha somente o dia",
   "or": "OU",
   "start_date": "Data Inicial",
@@ -85,7 +85,7 @@ export const pt = {
   "subscribe_webcal_desc": "Abre o app nativo do seu aparelho",
   "copy_feed_url_btn": "Copiar link do calendário",
   "copy_feed_url_desc": "Para adicionar manualmente no seu app",
-  "subscribe_full_calendar": "Assinar Agenda da Seleção",
+  "subscribe_full_calendar": "Assinar Agenda do Time",
 
   // Share templates
   "share_free_range": "Pode marcar compromisso entre os dias {start} e {end}! Eu já garanti que a agenda está livre em https://www.essediatemjogo.com.br",
@@ -109,7 +109,7 @@ export const pt = {
   "seo_faq_a3": "A ferramenta oferece suporte tanto para grandes seleções mundiais quanto para campeonatos de clubes nacionais e internacionais. Você pode alternar o modo de busca conforme sua preferência.",
   "seo_faq_q4": "O que são as partidas com status de 'Possível Jogo'?",
   "seo_faq_a4": "Em fases de mata-mata ou eliminatórias, o adversário e a data dependem da classificação na fase de grupos. O site calcula todos os cenários possíveis para que você saiba com antecedência quando seu time *poderia* jogar, ajudando a evitar imprevistos.",
-  "seo_available_teams_title": "Selecione uma Seleção para ver a Agenda Completa:",
+  "seo_available_teams_title": "Selecione um Time para ver a Agenda Completa:",
   "seo_team_default_desc": "Confira o calendário completo de partidas de {team}. Veja datas, horários e canais de transmissão de todas as rodadas, mantendo sua agenda livre nos dias de jogos.",
 
   // Team names (Portuguese, defaults from calendar.json)

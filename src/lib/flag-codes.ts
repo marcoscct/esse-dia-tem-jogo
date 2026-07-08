@@ -270,7 +270,7 @@ const CLUB_BADGES: Record<string, string> = {
   CAP: "https://s.sde.globo.com/media/organizations/2026/01/07/Athletico-PR.svg",
   RBB: "https://s.sde.globo.com/media/organizations/2021/06/28/bragantino.svg",
   BAH: "https://s.sde.globo.com/media/organizations/2018/03/11/bahia.svg",
-  CFC: "https://s.sde.globo.com/media/organizations/2018/03/11/coritiba.svg",
+  CFC: "https://s.sde.globo.com/media/organizations/2019/02/18/caracas-svg-13084.svg",
   SAO: "https://s.sde.globo.com/media/organizations/2018/03/11/sao-paulo.svg",
   CAM: "https://s.sde.globo.com/media/organizations/2018/03/10/atletico-mg.svg",
   COR: "https://s.sde.globo.com/media/organizations/2024/10/09/Corinthians_2024_Q4ahot4.svg",
@@ -303,7 +303,42 @@ const CLUB_BADGES: Record<string, string> = {
   AVA: "https://s.sde.globo.com/media/organizations/2024/05/12/avaí.svg",
   LEC: "https://s.sde.globo.com/media/organizations/2018/03/11/londrina.svg",
   PON: "https://s.sde.globo.com/media/organizations/2019/03/17/ponte-preta.svg",
-  AME: "https://s.sde.globo.com/media/organizations/2024/05/07/America-MG-branco.svg"
+  AME: "https://s.sde.globo.com/media/organizations/2024/05/07/America-MG-branco.svg",
+  EST: "https://s.sde.globo.com/media/organizations/2025/09/18/Novo_Escudo_Estudiantes.svg",
+  CAT: "https://s.sde.globo.com/media/organizations/2019/02/18/universidad-catolica-svg-13106.svg",
+  RCE: "https://s.sde.globo.com/media/organizations/2024/03/26/ROSARIO_CENTRAL.svg",
+  TOL: "https://s.sde.globo.com/media/organizations/2023/05/01/tolima-svg-60445.svg",
+  IDV: "https://s.sde.globo.com/media/organizations/2025/09/23/independiente_del_valle.svg",
+  LDU: "https://s.sde.globo.com/media/organizations/2019/02/19/ldu-svg-13094.svg",
+  CCP: "https://s.sde.globo.com/media/organizations/2024/03/26/CERRO_PORTEÑO.svg",
+  PLA: "https://s.sde.globo.com/media/organizations/2025/06/25/Platense.svg",
+  COQ: "https://s.sde.globo.com/media/organizations/2024/03/29/Coquimbo_Unido.svg",
+  CIR: "https://s.sde.globo.com/media/organizations/2025/12/18/club-sportivo-independiente-rivadavia-svg-79360.svg",
+  BOC: "https://s.sde.globo.com/media/organizations/2019/02/19/boca-juniors-svg-13083.svg",
+  OHI: "https://s.sde.globo.com/media/organizations/2026/02/14/OHiggins.svg",
+  BOL: "https://s.sde.globo.com/media/organizations/2023/05/01/Bolívar.svg",
+  SFE: "https://s.sde.globo.com/media/organizations/2023/05/01/Santa_Fe.svg",
+  DIM: "https://s.sde.globo.com/media/organizations/2024/03/29/Independiente_Medellín.svg",
+  SCR: "https://s.sde.globo.com/media/organizations/2019/02/19/sporting-cristal-svg-13103.svg",
+  UCV: "https://s.sde.globo.com/media/organizations/2024/12/23/universidad-central-fc-svg-74496.svg",
+  NAC: "https://s.sde.globo.com/media/organizations/2024/03/26/NACIONAL-01.svg",
+  TIG: "https://s.sde.globo.com/media/organizations/2023/05/01/Tigre.svg",
+  LAN: "https://s.sde.globo.com/media/organizations/2024/03/29/Lanus.svg",
+  CIE: "https://s.sde.globo.com/media/organizations/2025/03/31/Ciensiano.svg",
+  LAG: "https://s.sde.globo.com/media/organizations/2026/03/23/la-guaira-svg-80300.svg",
+  BSC: "https://s.sde.globo.com/media/organizations/2023/03/22/barcelona_SC.svg",
+  ALW: "https://s.sde.globo.com/media/organizations/2019/12/26/always-ready-23152.svg",
+  UNI: "https://s.sde.globo.com/media/organizations/2023/05/01/Universitario.svg",
+  CUS: "https://s.sde.globo.com/media/teams/2026/03/30/cusco-svg-80418.svg",
+  JUN: "https://s.sde.globo.com/media/organizations/2024/03/26/JUNIOR_BARRANQUILLA_copy.svg",
+  LIB: "https://s.sde.globo.com/media/organizations/2024/03/26/LIBERTAD.svg",
+  PEN: "https://s.sde.globo.com/media/organizations/2019/02/18/penarol-svg-13099.svg",
+  SLB: "https://upload.wikimedia.org/wikipedia/en/a/a2/SL_Benfica_logo.svg",
+  RIV: "https://upload.wikimedia.org/wikipedia/commons/4/43/Club_Atl%C3%A9tico_River_Plate_logo.svg",
+  LAU: "https://upload.wikimedia.org/wikipedia/commons/0/0d/FC_Lausanne-Sport_logo.svg",
+  NIG: "https://upload.wikimedia.org/wikipedia/pt/7/7a/NovaIguacuFC.png",
+  TUN: "https://upload.wikimedia.org/wikipedia/commons/0/01/Tuna_Luso_1903.svg",
+  CAS: "https://upload.wikimedia.org/wikipedia/pt/2/29/FC_Cascavel.png",
 };
 
 /**
@@ -312,8 +347,9 @@ const CLUB_BADGES: Record<string, string> = {
  */
 export function getFlagUrl(teamCode: string): string {
   const code = teamCode.toUpperCase();
-  if (CLUB_BADGES[code]) {
-    return `/badges/${code.toLowerCase()}.svg`;
+    if (CLUB_BADGES[code]) {
+    const ext = ['NIG', 'CAS'].includes(code) ? 'png' : 'svg';
+    return `/badges/${code.toLowerCase()}.${ext}`;
   }
   const iso = TEAM_TO_ISO[code];
   if (!iso) return "/flags/xx.svg";

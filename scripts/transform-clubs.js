@@ -2,8 +2,9 @@
 /* eslint-disable */
 /**
  * scripts/transform-clubs.js
- * Scrapes and compiles Série A, Série B, Libertadores, and Copa do Brasil fixtures
- * from Globo Esporte for 2026. Generates public/data/clubs_calendar.json.
+ * Scrapes and compiles Série A, Série B, Libertadores, Copa Sul-Americana,
+ * Copa do Brasil fixtures, and merges friendly matches for 2026.
+ * Generates public/data/clubs_calendar.json.
  */
 
 'use strict';
@@ -66,6 +67,19 @@ function slugify(name) {
     .replace(/^-|-$/g, '');
 }
 
+// Conflict resolver for code overlaps (e.g. Caracas vs Coritiba, both "CFC")
+function isSameTeam(code, geTeamObj) {
+  const info = CLUB_INFO[code];
+  if (!info) return false;
+  const name1 = info.name.toLowerCase();
+  const name2 = geTeamObj.nome_popular.toLowerCase();
+  if (name1 === name2) return true;
+  const clean = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
+  const c1 = clean(name1);
+  const c2 = clean(name2);
+  return c1.includes(c2) || c2.includes(c1);
+}
+
 // Delay helper
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -91,7 +105,6 @@ async function fetchJson(url) {
 
 // Generate default broadcasts based on competition
 function getBroadcasts(competition, match) {
-  // Check if GE has defined standard transmission
   if (match.transmissao && match.transmissao.label) {
     const label = match.transmissao.label.toLowerCase();
     const channels = [];
@@ -108,9 +121,7 @@ function getBroadcasts(competition, match) {
     if (channels.length > 0) return channels;
   }
 
-  // Default fallbacks if no broadcasts specified
   if (competition === 'brasileirao-a') {
-    // Standard Brasileirão A defaults: Premiere for almost all, Globo sometimes
     return ['Premiere'];
   }
   if (competition === 'brasileirao-b') {
@@ -119,7 +130,7 @@ function getBroadcasts(competition, match) {
   if (competition === 'copa-do-brasil') {
     return ['Prime Video', 'SporTV', 'Premiere'];
   }
-  if (competition === 'libertadores') {
+  if (competition === 'libertadores' || competition === 'copa-sul-americana' || competition === 'sul-americana') {
     return ['ESPN', 'Paramount+'];
   }
   return [];
@@ -134,7 +145,7 @@ async function main() {
     calendarTeams[code] = {
       name: info.name,
       slug: slugify(info.name),
-      flag: '🛡️', // Default emoji flag, but getFlagUrl will overwrite this with badge SVG URL
+      flag: '🛡️',
       group: null,
       type: 'club',
       status: 'active',
@@ -167,7 +178,6 @@ async function main() {
   // Helper to insert a match for a team
   const addMatch = (teamCode, matchData) => {
     if (calendarTeams[teamCode]) {
-      // Avoid duplicate matches by checking GE match id
       const exists = calendarTeams[teamCode].matches.some(m => m.id === matchData.id);
       if (!exists) {
         calendarTeams[teamCode].matches.push(matchData);
@@ -185,7 +195,7 @@ async function main() {
         if (Array.isArray(games)) {
           games.forEach(g => {
             const dateStr = g.data_realizacao ? g.data_realizacao.slice(0, 10) : '';
-            if (!dateStr) return; // Skip matches without a date
+            if (!dateStr) return;
 
             const timeStr = g.hora_realizacao || (g.data_realizacao ? g.data_realizacao.slice(11, 16) : null);
             const home = g.equipes.mandante;
@@ -199,7 +209,7 @@ async function main() {
             const phaseSlug = comp.phaseSlug;
 
             // Save match for home team
-            if (CLUB_INFO[homeCode]) {
+            if (CLUB_INFO[homeCode] && isSameTeam(homeCode, home)) {
               addMatch(homeCode, {
                 id: `${matchId}-H`,
                 date: dateStr,
@@ -219,7 +229,7 @@ async function main() {
             }
 
             // Save match for away team
-            if (CLUB_INFO[awayCode]) {
+            if (CLUB_INFO[awayCode] && isSameTeam(awayCode, away)) {
               addMatch(awayCode, {
                 id: `${matchId}-A`,
                 date: dateStr,
@@ -239,7 +249,7 @@ async function main() {
             }
           });
         }
-        await delay(50); // Be friendly
+        await delay(50);
       } catch (err) {
         console.error(`⚠️ Failed to fetch ${comp.id} round ${r}: ${err.message}`);
       }
@@ -260,7 +270,6 @@ async function main() {
         if (Array.isArray(chave.jogos)) {
           chave.jogos.forEach(g => {
             const dateStr = g.data_realizacao ? g.data_realizacao.slice(0, 10) : '';
-            // If date is missing (TBD), we can skip or use a fallback date. We keep it only if date exists.
             if (!dateStr) return;
 
             const timeStr = g.hora_realizacao || (g.data_realizacao ? g.data_realizacao.slice(11, 16) : null);
@@ -270,14 +279,12 @@ async function main() {
             const homeCode = home.sigla.toUpperCase();
             const awayCode = away.sigla.toUpperCase();
 
-            // GE id is missing in Copa do Brasil sometimes (it's null in mockup).
-            // We can generate a deterministic ID.
             const matchId = `cdb2026-${slugify(home.nome_popular)}-vs-${slugify(away.nome_popular)}-${dateStr}`;
             const phaseLabel = 'Oitavas de final';
             const phaseSlug = cdbData.fase.slug || 'oitavas-de-final-copa-do-brasil-2026';
 
             // Home match
-            if (CLUB_INFO[homeCode]) {
+            if (CLUB_INFO[homeCode] && isSameTeam(homeCode, home)) {
               addMatch(homeCode, {
                 id: `${matchId}-H`,
                 date: dateStr,
@@ -297,7 +304,7 @@ async function main() {
             }
 
             // Away match
-            if (CLUB_INFO[awayCode]) {
+            if (CLUB_INFO[awayCode] && isSameTeam(awayCode, away)) {
               addMatch(awayCode, {
                 id: `${matchId}-A`,
                 date: dateStr,
@@ -353,7 +360,7 @@ async function main() {
                 const phaseSlug = libData.fase.slug || 'oitavas-de-final-libertadores-2026';
 
                 // Home match
-                if (CLUB_INFO[homeCode]) {
+                if (CLUB_INFO[homeCode] && isSameTeam(homeCode, home)) {
                   addMatch(homeCode, {
                     id: `${matchId}-H`,
                     date: dateStr,
@@ -373,7 +380,7 @@ async function main() {
                 }
 
                 // Away match
-                if (CLUB_INFO[awayCode]) {
+                if (CLUB_INFO[awayCode] && isSameTeam(awayCode, away)) {
                   addMatch(awayCode, {
                     id: `${matchId}-A`,
                     date: dateStr,
@@ -401,6 +408,141 @@ async function main() {
     console.error(`⚠️ Failed to fetch Libertadores knockout: ${err.message}`);
   }
 
+  // 4. Fetch Copa Sul-Americana Knockout fixtures (Playoffs de oitavas)
+  console.log('📡 Fetching Copa Sul-Americana...');
+  try {
+    const r = await fetch('https://ge.globo.com/futebol/copa-sul-americana/');
+    const html = await r.text();
+    const m = html.match(/id=\x22scriptReact\x22>([\s\S]*?)<\/script>/)[1];
+    const c = m.match(/const classificacao = (\{[\s\S]*?\});/)[1];
+    const sulData = JSON.parse(c);
+
+    if (sulData && sulData.secao) {
+      sulData.secao.forEach(secao => {
+        if (Array.isArray(secao.chave)) {
+          secao.chave.forEach(chave => {
+            if (Array.isArray(chave.jogos)) {
+              chave.jogos.forEach(g => {
+                const dateStr = g.data_realizacao ? g.data_realizacao.slice(0, 10) : '';
+                if (!dateStr) return;
+
+                const timeStr = g.hora_realizacao || (g.data_realizacao ? g.data_realizacao.slice(11, 16) : null);
+                const home = g.equipes.mandante;
+                const away = g.equipes.visitante;
+
+                const homeCode = home.sigla.toUpperCase();
+                const awayCode = away.sigla.toUpperCase();
+
+                const matchId = `sul2026-ko-${slugify(home.nome_popular)}-vs-${slugify(away.nome_popular)}-${dateStr}`;
+                const phaseLabel = chave.nome || 'Playoffs de Oitavas';
+                const phaseSlug = sulData.fase.slug || 'playoffs-de-oitavas-de-final-sul-americana-2026';
+
+                // Home match
+                if (CLUB_INFO[homeCode] && isSameTeam(homeCode, home)) {
+                  addMatch(homeCode, {
+                    id: `${matchId}-H`,
+                    date: dateStr,
+                    time_brt: timeStr,
+                    opponent_code: awayCode,
+                    opponent_name: CLUB_INFO[awayCode] ? CLUB_INFO[awayCode].name : away.nome_popular,
+                    opponent_flag: null,
+                    phase: phaseLabel,
+                    phase_slug: phaseSlug,
+                    venue: g.sede ? g.sede.nome_popular : null,
+                    city: g.sede ? g.sede.nome_popular : null,
+                    status: 'confirmed',
+                    result: g.placar_oficial_mandante !== null ? { home: g.placar_oficial_mandante, away: g.placar_oficial_visitante } : null,
+                    broadcasts: getBroadcasts('copa-sul-americana', g),
+                    is_home: true
+                  });
+                }
+
+                // Away match
+                if (CLUB_INFO[awayCode] && isSameTeam(awayCode, away)) {
+                  addMatch(awayCode, {
+                    id: `${matchId}-A`,
+                    date: dateStr,
+                    time_brt: timeStr,
+                    opponent_code: homeCode,
+                    opponent_name: CLUB_INFO[homeCode] ? CLUB_INFO[homeCode].name : home.nome_popular,
+                    opponent_flag: null,
+                    phase: phaseLabel,
+                    phase_slug: phaseSlug,
+                    venue: g.sede ? g.sede.nome_popular : null,
+                    city: g.sede ? g.sede.nome_popular : null,
+                    status: 'confirmed',
+                    result: g.placar_oficial_mandante !== null ? { home: g.placar_oficial_mandante, away: g.placar_oficial_visitante } : null,
+                    broadcasts: getBroadcasts('copa-sul-americana', g),
+                    is_home: false
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  } catch (err) {
+    console.error(`⚠️ Failed to fetch Copa Sul-Americana: ${err.message}`);
+  }
+
+  // 5. Merge club friendlies
+  console.log('📡 Merging club friendlies...');
+  try {
+    const friendliesPath = path.join(__dirname, 'club_friendlies.json');
+    if (fs.existsSync(friendliesPath)) {
+      const friendlies = JSON.parse(fs.readFileSync(friendliesPath, 'utf-8'));
+      friendlies.forEach(f => {
+        const homeCode = f.home_team.code.toUpperCase();
+        const awayCode = f.away_team.code.toUpperCase();
+
+        // Add for home team if it is in our club info
+        if (CLUB_INFO[homeCode]) {
+          addMatch(homeCode, {
+            id: `${f.id}-H`,
+            date: f.date,
+            time_brt: f.time_brt,
+            opponent_code: awayCode,
+            opponent_name: f.away_team.name,
+            opponent_flag: null,
+            phase: 'Amistoso',
+            phase_slug: 'friendly',
+            venue: f.venue || null,
+            city: f.city || null,
+            country: f.country || null,
+            status: f.status || 'confirmed',
+            result: f.result || null,
+            broadcasts: f.broadcasts || [],
+            is_home: true
+          });
+        }
+
+        // Add for away team if it is in our club info
+        if (CLUB_INFO[awayCode]) {
+          addMatch(awayCode, {
+            id: `${f.id}-A`,
+            date: f.date,
+            time_brt: f.time_brt,
+            opponent_code: homeCode,
+            opponent_name: f.home_team.name,
+            opponent_flag: null,
+            phase: 'Amistoso',
+            phase_slug: 'friendly',
+            venue: f.venue || null,
+            city: f.city || null,
+            country: f.country || null,
+            status: f.status || 'confirmed',
+            result: f.result || null,
+            broadcasts: f.broadcasts || [],
+            is_home: false
+          });
+        }
+      });
+    }
+  } catch (err) {
+    console.error(`⚠️ Failed to merge club friendlies: ${err.message}`);
+  }
+
   // Sort matches for each club by date
   for (const team of Object.values(calendarTeams)) {
     team.matches.sort((a, b) => a.date.localeCompare(b.date));
@@ -412,7 +554,7 @@ async function main() {
       version: '1.0',
       last_updated: new Date().toISOString().slice(0, 10),
       source: 'ge.globo.com scraper',
-      competition: 'Clubes do Brasil - Série A, Série B, Copa do Brasil e Libertadores 2026',
+      competition: 'Clubes do Brasil - Série A, Série B, Copa do Brasil, Libertadores e Sul-Americana 2026',
       competition_slug: 'clubes_brasil_2026',
       timezone: 'America/Sao_Paulo',
       notes: 'Gerado automaticamente por scripts/transform-clubs.js'

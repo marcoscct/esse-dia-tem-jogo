@@ -14,7 +14,7 @@ export async function getClientCalendar(isClubs: boolean = false): Promise<Calen
     if (cachedClubsCalendar) return cachedClubsCalendar;
 
     if (!fetchClubsPromise) {
-      fetchClubsPromise = fetch("/data/clubs_calendar.json")
+      fetchClubsPromise = fetch("/data/calendar.json")
         .then((res) => {
           if (!res.ok) throw new Error("Failed to load clubs calendar data on client");
           return res.json() as Promise<Calendar>;
@@ -35,7 +35,7 @@ export async function getClientCalendar(isClubs: boolean = false): Promise<Calen
   if (cachedCalendar) return cachedCalendar;
 
   if (!fetchPromise) {
-    fetchPromise = fetch("/data/calendar.json")
+    fetchPromise = fetch("/data/clubs_calendar.json")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to load calendar data on client");
         return res.json() as Promise<Calendar>;

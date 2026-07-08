@@ -1,8 +1,8 @@
 export const es = {
   // Common / Home
   "title": "¿Este Día Hay Partido?",
-  "description": "Descubre si tu selección juega en la fecha que elijas.",
-  "select_team": "Elige la Selección",
+  "description": "Descubre si tu equipo juega en la fecha que elijas.",
+  "select_team": "Elige el Equipo",
   "select_day_only": "Elige solo el día",
   "or": "O",
   "start_date": "Fecha Inicial",

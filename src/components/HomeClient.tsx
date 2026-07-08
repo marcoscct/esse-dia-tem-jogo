@@ -37,7 +37,7 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
     : (teams.find(t => t.code === "BRA")?.slug || teams[0]?.slug);
   const [selectedTeam, setSelectedTeam] = useState(initialTeam || defaultTeam);
   const [selectedTeamMatches, setSelectedTeamMatches] = useState<Match[]>(() => {
-    return (initialMatches || []).filter(m => m.phase_slug !== 'friendly');
+    return (initialMatches || []);
   });
   const [selectedDate, setSelectedDate] = useState(() => {
     if (initialDate) return initialDate;
@@ -71,7 +71,6 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
         if (entry && active) {
           const [, teamItem] = entry;
           const sorted = [...teamItem.matches]
-            .filter(m => m.phase_slug !== 'friendly')
             .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
           setSelectedTeamMatches(sorted);
         }

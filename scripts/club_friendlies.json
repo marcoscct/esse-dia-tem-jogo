@@ -1,0 +1,165 @@
+[
+  {
+    "id": "friendly-20260703-fla-riv",
+    "date": "2026-07-03",
+    "time_brt": "15:30",
+    "home_team": {
+      "code": "FLA",
+      "name": "Flamengo"
+    },
+    "away_team": {
+      "code": "RIV",
+      "name": "River Plate"
+    },
+    "venue": "Estádio Algarve",
+    "city": "Faro",
+    "country": "Portugal",
+    "broadcasts": ["Band", "Bandplay", "SporTV", "Premiere", "ge.globo"],
+    "status": "played",
+    "result": { "home": 2, "away": 2 }
+  },
+  {
+    "id": "friendly-20260708-fla-lau",
+    "date": "2026-07-08",
+    "time_brt": "16:30",
+    "home_team": {
+      "code": "FLA",
+      "name": "Flamengo"
+    },
+    "away_team": {
+      "code": "LAU",
+      "name": "Lausanne-Sport"
+    },
+    "venue": "Estádio Algarve",
+    "city": "Faro",
+    "country": "Portugal",
+    "broadcasts": ["Band", "Bandplay", "SporTV", "Premiere", "ge.globo"],
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260708-rem-tun",
+    "date": "2026-07-08",
+    "time_brt": "19:00",
+    "home_team": {
+      "code": "REM",
+      "name": "Remo"
+    },
+    "away_team": {
+      "code": "TUN",
+      "name": "Tuna Luso"
+    },
+    "venue": "Estádio Mangueirão",
+    "city": "Belém",
+    "country": "Brasil",
+    "broadcasts": ["Remo TV"],
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260708-flu-nig",
+    "date": "2026-07-08",
+    "time_brt": "20:30",
+    "home_team": {
+      "code": "FLU",
+      "name": "Fluminense"
+    },
+    "away_team": {
+      "code": "NIG",
+      "name": "Nova Iguaçu"
+    },
+    "venue": "Maracanã",
+    "city": "Rio de Janeiro",
+    "country": "Brasil",
+    "broadcasts": ["SporTV", "Premiere", "ge.globo"],
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260708-cap-boc",
+    "date": "2026-07-08",
+    "time_brt": "21:00",
+    "home_team": {
+      "code": "CAP",
+      "name": "Athletico-PR"
+    },
+    "away_team": {
+      "code": "BOC",
+      "name": "Boca Juniors"
+    },
+    "venue": "Estádio Padre Ernesto Martearena",
+    "city": "Salta",
+    "country": "Argentina",
+    "broadcasts": ["ESPN", "Disney+"],
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260711-fla-slb",
+    "date": "2026-07-11",
+    "time_brt": "15:30",
+    "home_team": {
+      "code": "FLA",
+      "name": "Flamengo"
+    },
+    "away_team": {
+      "code": "SLB",
+      "name": "Benfica"
+    },
+    "venue": "Estádio Algarve",
+    "city": "Faro",
+    "country": "Portugal",
+    "broadcasts": ["Band", "Bandplay", "SporTV", "Premiere", "ge.globo"],
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260712-flu-bah",
+    "date": "2026-07-12",
+    "time_brt": "16:00",
+    "home_team": {
+      "code": "FLU",
+      "name": "Fluminense"
+    },
+    "away_team": {
+      "code": "BAH",
+      "name": "Bahia"
+    },
+    "venue": "Maracanã",
+    "city": "Rio de Janeiro",
+    "country": "Brasil",
+    "broadcasts": ["Band", "Bandplay", "SporTV", "Premiere", "ge.globo"],
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260712-cor-cas",
+    "date": "2026-07-12",
+    "time_brt": "16:00",
+    "home_team": {
+      "code": "COR",
+      "name": "Corinthians"
+    },
+    "away_team": {
+      "code": "CAS",
+      "name": "Cascavel"
+    },
+    "venue": "Estádio Olímpico Regional",
+    "city": "Cascavel",
+    "country": "Brasil",
+    "broadcasts": ["SporTV", "Premiere", "Globoplay", "ge.globo"],
+    "status": "confirmed"
+  },
+  {
+    "id": "friendly-20260712-cru-gre",
+    "date": "2026-07-12",
+    "time_brt": "17:00",
+    "home_team": {
+      "code": "CRU",
+      "name": "Cruzeiro"
+    },
+    "away_team": {
+      "code": "GRE",
+      "name": "Grêmio"
+    },
+    "venue": "Arena Mané Garrincha",
+    "city": "Brasília",
+    "country": "Brasil",
+    "broadcasts": ["Premiere"],
+    "status": "confirmed"
+  }
+]

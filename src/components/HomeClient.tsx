@@ -133,6 +133,29 @@ export default function HomeClient({ teams, lastUpdated, initialTeam, initialDat
     }
   }
 
+  // Sync state when initial props change (Next.js route transitions)
+  const [prevInitialTeam, setPrevInitialTeam] = useState(initialTeam);
+  if (initialTeam !== prevInitialTeam) {
+    setPrevInitialTeam(initialTeam);
+    if (initialTeam) {
+      setSelectedTeam(initialTeam);
+    }
+  }
+
+  const [prevInitialDate, setPrevInitialDate] = useState(initialDate);
+  if (initialDate !== prevInitialDate) {
+    setPrevInitialDate(initialDate);
+    if (initialDate) {
+      setSelectedDate(initialDate);
+    }
+  }
+
+  const [prevInitialMode, setPrevInitialMode] = useState(initialMode);
+  if (initialMode !== prevInitialMode) {
+    setPrevInitialMode(initialMode);
+    setMode(initialMode);
+  }
+
   // Restore last selected team from localStorage if on the home page (no initialTeam)
   useEffect(() => {
     if (!initialTeam) {

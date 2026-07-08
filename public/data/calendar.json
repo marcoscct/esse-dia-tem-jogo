@@ -1252,6 +1252,30 @@
           ]
         },
         {
+          "id": "wc2026-100-sui",
+          "date": "2026-07-11",
+          "time_brt": "22:00",
+          "opponent_code": "ARG",
+          "opponent_name": "Argentina",
+          "opponent_flag": "🇦🇷",
+          "phase": "Quartas de Final",
+          "phase_slug": "quarter_finals",
+          "venue": "Kansas City",
+          "city": "Kansas City",
+          "country": "EUA/México/Canadá",
+          "status": "confirmed",
+          "result": null,
+          "condition": null,
+          "condition_type": null,
+          "match_number": 100,
+          "is_home": false,
+          "broadcasts": [
+            "Globo",
+            "SporTV",
+            "CazéTV"
+          ]
+        },
+        {
           "id": "wc2026-102-sui-possible",
           "date": "2026-07-15",
           "time_brt": "16:00",
@@ -2663,30 +2687,6 @@
           "match_number": 88,
           "is_home": true,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-100-aus-possible",
-          "date": "2026-07-11",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 96",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
-          "city": "Kansas City",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 100,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -4675,30 +4675,6 @@
           ]
         },
         {
-          "id": "wc2026-100-egy-possible",
-          "date": "2026-07-11",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 96",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
-          "city": "Kansas City",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 100,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-102-egy-possible",
           "date": "2026-07-15",
           "time_brt": "16:00",
@@ -5331,30 +5307,6 @@
           "condition_type": null,
           "match_number": 86,
           "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-100-cpv-possible",
-          "date": "2026-07-11",
-          "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 96",
-          "opponent_flag": null,
-          "phase": "Quartas de Final",
-          "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
-          "city": "Kansas City",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
-          "match_number": 100,
-          "is_home": true,
           "broadcasts": [
             "Globo",
             "SporTV",
@@ -6628,21 +6580,21 @@
           ]
         },
         {
-          "id": "wc2026-100-arg-possible",
+          "id": "wc2026-100-arg",
           "date": "2026-07-11",
           "time_brt": "22:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 96",
-          "opponent_flag": null,
+          "opponent_code": "SUI",
+          "opponent_name": "Suíça",
+          "opponent_flag": "🇨🇭",
           "phase": "Quartas de Final",
           "phase_slug": "quarter_finals",
-          "venue": "Kansas City Stadium",
+          "venue": "Kansas City",
           "city": "Kansas City",
           "country": "EUA/México/Canadá",
-          "status": "possible",
+          "status": "confirmed",
           "result": null,
-          "condition": "Caso avance para as 4ªˢ",
-          "condition_type": "knockout_advance",
+          "condition": null,
+          "condition_type": null,
           "match_number": 100,
           "is_home": true,
           "broadcasts": [

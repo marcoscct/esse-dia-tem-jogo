@@ -344,31 +344,6 @@
           ]
         },
         {
-          "id": "wc2026-101-rsa-possible",
-          "date": "2026-07-14",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 98",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 101,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-rsa-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
@@ -736,31 +711,6 @@
           ]
         },
         {
-          "id": "wc2026-101-can-possible",
-          "date": "2026-07-14",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 98",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 101,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-can-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
@@ -921,31 +871,6 @@
           "match_number": 81,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-101-bih-possible",
-          "date": "2026-07-14",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 98",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo B e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 101,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -1798,31 +1723,6 @@
           ]
         },
         {
-          "id": "wc2026-101-mar-possible",
-          "date": "2026-07-14",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 98",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 101,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-mar-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
@@ -2435,31 +2335,6 @@
           ]
         },
         {
-          "id": "wc2026-101-par-possible",
-          "date": "2026-07-14",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 98",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo D e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 101,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-102-par-possible",
           "date": "2026-07-15",
           "time_brt": "16:00",
@@ -2970,31 +2845,6 @@
           "is_home": true,
           "broadcasts": [
             "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-101-ger-possible",
-          "date": "2026-07-14",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 98",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 101,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
             "SporTV",
             "CazéTV"
           ]
@@ -3633,31 +3483,6 @@
           ]
         },
         {
-          "id": "wc2026-101-ned-possible",
-          "date": "2026-07-14",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 98",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 101,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-ned-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
@@ -4015,31 +3840,6 @@
           ]
         },
         {
-          "id": "wc2026-101-swe-possible",
-          "date": "2026-07-14",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 98",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Dallas Stadium",
-          "city": "Dallas",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo F e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 101,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-102-swe-possible",
           "date": "2026-07-15",
           "time_brt": "16:00",
@@ -4377,8 +4177,12 @@
           "venue": "Los Angeles (Inglewood)",
           "city": "Los Angeles",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 1,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 98,
@@ -5037,14 +4841,43 @@
           "venue": "Los Angeles (Inglewood)",
           "city": "Los Angeles",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 1,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 98,
           "is_home": true,
           "broadcasts": [
             "Globo",
+            "SporTV",
+            "CazéTV"
+          ]
+        },
+        {
+          "id": "wc2026-101-esp",
+          "date": "2026-07-14",
+          "time_brt": "16:00",
+          "opponent_code": "FRA",
+          "opponent_name": "França",
+          "opponent_flag": "🇫🇷",
+          "phase": "Semifinal",
+          "phase_slug": "semi_finals",
+          "venue": "Dallas Stadium",
+          "city": "Dallas",
+          "country": "EUA/México/Canadá",
+          "status": "confirmed",
+          "result": null,
+          "condition": null,
+          "condition_type": null,
+          "match_number": 101,
+          "is_home": false,
+          "broadcasts": [
+            "Globo",
+            "SBT",
             "SporTV",
             "CazéTV"
           ]
@@ -5652,21 +5485,21 @@
           ]
         },
         {
-          "id": "wc2026-101-fra-possible",
+          "id": "wc2026-101-fra",
           "date": "2026-07-14",
           "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 98",
-          "opponent_flag": null,
+          "opponent_code": "ESP",
+          "opponent_name": "Espanha",
+          "opponent_flag": "🇪🇸",
           "phase": "Semifinal",
           "phase_slug": "semi_finals",
           "venue": "Dallas Stadium",
           "city": "Dallas",
           "country": "EUA/México/Canadá",
-          "status": "possible",
+          "status": "confirmed",
           "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
+          "condition": null,
+          "condition_type": null,
           "match_number": 101,
           "is_home": true,
           "broadcasts": [

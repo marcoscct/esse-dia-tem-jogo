@@ -153,31 +153,6 @@
           ]
         },
         {
-          "id": "wc2026-102-mex-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-mex-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
@@ -1205,31 +1180,6 @@
           ]
         },
         {
-          "id": "wc2026-102-sui-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 99",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-sui-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
@@ -1448,31 +1398,6 @@
           "condition": null,
           "condition_type": null,
           "match_number": 91,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-102-bra-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
           "is_home": true,
           "broadcasts": [
             "Globo",
@@ -2339,31 +2264,6 @@
           ]
         },
         {
-          "id": "wc2026-102-par-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 99",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo D e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-par-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
@@ -2545,31 +2445,6 @@
           "match_number": 88,
           "is_home": true,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-102-aus-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 99",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -3108,31 +2983,6 @@
           ]
         },
         {
-          "id": "wc2026-102-civ-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-civ-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
@@ -3294,31 +3144,6 @@
           "match_number": 79,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-102-ecu-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo E e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -3654,31 +3479,6 @@
           ]
         },
         {
-          "id": "wc2026-102-jpn-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-jpn-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
@@ -3839,31 +3639,6 @@
           "is_home": false,
           "broadcasts": [
             "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-102-swe-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo F e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
             "SporTV",
             "CazéTV"
           ]
@@ -4407,31 +4182,6 @@
           "is_home": false,
           "broadcasts": [
             "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-102-egy-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 99",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
             "SporTV",
             "CazéTV"
           ]
@@ -5055,31 +4805,6 @@
           ]
         },
         {
-          "id": "wc2026-102-cpv-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 99",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-cpv-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
@@ -5678,31 +5403,6 @@
           ]
         },
         {
-          "id": "wc2026-102-sen-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo I e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-sen-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
@@ -6037,31 +5737,6 @@
           ]
         },
         {
-          "id": "wc2026-102-nor-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-nor-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
@@ -6332,21 +6007,21 @@
           ]
         },
         {
-          "id": "wc2026-102-arg-possible",
+          "id": "wc2026-102-arg",
           "date": "2026-07-15",
           "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 99",
-          "opponent_flag": null,
+          "opponent_code": "ENG",
+          "opponent_name": "Inglaterra",
+          "opponent_flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
           "phase": "Semifinal",
           "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
+          "venue": "Atlanta",
           "city": "Atlanta",
           "country": "EUA/México/Canadá",
-          "status": "possible",
+          "status": "confirmed",
           "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
+          "condition": null,
+          "condition_type": null,
           "match_number": 102,
           "is_home": false,
           "broadcasts": [
@@ -6518,31 +6193,6 @@
           "match_number": 85,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-102-alg-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo J e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
             "CazéTV"
           ]
         },
@@ -7235,31 +6885,6 @@
           ]
         },
         {
-          "id": "wc2026-102-cgo-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo K e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-cgo-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
@@ -7565,31 +7190,6 @@
           ]
         },
         {
-          "id": "wc2026-102-col-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 99",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
           "id": "wc2026-103-col-possible",
           "date": "2026-07-18",
           "time_brt": "18:00",
@@ -7859,21 +7459,21 @@
           ]
         },
         {
-          "id": "wc2026-102-eng-possible",
+          "id": "wc2026-102-eng",
           "date": "2026-07-15",
           "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 100",
-          "opponent_flag": null,
+          "opponent_code": "ARG",
+          "opponent_name": "Argentina",
+          "opponent_flag": "🇦🇷",
           "phase": "Semifinal",
           "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
+          "venue": "Atlanta",
           "city": "Atlanta",
           "country": "EUA/México/Canadá",
-          "status": "possible",
+          "status": "confirmed",
           "result": null,
-          "condition": "Caso avance para a Semifinal",
-          "condition_type": "knockout_advance",
+          "condition": null,
+          "condition_type": null,
           "match_number": 102,
           "is_home": true,
           "broadcasts": [
@@ -8232,31 +7832,6 @@
           "match_number": 87,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-102-gha-possible",
-          "date": "2026-07-15",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 99",
-          "opponent_flag": null,
-          "phase": "Semifinal",
-          "phase_slug": "semi_finals",
-          "venue": "Atlanta Stadium",
-          "city": "Atlanta",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso passe como melhor 3º do Grupo L e avance para a Semifinal",
-          "condition_type": "knockout_advance",
-          "match_number": 102,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
             "CazéTV"
           ]
         },

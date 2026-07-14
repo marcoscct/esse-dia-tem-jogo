@@ -151,55 +151,6 @@
             "SporTV",
             "CazéTV"
           ]
-        },
-        {
-          "id": "wc2026-103-mex-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-mex-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
         }
       ]
     },
@@ -1178,55 +1129,6 @@
             "SporTV",
             "CazéTV"
           ]
-        },
-        {
-          "id": "wc2026-103-sui-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-sui-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
         }
       ]
     },
@@ -1399,56 +1301,6 @@
           "condition_type": null,
           "match_number": 91,
           "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-103-bra-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-bra-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
           "broadcasts": [
             "Globo",
             "SBT",
@@ -2447,55 +2299,6 @@
           "broadcasts": [
             "CazéTV"
           ]
-        },
-        {
-          "id": "wc2026-103-aus-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-aus-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
         }
       ]
     },
@@ -2981,55 +2784,6 @@
           "broadcasts": [
             "CazéTV"
           ]
-        },
-        {
-          "id": "wc2026-103-civ-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-civ-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
         }
       ]
     },
@@ -3144,55 +2898,6 @@
           "match_number": 79,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-103-ecu-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-ecu-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
             "CazéTV"
           ]
         }
@@ -3470,55 +3175,6 @@
           "condition": null,
           "condition_type": null,
           "match_number": 76,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-103-jpn-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-jpn-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
           "is_home": false,
           "broadcasts": [
             "Globo",
@@ -4185,55 +3841,6 @@
             "SporTV",
             "CazéTV"
           ]
-        },
-        {
-          "id": "wc2026-103-egy-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-egy-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
         }
       ]
     },
@@ -4623,8 +4230,12 @@
           "venue": "Dallas (Arlington)",
           "city": "Dallas",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 2,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 101,
@@ -4800,55 +4411,6 @@
           "is_home": false,
           "broadcasts": [
             "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-103-cpv-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-cpv-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
             "SporTV",
             "CazéTV"
           ]
@@ -5225,8 +4787,12 @@
           "venue": "Dallas (Arlington)",
           "city": "Dallas",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 2,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 101,
@@ -5399,55 +4965,6 @@
           "match_number": 82,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-103-sen-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-sen-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
             "CazéTV"
           ]
         }
@@ -5735,55 +5252,6 @@
             "SporTV",
             "CazéTV"
           ]
-        },
-        {
-          "id": "wc2026-103-nor-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-nor-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
         }
       ]
     },
@@ -6030,55 +5498,6 @@
             "SporTV",
             "CazéTV"
           ]
-        },
-        {
-          "id": "wc2026-103-arg-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-arg-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
         }
       ]
     },
@@ -6193,55 +5612,6 @@
           "match_number": 85,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-103-alg-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-alg-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
             "CazéTV"
           ]
         }
@@ -6883,55 +6253,6 @@
             "SporTV",
             "CazéTV"
           ]
-        },
-        {
-          "id": "wc2026-103-cgo-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-cgo-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
         }
       ]
     },
@@ -7188,55 +6509,6 @@
             "SporTV",
             "CazéTV"
           ]
-        },
-        {
-          "id": "wc2026-103-col-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-col-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
         }
       ]
     },
@@ -7476,55 +6748,6 @@
           "condition_type": null,
           "match_number": 102,
           "is_home": true,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-103-eng-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-eng-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
           "broadcasts": [
             "Globo",
             "SBT",
@@ -7832,55 +7055,6 @@
           "match_number": 87,
           "is_home": false,
           "broadcasts": [
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-103-gha-possible",
-          "date": "2026-07-18",
-          "time_brt": "18:00",
-          "opponent_code": null,
-          "opponent_name": "Perdedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Disputa de 3º Lugar",
-          "phase_slug": "third_place",
-          "venue": "Miami Stadium",
-          "city": "Miami",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso dispute o 3º lugar",
-          "condition_type": "knockout_advance",
-          "match_number": 103,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SporTV",
-            "CazéTV"
-          ]
-        },
-        {
-          "id": "wc2026-104-gha-possible",
-          "date": "2026-07-19",
-          "time_brt": "16:00",
-          "opponent_code": null,
-          "opponent_name": "Vencedor da Partida 101",
-          "opponent_flag": null,
-          "phase": "Final",
-          "phase_slug": "final",
-          "venue": "New York New Jersey Stadium",
-          "city": "Nova York/NJ",
-          "country": "EUA/México/Canadá",
-          "status": "possible",
-          "result": null,
-          "condition": "Caso chegue à Final",
-          "condition_type": "knockout_advance",
-          "match_number": 104,
-          "is_home": false,
-          "broadcasts": [
-            "Globo",
-            "SBT",
-            "SporTV",
             "CazéTV"
           ]
         }

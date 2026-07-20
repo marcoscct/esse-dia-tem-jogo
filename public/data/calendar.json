@@ -3769,8 +3769,12 @@
           "venue": "New York/New Jersey (East Rutherford)",
           "city": "Nova York/NJ",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 104,
@@ -4980,8 +4984,12 @@
           "venue": "New York/New Jersey (East Rutherford)",
           "city": "Nova York/NJ",
           "country": "EUA/México/Canadá",
-          "status": "confirmed",
-          "result": null,
+          "status": "played",
+          "result": {
+            "goals_home": 0,
+            "goals_away": 0,
+            "winner_code": null
+          },
           "condition": null,
           "condition_type": null,
           "match_number": 104,
